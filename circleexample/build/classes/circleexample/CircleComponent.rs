@@ -1,0 +1,3 @@
+circleexample.Circleexample
+CircleComponent
+CircleComponent$1
