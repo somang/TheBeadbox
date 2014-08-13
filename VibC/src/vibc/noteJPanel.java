@@ -6,21 +6,38 @@
 
 package vibc;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  *
  * @author somang
  */
 public class noteJPanel extends javax.swing.JPanel {
-    int radius;
+    public int curIntensity, maxIntensity;
+    
+    private int curX,curY,centerX,centerY;
+    
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.yellow);
-        g.fillOval(50, 50, radius, radius);
+        Graphics2D g2d = (Graphics2D) g;
+                
+        super.paintComponent(g2d);
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(2));
+        centerX = (getWidth()-maxIntensity)/2;
+        centerY = (getHeight()-maxIntensity)/2;
+        
+        g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
+        
+        g2d.setColor(Color.yellow);
+        curX = (getWidth()-curIntensity)/2;
+        curY = (getHeight()-curIntensity)/2;
+        g2d.fillOval(curX, curY, curIntensity, curIntensity);
+        
         repaint();
     }
     

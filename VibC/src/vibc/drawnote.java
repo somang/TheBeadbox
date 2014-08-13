@@ -62,15 +62,18 @@ public class drawnote extends javax.swing.JFrame {
             }
         });
 
+        noteJPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        noteJPanel1.setPreferredSize(new java.awt.Dimension(300, 250));
+
         javax.swing.GroupLayout noteJPanel1Layout = new javax.swing.GroupLayout(noteJPanel1);
         noteJPanel1.setLayout(noteJPanel1Layout);
         noteJPanel1Layout.setHorizontalGroup(
             noteJPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
+            .addGap(0, 298, Short.MAX_VALUE)
         );
         noteJPanel1Layout.setVerticalGroup(
             noteJPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 223, Short.MAX_VALUE)
+            .addGap(0, 221, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -80,7 +83,7 @@ public class drawnote extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(noteJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -90,7 +93,7 @@ public class drawnote extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addComponent(noteJPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(noteJPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -102,8 +105,8 @@ public class drawnote extends javax.swing.JFrame {
 
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
         // TODO add your handling code here:
-        noteJPanel1.radius = jSlider2.getValue()/10;
-        System.out.println(noteJPanel1.radius);
+        noteJPanel1.maxIntensity = jSlider2.getMaximum()/10;
+        noteJPanel1.curIntensity = jSlider2.getValue()/10;
     }//GEN-LAST:event_jSlider2StateChanged
 
     /**
