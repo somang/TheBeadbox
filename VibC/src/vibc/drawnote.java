@@ -102,8 +102,8 @@ public class drawnote extends javax.swing.JFrame {
 
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
         // TODO add your handling code here:
-        //System.out.println(jSlider2.getValue());
-        createNote(jSlider2.getValue()/10);
+        noteJPanel1.radius = jSlider2.getValue()/10;
+        System.out.println(noteJPanel1.radius);
     }//GEN-LAST:event_jSlider2StateChanged
 
     /**
@@ -148,20 +148,5 @@ public class drawnote extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     
-
-    private void createNote(int radius) {
-        
-        notePacks component = new notePacks(radius);
-        
-        
-        //jPanel1.add(component);
-        //jPanel1.repaint();
-    }
-
     
 }
-
-
-
-
-

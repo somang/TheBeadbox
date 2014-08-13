@@ -14,21 +14,20 @@ import java.awt.Graphics;
  * @author somang
  */
 public class noteJPanel extends javax.swing.JPanel {
+    int radius;
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.yellow);
-        g.fillOval(50, 50, 100, 100);
+        g.fillOval(50, 50, radius, radius);
+        repaint();
     }
-
-    int radius = 10;
     
     /**
      * Creates new form noteJPanel
      */
     public noteJPanel() {
-        
         initComponents();
     }
 
