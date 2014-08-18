@@ -16,9 +16,10 @@ import java.awt.Graphics2D;
  * @author somang
  */
 public class Note extends javax.swing.JPanel {
-    public int curIntensity, maxIntensity, curFrequency;
     
-    private int curX,curY,centerX,centerY;
+    private int curX,curY,centerX,centerY,curIntensity, maxIntensity, curFrequency;
+    private int track, timeposition, duration;
+    private Color color, blindsafeColor;
     
 
     @Override
@@ -33,7 +34,15 @@ public class Note extends javax.swing.JPanel {
         
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         
-        g2d.setColor(Color.yellow);
+        // Here comes the color.
+        color = new Color (curFrequency, curFrequency, curFrequency);
+        //System.out.println(color);
+        
+        // There will be the array of color blind safe colors, 
+        // and it will be picked depending on the track number.
+        //color = blindsafeColor; 
+        g2d.setColor(color);
+        //
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
@@ -41,10 +50,29 @@ public class Note extends javax.swing.JPanel {
         repaint();
     }
     
+    
+    /* GETTERS */
     public int getIntensity(){
         return curIntensity;
     }
     
+    public int getFrequency(){
+        return curFrequency;
+    }
+    
+    public int getTrack(){
+        return track;
+    }
+    
+    public int getTime(){
+        return timeposition;
+    }
+    
+    public int getDuration(){
+        return duration;
+    }
+    
+    /* SETTERS */
     public void setIntensity(int intensity){
         curIntensity = intensity;
     }
@@ -56,6 +84,19 @@ public class Note extends javax.swing.JPanel {
     public void setFrequency(int freq){
         curFrequency = freq;
     }
+    
+    public void setTrack(int tracknumber){
+        track = tracknumber;
+    }
+    
+    public void setTime(int position){
+        timeposition = position;
+    }
+    
+    public void setDuration(int givenduration){
+        duration = givenduration;
+    }
+    
     /**
      * Creates new form noteJPanel
      */

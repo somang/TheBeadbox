@@ -50,8 +50,12 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
 
-        jSlider1.setMinorTickSpacing(10);
+        jSlider1.setMajorTickSpacing(100);
+        jSlider1.setMaximum(1000);
+        jSlider1.setMinimum(100);
+        jSlider1.setMinorTickSpacing(50);
         jSlider1.setPaintTicks(true);
+        jSlider1.setToolTipText("");
         jSlider1.setBorder(javax.swing.BorderFactory.createTitledBorder("Frequency"));
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -161,7 +165,10 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider2StateChanged
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        int freq = jSlider2.getValue()*1;//logarithmic frequenct calculation goes here
+        int freq = jSlider1.getValue();
+        //logarithmic frequenct calculation goes here
+        freq = (int) Math.log(freq)*12;
+        //System.out.println(freq);
         note.setFrequency(freq);
     }//GEN-LAST:event_jSlider1StateChanged
 
