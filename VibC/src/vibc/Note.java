@@ -19,7 +19,7 @@ public class Note extends javax.swing.JPanel {
     
     private int curX,curY,centerX,centerY,curIntensity, maxIntensity, curFrequency;
     private int track, timeposition, duration;
-    private Color color, blindsafeColor;
+    private Color noteColor;
     
 
     @Override
@@ -35,13 +35,15 @@ public class Note extends javax.swing.JPanel {
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         
         // Here comes the color.
-        color = new Color (curFrequency, curFrequency, curFrequency);
-        //System.out.println(color);
+        track = 1;
+        safeColors safeColor = new safeColors();
+        noteColor = safeColor.pickColor(curFrequency, track);
+        System.out.println(noteColor);
         
         // There will be the array of color blind safe colors, 
         // and it will be picked depending on the track number.
         //color = blindsafeColor; 
-        g2d.setColor(color);
+        g2d.setColor(noteColor);
         //
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;

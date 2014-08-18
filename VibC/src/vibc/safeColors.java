@@ -6,10 +6,21 @@
 
 package vibc;
 
+import java.awt.Color;
+
 /**
  *
  * @author somang
  */
-public class safeColors {
+class safeColors {
+    private Color safeColor;
+
+    public void safeColors() {
+        System.out.println("color picker.");
+    }
     
+    public Color pickColor(int curFrequency, int track){
+        safeColor = new Color(curFrequency,curFrequency,10);
+        return safeColor;
+    }
 }
