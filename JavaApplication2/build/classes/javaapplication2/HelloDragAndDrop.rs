@@ -1,7 +1,0 @@
-hellodraganddrop.HelloDragAndDrop$5
-hellodraganddrop.HelloDragAndDrop$4
-hellodraganddrop.HelloDragAndDrop$3
-hellodraganddrop.HelloDragAndDrop$2
-hellodraganddrop.HelloDragAndDrop$1
-hellodraganddrop.HelloDragAndDrop$6
-hellodraganddrop.HelloDragAndDrop
