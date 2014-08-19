@@ -14,6 +14,14 @@ public class rightJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form rightJPanel
+     * 
+     * This panel will have a visualizer of output speakers.
+     * The lights of each speaker corresponding to the track number will 
+     * turn on/off when it is playing.
+     * 
+     * User can Drag around the speakers so that he/she can match the physical
+     * position of the speakers visualized.
+     * 
      */
     public rightJPanel() {
         initComponents();
@@ -32,11 +40,11 @@ public class rightJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
