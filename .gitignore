@@ -37,3 +37,5 @@ Icon
 .Trashes
 /nbproject/private/
 /VibC/build/
+VibC/nbproject/private/private.xml
+*.xml
