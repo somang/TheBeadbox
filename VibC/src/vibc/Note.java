@@ -20,29 +20,31 @@ public class Note extends javax.swing.JPanel {
     private int curX,curY,centerX,centerY,curIntensity, maxIntensity, curFrequency;
     private int track, timeposition, duration;
     private Color noteColor;
-    private safeColors safeColor;
     
 
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+                
         super.paintComponent(g2d);
-        
-        // Draw the outer circle. border.
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(2));
         centerX = (getWidth()-maxIntensity)/2;
         centerY = (getHeight()-maxIntensity)/2;
+        
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         
-        
         // Here comes the color.
-        track = 1; //arbitrary track number.
+        track = 1;
+        safeColors safeColor = new safeColors();
         noteColor = safeColor.pickColor(curFrequency, track);
+        System.out.println(noteColor);
+        
         // There will be the array of color blind safe colors, 
         // and it will be picked depending on the track number.
+        //color = blindsafeColor; 
         g2d.setColor(noteColor);
-        
+        //
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
@@ -97,13 +99,6 @@ public class Note extends javax.swing.JPanel {
         duration = givenduration;
     }
     
-    public void setPalette(safeColors sc) {
-        safeColor = sc;
-    }
-
-    
-    
-    
     /**
      * Creates new form noteJPanel
      */
@@ -135,8 +130,4 @@ public class Note extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
-    
-    
-    
 }
