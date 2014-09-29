@@ -1,4 +1,4 @@
-The Beadbox - ToDo List (tentative/temporary for now)
+The Beadbox - ToDo List
 ==========
 
 TODO list for the project starting 2014 Sept. 28
