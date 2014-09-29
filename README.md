@@ -1,5 +1,42 @@
-TheBeadbox
+The Beadbox - ToDo List (tentative/temporary for now)
 ==========
+
+TODO list for the project starting 2014 Sept. 28
+# What's done?
+* Bead(Note) generation.
+* Basic UI
+* Setup (Github, this)
+
+## Milestone 1. (Due Oct. 28)
+1. 
+2. 
+3. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Synopsis
 
@@ -20,7 +57,9 @@ The Vibrotactile technology has four essential components to be used.
 ### Research Questions
 1. How can a novice user who does not have any previous education in computer programming or music, can create a vibrotactile composition?
 2. What is the impact of using a dedicated software for vibrotactile composition?
-3. What is the usability of the Vibrotactile Composition Tool for allowing users to control over the frequency, intensity, timing, and spatial information?
+3. Will the dedicated software be viable to the users?
+4. What is the protocol for the vibrotactile data?
+5. What is the usability of the vibrotactile composition tool for allowing users to control over the frequency, intensity, timing, and spatial information?
 
 ## Installation, prerequisites.
 
