@@ -15,8 +15,26 @@ TODO list for the project starting 2014 Sept. 28
 
 
 
+# Functionalities...
 
+- Play, Pause whole composition
+- Note(Bead) Entry - Undo & Redo - Copy & Paste
 
+- Layout: Move notes freely
+- Concept of Time: Timeline for playing
+- Virtual Input instrumental/device/window UI 
+(i.e. virtual Vibrochord, Computer Keyboard mapped, etc)
+- Frequency Control, Intensity/Amplitude Control
+- Separate Multi-track Output/Play
+
+- Recording directly from instruments
+- Import audio files to use
+- Import wav files, Export multi-track audio file
+- Save the composition
+- Load the composition file, File Format
+
+- Visualization
+- Pattern templates, Pallete, Presets
 
 
 
