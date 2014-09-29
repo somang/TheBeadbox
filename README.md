@@ -8,7 +8,19 @@ TODO list for the project starting 2014 Sept. 28
 * Setup (Github, this)
 
 ## Milestone 1. (Due Oct. 28)
-1. 
+0. Beads (Notes) will assign the actual "Frequency value" to its object of own.
+
+1. TracksJPanel (Click button to add more tracks): This should check how many tracks available.
+  - This should also be available for drag drop the bead (notes) created from the scales pallette on bottom right.
+  - The tracks will locate the beads (notes) at specific time signiture.
+  - The tracks will be playable.
+  
+  - The tracks should be available for zoom in and zoom out.
+  - Each bead(note) has 40ms duration.
+  - The maximized zoom will contain each note, with one in each cell.
+  - 
+  
+
 2. 
 3. 
 
@@ -27,14 +39,11 @@ TODO list for the project starting 2014 Sept. 28
 - Frequency Control, Intensity/Amplitude Control
 - Separate Multi-track Output/Play
 
-- Recording directly from instruments
-- Import audio files to use
 - Import wav files, Export multi-track audio file
 - Save the composition
 - Load the composition file, File Format
 
-- Visualization
-- Pattern templates, Pallete, Presets
+- Visualization for 
 
 
 
