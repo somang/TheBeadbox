@@ -19,6 +19,7 @@ public class Bead extends javax.swing.JPanel {
     
     private int curX,curY,centerX,centerY,curIntensity, maxIntensity, curFrequency;
     private int track, timeposition, duration;
+    private int[] colorCodeReturned;
     private Color beadColor;
     
 
@@ -37,7 +38,8 @@ public class Bead extends javax.swing.JPanel {
         // Here comes the color.
         track = 1;
         safeColors safeColor = new safeColors();
-        beadColor = safeColor.pickColor(curFrequency, track);
+        colorCodeReturned = safeColor.pickColor(curFrequency, track);
+        beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);
         System.out.println(beadColor);
         
         // There will be the array of color blind safe colors, 
