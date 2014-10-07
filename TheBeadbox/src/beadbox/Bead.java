@@ -21,6 +21,7 @@ public class Bead extends javax.swing.JPanel {
     private int track, timeposition, duration;
     private int[] colorCodeReturned;
     private Color beadColor;
+    private safeColors safeColor ;
     
 
     @Override
@@ -36,15 +37,12 @@ public class Bead extends javax.swing.JPanel {
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         
         // Here comes the color.
-        track = 1;
-        safeColors safeColor = new safeColors();
+        //track = 2;
         colorCodeReturned = safeColor.pickColor(curFrequency, track);
         beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);
-        System.out.println(beadColor);
         
         // There will be the array of color blind safe colors, 
         // and it will be picked depending on the track number.
-        //color = blindsafeColor; 
         g2d.setColor(beadColor);
         //
         curX = (getWidth()-curIntensity)/2;
@@ -105,6 +103,10 @@ public class Bead extends javax.swing.JPanel {
      * Creates new form beadJPanel
      */
     public Bead() {
+        safeColor = new safeColors();
+        curFrequency = 0;
+        track = 0;
+        curIntensity = 50;
         initComponents();
     }
 

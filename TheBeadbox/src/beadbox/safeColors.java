@@ -23,7 +23,7 @@ class safeColors {
     private int size=20; // temporarily palette size.
     private int[][] safeColorP = new int[size][3];
 
-    public void safeColorsInit() {
+    public safeColors() {
         // initiate the palette.
         int index = 0;
         int[] intparts = new int[3];
@@ -41,7 +41,6 @@ class safeColors {
                 safeColorP[index][1] = intparts[1];
                 safeColorP[index][2] = intparts[2];
                 index++;
-                System.out.println(""+intparts[0]+intparts[1]+intparts[2]);
             }  
             in.close();
         }catch (Exception e){
@@ -52,9 +51,9 @@ class safeColors {
     public int[] pickColor(int curFrequency, int track){
         /* This method should return a color corresponding to a track number.
         Question 1. How do we know the track number before its dragged? */ 
-        int red = (safeColorP[track][0]+curFrequency*3);
-        int green = (safeColorP[track][1]+curFrequency*3);
-        int blue = (safeColorP[track][2]+curFrequency*3);
+        int red = (safeColorP[track][0]+(curFrequency/20));
+        int green = (safeColorP[track][1]+(curFrequency/20));
+        int blue = (safeColorP[track][2]+(curFrequency/20));
         if (red > 255) red = 255;
         if (green > 255) green = 255;
         if (blue > 255) blue = 255;

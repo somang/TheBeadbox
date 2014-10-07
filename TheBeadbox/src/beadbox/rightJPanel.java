@@ -28,19 +28,175 @@ public class rightJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bead2 = new beadbox.Bead();
+        bead1 = new beadbox.Bead();
+        bead3 = new beadbox.Bead();
+        bead4 = new beadbox.Bead();
+        bead5 = new beadbox.Bead();
+        bead6 = new beadbox.Bead();
+        bead7 = new beadbox.Bead();
+        bead8 = new beadbox.Bead();
+
+        bead2.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead2.setTrack(1);
+
+        javax.swing.GroupLayout bead2Layout = new javax.swing.GroupLayout(bead2);
+        bead2.setLayout(bead2Layout);
+        bead2Layout.setHorizontalGroup(
+            bead2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead2Layout.setVerticalGroup(
+            bead2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        bead1.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead1.setTrack(2);
+
+        javax.swing.GroupLayout bead1Layout = new javax.swing.GroupLayout(bead1);
+        bead1.setLayout(bead1Layout);
+        bead1Layout.setHorizontalGroup(
+            bead1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead1Layout.setVerticalGroup(
+            bead1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        bead3.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead3.setTrack(3);
+
+        javax.swing.GroupLayout bead3Layout = new javax.swing.GroupLayout(bead3);
+        bead3.setLayout(bead3Layout);
+        bead3Layout.setHorizontalGroup(
+            bead3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead3Layout.setVerticalGroup(
+            bead3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        bead4.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead4.setTrack(4);
+
+        javax.swing.GroupLayout bead4Layout = new javax.swing.GroupLayout(bead4);
+        bead4.setLayout(bead4Layout);
+        bead4Layout.setHorizontalGroup(
+            bead4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead4Layout.setVerticalGroup(
+            bead4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        bead5.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead5.setTrack(5);
+
+        javax.swing.GroupLayout bead5Layout = new javax.swing.GroupLayout(bead5);
+        bead5.setLayout(bead5Layout);
+        bead5Layout.setHorizontalGroup(
+            bead5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead5Layout.setVerticalGroup(
+            bead5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        bead6.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead6.setTrack(6);
+
+        javax.swing.GroupLayout bead6Layout = new javax.swing.GroupLayout(bead6);
+        bead6.setLayout(bead6Layout);
+        bead6Layout.setHorizontalGroup(
+            bead6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead6Layout.setVerticalGroup(
+            bead6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        bead7.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead7.setTrack(7);
+
+        javax.swing.GroupLayout bead7Layout = new javax.swing.GroupLayout(bead7);
+        bead7.setLayout(bead7Layout);
+        bead7Layout.setHorizontalGroup(
+            bead7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead7Layout.setVerticalGroup(
+            bead7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        bead8.setPreferredSize(new java.awt.Dimension(60, 60));
+        bead8.setTrack(8);
+
+        javax.swing.GroupLayout bead8Layout = new javax.swing.GroupLayout(bead8);
+        bead8.setLayout(bead8Layout);
+        bead8Layout.setHorizontalGroup(
+            bead8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        bead8Layout.setVerticalGroup(
+            bead8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bead1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bead2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bead3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bead4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bead5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bead6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bead8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bead7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bead2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bead1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bead3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bead4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bead5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bead6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bead7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bead8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private beadbox.Bead bead1;
+    private beadbox.Bead bead2;
+    private beadbox.Bead bead3;
+    private beadbox.Bead bead4;
+    private beadbox.Bead bead5;
+    private beadbox.Bead bead6;
+    private beadbox.Bead bead7;
+    private beadbox.Bead bead8;
     // End of variables declaration//GEN-END:variables
 }
