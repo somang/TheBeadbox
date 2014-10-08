@@ -81,7 +81,7 @@ public class VibcompUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rightJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -96,6 +96,12 @@ public class VibcompUI extends javax.swing.JFrame {
         jButton2.setText("> Play");
 
         jButton3.setText("[] Stop");
+
+        bead1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bead1MouseDragged(evt);
+            }
+        });
 
         javax.swing.GroupLayout bead1Layout = new javax.swing.GroupLayout(bead1);
         bead1.setLayout(bead1Layout);
@@ -176,6 +182,10 @@ public class VibcompUI extends javax.swing.JFrame {
         //freq = (int) Math.log(freq)*12;
         bead1.setFrequency(freq);
     }//GEN-LAST:event_jSlider1StateChanged
+
+    private void bead1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead1MouseDragged
+        bead1.setLocation(evt.getX(), evt.getY());
+    }//GEN-LAST:event_bead1MouseDragged
 
     /**
      * @param args the command line arguments
