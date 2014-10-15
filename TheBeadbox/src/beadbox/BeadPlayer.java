@@ -15,21 +15,22 @@ import java.awt.Graphics2D;
  * @author imdc
  */
 public class BeadPlayer extends javax.swing.JPanel {
-    
+    int TRACKHEIGHT = getHeight()/8;
+    int BEADHEIGHT = 50;
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-                
+        TRACKHEIGHT = getHeight()/8;
+        Graphics2D g2d = (Graphics2D) g;                
         super.paintComponent(g2d);
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(2));
-        g2d.drawLine(0, getHeight()/8, getWidth(), getHeight()/8);
-        g2d.drawLine(0, getHeight()/8*2, getWidth(), getHeight()/8*2);
-        g2d.drawLine(0, getHeight()/8*3, getWidth(), getHeight()/8*3);
-        g2d.drawLine(0, getHeight()/8*4, getWidth(), getHeight()/8*4);
-        g2d.drawLine(0, getHeight()/8*5, getWidth(), getHeight()/8*5);
-        g2d.drawLine(0, getHeight()/8*6, getWidth(), getHeight()/8*6);
-        g2d.drawLine(0, getHeight()/8*7, getWidth(), getHeight()/8*7);
+        g2d.drawLine(0, TRACKHEIGHT, getWidth(), TRACKHEIGHT);
+        g2d.drawLine(0, TRACKHEIGHT*2, getWidth(), TRACKHEIGHT*2);
+        g2d.drawLine(0, TRACKHEIGHT*3, getWidth(), TRACKHEIGHT*3);
+        g2d.drawLine(0, TRACKHEIGHT*4, getWidth(), TRACKHEIGHT*4);
+        g2d.drawLine(0, TRACKHEIGHT*5, getWidth(), TRACKHEIGHT*5);
+        g2d.drawLine(0, TRACKHEIGHT*6, getWidth(), TRACKHEIGHT*6);
+        g2d.drawLine(0, TRACKHEIGHT*7, getWidth(), TRACKHEIGHT*7);
         
         repaint ();
     }
@@ -39,8 +40,20 @@ public class BeadPlayer extends javax.swing.JPanel {
      */
     public BeadPlayer() {
         initComponents();
+        
     }
     
+    public void setBead(int x, int y, Bead bead){
+        bead.setTrack(getTrackAt(y));
+        x = x-(BEADHEIGHT/2);
+        y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
+        bead.setLocation(x, y);
+        this.add(bead);
+    }
+    
+    public int getTrackAt(int y){
+        return (y/(TRACKHEIGHT)+1);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
