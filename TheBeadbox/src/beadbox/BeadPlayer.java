@@ -23,7 +23,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         Graphics2D g2d = (Graphics2D) g;                
         super.paintComponent(g2d);
         g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(2));
+        g2d.setStroke(new BasicStroke(4));
         g2d.drawLine(0, TRACKHEIGHT, getWidth(), TRACKHEIGHT);
         g2d.drawLine(0, TRACKHEIGHT*2, getWidth(), TRACKHEIGHT*2);
         g2d.drawLine(0, TRACKHEIGHT*3, getWidth(), TRACKHEIGHT*3);

@@ -6,8 +6,6 @@
 
 package beadbox;
 
-import java.awt.Component;
-import javax.swing.JInternalFrame;
 
 /**
  *
@@ -48,6 +46,7 @@ public class VibcompUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 800));
 
+        beadPlayer1.setBackground(new java.awt.Color(255, 255, 255));
         beadPlayer1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 beadPlayer1MouseClicked(evt);
@@ -100,10 +99,7 @@ public class VibcompUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(rightJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+            .addComponent(rightJPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +193,7 @@ public class VibcompUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -235,7 +231,7 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void bead1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead1MouseDragged
-        bead1.setLocation(evt.getX(), evt.getY());
+
     }//GEN-LAST:event_bead1MouseDragged
 
     private void bead1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead1MouseClicked
@@ -252,7 +248,6 @@ public class VibcompUI extends javax.swing.JFrame {
             Bead tmpBead = new Bead();
             tmpBead.setSize(60,60);
             beadPanel.add(tmpBead);
-            //beadPanel.revalidate();
             beadPanel.repaint();
             activeBead = tmpBead;
         }
