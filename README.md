@@ -2,19 +2,19 @@ The Beadbox - ToDo List
 ==========
 TODO list for the project starting 2014 Sept. 28
 
-## Milestone 1. (Due Oct. 28)
+# Milestone 1. (Due Oct. 28)
 0. Beads (Notes) will assign the actual "Frequency value" to its object of own.
 1. The Spatial info-vis frame.
 2. TracksJPanel (Click button to add more tracks): This should check how many tracks available.
   - This should also be available for click and drop the bead (notes) created from the scales pallette on bottom right.
   - The tracks will locate the beads (notes) at specific time signiture.
 
-## Milestone 2. (Due Nov. 28)
-# What's done?
+# Milestone 2. (Due Nov. 28)
+## What's done?
 * Bead(Note) generation.
 * Basic UI
 * Setup (Github, this)
-# What's left?
+## What's left?
 * The tracks will be playable.
 * The tracks should be available for zoom in and zoom out.
 * Each bead(note) has 40ms duration.
