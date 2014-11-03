@@ -22,6 +22,8 @@ public class Bead extends javax.swing.JPanel {
     private int[] colorCodeReturned;
     private Color beadColor;
     private safeColors safeColor ;
+    protected boolean playable = false;
+    public VibcompUI vibcompUI = null;
     
 
     @Override
@@ -48,6 +50,19 @@ public class Bead extends javax.swing.JPanel {
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
+        
+        if(playable && VibcompUI.playing){
+            setLocation(getX()-1, getY());
+            int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
+            if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ 
+                Bead tmpBead = (Bead)vibcompUI.rightJPanel1.getComponents()[8-track];
+                tmpBead.curIntensity = 40;
+                playBead();
+            }else{
+                Bead tmpBead = (Bead)vibcompUI.rightJPanel1.getComponents()[8-track];
+                tmpBead.curIntensity = 0;
+            }
+        }
         
         repaint();
     }
@@ -99,6 +114,10 @@ public class Bead extends javax.swing.JPanel {
         duration = givenduration;
     }
     
+    public void playBead(){
+        //TODO: Play note 
+    }
+    
     /**
      * Creates new form beadJPanel
      */
@@ -107,6 +126,7 @@ public class Bead extends javax.swing.JPanel {
         curFrequency = 0;
         track = 0;
         curIntensity = 50;
+        maxIntensity = 50;
         initComponents();
     }
 

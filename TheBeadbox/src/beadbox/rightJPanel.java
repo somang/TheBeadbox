@@ -6,12 +6,19 @@
 
 package beadbox;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
+
 /**
  *
  * @author somang
  */
 public class rightJPanel extends javax.swing.JPanel {
-
+    PointerInfo mouseP = MouseInfo.getPointerInfo();
+    int activeSideBead = 0;
+    int ofsetX = 0, ofsetY=0;
+    
     /**
      * Creates new form rightJPanel
      */
@@ -47,26 +54,17 @@ public class rightJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        bead2.setBackground(new java.awt.Color(255, 255, 255));
+        bead2.setIntensity(0);
+        bead2.setMaxIntensity(40);
+        bead2.setOpaque(false);
         bead2.setTrack(2);
         bead2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 bead2MouseDragged(evt);
             }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                bead2MouseMoved(evt);
-            }
-        });
-        bead2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                bead2MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                bead2MouseReleased(evt);
-            }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("2");
 
@@ -87,7 +85,9 @@ public class rightJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        bead1.setBackground(new java.awt.Color(255, 255, 255));
+        bead1.setIntensity(0);
+        bead1.setMaxIntensity(40);
+        bead1.setOpaque(false);
         bead1.setTrack(1);
         bead1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -95,7 +95,7 @@ public class rightJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("1");
 
@@ -118,10 +118,17 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel1.getAccessibleContext().setAccessibleName("jLabel1");
 
-        bead3.setBackground(new java.awt.Color(255, 255, 255));
+        bead3.setIntensity(0);
+        bead3.setMaxIntensity(40);
+        bead3.setOpaque(false);
         bead3.setTrack(3);
+        bead3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bead3MouseDragged(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("3");
 
@@ -142,10 +149,17 @@ public class rightJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        bead4.setBackground(new java.awt.Color(255, 255, 255));
+        bead4.setIntensity(0);
+        bead4.setMaxIntensity(40);
+        bead4.setOpaque(false);
         bead4.setTrack(4);
+        bead4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bead4MouseDragged(evt);
+            }
+        });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("4");
 
@@ -166,10 +180,17 @@ public class rightJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        bead5.setBackground(new java.awt.Color(255, 255, 255));
+        bead5.setIntensity(0);
+        bead5.setMaxIntensity(40);
+        bead5.setOpaque(false);
         bead5.setTrack(5);
+        bead5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bead5MouseDragged(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("5");
 
@@ -190,10 +211,17 @@ public class rightJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        bead6.setBackground(new java.awt.Color(255, 255, 255));
+        bead6.setIntensity(0);
+        bead6.setMaxIntensity(40);
+        bead6.setOpaque(false);
         bead6.setTrack(6);
+        bead6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bead6MouseDragged(evt);
+            }
+        });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("6");
 
@@ -214,10 +242,17 @@ public class rightJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        bead7.setBackground(new java.awt.Color(255, 255, 255));
+        bead7.setIntensity(0);
+        bead7.setMaxIntensity(40);
+        bead7.setOpaque(false);
         bead7.setTrack(7);
+        bead7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bead7MouseDragged(evt);
+            }
+        });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("7");
 
@@ -238,10 +273,17 @@ public class rightJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        bead8.setBackground(new java.awt.Color(255, 255, 255));
+        bead8.setIntensity(0);
+        bead8.setMaxIntensity(40);
+        bead8.setOpaque(false);
         bead8.setTrack(8);
+        bead8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                bead8MouseDragged(evt);
+            }
+        });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("8");
 
@@ -301,27 +343,133 @@ public class rightJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bead2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead2MousePressed
-        
-    }//GEN-LAST:event_bead2MousePressed
-
     private void bead2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead2MouseDragged
-        // TODO add your handling code here:
-        bead2.setLocation(evt.getX(), evt.getY());
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=2){
+            activeSideBead=2;
+           mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
     }//GEN-LAST:event_bead2MouseDragged
 
-    private void bead2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead2MouseReleased
-
-    }//GEN-LAST:event_bead2MouseReleased
-
-    private void bead2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead2MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bead2MouseMoved
-
     private void bead1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead1MouseDragged
-        // TODO add your handling code here:
-        bead1.setLocation(evt.getX(), evt.getY());
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=1){
+            activeSideBead=1;
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
     }//GEN-LAST:event_bead1MouseDragged
+
+    private void bead3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead3MouseDragged
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=3){
+            activeSideBead=3;
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
+    }//GEN-LAST:event_bead3MouseDragged
+
+    private void bead4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead4MouseDragged
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=4){
+            activeSideBead=4;
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
+    }//GEN-LAST:event_bead4MouseDragged
+
+    private void bead5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead5MouseDragged
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=5){
+            activeSideBead=5;
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
+    }//GEN-LAST:event_bead5MouseDragged
+
+    private void bead6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead6MouseDragged
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=5){
+            activeSideBead=5;
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
+    }//GEN-LAST:event_bead6MouseDragged
+
+    private void bead7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead7MouseDragged
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=7){
+            activeSideBead=7;
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
+    }//GEN-LAST:event_bead7MouseDragged
+
+    private void bead8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bead8MouseDragged
+        Bead object = (Bead)evt.getSource();
+        if(activeSideBead!=8){
+            activeSideBead=8;
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            ofsetX = ((int)b.getX() - object.getLocation().x );
+            ofsetY = ((int)b.getY() - object.getLocation().y );
+        }
+        else{
+            mouseP = MouseInfo.getPointerInfo();
+            Point b = mouseP.getLocation();
+            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+        }
+    }//GEN-LAST:event_bead8MouseDragged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -63,16 +63,13 @@
   <SubComponents>
     <Container class="beadbox.Bead" name="bead2">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead2MouseDragged"/>
-        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead2MouseMoved"/>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bead2MousePressed"/>
-        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bead2MouseReleased"/>
       </Events>
 
       <Layout>
@@ -99,7 +96,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="2"/>
@@ -109,9 +106,9 @@
     </Container>
     <Container class="beadbox.Bead" name="bead1">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="1"/>
       </Properties>
       <Events>
@@ -142,7 +139,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="1"/>
@@ -155,11 +152,14 @@
     </Container>
     <Container class="beadbox.Bead" name="bead3">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="3"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead3MouseDragged"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -185,7 +185,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="3"/>
@@ -195,11 +195,14 @@
     </Container>
     <Container class="beadbox.Bead" name="bead4">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead4MouseDragged"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -225,7 +228,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="4"/>
@@ -235,11 +238,14 @@
     </Container>
     <Container class="beadbox.Bead" name="bead5">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="5"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead5MouseDragged"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -265,7 +271,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="5"/>
@@ -275,11 +281,14 @@
     </Container>
     <Container class="beadbox.Bead" name="bead6">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="6"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead6MouseDragged"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -305,7 +314,7 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="6"/>
@@ -315,11 +324,14 @@
     </Container>
     <Container class="beadbox.Bead" name="bead7">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="7"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead7MouseDragged"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -345,7 +357,7 @@
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="7"/>
@@ -355,11 +367,14 @@
     </Container>
     <Container class="beadbox.Bead" name="bead8">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
+        <Property name="intensity" type="int" value="0"/>
+        <Property name="maxIntensity" type="int" value="40"/>
+        <Property name="opaque" type="boolean" value="false"/>
         <Property name="track" type="int" value="8"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bead8MouseDragged"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -385,7 +400,7 @@
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="8"/>
