@@ -16,9 +16,12 @@ TODO list for the project starting 2014 Sept. 28
 * Setup (Github, this)
 ## What's left?
 * The tracks will be playable.
+* selecting a bead (right click? or double click?)
+
 * The tracks should be available for zoom in and zoom out.
 * Each bead(note) has 40ms duration.
   - The maximized zoom will contain each note, with one in each cell.
+
 
  
  
