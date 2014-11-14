@@ -10,6 +10,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.nio.BufferOverflowException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +27,7 @@ public class Bead extends javax.swing.JPanel {
     private safeColors safeColor ;
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
+    int sleepTime = 2;
     
 
     @Override
@@ -52,12 +56,13 @@ public class Bead extends javax.swing.JPanel {
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
         
         if(playable && VibcompUI.playing){
-            setLocation(getX()-1, getY());
+            if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
+            else setLocation(getX()-1, getY());
             int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
             if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ 
                 Bead tmpBead = (Bead)vibcompUI.rightJPanel1.getComponents()[8-track];
                 tmpBead.curIntensity = 40;
-                playBead();
+                playBead();               
             }else{
                 Bead tmpBead = (Bead)vibcompUI.rightJPanel1.getComponents()[8-track];
                 tmpBead.curIntensity = 0;
@@ -116,6 +121,25 @@ public class Bead extends javax.swing.JPanel {
     
     public void playBead(){
         //TODO: Play note 
+        float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
+        if(vibcompUI.driverLoaded){           
+            try {
+                for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
+                    sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate());                   
+                }                          
+                vibcompUI.listener.output ( track-1, sampleWave );
+                
+                //Thread.sleep(sleepTime);
+                
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Bead.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (BufferOverflowException e) {
+                if(sleepTime<5)sleepTime+=2;
+                //System.out.print("\tWarning Buffer overload..Sleep Time increased: "+sleepTime);                     
+            }
+        }
     }
     
     /**
@@ -123,7 +147,7 @@ public class Bead extends javax.swing.JPanel {
      */
     public Bead() {
         safeColor = new safeColors();
-        curFrequency = 0;
+        curFrequency = 1;
         track = 0;
         curIntensity = 50;
         maxIntensity = 50;
@@ -141,6 +165,11 @@ public class Bead extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(60, 60));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -153,6 +182,10 @@ public class Bead extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        
+    }//GEN-LAST:event_formKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

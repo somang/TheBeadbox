@@ -34,7 +34,9 @@
                   <Component id="barSlider" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="rewind" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="playButton" min="-2" pref="205" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       <Component id="stopButton" min="-2" pref="175" max="-2" attributes="0"/>
@@ -46,8 +48,8 @@
                       <Component id="beadPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jSlider1" pref="163" max="32767" attributes="0"/>
-                          <Component id="jSlider2" pref="0" max="32767" attributes="0"/>
+                          <Component id="frequencySlider" pref="163" max="32767" attributes="0"/>
+                          <Component id="intensitySlider" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="rightJPanel1" min="-2" pref="270" max="-2" attributes="0"/>
@@ -69,18 +71,18 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="playButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="stopButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="playButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rewind" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="stopButton" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                              <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
+                              <Component id="frequencySlider" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jSlider2" min="-2" max="-2" attributes="0"/>
+                              <Component id="intensitySlider" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="58" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                   </Group>
                   <Component id="beadPanel" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -121,7 +123,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JSlider" name="jSlider1">
+    <Component class="javax.swing.JSlider" name="frequencySlider">
       <Properties>
         <Property name="majorTickSpacing" type="int" value="100"/>
         <Property name="maximum" type="int" value="1000"/>
@@ -136,10 +138,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSlider1StateChanged"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="frequencySliderStateChanged"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JSlider" name="jSlider2">
+    <Component class="javax.swing.JSlider" name="intensitySlider">
       <Properties>
         <Property name="minorTickSpacing" type="int" value="10"/>
         <Property name="paintTicks" type="boolean" value="true"/>
@@ -150,7 +152,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSlider2StateChanged"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="intensitySliderStateChanged"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="playButton">
@@ -253,13 +255,19 @@
     </Container>
     <Component class="javax.swing.JSlider" name="barSlider">
       <Properties>
-        <Property name="minorTickSpacing" type="int" value="4"/>
+        <Property name="majorTickSpacing" type="int" value="4"/>
         <Property name="paintTicks" type="boolean" value="true"/>
         <Property name="paintTrack" type="boolean" value="false"/>
         <Property name="value" type="int" value="10"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+            <EtchetBorder/>
+          </Border>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="barSliderMouseDragged"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="barSliderMouseClicked"/>
       </Events>
     </Component>
     <Component class="beadbox.rightJPanel" name="rightJPanel1">
@@ -269,6 +277,14 @@
             <LineBorder/>
           </Border>
         </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="rewind">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reverse"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
