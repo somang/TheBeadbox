@@ -9,6 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +19,9 @@ public class BeadPlayer extends javax.swing.JPanel {
     int TRACKHEIGHT = getHeight()/8;
     int BEADHEIGHT = 50;
     int barPosition = 10;
+    int tick = 0, speed = 10, page = 1, maxPage = 1;
+    ArrayList <Bead> beads = new ArrayList();
+    VibcompUI vibcompUI = null;
     @Override
     protected void paintComponent(Graphics g) {
         TRACKHEIGHT = getHeight()/8;
@@ -36,6 +40,24 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.setStroke(new BasicStroke(1));
         g2d.drawLine(getWidth()*barPosition/100, 0, getWidth()*barPosition/100, getHeight());
         
+        if(VibcompUI.playing && tick%speed == 0){
+            if(barPosition < 100) barPosition++;
+            else{ 
+                barPosition = 0;
+                page++;
+                if(page>maxPage){
+                    maxPage = page;
+                    vibcompUI.pageScroll.setMaximum(page);
+                }
+                vibcompUI.pageScroll.setValue(page);
+            }           
+        }
+        tick++;
+        vibcompUI.rewind.setText("Page: "+page);
+        for(int i = 0; i<beads.size(); i++){
+            if(beads.get(i).getPage()==page) beads.get(i).show();
+            else beads.get(i).hide();
+        }
         repaint ();
     }
 
@@ -53,6 +75,8 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setOpaque(false);
         bead.setLocation(x, y);
         bead.playable = true;
+        bead.setPage(page);
+        beads.add(bead);
         this.add(bead);
     }
     

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class Bead extends javax.swing.JPanel {
     
     private int curX,curY,centerX,centerY,curIntensity, maxIntensity, curFrequency;
-    private int track, timeposition, duration;
+    private int track, page, duration;
     private int[] colorCodeReturned;
     private Color beadColor;
     private safeColors safeColor ;
@@ -56,8 +56,8 @@ public class Bead extends javax.swing.JPanel {
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
         
         if(playable && VibcompUI.playing){
-            if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
-            else setLocation(getX()-1, getY());
+            //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
+            //else setLocation(getX()-1, getY());
             int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
             if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ 
                 Bead tmpBead = (Bead)vibcompUI.rightJPanel1.getComponents()[8-track];
@@ -86,8 +86,8 @@ public class Bead extends javax.swing.JPanel {
         return track;
     }
     
-    public int getTime(){
-        return timeposition;
+    public int getPage(){
+        return page;
     }
     
     public int getDuration(){
@@ -111,8 +111,8 @@ public class Bead extends javax.swing.JPanel {
         track = tracknumber;
     }
     
-    public void setTime(int position){
-        timeposition = position;
+    public void setPage(int position){
+        page = position;
     }
     
     public void setDuration(int givenduration){
@@ -151,6 +151,7 @@ public class Bead extends javax.swing.JPanel {
         track = 0;
         curIntensity = 50;
         maxIntensity = 50;
+        page = -1;
         initComponents();
     }
 
