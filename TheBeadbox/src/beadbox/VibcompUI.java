@@ -221,7 +221,6 @@ public class VibcompUI extends javax.swing.JFrame {
         pageScroll.setMaximum(2);
         pageScroll.setMinimum(1);
         pageScroll.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
-        pageScroll.setVisibleAmount(1);
         pageScroll.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 pageScrollMouseDragged(evt);

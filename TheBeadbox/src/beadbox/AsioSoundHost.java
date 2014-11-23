@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  *
- * @author imdc
+ * @author Albert@imdc
  */
 public class AsioSoundHost implements AsioDriverListener {
     

@@ -299,7 +299,6 @@
         <Property name="maximum" type="int" value="2"/>
         <Property name="minimum" type="int" value="1"/>
         <Property name="orientation" type="int" value="0"/>
-        <Property name="visibleAmount" type="int" value="1"/>
       </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="pageScrollMouseDragged"/>

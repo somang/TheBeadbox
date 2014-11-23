@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author somang
+ * @author Somang and Albert
  */
 public class Bead extends javax.swing.JPanel {
     
@@ -24,7 +24,7 @@ public class Bead extends javax.swing.JPanel {
     private int track, page, duration;
     private int[] colorCodeReturned;
     private Color beadColor;
-    private safeColors safeColor ;
+    private safeColors safeColor ;	
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     int sleepTime = 2;
@@ -43,7 +43,6 @@ public class Bead extends javax.swing.JPanel {
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         
         // Here comes the color.
-        //track = 2;
         colorCodeReturned = safeColor.pickColor(curFrequency, track);
         beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);
         
@@ -59,13 +58,22 @@ public class Bead extends javax.swing.JPanel {
             //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
             //else setLocation(getX()-1, getY());
             int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
-            if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ 
-                Bead tmpBead = (Bead)vibcompUI.rightJPanel1.getComponents()[8-track];
-                tmpBead.curIntensity = 40;
-                playBead();               
+            if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ // If bar is in a bead, 
+                System.out.println(track);
+                try{
+                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track);
+                    tmpBead.setIntensity(40);
+                    playBead();               
+                }catch(ArrayIndexOutOfBoundsException e){
+                    
+                }
             }else{
-                Bead tmpBead = (Bead)vibcompUI.rightJPanel1.getComponents()[8-track];
-                tmpBead.curIntensity = 0;
+                try{
+                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track);
+                    tmpBead.setIntensity(0);
+                }catch(ArrayIndexOutOfBoundsException e){
+                    
+                }
             }
         }
         
@@ -121,25 +129,31 @@ public class Bead extends javax.swing.JPanel {
     
     public void playBead(){
         //TODO: Play note 
-        float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
-        if(vibcompUI.driverLoaded){           
-            try {
-                for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
-                    sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate());                   
-                }                          
-                vibcompUI.listener.output ( track-1, sampleWave );
-                
-                //Thread.sleep(sleepTime);
-                
-                
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Bead.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
+
+            if(vibcompUI.driverLoaded){           
+                try {
+                    for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
+                        sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate());                   
+                    }                          
+                    vibcompUI.listener.output ( track-1, sampleWave );
+
+                    //Thread.sleep(sleepTime);
+
+
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Bead.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                catch (BufferOverflowException e) {
+                    if(sleepTime<5)sleepTime+=2;
+                    //System.out.print("\tWarning Buffer overload..Sleep Time increased: "+sleepTime);                     
+                }
             }
-            catch (BufferOverflowException e) {
-                if(sleepTime<5)sleepTime+=2;
-                //System.out.print("\tWarning Buffer overload..Sleep Time increased: "+sleepTime);                     
-            }
+        }catch(NullPointerException e){
+            //System.out.println("Yo, This is from Bead.playBead() exception.");
         }
+        
     }
     
     /**
@@ -176,11 +190,11 @@ public class Bead extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

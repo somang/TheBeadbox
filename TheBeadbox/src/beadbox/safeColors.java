@@ -11,15 +11,13 @@ import java.io.*;
 
 /**
  *
- * @author somang
+ * @author Somang and Albert
  * 
  * To change colors, this class provides an array of color blind safe colors.
  * However, this should be called when the "Color Blind Option" gets ticked.
  * If the user is not Color Blind, then random color gets called.
  */
 class safeColors {
-    
-    //private Color safeColor;
     private int size=20; // temporarily palette size.
     private int[][] safeColorP = new int[size][3];
 
@@ -49,8 +47,7 @@ class safeColors {
     }
     
     public int[] pickColor(int curFrequency, int track){
-        /* This method should return a color corresponding to a track number.
-        Question 1. How do we know the track number before its dragged? */ 
+        /* Picks Color corresponding to the current frequency, and track number. */ 
         int red = (safeColorP[track][0]+(curFrequency/20));
         int green = (safeColorP[track][1]+(curFrequency/20));
         int blue = (safeColorP[track][2]+(curFrequency/20));

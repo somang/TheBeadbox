@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author imdc
+ * @author Albert@imdc
  */
 public class BeadPlayer extends javax.swing.JPanel {
     int TRACKHEIGHT = getHeight()/8;
