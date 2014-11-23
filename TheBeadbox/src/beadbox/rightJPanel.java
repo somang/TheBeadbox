@@ -6,6 +6,8 @@
 
 package beadbox;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
@@ -27,6 +29,17 @@ public class rightJPanel extends javax.swing.JPanel {
         loadLights();
     }
     
+    public static final int getComponentIndex(Component component) {
+        if (component != null && component.getParent() != null) {
+            Container c = component.getParent();
+            for (int i = 0; i < c.getComponentCount(); i++) {
+                if (c.getComponent(i) == component){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -292,43 +305,49 @@ public class rightJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(beadlight6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beadlight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beadlight2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beadlight3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beadlight4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beadlight5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beadlight8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beadlight7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(beadlight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(beadlight2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(beadlight3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(beadlight4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(beadlight5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(beadlight6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(beadlight7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(beadlight8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(beadlight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(beadlight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beadlight2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beadlight3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(beadlight2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(beadlight4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beadlight5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beadlight6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(beadlight3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(beadlight4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(beadlight5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beadlight6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(beadlight7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beadlight8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(beadlight7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beadlight8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void beadlight1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight1MouseDragged
-       Beadlight object = (Beadlight)evt.getSource();
+    private void beadlight3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight3MouseDragged
+        Beadlight object = (Beadlight)evt.getSource();
         if(activeSideBead!=1){
             activeSideBead=1;
             mouseP = MouseInfo.getPointerInfo();
@@ -341,9 +360,10 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-    }//GEN-LAST:event_beadlight1MouseDragged
+        System.out.println(getComponentIndex(object));
+    }//GEN-LAST:event_beadlight3MouseDragged
 
-    private void beadlight2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight2MouseDragged
+    private void beadlight4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight4MouseDragged
         Beadlight object = (Beadlight)evt.getSource();
         if(activeSideBead!=2){
             activeSideBead=2;
@@ -356,9 +376,11 @@ public class rightJPanel extends javax.swing.JPanel {
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
-        }    }//GEN-LAST:event_beadlight2MouseDragged
+        }
+	System.out.println(getComponentIndex(object));
+    }//GEN-LAST:event_beadlight4MouseDragged
 
-    private void beadlight3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight3MouseDragged
+    private void beadlight5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight5MouseDragged
         Beadlight object = (Beadlight)evt.getSource();
         if(activeSideBead!=3){
             activeSideBead=3;
@@ -372,9 +394,10 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-    }//GEN-LAST:event_beadlight3MouseDragged
+	System.out.println(getComponentIndex(object));
+    }//GEN-LAST:event_beadlight5MouseDragged
 
-    private void beadlight4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight4MouseDragged
+    private void beadlight6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight6MouseDragged
         Beadlight object = (Beadlight)evt.getSource();
         if(activeSideBead!=4){
             activeSideBead=4;
@@ -388,9 +411,10 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-    }//GEN-LAST:event_beadlight4MouseDragged
+	System.out.println(getComponentIndex(object));
+    }//GEN-LAST:event_beadlight6MouseDragged
 
-    private void beadlight5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight5MouseDragged
+    private void beadlight7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight7MouseDragged
         Beadlight object = (Beadlight)evt.getSource();
         if(activeSideBead!=5){
             activeSideBead=5;
@@ -404,9 +428,10 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-    }//GEN-LAST:event_beadlight5MouseDragged
+	System.out.println(getComponentIndex(object));
+    }//GEN-LAST:event_beadlight7MouseDragged
 
-    private void beadlight6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight6MouseDragged
+    private void beadlight1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight1MouseDragged
         Beadlight object = (Beadlight)evt.getSource();
         if(activeSideBead!=6){
             activeSideBead=6;
@@ -420,9 +445,10 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-    }//GEN-LAST:event_beadlight6MouseDragged
+	System.out.println(getComponentIndex(object));
+    }//GEN-LAST:event_beadlight1MouseDragged
 
-    private void beadlight7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight7MouseDragged
+    private void beadlight2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight2MouseDragged
         Beadlight object = (Beadlight)evt.getSource();
         if(activeSideBead!=7){
             activeSideBead=7;
@@ -436,7 +462,8 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-    }//GEN-LAST:event_beadlight7MouseDragged
+	System.out.println(getComponentIndex(object));
+    }//GEN-LAST:event_beadlight2MouseDragged
 
     private void beadlight8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight8MouseDragged
         Beadlight object = (Beadlight)evt.getSource();
@@ -452,6 +479,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
+	System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight8MouseDragged
 
 
@@ -475,13 +503,13 @@ public class rightJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void loadLights() {
-        beadlight1.setTrack(1);
-        beadlight2.setTrack(2);
-        beadlight3.setTrack(3);
-        beadlight4.setTrack(4);
-        beadlight5.setTrack(5);
-        beadlight6.setTrack(6);
-        beadlight7.setTrack(7);
+        beadlight3.setTrack(1);
+        beadlight4.setTrack(2);
+        beadlight5.setTrack(3);
+        beadlight6.setTrack(4);
+        beadlight7.setTrack(5);
+        beadlight1.setTrack(6);
+        beadlight2.setTrack(7);
         beadlight8.setTrack(8);
     }
 }

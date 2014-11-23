@@ -8,6 +8,8 @@ package beadbox;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.nio.BufferOverflowException;
@@ -59,9 +61,9 @@ public class Bead extends javax.swing.JPanel {
             //else setLocation(getX()-1, getY());
             int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
             if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ // If bar is in a bead, 
-                System.out.println(track);
+                //System.out.println(track);
                 try{
-                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track);
+                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
                     tmpBead.setIntensity(40);
                     playBead();               
                 }catch(ArrayIndexOutOfBoundsException e){
@@ -69,7 +71,7 @@ public class Bead extends javax.swing.JPanel {
                 }
             }else{
                 try{
-                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track);
+                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
                     tmpBead.setIntensity(0);
                 }catch(ArrayIndexOutOfBoundsException e){
                     
@@ -79,7 +81,6 @@ public class Bead extends javax.swing.JPanel {
         
         repaint();
     }
-    
     
     /* GETTERS */
     public int getIntensity(){
