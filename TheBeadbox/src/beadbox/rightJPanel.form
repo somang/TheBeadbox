@@ -75,6 +75,9 @@
   </Layout>
   <SubComponents>
     <Container class="beadbox.Beadlight" name="beadlight1">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight1MouseDragged"/>
       </Events>
@@ -118,6 +121,9 @@
       </SubComponents>
     </Container>
     <Container class="beadbox.Beadlight" name="beadlight2">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight2MouseDragged"/>
       </Events>
@@ -158,6 +164,9 @@
       </SubComponents>
     </Container>
     <Container class="beadbox.Beadlight" name="beadlight3">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight3MouseDragged"/>
       </Events>
@@ -198,6 +207,9 @@
       </SubComponents>
     </Container>
     <Container class="beadbox.Beadlight" name="beadlight4">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight4MouseDragged"/>
       </Events>
@@ -238,6 +250,9 @@
       </SubComponents>
     </Container>
     <Container class="beadbox.Beadlight" name="beadlight5">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight5MouseDragged"/>
       </Events>
@@ -278,6 +293,9 @@
       </SubComponents>
     </Container>
     <Container class="beadbox.Beadlight" name="beadlight6">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight6MouseDragged"/>
       </Events>
@@ -318,6 +336,9 @@
       </SubComponents>
     </Container>
     <Container class="beadbox.Beadlight" name="beadlight7">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight7MouseDragged"/>
       </Events>
@@ -358,6 +379,9 @@
       </SubComponents>
     </Container>
     <Container class="beadbox.Beadlight" name="beadlight8">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="beadlight8MouseDragged"/>
       </Events>

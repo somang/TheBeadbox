@@ -53,7 +53,7 @@ public class BeadPlayer extends javax.swing.JPanel {
             }           
         }
         tick++;
-        vibcompUI.rewind.setText("Page: "+page);
+        //vibcompUI.rewind.setText("Page: "+page);
         for(int i = 0; i<beads.size(); i++){
             if(beads.get(i).getPage()==page) beads.get(i).show();
             else beads.get(i).hide();

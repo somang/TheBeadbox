@@ -68,6 +68,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        beadlight1.setOpaque(false);
         beadlight1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight1MouseDragged(evt);
@@ -97,6 +98,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel1.getAccessibleContext().setAccessibleName("");
 
+        beadlight2.setOpaque(false);
         beadlight2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight2MouseDragged(evt);
@@ -126,6 +128,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel2.getAccessibleContext().setAccessibleName("");
 
+        beadlight3.setOpaque(false);
         beadlight3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight3MouseDragged(evt);
@@ -155,6 +158,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel3.getAccessibleContext().setAccessibleName("");
 
+        beadlight4.setOpaque(false);
         beadlight4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight4MouseDragged(evt);
@@ -184,6 +188,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel4.getAccessibleContext().setAccessibleName("");
 
+        beadlight5.setOpaque(false);
         beadlight5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight5MouseDragged(evt);
@@ -213,6 +218,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel5.getAccessibleContext().setAccessibleName("");
 
+        beadlight6.setOpaque(false);
         beadlight6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight6MouseDragged(evt);
@@ -242,6 +248,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel6.getAccessibleContext().setAccessibleName("");
 
+        beadlight7.setOpaque(false);
         beadlight7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight7MouseDragged(evt);
@@ -271,6 +278,7 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel7.getAccessibleContext().setAccessibleName("");
 
+        beadlight8.setOpaque(false);
         beadlight8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight8MouseDragged(evt);
@@ -503,13 +511,13 @@ public class rightJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void loadLights() {
-        beadlight3.setTrack(1);
-        beadlight4.setTrack(2);
-        beadlight5.setTrack(3);
-        beadlight6.setTrack(4);
-        beadlight7.setTrack(5);
-        beadlight1.setTrack(6);
-        beadlight2.setTrack(7);
+        beadlight1.setTrack(1);
+        beadlight2.setTrack(2);
+        beadlight3.setTrack(3);
+        beadlight4.setTrack(4);
+        beadlight5.setTrack(5);
+        beadlight6.setTrack(6);
+        beadlight7.setTrack(7);
         beadlight8.setTrack(8);
     }
 }
