@@ -8,8 +8,6 @@ package beadbox;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.nio.BufferOverflowException;
@@ -35,48 +33,38 @@ public class Bead extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-                
         super.paintComponent(g2d);
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(2));
         centerX = (getWidth()-maxIntensity)/2;
         centerY = (getHeight()-maxIntensity)/2;
-        
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         
         // Here comes the color.
-        colorCodeReturned = safeColor.pickColor(curFrequency, track);
-        beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);
-        
         // There will be the array of color blind safe colors, 
         // and it will be picked depending on the track number.
-        g2d.setColor(beadColor);
-        //
+        colorCodeReturned = safeColor.pickColor(curFrequency, track);
+        beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);g2d.setColor(beadColor);
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
         
-        if(playable && VibcompUI.playing){
-            //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
-            //else setLocation(getX()-1, getY());
-            int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
-            if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ // If bar is in a bead, 
-                //System.out.println(track);
-                try{
+        try{   
+            if(playable && VibcompUI.playing){
+                //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
+                //else setLocation(getX()-1, getY());
+                int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
+                if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ // If bar is in a bead, 
                     Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
                     tmpBead.setIntensity(40);
-                    playBead();               
-                }catch(ArrayIndexOutOfBoundsException e){
-                    
-                }
-            }else{
-                try{
+                    playBead();
+                }else{
                     Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
                     tmpBead.setIntensity(0);
-                }catch(ArrayIndexOutOfBoundsException e){
-                    
                 }
             }
+        }catch(ArrayIndexOutOfBoundsException e){
+                    
         }
         
         repaint();
