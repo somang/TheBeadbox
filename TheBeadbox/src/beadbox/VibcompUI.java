@@ -321,7 +321,8 @@ public class VibcompUI extends javax.swing.JFrame {
         }else{
             activeBead = tmpBead;
             frequencySlider.setValue(activeBead.getFrequency());
-            intensitySlider.setValue(activeBead.getIntensity());
+            System.out.println(activeBead.getIntensity());
+            //intensitySlider.setValue(activeBead.getIntensity());
         }
     }//GEN-LAST:event_beadPlayer1MouseClicked
 

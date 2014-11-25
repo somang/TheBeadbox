@@ -40,11 +40,9 @@ public class Bead extends javax.swing.JPanel {
         centerY = (getHeight()-maxIntensity)/2;
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         
-        // Here comes the color.
-        // There will be the array of color blind safe colors, 
-        // and it will be picked depending on the track number.
         colorCodeReturned = safeColor.pickColor(curFrequency, track);
         beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);g2d.setColor(beadColor);
+        g2d.setColor(beadColor);
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
@@ -55,12 +53,12 @@ public class Bead extends javax.swing.JPanel {
                 //else setLocation(getX()-1, getY());
                 int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
                 if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ // If bar is in a bead, 
-                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                    tmpBead.setIntensity(40);
+                    Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
+                    tmpBeadlight.setIntensity(40);
                     playBead();
                 }else{
-                    Beadlight tmpBead = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                    tmpBead.setIntensity(0);
+                    Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
+                    tmpBeadlight.setIntensity(0);
                 }
             }
         }catch(ArrayIndexOutOfBoundsException e){
