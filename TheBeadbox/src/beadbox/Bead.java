@@ -47,6 +47,13 @@ public class Bead extends javax.swing.JPanel {
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
         
+        if (curIntensity<40 && playable){
+            this.setSize(maxIntensity+65, 65);          
+            g2d.fillOval(curX+20, curY, curIntensity, curIntensity);
+            g2d.setColor(Color.BLACK);
+            g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);            
+        }
+        
         try{   
             if(playable && VibcompUI.playing){
                 //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
@@ -64,7 +71,7 @@ public class Bead extends javax.swing.JPanel {
         }catch(ArrayIndexOutOfBoundsException e){
                     
         }
-        
+            
         repaint();
     }
     

@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -19,7 +20,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     int TRACKHEIGHT = getHeight()/8;
     int BEADHEIGHT = 50;
     int barPosition = 10;
-    int tick = 0, speed = 10, page = 1, maxPage = 1;
+    int tick = 0, speed = 10, page = 1, maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
     VibcompUI vibcompUI = null;
     @Override
@@ -47,7 +48,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                 page++;
                 if(page>maxPage){
                     maxPage = page;
-                    vibcompUI.pageScroll.setMaximum(page);
+                    vibcompUI.pageScroll.setMaximum(page+2);
                 }
                 vibcompUI.pageScroll.setValue(page);
             }           
@@ -65,7 +66,7 @@ public class BeadPlayer extends javax.swing.JPanel {
      * Creates new form BeadPlayer
      */
     public BeadPlayer() {
-        initComponents();        
+        initComponents();  
     }
     
     public void setBead(int x, int y, Bead bead){
