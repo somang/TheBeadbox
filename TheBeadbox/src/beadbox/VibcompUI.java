@@ -326,6 +326,10 @@ public class VibcompUI extends javax.swing.JFrame {
                 intensitySlider.setValue(activeBead.getIntensity()*2);          
             }
         }else JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
+        /*Few bugs.
+        1. After a few repetited placement, the new bead button does not appear.
+        2. when two or more beads are playing, the beadlights dont turn on
+        3. if two bead in a same track played, the beadlight does not turn on*/
             
     }//GEN-LAST:event_beadPlayer1MousePressed
 
