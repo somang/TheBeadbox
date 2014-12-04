@@ -81,6 +81,10 @@ public class BeadPlayer extends javax.swing.JPanel {
         this.add(bead);
     }
     
+    public void deleteBead(Bead activeBead) {
+        this.remove(activeBead);
+    }
+    
     public int getTrackAt(int y){
         return (y/(TRACKHEIGHT)+1);
     }
@@ -132,4 +136,5 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
 }
