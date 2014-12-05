@@ -30,7 +30,10 @@ public class VibcompUI extends javax.swing.JFrame {
         beadPanel.repaint();
         /* load the driver */
         try {
-            driver = AsioDriver.getDriver ( "ASIO PreSonus FireStudio" );
+            /*
+                https://github.com/mhroth/jasiohost
+            */
+            driver = AsioDriver.getDriver ( "ASIO PreSonus FireStudio" ); 
             //System.out.println(AsioDriver.getDriverNames());
             //driver = AsioDriver.getDriver ( "ASIO4ALL v2" );
             //driver = AsioDriver.getDriver("ASIO 2.0 - ESI GIGAPort HD");

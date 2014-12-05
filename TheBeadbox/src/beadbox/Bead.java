@@ -129,7 +129,9 @@ public class Bead extends javax.swing.JPanel {
                     for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
                         sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate());                   
                     }                          
+                    vibcompUI.listener.setVolume(curIntensity);
                     vibcompUI.listener.output ( track-1, sampleWave );
+                    
 
                     //Thread.sleep(sleepTime);
 
