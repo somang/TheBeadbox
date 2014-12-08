@@ -386,9 +386,11 @@ public class VibcompUI extends javax.swing.JFrame {
                 if(endBead == null){//If there is no bead.
                     endBead = new Bead();                 
                     endBead.setSize(55,55);
+                    
                     endBead.vibcompUI = this;
                     beadPlayer1.setBead(endBead_x, endBead_y, endBead);
                 }else{//If there is a bead already.
+                    
                     endBead_x = endBead.getX();
                     endBead_y = endBead.getY();
                 }               
