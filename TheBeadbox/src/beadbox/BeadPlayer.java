@@ -58,8 +58,8 @@ public class BeadPlayer extends javax.swing.JPanel {
         tick++;
         //vibcompUI.rewind.setText("Page: "+page);
         for(int i = 0; i<beads.size(); i++){
-            if(beads.get(i).getPage()==page) beads.get(i).show();
-            else beads.get(i).hide();
+            if(beads.get(i).getPage()==page) beads.get(i).setVisible(true);//.show();
+            else beads.get(i).setVisible(false);//.hide();
         }
         repaint ();
     }
@@ -81,6 +81,10 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setPage(page);
         beads.add(bead);
         this.add(bead);
+    }
+    
+    public void deleteBead(Bead activeBead) {
+        this.remove(activeBead);
     }
     
     public int getTrackAt(int y){
@@ -134,4 +138,5 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
 }
