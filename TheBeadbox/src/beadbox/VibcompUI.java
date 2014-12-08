@@ -7,7 +7,9 @@
 package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 
 /**
@@ -21,6 +23,9 @@ public class VibcompUI extends javax.swing.JFrame {
     protected AsioDriver driver;
     protected AsioSoundHost listener;   
     protected boolean driverLoaded;
+    final private JMenuItem BeadMenuDelete = new JMenuItem("Delete");
+    final private JMenuItem BeadMenuDuration = new JMenuItem("Duration");
+    final private JPopupMenu menuPopup = new JPopupMenu();
     /**
      * Creates new form VibCUI
      */
@@ -53,6 +58,10 @@ public class VibcompUI extends javax.swing.JFrame {
             driverLoaded = false;
         }
         beadPlayer1.vibcompUI = this;
+        
+        menuPopup.add(BeadMenuDelete);
+        menuPopup.add(BeadMenuDuration);
+        beadPlayer1.setComponentPopupMenu(menuPopup);
     }
 
     /**

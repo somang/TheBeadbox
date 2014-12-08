@@ -10,7 +10,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import javax.swing.JComboBox;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -23,6 +24,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     int tick = 0, speed = 10, page = 1, maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
     VibcompUI vibcompUI = null;
+    
     @Override
     protected void paintComponent(Graphics g) {
         TRACKHEIGHT = getHeight()/8;
@@ -66,7 +68,7 @@ public class BeadPlayer extends javax.swing.JPanel {
      * Creates new form BeadPlayer
      */
     public BeadPlayer() {
-        initComponents();  
+        initComponents(); 
     }
     
     public void setBead(int x, int y, Bead bead){
