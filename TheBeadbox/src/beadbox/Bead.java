@@ -129,7 +129,7 @@ public class Bead extends javax.swing.JPanel {
                     for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
                         sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate());                   
                     }                          
-                    vibcompUI.listener.setVolume(curIntensity);
+                    vibcompUI.listener.setVolume(curIntensity); // set intensity
                     vibcompUI.listener.output ( track-1, sampleWave );
                     
 
@@ -193,7 +193,7 @@ public class Bead extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        
+        System.out.println("Keypressed");
     }//GEN-LAST:event_formKeyPressed
 
 
