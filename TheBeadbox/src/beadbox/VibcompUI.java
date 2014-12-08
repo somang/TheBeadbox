@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
@@ -33,6 +34,8 @@ public class VibcompUI extends javax.swing.JFrame {
     Bead startBead,endBead;
     int startBead_x,startBead_y,endBead_x,endBead_y;
     boolean dragStatus=false;
+    Point point1,point2;
+    Bead beadOnClick;
 
     /**
      * Creates new form VibCUI
@@ -74,7 +77,8 @@ public class VibcompUI extends javax.swing.JFrame {
         
         menuPopup.add(BeadMenuDelete);
         menuPopup.add(BeadMenuDuration);
-        beadPlayer1.setComponentPopupMenu(menuPopup);
+        
+        
     }
 
     /**
@@ -98,7 +102,6 @@ public class VibcompUI extends javax.swing.JFrame {
         rightJPanel1 = new beadbox.rightJPanel();
         rewind = new javax.swing.JCheckBox();
         pageScroll = new javax.swing.JScrollBar();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 850));
@@ -234,13 +237,6 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Delete");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,15 +246,13 @@ public class VibcompUI extends javax.swing.JFrame {
                     .addComponent(barSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pageScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(rewind)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
                         .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
                         .addGap(38, 38, 38)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,21 +276,17 @@ public class VibcompUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(pageScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(rightJPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(playButton)
-                                    .addComponent(rewind))
-                                .addComponent(stopButton)
-                                .addComponent(frequencySlider, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                                .addComponent(intensitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                            .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(frequencySlider, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                        .addComponent(intensitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(stopButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rewind))))
+                    .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 30, Short.MAX_VALUE))
         );
 
@@ -358,34 +348,36 @@ public class VibcompUI extends javax.swing.JFrame {
         1. After a few repetited placement, the new bead button does not appear.
         2. when two or more beads are playing, the beadlights dont turn on
         3. if two bead in a same track played, the beadlight does not turn on*/
-        Point point = evt.getPoint();        
-        Bead tmpBead = beadPlayer1.getBeadAt(point.x, point.y);
-        
-        if(activeBead != null){
-            if(tmpBead == null){//Create one
-                beadPanelText.setVisible(true);
-                activeBead.vibcompUI= this;
-                beadPlayer1.setBead(point.x, point.y, activeBead);
-            }else{//To select.
-                activeBead = tmpBead;
-                frequencySlider.setValue(activeBead.getFrequency());
-                intensitySlider.setValue(activeBead.getIntensity()*2);
-
-                //For Dragging.
-                startBead = tmpBead;
-                startBead_x = startBead.getX();
-                startBead_y = startBead.getY();
+        point1 = evt.getPoint();        
+        Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
+        if (evt.getButton() == MouseEvent.BUTTON1) // Left click
+        {
+            if(activeBead != null){
+                if(tmpBead == null){//Create one
+                    beadPanelText.setVisible(true);
+                    activeBead.vibcompUI= this;
+                    beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                }else{
+                    //Select.
+                    activeBead = tmpBead;
+                    frequencySlider.setValue(activeBead.getFrequency());
+                    intensitySlider.setValue(activeBead.getIntensity()*2);
+                    
+                    //Dragging.
+                    startBead = tmpBead;
+                    startBead_x = startBead.getX();
+                    startBead_y = startBead.getY();
+                }
+            }else JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
+        }else if (evt.getButton() == MouseEvent.BUTTON3) // Right click
+        {
+            if (tmpBead != null){
+                
+                tmpBead.setComponentPopupMenu(menuPopup);
+                BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1,tmpBead));
             }
-        }else JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
-            
-    }//GEN-LAST:event_beadPlayer1MousePressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Delete the selected note.
-        if(activeBead != null){
-            beadPlayer1.deleteBead(activeBead);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_beadPlayer1MousePressed
 
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
         endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.
@@ -410,18 +402,20 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged
         // TODO add your handling code here:
-        Point curPoint = evt.getPoint();
-        endBead_x = curPoint.x;
-        endBead_y = curPoint.y;
+        point2 = evt.getPoint();
+        endBead_x = point2.x;
+        endBead_y = point2.y;
         dragStatus=true;
 
         //System.out.println("Dragging at"+endBead_x+","+endBead_y);
-        /*
+        
         if (dragStatus){
-            System.out.println("mouse Dragged to " + curPoint);
-            repaint();
+            /*The line between two beads come here.*/
+            //Point startPoint = new Point(startBead_x,startBead_y);
+            //Line2D line2d = new Line2D.Double(point1,point2);
+            //repaint();
         }
-        */
+        
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
     
@@ -473,7 +467,6 @@ public class VibcompUI extends javax.swing.JFrame {
     public beadbox.BeadPlayer beadPlayer1;
     private javax.swing.JSlider frequencySlider;
     private javax.swing.JSlider intensitySlider;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JScrollBar pageScroll;
     private javax.swing.JButton playButton;
