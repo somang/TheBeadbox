@@ -445,9 +445,20 @@ public class VibcompUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Bead tmpBead = new Bead();
-        int x = 242;
-        int y = 291;
+        tmpBead.repaint();
+        
+        int x = 286;
+        int y = 281;
+        tmpBead.vibcompUI = this;
         beadPlayer1.setBead(x, y, tmpBead);
+        
+        System.out.println("Playable: "+tmpBead.playable);                
+        System.out.println("Frequency: "+tmpBead.getFrequency());
+        System.out.println("Intensity: "+tmpBead.getIntensity());
+        System.out.println("Page: "+tmpBead.getPage());
+        System.out.println("Track: "+tmpBead.getTrack());
+        System.out.println("Parent: "+tmpBead.getParent().toString());
+        beadPlayer1.repaint();
         
         System.out.println("Bead set at "+x+","+y+ " by the jButton2");
     }//GEN-LAST:event_jButton2ActionPerformed

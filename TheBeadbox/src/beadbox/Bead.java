@@ -47,6 +47,7 @@ public class Bead extends javax.swing.JPanel {
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
                
+        //System.out.println("wascalled.");
         try{   
             if(playable && VibcompUI.playing){
                 //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
