@@ -381,7 +381,7 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
         endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.
-        if (dragStatus){
+        if (dragStatus){// && evt.isControlDown()){ //if control is down, AND dragged.
             if (activeBead != null){
                 if(endBead == null){//If there is no bead.
                     endBead = new Bead();                 

@@ -28,8 +28,10 @@ public class Bead extends javax.swing.JPanel {
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     int sleepTime = 2;
-    
 
+    boolean inandout = false;
+    
+    
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -46,20 +48,31 @@ public class Bead extends javax.swing.JPanel {
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
-               
-        //System.out.println("wascalled.");
+        
+        
         try{   
             if(playable && VibcompUI.playing){
                 //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
                 //else setLocation(getX()-1, getY());
                 int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
+                
+                //System.out.println(this);
+                
                 if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ // If bar is in a bead, 
                     Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                    tmpBeadlight.setIntensity(40);
-                    playBead();
+                    if (inandout){
+                        System.out.println("playing a note at "+track);
+                        tmpBeadlight.setIntensity(40);
+                        playBead();
+                        inandout = false;
+                    }
                 }else{
-                    Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                    tmpBeadlight.setIntensity(0);
+                    if (!inandout){
+                        Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
+                        System.out.println("notplaying");
+                        tmpBeadlight.setIntensity(0);
+                        inandout = true;
+                    }
                 }
             }
         }catch(ArrayIndexOutOfBoundsException e){

@@ -77,12 +77,10 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="frequencySlider" alignment="0" pref="151" max="32767" attributes="0"/>
                       <Component id="intensitySlider" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="stopButton" alignment="0" max="32767" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="playButton" alignment="3" min="-2" pref="106" max="-2" attributes="0"/>
-                              <Component id="rewind" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Component id="stopButton" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="playButton" alignment="3" min="-2" pref="106" max="-2" attributes="0"/>
+                          <Component id="rewind" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="beadPanel" min="-2" max="-2" attributes="0"/>
