@@ -3,18 +3,20 @@ The Beadbox - ToDo List
 TODO list for the project starting 2014 Sept. 28
 
 ## What's left?
-* RightjPanel refreshing issue after pageing
-* If user make changes on rightJpanel before putting first note, it refreshes as soon as the first note gets placed.
 * selecting precision?
-* 
-* selecting a bead (right click? or double click?)
-* Longer notes
-* 
+
+* Longer notes: Draw two lines to connect two beads.
+  - If one of the bead gets deleted, the line is deleted.
+  - The other bead stays while the selected bead gets deleted at first place.
+  - 
+  
+
+* Color palette: http://www.sron.nl/~pault/ and Google up CUD palette. (Colour Universal Design)
 
 * The tracks should be available for zoom in and zoom out.
 * Each bead(note) has 40ms duration.
   - The maximized zoom will contain each note, with one in each cell.
-
+  - How would you time it? How do I know? UHHHH
 
  
  
@@ -38,7 +40,8 @@ TODO list for the project starting 2014 Sept. 28
 # Functionalities...
 
 - Play, Pause whole composition
-- Note(Bead) Entry - Undo & Redo - Copy & Paste
+- Note(Bead) Entry 
+- - Undo & Redo - Copy & Paste
 
 - Layout: Move notes freely
 - Concept of Time: Timeline for playing
