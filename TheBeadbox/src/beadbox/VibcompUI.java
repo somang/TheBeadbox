@@ -7,11 +7,13 @@
 package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
+import java.awt.Color;
 import javax.swing.JMenuItem;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
@@ -32,11 +34,13 @@ public class VibcompUI extends javax.swing.JFrame {
     final private JPopupMenu menuPopup = new JPopupMenu();
 
     Bead startBead,endBead;
+    Bead prevBead=null;
     int startBead_x,startBead_y,endBead_x,endBead_y;
     boolean dragStatus=false;
     Point point1,point2;
     Bead beadOnClick;
-
+    
+    
     /**
      * Creates new form VibCUI
      */
@@ -46,6 +50,9 @@ public class VibcompUI extends javax.swing.JFrame {
         endBead = null;
         activeBead = null;  
         beadPanel.repaint();
+        //this.setComponentZOrder(beadPlayer1, 1);
+        //this.setComponentZOrder(barSlider, 0);
+        
         /* load the driver */
         try {
             /*
@@ -346,8 +353,7 @@ public class VibcompUI extends javax.swing.JFrame {
         
         /*Few bugs. 2014-12-07
         1. After a few repetited placement, the new bead button does not appear.
-        2. when two or more beads are playing, the beadlights dont turn on
-        3. if two bead in a same track played, the beadlight does not turn on*/
+        */
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
@@ -357,11 +363,25 @@ public class VibcompUI extends javax.swing.JFrame {
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI= this;
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                    try{
+                        prevBead.setBorder(BorderFactory.createEmptyBorder());
+                    }catch(Exception e){
+                        
+                    }
+                    prevBead = activeBead;
+                    
                 }else{
                     //Select.
                     activeBead = tmpBead;
                     frequencySlider.setValue(activeBead.getFrequency());
                     intensitySlider.setValue(activeBead.getIntensity()*2);
+                    
+                    // If selected, then create a border to show.
+                    tmpBead.setBorder(BorderFactory.createLineBorder(Color.black));
+                    if (tmpBead!=prevBead){
+                        prevBead.setBorder(BorderFactory.createEmptyBorder());
+                    }
+                    prevBead = tmpBead;
                     
                     //Dragging.
                     startBead = tmpBead;
@@ -394,12 +414,11 @@ public class VibcompUI extends javax.swing.JFrame {
                     endBead_x = endBead.getX();
                     endBead_y = endBead.getY();
                 }               
-            }else JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
+            }else JOptionPane.showMessageDialog(null, "There is no active Bead!");
             
             System.out.println("dragged from " + startBead_x + "," + startBead_y + " to " + endBead_x + "," + endBead_y);
         }
         dragStatus = false;
-
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged

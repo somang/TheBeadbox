@@ -25,6 +25,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
+        
         TRACKHEIGHT = getHeight()/8;
         Graphics2D g2d = (Graphics2D) g;                
         super.paintComponent(g2d);
