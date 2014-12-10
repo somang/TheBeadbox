@@ -11,7 +11,7 @@ TODO list for the project starting 2014 Sept. 28
   - 
   
 
-* Color palette: http://www.sron.nl/~pault/ and Google up CUD palette. (Colour Universal Design)
+* Color palette: http://www.sron.nl/~pault/ and Google up CUD palette. (Colour Universal Design) and http://draketo.de/light/english/websafe-colors-colorblind-safe
 
 * The tracks should be available for zoom in and zoom out.
 * Each bead(note) has 40ms duration.
