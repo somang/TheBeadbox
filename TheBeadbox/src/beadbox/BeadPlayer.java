@@ -56,8 +56,22 @@ public class BeadPlayer extends javax.swing.JPanel {
         }
         tick++;
         //vibcompUI.rewind.setText("Page: "+page);
+        
+        //display beads
+        g2d.setStroke(new BasicStroke(1));
+        g2d.setColor(Color.BLACK);
+        int yOfset=2;
         for(int i = 0; i<beads.size(); i++){
-            if(beads.get(i).getPage()==page) beads.get(i).setVisible(true);//.show();
+            //.show();
+            if(beads.get(i).getPage()==page){ 
+                beads.get(i).setVisible(true);
+                if(beads.get(i).connectedTo != null){                  
+                    g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset, 
+                            beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset);
+                    g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT, 
+                            beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset+BEADHEIGHT);
+                }
+            }
             else beads.get(i).setVisible(false);//.hide();
         }
         repaint ();
@@ -84,6 +98,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     
     public void deleteBead(Bead activeBead) {
         this.remove(activeBead);
+        activeBead.breakConnections();
         //beads.remove(activeBead);
     }
     

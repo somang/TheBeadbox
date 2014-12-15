@@ -28,6 +28,7 @@ public class Bead extends javax.swing.JPanel {
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     int sleepTime = 2;
+    protected Bead connectedTo = null;
 
     boolean inandout = false;
     
@@ -58,12 +59,13 @@ public class Bead extends javax.swing.JPanel {
                 
                 //System.out.println(this);
                 
-                if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos ){ // If bar is in a bead, 
+                if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos // If bar is in a bead, 
+                        || (connectedTo!=null && this.getLocation().x+getWidth() < barPos && connectedTo.getLocation().x>barPos)){ // If bar is in a bead connection, 
                     Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
+                    playBead();
                     if (inandout){
                         System.out.println("playing a note at "+track);
-                        tmpBeadlight.setIntensity(40);
-                        playBead();
+                        tmpBeadlight.setIntensity(40);                      
                         inandout = false;
                     }
                 }else{
@@ -128,6 +130,18 @@ public class Bead extends javax.swing.JPanel {
         duration = givenduration;
     }
     
+    public void setConnection(Bead otherBead){
+        connectedTo = otherBead;
+        otherBead.connectedTo=this;
+    }
+    
+    public void breakConnections(){
+        if(connectedTo != null){
+            connectedTo.connectedTo = null;
+            connectedTo = null;
+        }
+    }
+    
     public void playBead(){
         //TODO: Play note 
         try{
@@ -136,9 +150,9 @@ public class Bead extends javax.swing.JPanel {
             if(vibcompUI.driverLoaded){           
                 try {
                     for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
-                        sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate());                   
+                        sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*curIntensity/100;                   
                     }                          
-                    vibcompUI.listener.setVolume(curIntensity); // set intensity
+                    //vibcompUI.listener.setVolume(curIntensity); // set intensity
                     vibcompUI.listener.output ( track-1, sampleWave );
                     
 

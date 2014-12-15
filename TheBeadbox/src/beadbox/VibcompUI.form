@@ -37,11 +37,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="rewind" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                       <Component id="playButton" min="-2" pref="205" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      <Component id="stopButton" min="-2" pref="175" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -77,7 +74,6 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="frequencySlider" alignment="0" pref="151" max="32767" attributes="0"/>
                       <Component id="intensitySlider" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="stopButton" alignment="0" max="32767" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="playButton" alignment="3" min="-2" pref="106" max="-2" attributes="0"/>
                           <Component id="rewind" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -164,15 +160,7 @@
         <Property name="text" type="java.lang.String" value="&gt; Play"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="playButtonMouseClicked"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="stopButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="[] Stop"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="stopButtonMouseClicked"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="playButtonMousePressed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="beadPanel">
