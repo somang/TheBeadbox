@@ -38,11 +38,12 @@ public class Bead extends javax.swing.JPanel {
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g2d);
         g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(2));
+        g2d.setStroke(new BasicStroke(3));
         centerX = (getWidth()-maxIntensity)/2;
         centerY = (getHeight()-maxIntensity)/2;
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
-        
+        g2d.setColor(Color.WHITE);
+        g2d.fillOval(centerX, centerY, maxIntensity, maxIntensity);
         colorCodeReturned = safeColor.pickColor(curFrequency, track);
         beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);g2d.setColor(beadColor);
         g2d.setColor(beadColor);

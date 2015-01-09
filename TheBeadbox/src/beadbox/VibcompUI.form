@@ -39,6 +39,8 @@
                       <Component id="rewind" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                       <Component id="playButton" min="-2" pref="205" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="addPage" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -64,24 +66,32 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Component id="pageScroll" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="rightJPanel1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="frequencySlider" alignment="0" pref="151" max="32767" attributes="0"/>
-                      <Component id="intensitySlider" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="playButton" alignment="3" min="-2" pref="106" max="-2" attributes="0"/>
-                          <Component id="rewind" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="frequencySlider" alignment="0" pref="151" max="32767" attributes="0"/>
+                              <Component id="intensitySlider" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="playButton" alignment="3" min="-2" pref="106" max="-2" attributes="0"/>
+                                  <Component id="rewind" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="beadPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="beadPanel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Component id="addPage" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -264,6 +274,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="addPage">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Page [+]"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addPageMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

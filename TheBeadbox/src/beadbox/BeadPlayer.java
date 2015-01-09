@@ -19,7 +19,8 @@ public class BeadPlayer extends javax.swing.JPanel {
     int TRACKHEIGHT = getHeight()/8;
     int BEADHEIGHT = 50;
     int barPosition = 10;
-    int tick = 0, speed = 10, page = 1, maxPage = 2;
+    int tick = 0, speed = 10, page = 1;
+    static int maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
     VibcompUI vibcompUI = null;
     
@@ -49,7 +50,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                 page++;
                 if(page>maxPage){
                     maxPage = page;
-                    vibcompUI.pageScroll.setMaximum(page+2);
+                    vibcompUI.pageScroll.setMaximum(page+1);
                 }
                 vibcompUI.pageScroll.setValue(page);
             }           
