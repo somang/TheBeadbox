@@ -18,8 +18,9 @@ import java.util.ArrayList;
 public class BeadPlayer extends javax.swing.JPanel {
     int TRACKHEIGHT = getHeight()/8;
     int BEADHEIGHT = 50;
-    int barPosition = 10;
-    int tick = 0, speed = 10, page = 1;
+    int barPosition = 10, MAXBARPOS = 1000;
+    int tick = 0, page = 1;
+    //double speed = 0.001;
     static int maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
     VibcompUI vibcompUI = null;
@@ -41,10 +42,11 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.drawLine(0, TRACKHEIGHT*7, getWidth(), TRACKHEIGHT*7);
         g2d.setColor(Color.GRAY);
         g2d.setStroke(new BasicStroke(1));
-        g2d.drawLine(getWidth()*barPosition/100, 0, getWidth()*barPosition/100, getHeight());
+        g2d.drawLine(getWidth()*barPosition/MAXBARPOS, 0, getWidth()*barPosition/MAXBARPOS, getHeight());
         
-        if(VibcompUI.playing && tick%speed == 0){
-            if(barPosition < 100) barPosition++;
+        
+        if(VibcompUI.playing && System.currentTimeMillis()%50<=20){//tick%speed == 0){
+            if(barPosition < MAXBARPOS) barPosition+=50;
             else{ 
                 barPosition = 0;
                 page++;
