@@ -13,13 +13,17 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Albert@imdc
+ * @author imdc
  */
-public class BeadPlayer extends javax.swing.JPanel {
+public class PlayerOverview extends javax.swing.JPanel {
+
+    /**
+     * Creates new form PlayerOverview
+     */  
     int TRACKHEIGHT = getHeight()/8;
     int BEADHEIGHT = 50;
     int barPosition = 10, MAXBARPOS = 1000;
-    int page = 1;
+    int tick = 0, page = 1;
     //double speed = 0.001;
     static int maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
@@ -27,12 +31,12 @@ public class BeadPlayer extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
-        
+
         TRACKHEIGHT = getHeight()/8;
         Graphics2D g2d = (Graphics2D) g;                
         super.paintComponent(g2d);
         g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(4));
+        g2d.setStroke(new BasicStroke(2));
         g2d.drawLine(0, TRACKHEIGHT, getWidth(), TRACKHEIGHT);
         g2d.drawLine(0, TRACKHEIGHT*2, getWidth(), TRACKHEIGHT*2);
         g2d.drawLine(0, TRACKHEIGHT*3, getWidth(), TRACKHEIGHT*3);
@@ -45,20 +49,19 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.drawLine(getWidth()*barPosition/MAXBARPOS, 0, getWidth()*barPosition/MAXBARPOS, getHeight());
         
         
-        if(VibcompUI.playing && System.currentTimeMillis()%50<=20){//tick%speed == 0){
-            if(barPosition < MAXBARPOS) barPosition+=50;
+        if(VibcompUI.playing && System.currentTimeMillis()%1000<=20){//tick%speed == 0){
+            if(barPosition < MAXBARPOS) barPosition++;
             else{ 
                 barPosition = 0;
-                page++;
+                /*page++;
                 if(page>maxPage){
-                    page=1;
-                    //maxPage = page;
-                    //vibcompUI.pageScroll.setMaximum(page+1);
+                    maxPage = page;
+                    vibcompUI.pageScroll.setMaximum(page+1);
                 }
-                vibcompUI.pageScroll.setValue(page);
-                
+                vibcompUI.pageScroll.setValue(page);*/
             }           
         }
+        tick++;
         //vibcompUI.rewind.setText("Page: "+page);
         
         //display beads
@@ -84,7 +87,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     /**
      * Creates new form BeadPlayer
      */
-    public BeadPlayer() {
+    public PlayerOverview() {
         initComponents(); 
     }
     
@@ -98,7 +101,6 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setPage(page);
         beads.add(bead);
         this.add(bead);
-        vibcompUI.playerOverview1.beads=beads;
     }
     
     public void deleteBead(Bead activeBead) {
@@ -124,6 +126,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         return getWidth()*barPosition/MAXBARPOS;
     }
     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,5 +151,4 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }

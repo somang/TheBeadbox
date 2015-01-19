@@ -56,12 +56,12 @@ public class Bead extends javax.swing.JPanel {
             if(playable && VibcompUI.playing){
                 //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
                 //else setLocation(getX()-1, getY());
-                int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
+                int barPos = vibcompUI.beadPlayer1.getBarIUPosition()*vibcompUI.beadPlayer1.page;
                 
-                //System.out.println(this);
+                //System.out.println(barPos);
                 
                 if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos // If bar is in a bead, 
-                        || (connectedTo!=null && this.getLocation().x+getWidth() < barPos && connectedTo.getLocation().x>barPos)){ // If bar is in a bead connection, 
+                        || (connectedTo!=null && this.getLocation().x+getWidth()*page < barPos && connectedTo.getLocation().x*connectedTo.page>barPos)){ // If bar is in a bead connection, 
                     Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
                     playBead();
                     if (inandout){
@@ -72,7 +72,7 @@ public class Bead extends javax.swing.JPanel {
                 }else{
                     if (!inandout){
                         Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                        System.out.println("notplaying");
+                        System.out.println("notplaying "+track);
                         tmpBeadlight.setIntensity(0);
                         inandout = true;
                     }
@@ -153,18 +153,15 @@ public class Bead extends javax.swing.JPanel {
                     for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
                         sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*curIntensity/100;                   
                     }                          
-                    //vibcompUI.listener.setVolume(curIntensity); // set intensity
                     vibcompUI.listener.output ( track-1, sampleWave );
                     
-
                     //Thread.sleep(sleepTime);
-
-
+                    
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Bead.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 catch (BufferOverflowException e) {
-                    if(sleepTime<5)sleepTime+=2;
+                    //if(sleepTime<5)sleepTime+=2;
                     //System.out.print("\tWarning Buffer overload..Sleep Time increased: "+sleepTime);                     
                 }
             }
