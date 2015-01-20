@@ -21,10 +21,8 @@ import java.util.logging.Logger;
 public class Bead extends javax.swing.JPanel {
     
     private int curX,curY,centerX,centerY,curIntensity, maxIntensity, curFrequency;
-    private int track, page, duration;
-    private int[] colorCodeReturned;
-    private Color beadColor;
-    private safeColors safeColor ;	
+    protected int track, page, duration;
+    final private safeColors safeColor ;	
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     int sleepTime = 2;
@@ -44,9 +42,7 @@ public class Bead extends javax.swing.JPanel {
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         g2d.setColor(Color.WHITE);
         g2d.fillOval(centerX, centerY, maxIntensity, maxIntensity);
-        colorCodeReturned = safeColor.pickColor(curFrequency, track);
-        beadColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);g2d.setColor(beadColor);
-        g2d.setColor(beadColor);
+        g2d.setColor(safeColor.pickColor(curFrequency, track));
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);

@@ -5,10 +5,6 @@
  */
 package beadbox;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -20,111 +16,45 @@ public class PlayerOverview extends javax.swing.JPanel {
     /**
      * Creates new form PlayerOverview
      */  
-    int TRACKHEIGHT = getHeight()/8;
-    int BEADHEIGHT = 50;
-    int barPosition = 10, MAXBARPOS = 1000;
-    int tick = 0, page = 1;
-    //double speed = 0.001;
-    static int maxPage = 2;
-    ArrayList <Bead> beads = new ArrayList();
-    VibcompUI vibcompUI = null;
+    int page = 1;
+    ArrayList <PlayerOverviewFragment> frags = new ArrayList();
     
-    @Override
-    protected void paintComponent(Graphics g) {
 
-        TRACKHEIGHT = getHeight()/8;
-        Graphics2D g2d = (Graphics2D) g;                
-        super.paintComponent(g2d);
-        g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(2));
-        g2d.drawLine(0, TRACKHEIGHT, getWidth(), TRACKHEIGHT);
-        g2d.drawLine(0, TRACKHEIGHT*2, getWidth(), TRACKHEIGHT*2);
-        g2d.drawLine(0, TRACKHEIGHT*3, getWidth(), TRACKHEIGHT*3);
-        g2d.drawLine(0, TRACKHEIGHT*4, getWidth(), TRACKHEIGHT*4);
-        g2d.drawLine(0, TRACKHEIGHT*5, getWidth(), TRACKHEIGHT*5);
-        g2d.drawLine(0, TRACKHEIGHT*6, getWidth(), TRACKHEIGHT*6);
-        g2d.drawLine(0, TRACKHEIGHT*7, getWidth(), TRACKHEIGHT*7);
-        g2d.setColor(Color.GRAY);
-        g2d.setStroke(new BasicStroke(1));
-        g2d.drawLine(getWidth()*barPosition/MAXBARPOS, 0, getWidth()*barPosition/MAXBARPOS, getHeight());
-        
-        
-        if(VibcompUI.playing && System.currentTimeMillis()%1000<=20){//tick%speed == 0){
-            if(barPosition < MAXBARPOS) barPosition++;
-            else{ 
-                barPosition = 0;
-                /*page++;
-                if(page>maxPage){
-                    maxPage = page;
-                    vibcompUI.pageScroll.setMaximum(page+1);
-                }
-                vibcompUI.pageScroll.setValue(page);*/
-            }           
-        }
-        tick++;
-        //vibcompUI.rewind.setText("Page: "+page);
-        
-        //display beads
-        g2d.setStroke(new BasicStroke(1));
-        g2d.setColor(Color.BLACK);
-        int yOfset=2;
-        for(int i = 0; i<beads.size(); i++){
-            //.show();
-            if(beads.get(i).getPage()==page){ 
-                beads.get(i).setVisible(true);
-                if(beads.get(i).connectedTo != null){                  
-                    g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset, 
-                            beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset);
-                    g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT, 
-                            beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset+BEADHEIGHT);
-                }
-            }
-            else beads.get(i).setVisible(false);//.hide();
-        }
-        repaint ();
+    public void setBead(int page, int track, boolean active){
+        frags.get(page-1).setBeadBars(track, active);       
     }
-
+    public void clearAll(){
+        for(int i=0; i<frags.size(); i++){
+            frags.get(i).clear();
+        }
+    }
     /**
      * Creates new form BeadPlayer
      */
     public PlayerOverview() {
-        initComponents(); 
+        initComponents();
+        frags.add(playerOverviewFragment1);
+        frags.add(playerOverviewFragment2);
+        frags.add(playerOverviewFragment3);
+        frags.add(playerOverviewFragment4);
+        frags.add(playerOverviewFragment5);
+        frags.add(playerOverviewFragment6);
+        frags.add(playerOverviewFragment7);
+        frags.add(playerOverviewFragment8);
+        frags.add(playerOverviewFragment9);
+        frags.add(playerOverviewFragment10);
+        frags.add(playerOverviewFragment11);
+        frags.add(playerOverviewFragment12);
+        frags.add(playerOverviewFragment13);
+        frags.add(playerOverviewFragment14);
+        frags.add(playerOverviewFragment15);
+        frags.add(playerOverviewFragment16);
+        frags.add(playerOverviewFragment17);
+        frags.add(playerOverviewFragment18);
+        frags.add(playerOverviewFragment19);
+        frags.add(playerOverviewFragment20);
     }
     
-    public void setBead(int x, int y, Bead bead){
-        bead.setTrack(getTrackAt(y));
-        x = x-(BEADHEIGHT/2);
-        y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
-        bead.setOpaque(false);
-        bead.setLocation(x, y);
-        bead.playable = true;
-        bead.setPage(page);
-        beads.add(bead);
-        this.add(bead);
-    }
-    
-    public void deleteBead(Bead activeBead) {
-        this.remove(activeBead);
-        activeBead.breakConnections();
-        //beads.remove(activeBead);
-    }
-    
-    public int getTrackAt(int y){
-        return (y/(TRACKHEIGHT)+1);
-    }
-    
-    public Bead getBeadAt(int x, int y){
-        try{
-            return (Bead)this.getComponentAt(x, y);
-        }
-        catch(ClassCastException e){
-            return null;
-        }
-    }
-    
-    public int getBarIUPosition(){
-        return getWidth()*barPosition/MAXBARPOS;
-    }
     
 
     /**
@@ -136,19 +66,343 @@ public class PlayerOverview extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        playerOverviewFragment1 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment2 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment3 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment4 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment5 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment6 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment7 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment8 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment9 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment10 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment11 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment12 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment13 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment14 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment15 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment16 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment17 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment18 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment19 = new beadbox.PlayerOverviewFragment();
+        playerOverviewFragment20 = new beadbox.PlayerOverviewFragment();
+
+        setBackground(new java.awt.Color(250, 250, 250));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        javax.swing.GroupLayout playerOverviewFragment1Layout = new javax.swing.GroupLayout(playerOverviewFragment1);
+        playerOverviewFragment1.setLayout(playerOverviewFragment1Layout);
+        playerOverviewFragment1Layout.setHorizontalGroup(
+            playerOverviewFragment1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment1Layout.setVerticalGroup(
+            playerOverviewFragment1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment2Layout = new javax.swing.GroupLayout(playerOverviewFragment2);
+        playerOverviewFragment2.setLayout(playerOverviewFragment2Layout);
+        playerOverviewFragment2Layout.setHorizontalGroup(
+            playerOverviewFragment2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment2Layout.setVerticalGroup(
+            playerOverviewFragment2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment3Layout = new javax.swing.GroupLayout(playerOverviewFragment3);
+        playerOverviewFragment3.setLayout(playerOverviewFragment3Layout);
+        playerOverviewFragment3Layout.setHorizontalGroup(
+            playerOverviewFragment3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment3Layout.setVerticalGroup(
+            playerOverviewFragment3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment4Layout = new javax.swing.GroupLayout(playerOverviewFragment4);
+        playerOverviewFragment4.setLayout(playerOverviewFragment4Layout);
+        playerOverviewFragment4Layout.setHorizontalGroup(
+            playerOverviewFragment4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment4Layout.setVerticalGroup(
+            playerOverviewFragment4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment5Layout = new javax.swing.GroupLayout(playerOverviewFragment5);
+        playerOverviewFragment5.setLayout(playerOverviewFragment5Layout);
+        playerOverviewFragment5Layout.setHorizontalGroup(
+            playerOverviewFragment5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment5Layout.setVerticalGroup(
+            playerOverviewFragment5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment6Layout = new javax.swing.GroupLayout(playerOverviewFragment6);
+        playerOverviewFragment6.setLayout(playerOverviewFragment6Layout);
+        playerOverviewFragment6Layout.setHorizontalGroup(
+            playerOverviewFragment6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment6Layout.setVerticalGroup(
+            playerOverviewFragment6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment7Layout = new javax.swing.GroupLayout(playerOverviewFragment7);
+        playerOverviewFragment7.setLayout(playerOverviewFragment7Layout);
+        playerOverviewFragment7Layout.setHorizontalGroup(
+            playerOverviewFragment7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment7Layout.setVerticalGroup(
+            playerOverviewFragment7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment8Layout = new javax.swing.GroupLayout(playerOverviewFragment8);
+        playerOverviewFragment8.setLayout(playerOverviewFragment8Layout);
+        playerOverviewFragment8Layout.setHorizontalGroup(
+            playerOverviewFragment8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment8Layout.setVerticalGroup(
+            playerOverviewFragment8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment9Layout = new javax.swing.GroupLayout(playerOverviewFragment9);
+        playerOverviewFragment9.setLayout(playerOverviewFragment9Layout);
+        playerOverviewFragment9Layout.setHorizontalGroup(
+            playerOverviewFragment9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment9Layout.setVerticalGroup(
+            playerOverviewFragment9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment10Layout = new javax.swing.GroupLayout(playerOverviewFragment10);
+        playerOverviewFragment10.setLayout(playerOverviewFragment10Layout);
+        playerOverviewFragment10Layout.setHorizontalGroup(
+            playerOverviewFragment10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment10Layout.setVerticalGroup(
+            playerOverviewFragment10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment11Layout = new javax.swing.GroupLayout(playerOverviewFragment11);
+        playerOverviewFragment11.setLayout(playerOverviewFragment11Layout);
+        playerOverviewFragment11Layout.setHorizontalGroup(
+            playerOverviewFragment11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment11Layout.setVerticalGroup(
+            playerOverviewFragment11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment12Layout = new javax.swing.GroupLayout(playerOverviewFragment12);
+        playerOverviewFragment12.setLayout(playerOverviewFragment12Layout);
+        playerOverviewFragment12Layout.setHorizontalGroup(
+            playerOverviewFragment12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment12Layout.setVerticalGroup(
+            playerOverviewFragment12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment13Layout = new javax.swing.GroupLayout(playerOverviewFragment13);
+        playerOverviewFragment13.setLayout(playerOverviewFragment13Layout);
+        playerOverviewFragment13Layout.setHorizontalGroup(
+            playerOverviewFragment13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment13Layout.setVerticalGroup(
+            playerOverviewFragment13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment14Layout = new javax.swing.GroupLayout(playerOverviewFragment14);
+        playerOverviewFragment14.setLayout(playerOverviewFragment14Layout);
+        playerOverviewFragment14Layout.setHorizontalGroup(
+            playerOverviewFragment14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment14Layout.setVerticalGroup(
+            playerOverviewFragment14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment15Layout = new javax.swing.GroupLayout(playerOverviewFragment15);
+        playerOverviewFragment15.setLayout(playerOverviewFragment15Layout);
+        playerOverviewFragment15Layout.setHorizontalGroup(
+            playerOverviewFragment15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment15Layout.setVerticalGroup(
+            playerOverviewFragment15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment16Layout = new javax.swing.GroupLayout(playerOverviewFragment16);
+        playerOverviewFragment16.setLayout(playerOverviewFragment16Layout);
+        playerOverviewFragment16Layout.setHorizontalGroup(
+            playerOverviewFragment16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment16Layout.setVerticalGroup(
+            playerOverviewFragment16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment17Layout = new javax.swing.GroupLayout(playerOverviewFragment17);
+        playerOverviewFragment17.setLayout(playerOverviewFragment17Layout);
+        playerOverviewFragment17Layout.setHorizontalGroup(
+            playerOverviewFragment17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment17Layout.setVerticalGroup(
+            playerOverviewFragment17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment18Layout = new javax.swing.GroupLayout(playerOverviewFragment18);
+        playerOverviewFragment18.setLayout(playerOverviewFragment18Layout);
+        playerOverviewFragment18Layout.setHorizontalGroup(
+            playerOverviewFragment18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment18Layout.setVerticalGroup(
+            playerOverviewFragment18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment19Layout = new javax.swing.GroupLayout(playerOverviewFragment19);
+        playerOverviewFragment19.setLayout(playerOverviewFragment19Layout);
+        playerOverviewFragment19Layout.setHorizontalGroup(
+            playerOverviewFragment19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment19Layout.setVerticalGroup(
+            playerOverviewFragment19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout playerOverviewFragment20Layout = new javax.swing.GroupLayout(playerOverviewFragment20);
+        playerOverviewFragment20.setLayout(playerOverviewFragment20Layout);
+        playerOverviewFragment20Layout.setHorizontalGroup(
+            playerOverviewFragment20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        playerOverviewFragment20Layout.setVerticalGroup(
+            playerOverviewFragment20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(playerOverviewFragment1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playerOverviewFragment20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(playerOverviewFragment1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerOverviewFragment20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private beadbox.PlayerOverviewFragment playerOverviewFragment1;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment10;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment11;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment12;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment13;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment14;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment15;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment16;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment17;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment18;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment19;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment2;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment20;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment3;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment4;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment5;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment6;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment7;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment8;
+    private beadbox.PlayerOverviewFragment playerOverviewFragment9;
     // End of variables declaration//GEN-END:variables
 }

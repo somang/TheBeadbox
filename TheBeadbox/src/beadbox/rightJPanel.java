@@ -368,7 +368,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-        System.out.println(getComponentIndex(object));
+        //System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight3MouseDragged
 
     private void beadlight4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight4MouseDragged
@@ -385,7 +385,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-	System.out.println(getComponentIndex(object));
+	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight4MouseDragged
 
     private void beadlight5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight5MouseDragged
@@ -402,7 +402,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-	System.out.println(getComponentIndex(object));
+	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight5MouseDragged
 
     private void beadlight6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight6MouseDragged
@@ -419,7 +419,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-	System.out.println(getComponentIndex(object));
+	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight6MouseDragged
 
     private void beadlight7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight7MouseDragged
@@ -436,7 +436,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-	System.out.println(getComponentIndex(object));
+	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight7MouseDragged
 
     private void beadlight1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight1MouseDragged
@@ -453,7 +453,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-	System.out.println(getComponentIndex(object));
+	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight1MouseDragged
 
     private void beadlight2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight2MouseDragged
@@ -470,7 +470,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-	System.out.println(getComponentIndex(object));
+	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight2MouseDragged
 
     private void beadlight8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadlight8MouseDragged
@@ -487,7 +487,7 @@ public class rightJPanel extends javax.swing.JPanel {
             Point b = mouseP.getLocation();
             object.setLocation(b.x-ofsetX, b.y-ofsetY);
         }
-	System.out.println(getComponentIndex(object));
+	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight8MouseDragged
 
 

@@ -46,7 +46,7 @@ class safeColors {
         }
     }
     
-    public int[] pickColor(int curFrequency, int track){
+    public int[] pickRGB(int curFrequency, int track){
         /* Picks Color corresponding to the current frequency, and track number. */ 
         int red = (safeColorP[track][0]+(curFrequency/20));
         int green = (safeColorP[track][1]+(curFrequency/20));
@@ -56,5 +56,11 @@ class safeColors {
         if (blue > 255) blue = 255;
         int[] col = new int[]{red,green,blue};
         return col;
+    }
+    
+    public Color pickColor(int curFrequency, int track){
+        /* Picks Color corresponding to the current frequency, and track number. */ 
+        int[] col = pickRGB(curFrequency,track);
+        return new Color(col[0],col[1],col[2]);
     }
 }

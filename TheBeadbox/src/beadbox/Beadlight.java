@@ -6,7 +6,6 @@
 package beadbox;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 /**
@@ -17,17 +16,13 @@ public class Beadlight extends javax.swing.JPanel {
 
     private int centerX,centerY,setIntensity,maxIntensity,track;    
     private safeColors safeColor ;
-    private int[] colorCodeReturned;
-    private Color lightColor;
     
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g2d);
         // Here comes the color.
-        colorCodeReturned = safeColor.pickColor(50, track);
-        lightColor = new Color(colorCodeReturned[0],colorCodeReturned[1],colorCodeReturned[2]);
-        g2d.setColor(lightColor);
+        g2d.setColor(safeColor.pickColor(50, track));
         g2d.setStroke(new BasicStroke(2));
         centerX = (getWidth()-maxIntensity)/2;
         centerY = (getHeight()-maxIntensity)/2;

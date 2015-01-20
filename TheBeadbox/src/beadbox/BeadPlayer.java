@@ -20,7 +20,6 @@ public class BeadPlayer extends javax.swing.JPanel {
     int BEADHEIGHT = 50;
     int barPosition = 10, MAXBARPOS = 1000;
     int page = 1;
-    //double speed = 0.001;
     static int maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
     VibcompUI vibcompUI = null;
@@ -55,28 +54,46 @@ public class BeadPlayer extends javax.swing.JPanel {
                     //maxPage = page;
                     //vibcompUI.pageScroll.setMaximum(page+1);
                 }
-                vibcompUI.pageScroll.setValue(page);
-                
+                vibcompUI.pageScroll.setValue(page);               
             }           
         }
         //vibcompUI.rewind.setText("Page: "+page);
         
-        //Draw Connection lines here.
+        
         g2d.setStroke(new BasicStroke(1));
         g2d.setColor(Color.BLACK);
         int yOfset=2;
+        vibcompUI.playerOverview1.clearAll();
         for(int i = 0; i<beads.size(); i++){
             //.show();
+            //Draw beads here 
             if(beads.get(i).getPage()==page){ 
                 beads.get(i).setVisible(true);
-                if(beads.get(i).connectedTo != null){                  
-                    g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset, 
-                            beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset);
-                    g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT, 
-                            beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset+BEADHEIGHT);
+                if(beads.get(i).connectedTo != null){    
+                    //Draw Connection lines here.
+                    if(beads.get(i).connectedTo.page == beads.get(i).page){
+                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset, 
+                                beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset);
+                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT, 
+                                beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset+BEADHEIGHT);
+                    }
+                    else if(beads.get(i).connectedTo.page < beads.get(i).page){
+                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset, 
+                                0, ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2);
+                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT, 
+                                0, ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2+BEADHEIGHT);
+                    }
+                    else{
+                        g2d.drawLine(getWidth(), ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2, 
+                                beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset);
+                        g2d.drawLine(getWidth(), ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2+BEADHEIGHT, 
+                                beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT);
+                    }
                 }
             }
             else beads.get(i).setVisible(false);//.hide();
+            
+            vibcompUI.playerOverview1.setBead(beads.get(i).page, beads.get(i).track, true);
         }
         repaint ();
     }
@@ -98,13 +115,11 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setPage(page);
         beads.add(bead);
         this.add(bead);
-        vibcompUI.playerOverview1.beads=beads;
     }
     
     public void deleteBead(Bead activeBead) {
         this.remove(activeBead);
         activeBead.breakConnections();
-        //beads.remove(activeBead);
     }
     
     public int getTrackAt(int y){
