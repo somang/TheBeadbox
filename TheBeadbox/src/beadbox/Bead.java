@@ -61,21 +61,23 @@ public class Bead extends javax.swing.JPanel {
                 //System.out.println(barPos);
                 
                 if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos // If bar is in a bead, 
-                        || (connectedTo!=null && this.getLocation().x+getWidth()*page < barPos && connectedTo.getLocation().x*connectedTo.page>barPos)){ // If bar is in a bead connection, 
+                        || (connectedTo!=null && this.getLocation().x+getWidth()*page < barPos 
+                        && connectedTo.getLocation().x*connectedTo.page>barPos)){ // If bar is in a bead connection, 
                     Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
                     playBead();
                     if (inandout){
-                        System.out.println("playing a note at "+track);
+                        //System.out.println("playing a note at "+track);
                         tmpBeadlight.setIntensity(40);                      
                         inandout = false;
                     }
                 }else{
                     if (!inandout){
                         Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                        System.out.println("notplaying "+track);
+                        //System.out.println("notplaying "+track);
                         tmpBeadlight.setIntensity(0);
                         inandout = true;
                     }
+                    /*Bug 1, It refreshes to a original position when clicked play button. (while playing)*/
                 }
             }
         }catch(ArrayIndexOutOfBoundsException e){

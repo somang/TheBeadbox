@@ -61,7 +61,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         }
         //vibcompUI.rewind.setText("Page: "+page);
         
-        //display beads
+        //Draw Connection lines here.
         g2d.setStroke(new BasicStroke(1));
         g2d.setColor(Color.BLACK);
         int yOfset=2;

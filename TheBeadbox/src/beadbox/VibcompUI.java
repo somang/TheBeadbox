@@ -8,11 +8,10 @@ package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JMenuItem;
-import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Line2D;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -50,6 +49,13 @@ public class VibcompUI extends javax.swing.JFrame {
         endBead = null;
         activeBead = null;  
         beadPanel.repaint();
+        
+        //Component[] incrButton = pageScroll.getComponents();
+        //for (int i=0; i<incrButton.length;i++){
+        //    System.out.println(incrButton[i]);            
+        //}
+        
+        
         //this.setComponentZOrder(beadPlayer1, 1);
         //this.setComponentZOrder(barSlider, 0);
         
@@ -58,10 +64,7 @@ public class VibcompUI extends javax.swing.JFrame {
             /*
                 https://github.com/mhroth/jasiohost
             */
-            driver = AsioDriver.getDriver ( "ASIO PreSonus FireStudio" ); 
-            //System.out.println(AsioDriver.getDriverNames());
-            //driver = AsioDriver.getDriver ( "ASIO4ALL v2" );
-            //driver = AsioDriver.getDriver("ASIO 2.0 - ESI GIGAPort HD");
+            driver = AsioDriver.getDriver ( "ASIO PreSonus FireStudio" );
             listener = new AsioSoundHost ( driver );
             driver.start();
             driverLoaded = true;
@@ -111,7 +114,6 @@ public class VibcompUI extends javax.swing.JFrame {
         playerOverview1 = new beadbox.PlayerOverview();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1750, 1000));
 
         beadPlayer1.setBackground(new java.awt.Color(255, 255, 255));
         beadPlayer1.setPreferredSize(new java.awt.Dimension(1350, 550));
@@ -368,6 +370,9 @@ public class VibcompUI extends javax.swing.JFrame {
         
         /*Few bugs. 2014-12-07
         1. After a few repetited placement, the new bead button does not appear.
+        2. Above is causing new problem, which draws connection line in random position
+        when the page is turned already.
+        
         */
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
