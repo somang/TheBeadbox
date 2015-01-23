@@ -405,9 +405,35 @@ public class VibcompUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
 
+    /* 
+       While there is a startBead, where the dragging started,
+       this gets ending coordinates of the mouse dragging,
+       and calculates the eucleadian distance in between
+       so that it returns whether the drag is valid or not.
+    
+        tempMinimumDistance. = 10;
+    */
+    private boolean isActualDrag(int endBeadx, int endBeady){
+        int xdif = 0;
+        int ydif = 0;
+        double distance;
+        xdif = endBeadx - startBead.getX();
+        ydif = endBeady - startBead.getY();
+        distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
+        System.out.println(distance);
+        
+        if (distance > 100){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
         endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.
-        if (dragStatus && evt.isControlDown()){ //if control is down, AND dragged.   
+        
+        
+        if (dragStatus && isActualDrag(endBead_x, endBead_y)){ //&& evt.isControlDown() if control is down, AND dragged.   
             if (activeBead != null){
                 if(endBead == null){//If there is no bead.
                     endBead = new Bead();                 
