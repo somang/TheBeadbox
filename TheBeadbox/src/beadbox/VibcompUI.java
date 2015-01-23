@@ -354,6 +354,11 @@ public class VibcompUI extends javax.swing.JFrame {
         2. Above is causing new problem, which draws connection line in random position
         when the page is turned already.
         
+        2015-01-20
+        - What needs to be fixed:
+        - Right click after paging does not work.
+        - dragging without ctrl key but now has the offset boundaries.
+        
         */
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
