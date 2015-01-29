@@ -25,7 +25,6 @@ public class Bead extends javax.swing.JPanel {
     final private safeColors safeColor ;	
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
-    int sleepTime = 2;
     protected Bead connectedTo = null;
 
     boolean inandout = false;
@@ -33,6 +32,7 @@ public class Bead extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
+        
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g2d);
         g2d.setColor(Color.BLACK);
@@ -73,14 +73,11 @@ public class Bead extends javax.swing.JPanel {
                         tmpBeadlight.setIntensity(0);
                         inandout = true;
                     }
-                    /*Bug 1, It refreshes to a original position when clicked play button. (while playing)*/
                 }
             }
-        }catch(ArrayIndexOutOfBoundsException e){
-                    
-        }
-            
+        }catch(ArrayIndexOutOfBoundsException e){}            
         repaint();
+        
     }
     
     /* GETTERS */

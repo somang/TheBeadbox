@@ -22,7 +22,7 @@ import javax.swing.JPopupMenu;
  */
 public class VibcompUI extends javax.swing.JFrame {
     
-    static protected boolean playing = false;
+    static protected boolean playing = false;    
     protected Bead activeBead;
     protected AsioDriver driver;
     protected AsioSoundHost listener;   
@@ -40,7 +40,7 @@ public class VibcompUI extends javax.swing.JFrame {
     
     
     /**
-     * Creates new form VibCUI
+     * Creates new form VibC UI
      */
     public VibcompUI() {
         initComponents();
@@ -168,9 +168,9 @@ public class VibcompUI extends javax.swing.JFrame {
         });
 
         playButton.setText("> Play");
-        playButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                playButtonMousePressed(evt);
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
             }
         });
 
@@ -357,6 +357,7 @@ public class VibcompUI extends javax.swing.JFrame {
         2015-01-20
         - What needs to be fixed:
         - Right click after paging does not work.
+        - New 
         - dragging without ctrl key but now has the offset boundaries.
         
         */
@@ -377,17 +378,6 @@ public class VibcompUI extends javax.swing.JFrame {
                     prevBead = activeBead;
                     
                 }else{
-                    //Select.
-                    activeBead = tmpBead;
-                    frequencySlider.setValue(activeBead.getFrequency());
-                    intensitySlider.setValue(activeBead.getIntensity()*2);
-                    
-                    // If selected, then create a border to show.
-                    tmpBead.setBorder(BorderFactory.createLineBorder(Color.black));
-                    if (tmpBead!=prevBead){
-                        prevBead.setBorder(BorderFactory.createEmptyBorder());
-                    }
-                    prevBead = tmpBead;
                     
                     //Dragging.
                     startBead = tmpBead;
@@ -411,27 +401,27 @@ public class VibcompUI extends javax.swing.JFrame {
        and calculates the eucleadian distance in between
        so that it returns whether the drag is valid or not.
     
-        tempMinimumDistance. = 10;
+        tempMinimumDistance. = 100;
     */
     private boolean isActualDrag(int endBeadx, int endBeady){
         int xdif = 0;
         int ydif = 0;
         double distance;
-        xdif = endBeadx - startBead.getX();
-        ydif = endBeady - startBead.getY();
-        distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
-        System.out.println(distance);
+        try{
+            xdif = endBeadx - startBead.getX();
+            ydif = endBeady - startBead.getY();
+            distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
+            System.out.println(distance);
         
-        if (distance > 100){
-            return true;
-        }else{
-            return false;
-        }
+            if (distance > 100){ //if distance is greater than 100
+                return true;
+            }
+        }catch(NullPointerException e){}
+        return false;
     }
     
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
-        endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.
-        
+        endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.        
         
         if (dragStatus && isActualDrag(endBead_x, endBead_y)){ //&& evt.isControlDown() if control is down, AND dragged.   
             if (activeBead != null){
@@ -473,21 +463,22 @@ public class VibcompUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
-    private void playButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playButtonMousePressed
-        if(playing){        
+    private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
+        BeadPlayer.maxPage++;
+        pageScroll.setMaximum(BeadPlayer.maxPage+1);
+    }//GEN-LAST:event_addPageMouseClicked
+
+    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
+        
+        if(playing){            
             playButton.setText("> PLAY");
             playing = false;
         }else{
             playButton.setText("[] STOP");
             playing = true;
-        }
-        
-    }//GEN-LAST:event_playButtonMousePressed
-
-    private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
-        BeadPlayer.maxPage++;
-        pageScroll.setMaximum(BeadPlayer.maxPage+1);
-    }//GEN-LAST:event_addPageMouseClicked
+        } 
+               
+    }//GEN-LAST:event_playButtonActionPerformed
 
     
     

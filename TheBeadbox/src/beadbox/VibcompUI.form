@@ -173,7 +173,7 @@
         <Property name="text" type="java.lang.String" value="&gt; Play"/>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="playButtonMousePressed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playButtonActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="beadPanel">

@@ -95,6 +95,7 @@ public class BeadPlayer extends javax.swing.JPanel {
             
             vibcompUI.playerOverview1.setBead(beads.get(i).page, beads.get(i).track, true);
         }
+        
         repaint ();
     }
 
