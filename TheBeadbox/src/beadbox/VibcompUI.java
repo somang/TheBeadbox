@@ -7,7 +7,6 @@
 package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
-import java.awt.Color;
 import javax.swing.JMenuItem;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -372,13 +371,11 @@ public class VibcompUI extends javax.swing.JFrame {
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
                     try{
                         prevBead.setBorder(BorderFactory.createEmptyBorder());
-                    }catch(Exception e){
-                        
-                    }
+                    }catch(Exception e){}
                     prevBead = activeBead;
                     
                 }else{
-                    
+                    activeBead = tmpBead;
                     //Dragging.
                     startBead = tmpBead;
                     startBead_x = startBead.getX();
