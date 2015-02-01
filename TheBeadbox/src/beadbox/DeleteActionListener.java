@@ -28,20 +28,23 @@ class DeleteActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         bp.deleteBead(db);
         
-        
-        
-        
-        
-        
-
-        
-        //for (int i=0;i<;i++){
-            //PlayerOverviewFragment frag = po.frags.get(i);
-        //}
-                
-                
+        IsEmptyTrackAtPage(db.page,db.track);
                 
         System.out.println("deleted.");
+    }
+    
+    private boolean IsEmptyTrackAtPage(int page,int track){
+        
+        for (int i=0;i<bp.beads.size();i++){
+            Bead tempbead = bp.beads.get(i); // if there is a bead,
+            if (tempbead.page == page){ // at current page, 
+                if (tempbead.track == track){ // on current track,
+                    return false; // then false
+                }
+            }     
+        }
+        // if there is no such bead at the position.
+        return true;
     }
     
 }

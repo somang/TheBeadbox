@@ -47,7 +47,9 @@ public class VibcompUI extends javax.swing.JFrame {
         endBead = null;
         activeBead = null;  
         beadPanel.repaint();
-        
+                
+        setExtendedState(this.MAXIMIZED_BOTH);        
+
         //Component[] incrButton = pageScroll.getComponents();
         //for (int i=0; i<incrButton.length;i++){
         //    System.out.println(incrButton[i]);            

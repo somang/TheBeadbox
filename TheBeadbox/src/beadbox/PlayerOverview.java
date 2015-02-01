@@ -25,13 +25,12 @@ public class PlayerOverview extends javax.swing.JPanel {
         frags.get(page-1).setBeadBars(track, active);       
     }
     public void clearAll(){
-        for(int i=0; i<frags.size(); i++){
+        for (int i=0; i<frags.size(); i++){
             frags.get(i).clear();
         }
     }
     
-    public void createFrags(){
-        
+    public void createFrags(){        
         frags.add(playerOverviewFragment1);
         frags.add(playerOverviewFragment2);
         frags.add(playerOverviewFragment3);
@@ -52,9 +51,6 @@ public class PlayerOverview extends javax.swing.JPanel {
         frags.add(playerOverviewFragment18);
         frags.add(playerOverviewFragment19);
         frags.add(playerOverviewFragment20);
-        
-        
-        
     }
     
     /**
@@ -64,8 +60,6 @@ public class PlayerOverview extends javax.swing.JPanel {
         initComponents();
         createFrags();        
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

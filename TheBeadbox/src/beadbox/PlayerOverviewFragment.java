@@ -91,8 +91,11 @@ public class PlayerOverviewFragment extends javax.swing.JPanel {
     public void clear(){
         for(int i=0; i<activeBars.length; i++){
             activeBars[i] = false;
-
         }
+    }
+    
+    public void cleartrack(int track){
+        activeBars[track] = false;
     }
 
     /**
