@@ -18,6 +18,7 @@ public class PlayerOverview extends javax.swing.JPanel {
      */  
     int page = 1;
     ArrayList <PlayerOverviewFragment> frags = new ArrayList();
+    PlayerOverviewFragment tempFrag;
     
 
     public void setBead(int page, int track, boolean active){
@@ -31,10 +32,29 @@ public class PlayerOverview extends javax.swing.JPanel {
     
     public void createFrags(){
         
-        for (int i=0;i<20;i++){
-            PlayerOverviewFragment tempFrag = new PlayerOverviewFragment();
-            frags.add(tempFrag);
-        }
+        frags.add(playerOverviewFragment1);
+        frags.add(playerOverviewFragment2);
+        frags.add(playerOverviewFragment3);
+        frags.add(playerOverviewFragment4);
+        frags.add(playerOverviewFragment5);
+        frags.add(playerOverviewFragment6);
+        frags.add(playerOverviewFragment7);
+        frags.add(playerOverviewFragment8);
+        frags.add(playerOverviewFragment9);
+        frags.add(playerOverviewFragment10);
+        frags.add(playerOverviewFragment11);
+        frags.add(playerOverviewFragment12);
+        frags.add(playerOverviewFragment13);
+        frags.add(playerOverviewFragment14);
+        frags.add(playerOverviewFragment15);
+        frags.add(playerOverviewFragment16);
+        frags.add(playerOverviewFragment17);
+        frags.add(playerOverviewFragment18);
+        frags.add(playerOverviewFragment19);
+        frags.add(playerOverviewFragment20);
+        
+        
+        
     }
     
     /**
