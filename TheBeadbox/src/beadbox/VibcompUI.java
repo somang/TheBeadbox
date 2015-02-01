@@ -387,7 +387,7 @@ public class VibcompUI extends javax.swing.JFrame {
             if (tmpBead != null){
                 
                 tmpBead.setComponentPopupMenu(menuPopup);
-                BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1,tmpBead));
+                BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1,tmpBead,playerOverview1));
             }
         }
     }//GEN-LAST:event_beadPlayer1MousePressed

@@ -7,23 +7,40 @@ package beadbox;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  *
  * @author imdc
  */
 class DeleteActionListener implements ActionListener {
-    private Bead gb;
+    private Bead db;
     private BeadPlayer bp;
+    private PlayerOverview po;
     
-    public DeleteActionListener(BeadPlayer beadPlayer1, Bead deletingBead) {
-        gb = deletingBead;
+    public DeleteActionListener(BeadPlayer beadPlayer1, Bead deletingBead, PlayerOverview overview1) {
+        db = deletingBead;
         bp = beadPlayer1;
+        po = overview1;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        bp.deleteBead(gb);
+        bp.deleteBead(db);
+        
+        
+        
+        
+        
+        
+
+        
+        //for (int i=0;i<;i++){
+            //PlayerOverviewFragment frag = po.frags.get(i);
+        //}
+                
+                
+                
         System.out.println("deleted.");
     }
     
