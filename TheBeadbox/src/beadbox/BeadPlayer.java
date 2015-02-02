@@ -119,6 +119,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
     
     public void deleteBead(Bead activeBead) {
+        beads.remove(activeBead);
         this.remove(activeBead);
         activeBead.breakConnections();
     }

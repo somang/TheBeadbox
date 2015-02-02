@@ -27,14 +27,12 @@ class DeleteActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         bp.deleteBead(db);
-        
-        IsEmptyTrackAtPage(db.page,db.track);
-                
-        System.out.println("deleted.");
+        //System.out.println(IsEmptyTrackAtPage(db.page,db.track));        
+        //System.out.println("deleted.");
     }
     
     private boolean IsEmptyTrackAtPage(int page,int track){
-        
+
         for (int i=0;i<bp.beads.size();i++){
             Bead tempbead = bp.beads.get(i); // if there is a bead,
             if (tempbead.page == page){ // at current page, 
