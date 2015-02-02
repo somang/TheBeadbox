@@ -26,19 +26,21 @@ public class Bead extends javax.swing.JPanel {
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     protected Bead connectedTo = null;
-
-    boolean inandout = false;
+    boolean inandout = false, initial = true;
+    Beadlight tmpBeadlight;
     
     
     @Override
     protected void paintComponent(Graphics g) {
-        
+        if(initial){       
+            centerX = (getWidth()-maxIntensity)/2;
+            centerY = (getHeight()-maxIntensity)/2;
+            initial = false;
+        }
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g2d);
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(3));
-        centerX = (getWidth()-maxIntensity)/2;
-        centerY = (getHeight()-maxIntensity)/2;
         g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
         g2d.setColor(Color.WHITE);
         g2d.fillOval(centerX, centerY, maxIntensity, maxIntensity);
@@ -49,18 +51,12 @@ public class Bead extends javax.swing.JPanel {
         
         
         try{   
-            if(playable && VibcompUI.playing){
-                //if (vibcompUI.rewind.isSelected()) setLocation(getX()+1, getY());
-                //else setLocation(getX()-1, getY());
-                int barPos = vibcompUI.beadPlayer1.getBarIUPosition()*vibcompUI.beadPlayer1.page;
-                
-                //System.out.println(barPos);
-                
-                if(this.getLocation().x < barPos && this.getLocation().x+getWidth() > barPos // If bar is in a bead, 
-                        || (connectedTo!=null && this.getLocation().x+getWidth()*page < barPos 
-                        && connectedTo.getLocation().x*connectedTo.page>barPos)){ // If bar is in a bead connection, 
-                    Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                    playBead();
+            if(playable && VibcompUI.playing){ 
+                int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
+                int start = getX()+(page*getWidth());
+                int end = getX()+(page*getWidth())+getWidth();
+                if(connectedTo!=null) end=connectedTo.getX()+(connectedTo.page*getWidth());
+                if(start<(barPos+(page*getWidth())) && end>barPos+(page*getWidth())){                
                     if (inandout){
                         //System.out.println("playing a note at "+track);
                         tmpBeadlight.setIntensity(40);                      
@@ -68,7 +64,7 @@ public class Bead extends javax.swing.JPanel {
                     }
                 }else{
                     if (!inandout){
-                        Beadlight tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
+                        tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
                         //System.out.println("notplaying "+track);
                         tmpBeadlight.setIntensity(0);
                         inandout = true;
@@ -76,7 +72,7 @@ public class Bead extends javax.swing.JPanel {
                 }
             }
         }catch(ArrayIndexOutOfBoundsException e){}            
-        repaint();
+        //repaint();
         
     }
     
@@ -139,7 +135,7 @@ public class Bead extends javax.swing.JPanel {
     }
     
     public void playBead(){
-        //TODO: Play note 
+        //Play note 
         try{
             float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
 
@@ -149,9 +145,6 @@ public class Bead extends javax.swing.JPanel {
                         sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*curIntensity/100;                   
                     }                          
                     vibcompUI.listener.output ( track-1, sampleWave );
-                    
-                    //Thread.sleep(sleepTime);
-                    
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Bead.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -163,7 +156,6 @@ public class Bead extends javax.swing.JPanel {
         }catch(NullPointerException e){
             //System.out.println("Yo, This is from Bead.playBead() exception.");
         }
-        
     }
     
     /**

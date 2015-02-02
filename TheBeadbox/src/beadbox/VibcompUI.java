@@ -383,6 +383,10 @@ public class VibcompUI extends javax.swing.JFrame {
                     startBead_x = startBead.getX();
                     startBead_y = startBead.getY();
                 }
+                //set slider positions
+                intensitySlider.setValue(activeBead.getIntensity()*2);
+                frequencySlider.setValue(activeBead.getFrequency());
+                
             }else JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
         }else if (evt.getButton() == MouseEvent.BUTTON3) // Right click
         {

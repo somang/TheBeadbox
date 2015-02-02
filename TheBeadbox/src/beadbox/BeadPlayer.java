@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +25,43 @@ public class BeadPlayer extends javax.swing.JPanel {
     static int maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
     VibcompUI vibcompUI = null;
+    Thread thread;
+    int SPEED = 50;
+    boolean inandout = true;
+    
+    Runnable playerTickTock = new Runnable(){
+        public void run(){
+            while(true){
+                if(VibcompUI.playing){//tick%speed == 0){
+                    if(barPosition < MAXBARPOS) barPosition+=50;
+                    else{ 
+                        barPosition = 0;
+                        page++;
+                        if(page>maxPage){
+                            page=1;
+                            //maxPage = page;
+                            //vibcompUI.pageScroll.setMaximum(page+1);
+                        }
+                        vibcompUI.pageScroll.setValue(page);               
+                    }           
+                }
+                try {
+                    thread.sleep(SPEED);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    };
+    
+    /**
+     * Creates new form BeadPlayer
+     */
+    public BeadPlayer() {
+        initComponents(); 
+        Thread thread = new Thread(playerTickTock);
+        thread.start();
+    }
     
     @Override
     protected void paintComponent(Graphics g) {
@@ -42,68 +81,56 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.setColor(Color.GRAY);
         g2d.setStroke(new BasicStroke(1));
         g2d.drawLine(getWidth()*barPosition/MAXBARPOS, 0, getWidth()*barPosition/MAXBARPOS, getHeight());
-        
-        
-        if(VibcompUI.playing && System.currentTimeMillis()%50<=20){//tick%speed == 0){
-            if(barPosition < MAXBARPOS) barPosition+=50;
-            else{ 
-                barPosition = 0;
-                page++;
-                if(page>maxPage){
-                    page=1;
-                    //maxPage = page;
-                    //vibcompUI.pageScroll.setMaximum(page+1);
-                }
-                vibcompUI.pageScroll.setValue(page);               
-            }           
-        }
-        //vibcompUI.rewind.setText("Page: "+page);
-        
+   
         
         g2d.setStroke(new BasicStroke(1));
         g2d.setColor(Color.BLACK);
         int yOfset=2;
         vibcompUI.playerOverview1.clearAll();
         for(int i = 0; i<beads.size(); i++){
+            Bead curBead = beads.get(i);
             //.show();
             //Draw beads here 
-            if(beads.get(i).getPage()==page){ 
-                beads.get(i).setVisible(true);
-                if(beads.get(i).connectedTo != null){    
+            if(curBead.getPage()==page){ 
+                curBead.setVisible(true);
+                if(curBead.connectedTo != null){    
                     //Draw Connection lines here.
-                    if(beads.get(i).connectedTo.page == beads.get(i).page){
-                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset, 
-                                beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset);
-                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT, 
-                                beads.get(i).connectedTo.getX()+(BEADHEIGHT/2), beads.get(i).connectedTo.getY()+yOfset+BEADHEIGHT);
+                    if(curBead.connectedTo.page == curBead.page){
+                        g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset, 
+                                curBead.connectedTo.getX()+(BEADHEIGHT/2), curBead.connectedTo.getY()+yOfset);
+                        g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT, 
+                                curBead.connectedTo.getX()+(BEADHEIGHT/2), curBead.connectedTo.getY()+yOfset+BEADHEIGHT);
                     }
-                    else if(beads.get(i).connectedTo.page < beads.get(i).page){
-                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset, 
-                                0, ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2);
-                        g2d.drawLine(beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT, 
-                                0, ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2+BEADHEIGHT);
+                    else if(curBead.connectedTo.page < curBead.page){
+                        g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset, 
+                                0, ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2);
+                        g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT, 
+                                0, ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2+BEADHEIGHT);
                     }
                     else{
-                        g2d.drawLine(getWidth(), ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2, 
-                                beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset);
-                        g2d.drawLine(getWidth(), ((beads.get(i).connectedTo.getY()+yOfset)+(beads.get(i).getY()+yOfset))/2+BEADHEIGHT, 
-                                beads.get(i).getX()+(BEADHEIGHT/2), beads.get(i).getY()+yOfset+BEADHEIGHT);
+                        g2d.drawLine(getWidth(), ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2, 
+                                curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset);
+                        g2d.drawLine(getWidth(), ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2+BEADHEIGHT, 
+                                curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT);
                     }
                 }
             }
-            else beads.get(i).setVisible(false);//.hide();
+            else curBead.setVisible(false);//.hide();
             
-            vibcompUI.playerOverview1.setBead(beads.get(i).page, beads.get(i).track, true);
+            vibcompUI.playerOverview1.setBead(curBead.page, curBead.track, true);
+            
+            if(VibcompUI.playing){
+                int start = curBead.getX()+(curBead.page*getWidth());
+                int end = curBead.getX()+(curBead.page*getWidth())+curBead.getWidth();
+                if(curBead.connectedTo!=null) end=curBead.connectedTo.getX()+(curBead.connectedTo.page*getWidth());
+                if(start<(getBarIUPosition()+(page*getWidth())) && end>getBarIUPosition()+(page*getWidth())){
+                    curBead.playBead();
+                }
+            }
+            //if(VibcompUI.playing && )
         }
         
         repaint ();
-    }
-
-    /**
-     * Creates new form BeadPlayer
-     */
-    public BeadPlayer() {
-        initComponents(); 
     }
     
     public void setBead(int x, int y, Bead bead){
