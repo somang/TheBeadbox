@@ -77,10 +77,12 @@ public class VibcompUI extends javax.swing.JFrame {
         }
         catch ( UnsatisfiedLinkError e ){ 
             System.out.println("Please install the Following Driver: ASIO PreSonus FireStudio");
+            JOptionPane.showMessageDialog(null, "Please install the Following Driver: ASIO PreSonus FireStudio");
             driverLoaded = false;
         }
         catch (com.synthbot.jasiohost.AsioException err){
             System.out.println("Output Device not found: Please connect the Asio device");
+            JOptionPane.showMessageDialog(null, "Output Device not found: Please connect the Asio device");
             driverLoaded = false;
         }
         beadPlayer1.vibcompUI = this;
