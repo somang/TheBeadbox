@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 
 /**
  *
- * @author imdc
+ * @author albert
  */
 public class PlayerOverviewFragment extends javax.swing.JPanel {
 

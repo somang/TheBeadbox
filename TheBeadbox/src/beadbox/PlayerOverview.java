@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author imdc
+ * @author albert & somang
  */
 public class PlayerOverview extends javax.swing.JPanel {
 

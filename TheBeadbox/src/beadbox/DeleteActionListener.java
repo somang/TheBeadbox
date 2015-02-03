@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author imdc
+ * @author somang
  */
 class DeleteActionListener implements ActionListener {
     private Bead db;

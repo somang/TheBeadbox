@@ -477,7 +477,7 @@ public class VibcompUI extends javax.swing.JFrame {
             playButton.setText("> PLAY");
             playing = false;
         }else{
-            playButton.setText("[] STOP");
+            //playButton.setText("[] STOP");
             playing = true;
         } 
                
