@@ -5,6 +5,7 @@
  */
 package beadbox;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,8 @@ public class PlayerOverview extends javax.swing.JPanel {
     /**
      * Creates new form PlayerOverview
      */  
-    int page = 1;
+    int activePage = 1;
+    Color defaultColor;
     ArrayList <PlayerOverviewFragment> frags = new ArrayList();
     PlayerOverviewFragment tempFrag;
     
@@ -28,6 +30,12 @@ public class PlayerOverview extends javax.swing.JPanel {
         for (int i=0; i<frags.size(); i++){
             frags.get(i).clear();
         }
+    }
+    
+    public void higlightFrag(int page){
+        frags.get(activePage-1).setBackground(defaultColor);
+        frags.get(page-1).setBackground(Color.WHITE);
+        activePage = page;
     }
     
     public void createFrags(){        
@@ -46,11 +54,6 @@ public class PlayerOverview extends javax.swing.JPanel {
         frags.add(playerOverviewFragment13);
         frags.add(playerOverviewFragment14);
         frags.add(playerOverviewFragment15);
-        frags.add(playerOverviewFragment16);
-        frags.add(playerOverviewFragment17);
-        frags.add(playerOverviewFragment18);
-        frags.add(playerOverviewFragment19);
-        frags.add(playerOverviewFragment20);
     }
     
     /**
@@ -58,7 +61,8 @@ public class PlayerOverview extends javax.swing.JPanel {
      */
     public PlayerOverview() {
         initComponents();
-        createFrags();        
+        createFrags(); 
+        defaultColor = frags.get(0).getBackground();
     }
 
     /**
@@ -85,14 +89,11 @@ public class PlayerOverview extends javax.swing.JPanel {
         playerOverviewFragment13 = new beadbox.PlayerOverviewFragment();
         playerOverviewFragment14 = new beadbox.PlayerOverviewFragment();
         playerOverviewFragment15 = new beadbox.PlayerOverviewFragment();
-        playerOverviewFragment16 = new beadbox.PlayerOverviewFragment();
-        playerOverviewFragment17 = new beadbox.PlayerOverviewFragment();
-        playerOverviewFragment18 = new beadbox.PlayerOverviewFragment();
-        playerOverviewFragment19 = new beadbox.PlayerOverviewFragment();
-        playerOverviewFragment20 = new beadbox.PlayerOverviewFragment();
 
         setBackground(new java.awt.Color(250, 250, 250));
         setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        playerOverviewFragment1.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout playerOverviewFragment1Layout = new javax.swing.GroupLayout(playerOverviewFragment1);
         playerOverviewFragment1.setLayout(playerOverviewFragment1Layout);
@@ -105,6 +106,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment2.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment2Layout = new javax.swing.GroupLayout(playerOverviewFragment2);
         playerOverviewFragment2.setLayout(playerOverviewFragment2Layout);
         playerOverviewFragment2Layout.setHorizontalGroup(
@@ -115,6 +118,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             playerOverviewFragment2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        playerOverviewFragment3.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout playerOverviewFragment3Layout = new javax.swing.GroupLayout(playerOverviewFragment3);
         playerOverviewFragment3.setLayout(playerOverviewFragment3Layout);
@@ -127,6 +132,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment4.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment4Layout = new javax.swing.GroupLayout(playerOverviewFragment4);
         playerOverviewFragment4.setLayout(playerOverviewFragment4Layout);
         playerOverviewFragment4Layout.setHorizontalGroup(
@@ -137,6 +144,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             playerOverviewFragment4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        playerOverviewFragment5.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout playerOverviewFragment5Layout = new javax.swing.GroupLayout(playerOverviewFragment5);
         playerOverviewFragment5.setLayout(playerOverviewFragment5Layout);
@@ -149,6 +158,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment6.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment6Layout = new javax.swing.GroupLayout(playerOverviewFragment6);
         playerOverviewFragment6.setLayout(playerOverviewFragment6Layout);
         playerOverviewFragment6Layout.setHorizontalGroup(
@@ -159,6 +170,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             playerOverviewFragment6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        playerOverviewFragment7.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout playerOverviewFragment7Layout = new javax.swing.GroupLayout(playerOverviewFragment7);
         playerOverviewFragment7.setLayout(playerOverviewFragment7Layout);
@@ -171,6 +184,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment8.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment8Layout = new javax.swing.GroupLayout(playerOverviewFragment8);
         playerOverviewFragment8.setLayout(playerOverviewFragment8Layout);
         playerOverviewFragment8Layout.setHorizontalGroup(
@@ -181,6 +196,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             playerOverviewFragment8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        playerOverviewFragment9.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout playerOverviewFragment9Layout = new javax.swing.GroupLayout(playerOverviewFragment9);
         playerOverviewFragment9.setLayout(playerOverviewFragment9Layout);
@@ -193,6 +210,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment10.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment10Layout = new javax.swing.GroupLayout(playerOverviewFragment10);
         playerOverviewFragment10.setLayout(playerOverviewFragment10Layout);
         playerOverviewFragment10Layout.setHorizontalGroup(
@@ -203,6 +222,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             playerOverviewFragment10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        playerOverviewFragment11.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout playerOverviewFragment11Layout = new javax.swing.GroupLayout(playerOverviewFragment11);
         playerOverviewFragment11.setLayout(playerOverviewFragment11Layout);
@@ -215,6 +236,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment12.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment12Layout = new javax.swing.GroupLayout(playerOverviewFragment12);
         playerOverviewFragment12.setLayout(playerOverviewFragment12Layout);
         playerOverviewFragment12Layout.setHorizontalGroup(
@@ -225,6 +248,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             playerOverviewFragment12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        playerOverviewFragment13.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout playerOverviewFragment13Layout = new javax.swing.GroupLayout(playerOverviewFragment13);
         playerOverviewFragment13.setLayout(playerOverviewFragment13Layout);
@@ -237,6 +262,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment14.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment14Layout = new javax.swing.GroupLayout(playerOverviewFragment14);
         playerOverviewFragment14.setLayout(playerOverviewFragment14Layout);
         playerOverviewFragment14Layout.setHorizontalGroup(
@@ -248,6 +275,8 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        playerOverviewFragment15.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout playerOverviewFragment15Layout = new javax.swing.GroupLayout(playerOverviewFragment15);
         playerOverviewFragment15.setLayout(playerOverviewFragment15Layout);
         playerOverviewFragment15Layout.setHorizontalGroup(
@@ -256,61 +285,6 @@ public class PlayerOverview extends javax.swing.JPanel {
         );
         playerOverviewFragment15Layout.setVerticalGroup(
             playerOverviewFragment15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout playerOverviewFragment16Layout = new javax.swing.GroupLayout(playerOverviewFragment16);
-        playerOverviewFragment16.setLayout(playerOverviewFragment16Layout);
-        playerOverviewFragment16Layout.setHorizontalGroup(
-            playerOverviewFragment16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        playerOverviewFragment16Layout.setVerticalGroup(
-            playerOverviewFragment16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout playerOverviewFragment17Layout = new javax.swing.GroupLayout(playerOverviewFragment17);
-        playerOverviewFragment17.setLayout(playerOverviewFragment17Layout);
-        playerOverviewFragment17Layout.setHorizontalGroup(
-            playerOverviewFragment17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        playerOverviewFragment17Layout.setVerticalGroup(
-            playerOverviewFragment17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout playerOverviewFragment18Layout = new javax.swing.GroupLayout(playerOverviewFragment18);
-        playerOverviewFragment18.setLayout(playerOverviewFragment18Layout);
-        playerOverviewFragment18Layout.setHorizontalGroup(
-            playerOverviewFragment18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        playerOverviewFragment18Layout.setVerticalGroup(
-            playerOverviewFragment18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout playerOverviewFragment19Layout = new javax.swing.GroupLayout(playerOverviewFragment19);
-        playerOverviewFragment19.setLayout(playerOverviewFragment19Layout);
-        playerOverviewFragment19Layout.setHorizontalGroup(
-            playerOverviewFragment19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        playerOverviewFragment19Layout.setVerticalGroup(
-            playerOverviewFragment19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout playerOverviewFragment20Layout = new javax.swing.GroupLayout(playerOverviewFragment20);
-        playerOverviewFragment20.setLayout(playerOverviewFragment20Layout);
-        playerOverviewFragment20Layout.setHorizontalGroup(
-            playerOverviewFragment20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        playerOverviewFragment20Layout.setVerticalGroup(
-            playerOverviewFragment20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
@@ -349,17 +323,7 @@ public class PlayerOverview extends javax.swing.JPanel {
                 .addComponent(playerOverviewFragment14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(playerOverviewFragment15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerOverviewFragment16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerOverviewFragment17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerOverviewFragment18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerOverviewFragment19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerOverviewFragment20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,11 +342,6 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addComponent(playerOverviewFragment13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(playerOverviewFragment14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(playerOverviewFragment15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(playerOverviewFragment16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(playerOverviewFragment17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(playerOverviewFragment18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(playerOverviewFragment19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(playerOverviewFragment20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -395,12 +354,7 @@ public class PlayerOverview extends javax.swing.JPanel {
     private beadbox.PlayerOverviewFragment playerOverviewFragment13;
     private beadbox.PlayerOverviewFragment playerOverviewFragment14;
     private beadbox.PlayerOverviewFragment playerOverviewFragment15;
-    private beadbox.PlayerOverviewFragment playerOverviewFragment16;
-    private beadbox.PlayerOverviewFragment playerOverviewFragment17;
-    private beadbox.PlayerOverviewFragment playerOverviewFragment18;
-    private beadbox.PlayerOverviewFragment playerOverviewFragment19;
     private beadbox.PlayerOverviewFragment playerOverviewFragment2;
-    private beadbox.PlayerOverviewFragment playerOverviewFragment20;
     private beadbox.PlayerOverviewFragment playerOverviewFragment3;
     private beadbox.PlayerOverviewFragment playerOverviewFragment4;
     private beadbox.PlayerOverviewFragment playerOverviewFragment5;

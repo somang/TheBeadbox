@@ -67,8 +67,8 @@ public class rightJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(180, 489));
 
-        beadlight1.setOpaque(false);
         beadlight1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight1MouseDragged(evt);
@@ -98,7 +98,6 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel1.getAccessibleContext().setAccessibleName("");
 
-        beadlight2.setOpaque(false);
         beadlight2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight2MouseDragged(evt);
@@ -128,7 +127,6 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel2.getAccessibleContext().setAccessibleName("");
 
-        beadlight3.setOpaque(false);
         beadlight3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight3MouseDragged(evt);
@@ -158,7 +156,6 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel3.getAccessibleContext().setAccessibleName("");
 
-        beadlight4.setOpaque(false);
         beadlight4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight4MouseDragged(evt);
@@ -188,7 +185,6 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel4.getAccessibleContext().setAccessibleName("");
 
-        beadlight5.setOpaque(false);
         beadlight5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight5MouseDragged(evt);
@@ -218,7 +214,6 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel5.getAccessibleContext().setAccessibleName("");
 
-        beadlight6.setOpaque(false);
         beadlight6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight6MouseDragged(evt);
@@ -248,7 +243,6 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel6.getAccessibleContext().setAccessibleName("");
 
-        beadlight7.setOpaque(false);
         beadlight7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight7MouseDragged(evt);
@@ -278,7 +272,6 @@ public class rightJPanel extends javax.swing.JPanel {
 
         jLabel7.getAccessibleContext().setAccessibleName("");
 
-        beadlight8.setOpaque(false);
         beadlight8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadlight8MouseDragged(evt);
@@ -312,8 +305,8 @@ public class rightJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(beadlight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,7 +324,7 @@ public class rightJPanel extends javax.swing.JPanel {
                         .addComponent(beadlight7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(beadlight8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +359,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
         //System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight3MouseDragged
@@ -383,7 +379,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
 	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight4MouseDragged
@@ -400,7 +399,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
 	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight5MouseDragged
@@ -417,7 +419,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
 	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight6MouseDragged
@@ -434,7 +439,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
 	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight7MouseDragged
@@ -451,7 +459,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
 	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight1MouseDragged
@@ -468,7 +479,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
 	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight2MouseDragged
@@ -485,7 +499,10 @@ public class rightJPanel extends javax.swing.JPanel {
         else{
             mouseP = MouseInfo.getPointerInfo();
             Point b = mouseP.getLocation();
-            object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            if(b.x-ofsetX > 0  &&  b.x-ofsetX < getWidth()-50  &&
+                    b.y-ofsetY > 0 && b.y-ofsetY < getHeight()-50){
+                object.setLocation(b.x-ofsetX, b.y-ofsetY);
+            }
         }
 	//System.out.println(getComponentIndex(object));
     }//GEN-LAST:event_beadlight8MouseDragged

@@ -127,9 +127,9 @@ public class BeadPlayer extends javax.swing.JPanel {
                     curBead.playBead();
                 }
             }
-            //if(VibcompUI.playing && )
+          
         }
-        
+        vibcompUI.playerOverview1.higlightFrag(page);
         repaint ();
     }
     
@@ -146,9 +146,10 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
     
     public void deleteBead(Bead activeBead) {
+        activeBead.breakConnections();
         beads.remove(activeBead);
         this.remove(activeBead);
-        activeBead.breakConnections();
+        
     }
     
     public int getTrackAt(int y){
