@@ -133,23 +133,22 @@ public class BeadPlayer extends javax.swing.JPanel {
         repaint ();
     }
     
-    public void setBead(int x, int y, Bead bead){
-        bead.setTrack(getTrackAt(y));
+    public void setBead(int x, int y, Bead bead){        
         x = x-(BEADHEIGHT/2);
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
+        bead.setTrack(getTrackAt(y));
         bead.setOpaque(false);
         bead.setLocation(x, y);
         bead.playable = true;
         bead.setPage(page);
         beads.add(bead);
-        this.add(bead);
-    }
+        this.add(bead);        
+    }   
     
     public void deleteBead(Bead activeBead) {
         activeBead.breakConnections();
         beads.remove(activeBead);
-        this.remove(activeBead);
-        
+        this.remove(activeBead);        
     }
     
     public int getTrackAt(int y){

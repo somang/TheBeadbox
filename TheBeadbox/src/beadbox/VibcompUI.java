@@ -34,6 +34,7 @@ public class VibcompUI extends javax.swing.JFrame {
     Bead prevBead=null;
     int startBead_x,startBead_y,endBead_x,endBead_y;
     boolean dragStatus=false;
+    boolean move = false;
     Point point1,point2;
     Bead beadOnClick;
     
@@ -43,7 +44,6 @@ public class VibcompUI extends javax.swing.JFrame {
      */
     public VibcompUI() {
         initComponents();
-        startBead= null;
         endBead = null;
         activeBead = null;  
         beadPanel.repaint();
@@ -374,18 +374,13 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_beadPanelTextMousePressed
 
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
-        
-        /*Few bugs. 2014-12-07
-        1. After a few repetited placement, the new bead button does not appear.
-        2. Above is causing new problem, which draws connection line in random position
-        when the page is turned already.
-        
-        2015-01-20
-        - What needs to be fixed:
+        /*
+        2015-02-12
+        - What needs to be fixed: 
+        - After a few repetited placement, the new bead button does not appear.
         - Right click after paging does not work.
-        - New 
-        - dragging without ctrl key but now has the offset boundaries.
-        
+        -  
+        - dragging without ctrl key but now has the offset boundaries.        
         */
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
@@ -395,34 +390,24 @@ public class VibcompUI extends javax.swing.JFrame {
                 if(tmpBead == null){//Create one
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI= this;
-                    beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                    try{
-                        prevBead.setBorder(BorderFactory.createEmptyBorder());
-                    }catch(Exception e){}
-                    prevBead = activeBead;
                     
-                }else{
-                    activeBead = tmpBead;
-                    //Dragging.
-                    startBead = tmpBead;
-                    startBead_x = startBead.getX();
-                    startBead_y = startBead.getY();
-                }
+                    beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                    
+                    prevBead = activeBead;
+                }else{activeBead = tmpBead;}//Dragging with the startbead given.
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity()*2);
-                frequencySlider.setValue(activeBead.getFrequency());
-                
-            }else JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
-        }else if (evt.getButton() == MouseEvent.BUTTON3) // Right click
-        {
-            if (tmpBead != null){
-                
+                frequencySlider.setValue(activeBead.getFrequency());                
+            }else{JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");}
+        }else if (evt.getButton() == MouseEvent.BUTTON3){// Right click
+            if (tmpBead != null){                
                 tmpBead.setComponentPopupMenu(menuPopup);
                 BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1,tmpBead,playerOverview1));
             }
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
 
+    
     /* 
        While there is a startBead, where the dragging started,
        this gets ending coordinates of the mouse dragging,
@@ -436,8 +421,8 @@ public class VibcompUI extends javax.swing.JFrame {
         int ydif = 0;
         double distance;
         try{
-            xdif = endBeadx - startBead.getX();
-            ydif = endBeady - startBead.getY();
+            xdif = endBeadx - activeBead.getX();
+            ydif = endBeady - activeBead.getY();
             distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
             System.out.println(distance);
         
@@ -451,44 +436,48 @@ public class VibcompUI extends javax.swing.JFrame {
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
         endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.        
         
-        if (dragStatus && isActualDrag(endBead_x, endBead_y)){ //&& evt.isControlDown() if control is down, AND dragged.   
+        if (dragStatus && isActualDrag(endBead_x, endBead_y)){
             if (activeBead != null){
-                if(endBead == null){//If there is no bead.
-                    endBead = new Bead();                 
+                if((endBead == null) && (activeBead.connectedTo==null)){//If there is no bead, create one.
+                    endBead = new Bead();
                     endBead.setSize(55,55);
                     endBead.setIntensity(activeBead.getIntensity());
                     endBead.setFrequency(activeBead.getFrequency());
                     endBead.setConnection(activeBead);
                     endBead.vibcompUI = this;
-                    beadPlayer1.setBead(endBead_x, endBead_y, endBead);
-                }else{//If there is a bead already.
-                    
-                    endBead_x = endBead.getX();
-                    endBead_y = endBead.getY();
+                    beadPlayer1.setBead(endBead_x, endBead_y, endBead);                    
+                }else{//If there is one, then it is the endbead.           
+                    if (activeBead.connectedTo!=null){
+                        // to move by drag. given A-B, drag from B to C make A-C
+                        //1. break connection between A-B.
+                        Bead A = activeBead.connectedTo;
+                        Bead B = activeBead;                        
+                        A.breakConnections();
+                        //2. connect A to C
+                        Bead C = new Bead();
+                        C.setSize(55,55);
+                        C.setIntensity(B.getIntensity());
+                        C.setFrequency(B.getFrequency());
+                        C.setConnection(A);
+                        C.vibcompUI = this;
+                        beadPlayer1.setBead(endBead_x, endBead_y, C);                        
+                        //3. Delete B
+                        beadPlayer1.deleteBead(B);                                                          
+                    }
                 }               
             }else JOptionPane.showMessageDialog(null, "There is no active Bead!");
             
-            System.out.println("dragged from " + startBead_x + "," + startBead_y + " to " + endBead_x + "," + endBead_y);
+            //System.out.println("dragged from " + startBead_x + "," + startBead_y + " to " + endBead_x + "," + endBead_y);
         }
         dragStatus = false;
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged
-        // TODO add your handling code here:
+        // dynamically get where the drag ends.
         point2 = evt.getPoint();
         endBead_x = point2.x;
         endBead_y = point2.y;
-        dragStatus=true;
-
-        //System.out.println("Dragging at"+endBead_x+","+endBead_y);
-        
-        if (dragStatus){
-            /*The line between two beads come here.*/
-            //Point startPoint = new Point(startBead_x,startBead_y);
-            //Line2D line2d = new Line2D.Double(point1,point2);
-            //repaint();
-        }
-        
+        dragStatus=true;        
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
     private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
