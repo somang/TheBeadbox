@@ -142,16 +142,11 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setOpaque(false);
         bead.setLocation(x, y);
         bead.playable = true;
-        bead.setPage(page);
+        bead.setPage(page); 
         beads.add(bead);
-        this.add(bead);        
-        
-        if(beads.size()==10) {
-            System.out.println("clearing..");
-        }
-        for (Bead b: beads){
-            System.out.println(b);
-        }
+        this.add(bead); 
+       
+        System.out.println("Bead Size: " +beads.size());
     }   
     
     public void deleteBead(Bead activeBead) {

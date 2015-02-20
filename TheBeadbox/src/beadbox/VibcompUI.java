@@ -383,13 +383,15 @@ public class VibcompUI extends javax.swing.JFrame {
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
-        {
+        {     
             if(activeBead != null){
                 if(tmpBead == null){//Create one
                     beadPanelText.setVisible(true);
-                    activeBead.vibcompUI= this;
-                    
+                    activeBead.vibcompUI= this;                    
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                    
+                    //Remove duplicate beads
+                    if(prevBead!=null && prevBead.equals(activeBead)) beadPlayer1.beads.remove(prevBead);
                     
                     prevBead = activeBead;
                     
@@ -423,7 +425,7 @@ public class VibcompUI extends javax.swing.JFrame {
             xdif = endBeadx - activeBead.getX();
             ydif = endBeady - activeBead.getY();
             distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
-            System.out.println(distance);
+            //System.out.println(distance);
         
             if (distance > 70){ //if distance is greater than 100
                 return true;
@@ -433,9 +435,9 @@ public class VibcompUI extends javax.swing.JFrame {
     }
     
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
-        endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.        
-        
-        if (dragStatus && isActualDrag(endBead_x, endBead_y)){
+        endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.  
+         
+        if (dragStatus && isActualDrag(endBead_x, endBead_y)){          
             if (activeBead != null){
                 if((endBead == null) && (activeBead.connectedTo==null)){//If there is no bead, and A is not connected, create one.
                     endBead = new Bead();
