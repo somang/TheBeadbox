@@ -134,6 +134,8 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
     
     public void setBead(int x, int y, Bead bead){        
+        
+        
         x = x-(BEADHEIGHT/2);
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
         bead.setTrack(getTrackAt(y));
@@ -143,6 +145,13 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setPage(page);
         beads.add(bead);
         this.add(bead);        
+        
+        if(beads.size()==10) {
+            System.out.println("clearing..");
+        }
+        for (Bead b: beads){
+            System.out.println(b);
+        }
     }   
     
     public void deleteBead(Bead activeBead) {

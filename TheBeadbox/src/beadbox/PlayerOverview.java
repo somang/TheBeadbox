@@ -93,7 +93,7 @@ public class PlayerOverview extends javax.swing.JPanel {
         setBackground(new java.awt.Color(250, 250, 250));
         setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        playerOverviewFragment1.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment1.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment1Layout = new javax.swing.GroupLayout(playerOverviewFragment1);
         playerOverviewFragment1.setLayout(playerOverviewFragment1Layout);
@@ -106,7 +106,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment2.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment2.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment2Layout = new javax.swing.GroupLayout(playerOverviewFragment2);
         playerOverviewFragment2.setLayout(playerOverviewFragment2Layout);
@@ -119,7 +119,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment3.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment3.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment3Layout = new javax.swing.GroupLayout(playerOverviewFragment3);
         playerOverviewFragment3.setLayout(playerOverviewFragment3Layout);
@@ -132,7 +132,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment4.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment4.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment4Layout = new javax.swing.GroupLayout(playerOverviewFragment4);
         playerOverviewFragment4.setLayout(playerOverviewFragment4Layout);
@@ -145,7 +145,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment5.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment5.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment5Layout = new javax.swing.GroupLayout(playerOverviewFragment5);
         playerOverviewFragment5.setLayout(playerOverviewFragment5Layout);
@@ -158,7 +158,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment6.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment6.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment6Layout = new javax.swing.GroupLayout(playerOverviewFragment6);
         playerOverviewFragment6.setLayout(playerOverviewFragment6Layout);
@@ -171,7 +171,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment7.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment7.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment7Layout = new javax.swing.GroupLayout(playerOverviewFragment7);
         playerOverviewFragment7.setLayout(playerOverviewFragment7Layout);
@@ -184,7 +184,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment8.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment8.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment8Layout = new javax.swing.GroupLayout(playerOverviewFragment8);
         playerOverviewFragment8.setLayout(playerOverviewFragment8Layout);
@@ -197,7 +197,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment9.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment9.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment9Layout = new javax.swing.GroupLayout(playerOverviewFragment9);
         playerOverviewFragment9.setLayout(playerOverviewFragment9Layout);
@@ -210,7 +210,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment10.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment10.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment10Layout = new javax.swing.GroupLayout(playerOverviewFragment10);
         playerOverviewFragment10.setLayout(playerOverviewFragment10Layout);
@@ -223,7 +223,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment11.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment11.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment11Layout = new javax.swing.GroupLayout(playerOverviewFragment11);
         playerOverviewFragment11.setLayout(playerOverviewFragment11Layout);
@@ -236,7 +236,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment12.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment12.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment12Layout = new javax.swing.GroupLayout(playerOverviewFragment12);
         playerOverviewFragment12.setLayout(playerOverviewFragment12Layout);
@@ -249,7 +249,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment13.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment13.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment13Layout = new javax.swing.GroupLayout(playerOverviewFragment13);
         playerOverviewFragment13.setLayout(playerOverviewFragment13Layout);
@@ -262,7 +262,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment14.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment14.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment14Layout = new javax.swing.GroupLayout(playerOverviewFragment14);
         playerOverviewFragment14.setLayout(playerOverviewFragment14Layout);
@@ -275,7 +275,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment15.setBackground(new java.awt.Color(240, 240, 240));
+        playerOverviewFragment15.setBackground(new java.awt.Color(110, 110, 110));
 
         javax.swing.GroupLayout playerOverviewFragment15Layout = new javax.swing.GroupLayout(playerOverviewFragment15);
         playerOverviewFragment15.setLayout(playerOverviewFragment15Layout);

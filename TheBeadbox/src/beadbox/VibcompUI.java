@@ -252,8 +252,7 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
 
-        playerOverview1.setMinimumSize(new java.awt.Dimension(858, 104));
-        playerOverview1.setPreferredSize(new java.awt.Dimension(858, 104));
+        playerOverview1.setBackground(new java.awt.Color(100, 100, 100));
 
         speedControl.setMinorTickSpacing(10);
         speedControl.setPaintTicks(true);
@@ -271,12 +270,11 @@ public class VibcompUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(playerOverview1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -285,8 +283,8 @@ public class VibcompUI extends javax.swing.JFrame {
                                 .addGap(458, 458, 458)
                                 .addComponent(addPage))
                             .addComponent(jScrollPane1)
-                            .addComponent(pageScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(pageScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,6 +392,7 @@ public class VibcompUI extends javax.swing.JFrame {
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
                     
                     prevBead = activeBead;
+                    
                 }else{activeBead = tmpBead;}//Dragging with the startbead given.
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity()*2);
@@ -426,7 +425,7 @@ public class VibcompUI extends javax.swing.JFrame {
             distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
             System.out.println(distance);
         
-            if (distance > 100){ //if distance is greater than 100
+            if (distance > 70){ //if distance is greater than 100
                 return true;
             }
         }catch(NullPointerException e){}
@@ -438,7 +437,7 @@ public class VibcompUI extends javax.swing.JFrame {
         
         if (dragStatus && isActualDrag(endBead_x, endBead_y)){
             if (activeBead != null){
-                if((endBead == null) && (activeBead.connectedTo==null)){//If there is no bead, create one.
+                if((endBead == null) && (activeBead.connectedTo==null)){//If there is no bead, and A is not connected, create one.
                     endBead = new Bead();
                     endBead.setSize(55,55);
                     endBead.setIntensity(activeBead.getIntensity());
@@ -446,8 +445,8 @@ public class VibcompUI extends javax.swing.JFrame {
                     endBead.setConnection(activeBead);
                     endBead.vibcompUI = this;
                     beadPlayer1.setBead(endBead_x, endBead_y, endBead);                    
-                }else{//If there is one, then it is the endbead.           
-                    if (activeBead.connectedTo!=null){
+                }else{//If there already is endBead, and
+                    if (activeBead.connectedTo!=null){// if A has current connection with other bead, replace.
                         // to move by drag. given A-B, drag from B to C make A-C
                         //1. break connection between A-B.
                         Bead A = activeBead.connectedTo;
@@ -463,6 +462,9 @@ public class VibcompUI extends javax.swing.JFrame {
                         beadPlayer1.setBead(endBead_x, endBead_y, C);                        
                         //3. Delete B
                         beadPlayer1.deleteBead(B);                                                          
+                    }else{// if there is no connected bead.
+                        //connect A and B(already existed)
+                        activeBead.setConnection(endBead);
                     }
                 }               
             }else JOptionPane.showMessageDialog(null, "There is no active Bead!");
