@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,8 @@ public class BeadPlayer extends javax.swing.JPanel {
     int page = 1;
     static int maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
+    HashSet hs = new HashSet();
+    
     VibcompUI vibcompUI = null;
     Thread thread;
     int SPEED = 50;
@@ -146,7 +149,18 @@ public class BeadPlayer extends javax.swing.JPanel {
         beads.add(bead);
         this.add(bead); 
        
-        System.out.println("Bead Size: " +beads.size());
+        hs.addAll(beads);
+        beads.clear();
+        beads.addAll(hs);
+        
+        System.out.println("Beads ARRAY Size: " + beads.size());
+        for (Bead b:beads){
+            System.out.println(b);
+        }
+        
+        
+        
+        
     }   
     
     public void deleteBead(Bead activeBead) {
