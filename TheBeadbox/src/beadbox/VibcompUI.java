@@ -47,18 +47,11 @@ public class VibcompUI extends javax.swing.JFrame {
         endBead = null;
         activeBead = null;  
         beadPanel.repaint();
-                
         //setExtendedState(this.MAXIMIZED_BOTH);        
-
         //Component[] incrButton = pageScroll.getComponents();
         //for (int i=0; i<incrButton.length;i++){
         //    System.out.println(incrButton[i]);            
         //}
-        
-        
-        //this.setComponentZOrder(beadPlayer1, 1);
-        //this.setComponentZOrder(barSlider, 0);
-        
         /* load the driver */
         try {
             /*
@@ -73,7 +66,6 @@ public class VibcompUI extends javax.swing.JFrame {
             //System.out.println(driver.getNumChannelsOutput());
             //System.out.println(driver.getName());
             //System.out.println(driver.getCurrentState());
-            
         }
         catch ( UnsatisfiedLinkError e ){ 
             System.out.println("Please install the Following Driver: ASIO PreSonus FireStudio");
@@ -86,11 +78,8 @@ public class VibcompUI extends javax.swing.JFrame {
             driverLoaded = false;
         }
         beadPlayer1.vibcompUI = this;
-        
         menuPopup.add(BeadMenuDelete);
         menuPopup.add(BeadMenuDuration);
-        
-        
     }
 
     /**
@@ -361,24 +350,24 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_pageScrollMouseDragged
 
     private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
-        if(beadPanel.getComponentCount()==1){           
-            Bead tmpBead = new Bead();          
-            tmpBead.setSize(55,55);
-            beadPanel.add(tmpBead);
-            tmpBead.setLocation(15, 20);
-            beadPanel.repaint();
-            activeBead = tmpBead;
+        if(beadPanel.getComponentCount()==1){                               
+            refreshBeadPanel();
         }
     }//GEN-LAST:event_beadPanelTextMousePressed
 
+    private void refreshBeadPanel(){
+        Bead tmpBead = new Bead();          
+        tmpBead.setSize(55,55);
+        beadPanel.add(tmpBead);
+        tmpBead.setLocation(15, 20);
+        beadPanel.repaint();
+        activeBead = tmpBead;
+    }
+    
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
         /*
-        2015-02-12
-        - What needs to be fixed: 
-        - After a few repetited placement, the new bead button does not appear.
+        2015-03-10
         - Right click after paging does not work.
-        -  
-        - dragging without ctrl key but now has the offset boundaries.        
         */
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
@@ -389,13 +378,16 @@ public class VibcompUI extends javax.swing.JFrame {
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI= this;                    
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                    
                     //Remove duplicate beads
                     if(prevBead!=null && prevBead.equals(activeBead)) beadPlayer1.beads.remove(prevBead);
-                    
                     prevBead = activeBead;
-                    
-                }else{activeBead = tmpBead;}//Dragging with the startbead given.
+                }else{
+                    if(!activeBead.playable) remove(activeBead); //Remove bead panel glitch
+                    else activeBead = tmpBead;                    
+                }
+                
+                
+                
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity()*2);
                 frequencySlider.setValue(activeBead.getFrequency());                
@@ -425,8 +417,6 @@ public class VibcompUI extends javax.swing.JFrame {
             xdif = endBeadx - activeBead.getX();
             ydif = endBeady - activeBead.getY();
             distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
-            //System.out.println(distance);
-        
             if (distance > 70){ //if distance is greater than 100
                 return true;
             }
