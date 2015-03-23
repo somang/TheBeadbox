@@ -144,7 +144,15 @@ public class MidiFile
     return out;
   }
 
-
+  public void pitchBend(int delta, int lsb, int msb){
+      int[] data = new int[4];
+      data[0] = delta;
+      data[1] = 0xE0;
+      data[2] = lsb;
+      data[3] = msb;
+      playEvents.add(data);
+  }
+  
   /** Store a note-on event */
   public void noteOn (int delta, int note, int velocity)
   {
@@ -190,98 +198,5 @@ public class MidiFile
   }
 
 
-  public void noteSequenceFixedVelocity (int[] sequence, int velocity)
-  {
-    boolean lastWasRest = false;
-    int restDelta = 0;
-    for (int i = 0; i< sequence.length; i += 2)
-    {
-      int note = sequence[i];
-      int duration = sequence[i + 1];
-      if (note < 0)
-      {
-        // This is a rest
-        restDelta += duration;
-        lastWasRest = true;
-      }
-      else
-      {
-        // A note, not a rest
-        if (lastWasRest)
-        {
-          noteOn (restDelta, note, velocity);
-          noteOff (duration, note);
-        }
-        else
-        {
-          noteOn (0, note, velocity);
-          noteOff (duration, note);
-        }
-        restDelta = 0;
-        lastWasRest = false;
-      }
-    }
-  }
-
-
-  /** Test method — creates a file test1.mid when the class
-      is executed 
-  public static void main (String[] args)
-    throws Exception
-  {
-    MidiFile mf = new MidiFile();
-
-    // Test 1 — play a C major chord
-
-    // Turn on all three notes at start-of-track (delta=0) 
-    mf.noteOn (0, 60, 127);
-    mf.noteOn (0, 64, 127);
-    mf.noteOn (0, 67, 127);
-
-    // Turn off all three notes after one minim. 
-    // NOTE delta value is cumulative — only _one_ of
-    //  these note-offs has a non-zero delta. The second and
-    //  third events are relative to the first
-    mf.noteOff (MINIM, 60);
-    mf.noteOff (0, 64);
-    mf.noteOff (0, 67);
-
-    // Test 2 — play a scale using noteOnOffNow
-    //  We don't need any delta values here, so long as one
-    //  note comes straight after the previous one 
-
-    mf.noteOnOffNow (QUAVER, 60, 127);
-    mf.noteOnOffNow (QUAVER, 62, 127);
-    mf.noteOnOffNow (QUAVER, 64, 127);
-    mf.noteOnOffNow (QUAVER, 65, 127);
-    mf.noteOnOffNow (QUAVER, 67, 127);
-    mf.noteOnOffNow (QUAVER, 69, 127);
-    mf.noteOnOffNow (QUAVER, 71, 127);
-    mf.noteOnOffNow (QUAVER, 72, 127);
-
-    // Test 3 — play a short tune using noteSequenceFixedVelocity
-    //  Note the rest inserted with a note value of -1
-
-    int[] sequence = new int[]
-      {
-      60, QUAVER + SEMIQUAVER,
-      65, SEMIQUAVER,
-      70, CROTCHET + QUAVER,
-      69, QUAVER,
-      65, QUAVER / 3,
-      62, QUAVER / 3,
-      67, QUAVER / 3,
-      72, MINIM + QUAVER,
-      -1, SEMIQUAVER,
-      72, SEMIQUAVER,
-      76, MINIM,
-      };
-
-    // What the heck — use a different instrument for a change
-    mf.progChange (10);
-
-    mf.noteSequenceFixedVelocity (sequence, 127);
-
-    mf.writeToFile ("test1.mid");
-  }*/
+  
 }

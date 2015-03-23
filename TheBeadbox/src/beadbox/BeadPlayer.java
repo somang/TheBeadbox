@@ -25,42 +25,44 @@ public class BeadPlayer extends javax.swing.JPanel {
     int page = 1;
     static int maxPage = 2;
     ArrayList <Bead> beads = new ArrayList();
-    HashSet hs = new HashSet();
+    HashSet hs;
     
     VibcompUI vibcompUI = null;
     Thread thread;
     int SPEED = 50;
     boolean inandout = true;
     
-    Runnable playerTickTock = new Runnable(){
-        public void run(){
-            while(true){
-                if(VibcompUI.playing){//tick%speed == 0){
-                    if(barPosition < MAXBARPOS) barPosition+=50;
-                    else{ 
-                        barPosition = 0;
-                        page++;
-                        if(page>maxPage){
-                            page=1;
-                            //maxPage = page;
-                            //vibcompUI.pageScroll.setMaximum(page+1);
-                        }
-                        vibcompUI.pageScroll.setValue(page);               
-                    }           
-                }
-                try {
-                    thread.sleep(SPEED);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    };
+    Runnable playerTickTock;
     
     /**
      * Creates new form BeadPlayer
      */
     public BeadPlayer() {
+        this.playerTickTock = new Runnable(){
+            public void run(){
+                while(true){
+                    if(VibcompUI.playing){//tick%speed == 0){                            
+                        if(barPosition < MAXBARPOS) barPosition+=50;
+                        else{                            
+                            barPosition = 0;
+                            page++;
+                            if(page>maxPage){
+                                page=1;
+                                //maxPage = page;
+                                //vibcompUI.pageScroll.setMaximum(page+1);
+                            }                            
+                            vibcompUI.pageScroll.setValue(page);
+                            
+                        }
+                    }
+                    try {
+                        thread.sleep(SPEED);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
         initComponents(); 
         Thread thread = new Thread(playerTickTock);
         thread.start();
@@ -136,10 +138,13 @@ public class BeadPlayer extends javax.swing.JPanel {
         repaint ();
     }
     
-    public void setBead(int x, int y, Bead bead){        
-        
-        
-        x = x-(BEADHEIGHT/2);
+    public void setBead(int x, int y, Bead bead){     
+        x = x-(BEADHEIGHT/2);        
+        if (x<0){                   
+            x = 0;
+        }else if (x>945){
+            x = 945;
+        }
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
         bead.setTrack(getTrackAt(y));
         bead.setOpaque(false);
@@ -147,20 +152,13 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.playable = true;
         bead.setPage(page); 
         beads.add(bead);
-        this.add(bead); 
-       
+        this.add(bead);    
+                    
+        hs = new HashSet();
         hs.addAll(beads);
         beads.clear();
         beads.addAll(hs);
-        
-        System.out.println("Beads ARRAY Size: " + beads.size());
-        for (Bead b:beads){
-            System.out.println(b);
-        }
-        
-        
-        
-        
+
     }   
     
     public void deleteBead(Bead activeBead) {

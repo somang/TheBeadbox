@@ -380,8 +380,14 @@ public class VibcompUI extends javax.swing.JFrame {
     
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
         /*
-        2015-03-10
+        2015-03-20
         - Right click after paging does not work.
+        
+        Let's make a single bead = 50 ms
+        A page takes 20 beads.
+        
+        Fade in and Fade out.
+        
         */
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
