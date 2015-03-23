@@ -138,13 +138,10 @@ public class BeadPlayer extends javax.swing.JPanel {
         repaint ();
     }
     
-    public void setBead(int x, int y, Bead bead){     
-        x = x-(BEADHEIGHT/2);        
-        if (x<0){                   
-            x = 0;
-        }else if (x>945){
-            x = 945;
-        }
+
+    public void setBead(int x, int y, Bead bead){ 
+        x = x-(BEADHEIGHT/2);
+
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
         bead.setTrack(getTrackAt(y));
         bead.setOpaque(false);
