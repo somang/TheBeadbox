@@ -30,10 +30,11 @@ class ProtocolHandler {
             //System.out.println(tmp);
             //mf.noteOn(0, i, i);
         }
-        /*
+        
         // Test 1 — play a C major chord
-        mf.noteOn (0, 60, 126);
-        mf.pitchBend(20, 0, 126);
+        //mf.noteOn (0, 60, 126);
+        mf.noteOnWithChannel(0,15,60,126);
+        mf.pitchBend(20, 15, 0, 126);
         // Turn off all three notes after one minim. 
         // NOTE delta value is cumulative — only _one_ of
         //  these note-offs has a non-zero delta. The second and
@@ -41,7 +42,7 @@ class ProtocolHandler {
         mf.noteOff (SEMIBREVE, 60);
         //mf.noteOff (0, 67);        
         mf.writeToFile ("test1.mid");
-        */
+        
     }
 
     private void parseBeadForMidi(Bead b) {
@@ -69,7 +70,16 @@ class ProtocolHandler {
             int cy = connection.getY();
         }
         
+        // Track = Channel
+        int channel = track;
+        
         // Given that 0 < x < Beadsize*20
+        // Assume there are 20 bead, and each of them are 55 x coordinate.
+        // then 20*55 = 1100px
+        // 
+        
+        
+        // Frequency convert.
         int midiPitch = getMidiPitch(frequency);
         int bending = getMidiBending(frequency, midiPitch);
         
@@ -78,16 +88,13 @@ class ProtocolHandler {
         String bendingHex = Integer.toHexString(bending);
         String intensityHex = Integer.toHexString(intensity);
         
-        
+        /*
         System.out.println(frequency);
         System.out.println(intensity);
         System.out.println("Midi Pitch is : " + midiPitch); // The Pitch Value                
         System.out.println("Bending value is : " + bending);
         System.out.println("Note On message would be : " + "t=0 0x90 " + pitchHex + " " + intensityHex);
         System.out.println("Bending message would be : " + "t=0 0xE0 " + " LSB[0-126] " + bendingHex);
-        
-        
-        
         for (frequency=10;frequency>-1;frequency--){
             System.out.println(frequency);
             midiPitch = getMidiPitch(frequency);
@@ -99,7 +106,7 @@ class ProtocolHandler {
         midiPitch = getMidiPitch(1000);
         System.out.println(midiPitch+43);
         System.out.println(getMidiBending(1000,midiPitch));
-        
+        */
         
         
     }

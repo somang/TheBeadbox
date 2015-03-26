@@ -144,21 +144,33 @@ public class MidiFile
     return out;
   }
 
-  public void pitchBend(int delta, int lsb, int msb){
+  public void pitchBend(int delta, int channel, int lsb, int msb){
       int[] data = new int[4];
-      data[0] = delta;
-      data[1] = 0xE0;
+      data[0] = delta;      
+      channel = (int) Long.parseLong(Integer.toHexString(224+channel),16);      
+      data[1] = channel;
       data[2] = lsb;
       data[3] = msb;
       playEvents.add(data);
   }
+  
+  public void noteOnWithChannel(int delta, int channel, int note, int velocity){
+      int[] data = new int[4];
+      data[0] = delta;
+      channel = (int) Long.parseLong(Integer.toHexString(144+channel),16);
+      data[1] = channel;
+      data[2] = note;
+      data[3] = velocity;
+      playEvents.add(data);      
+  }
+  
   
   /** Store a note-on event */
   public void noteOn (int delta, int note, int velocity)
   {
   int[] data = new int[4];
   data[0] = delta;
-  data[1] = 0x90;
+  data[1] = 0x90; //1001 0000
   data[2] = note;
   data[3] = velocity;
   playEvents.add (data);
