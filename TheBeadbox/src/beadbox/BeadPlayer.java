@@ -143,8 +143,10 @@ public class BeadPlayer extends javax.swing.JPanel {
         x = x-(BEADHEIGHT/2);
         if (x<0){                   
             x = 0;
-        }else if (x>945){
-            x = 945;
+        }else if (x>1055){
+            x = 1045;
+            //page+=1;
+            //x=x-1100;
         }
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
         bead.setTrack(getTrackAt(y));
