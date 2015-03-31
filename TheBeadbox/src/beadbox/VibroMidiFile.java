@@ -22,7 +22,43 @@ public class VibroMidiFile {
     static int CHANNEL = 0;
     
     public VibroMidiFile() throws InvalidMidiDataException{
-        this.sequence = new Sequence(Sequence.PPQ, 1, 8);
+        this.sequence = new Sequence(Sequence.PPQ, 16, 8); //16 ticks per quarter note, 8tracks.
+        
+        for (int i=0;i<8;i++){
+            Track curTrack = sequence.getTracks()[i];            
+            //setTimeSignature(curTrack);
+            setTempo(curTrack);
+        }
+    }
+
+    public void setTimeSignature(Track curTrack) throws InvalidMidiDataException {
+        /**
+         * The Default Time signature is 4/4
+         * 
+        */
+        MetaMessage mm = new MetaMessage();
+            byte[] b = new byte[]{
+                (byte)0x04, // numerator 4
+                (byte)0x02, // denominator, the power to the number by 2, so this is 4
+                (byte)0x18, // the metronome will click once every 24 MIDI clocks
+                (byte)0x08 // there are eight 32nd notes per beat. 
+            };            
+        mm.setMessage(88, b, 4);
+        MidiEvent ev = new MidiEvent(mm,0);
+        curTrack.add(ev);
+    }
+
+    
+    public void setTempo(Track curTrack) throws InvalidMidiDataException{
+        MetaMessage mm = new MetaMessage();
+            byte[] b = new byte[]{
+                (byte)0x07, 
+                (byte)0xA1, 
+                (byte)0x20
+            };            
+        mm.setMessage(81, b, 3);
+        MidiEvent ev = new MidiEvent(mm,0);
+        curTrack.add(ev);
     }
     
     /**
@@ -36,11 +72,10 @@ public class VibroMidiFile {
    * 
    * @param delta Time Measure unit
    * @param track Track number (0-15)
-   * @param note Pitch number (0-126)
+   * @param frequency Pitch number (0-126)
    * @param velocity Intensity (0-100)
    */
-    public void noteOn(long delta, int track, int frequency, int intensity) throws InvalidMidiDataException {
-        
+    public void noteOn(long delta, int track, int frequency, int intensity) throws InvalidMidiDataException {        
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.NOTE_ON, frequency, intensity, delta));
     }
     
@@ -50,11 +85,11 @@ public class VibroMidiFile {
    * 
    * @param delta Time Measure unit
    * @param track Track number (0-15)
-   * @param lsb Least Significant Byte
-   * @param msb Most Significant Byte
+   * @param lsb Least Significant Byte [0-126]
+   * @param msb Most Significant Byte [0-126]
    */
-    public void pitchBend(long delta, int track, int lsb, int msb) throws InvalidMidiDataException {
-        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.PITCH_BEND, lsb, msb, delta));
+    public void pitchBend(int track, int lsb, int msb) throws InvalidMidiDataException {
+        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.PITCH_BEND, lsb, msb, 0));
     }
 
     
@@ -63,7 +98,7 @@ public class VibroMidiFile {
     }
     
     private static MidiEvent createNoteEvent(int nCommand, int frequency, int intensity, long lTick) throws InvalidMidiDataException{
-	ShortMessage message = new ShortMessage();
+	ShortMessage message = new ShortMessage();        
         message.setMessage(nCommand, CHANNEL, frequency, intensity);
 	MidiEvent event = new MidiEvent(message, lTick);
 	return event;
@@ -81,5 +116,6 @@ public class VibroMidiFile {
         }
         
     }
+
 
 }
