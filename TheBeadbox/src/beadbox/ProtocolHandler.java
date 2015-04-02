@@ -5,6 +5,7 @@
  */
 package beadbox;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import javax.sound.midi.InvalidMidiDataException;
 
@@ -38,7 +39,7 @@ class ProtocolHandler {
         
     }
 
-    private void parseBeadForMidi(VibroMidiFile mf, Bead b) throws InvalidMidiDataException {
+    private void parseBeadForMidi(VibroMidiFile mf, Bead b) throws InvalidMidiDataException, UnsupportedEncodingException {
         /* This method takes a bead, and parse it
             So that it converts the data that could fit into Midi Protocol
             
@@ -53,44 +54,74 @@ class ProtocolHandler {
         int track = b.track-1;
         System.out.println(track);
         // Frequency convert.
-        // Then find the closest Midi pitch value        
-        // And the filler for the rest of frequency.
+        // Then find the closest Midi pitch value + the filler for the rest.
         // frequency = pitchVal + bendingVal
-        // i.e. 501 = 71(493.88) + 9207(7.2)
+        // i.e. 501 = 71(493.88Hz) + 9207(7.2Hz)
         int frequency = b.getFrequency();
         int pitchVal = getMidiPitch(frequency)+43; // 126-83 to avoid negative from log2
         Tuple bendingVal = getMidiBending(frequency, pitchVal);
         // Intensity
         int intensity = b.getIntensity();     
+        // Time position, Delta time (the time difference), the x position.
+        // Assumed that a single page handles 20 beads = 1100 pix
+        int position = 1100*b.page + b.getX();
         
         
-        int page = b.page;        
-        int xpos = b.getX();
         
+        
+        Tuple cntBead = new Tuple(0,0);
         if (b.connectedTo != null){
             Bead connection = b.connectedTo;
-            int cx = connection.getX();
-            int cy = connection.getY();
+            cntBead = cnctBeads(connection);
         }
         
         
-        mf.noteOn(0, track, pitchVal, intensity);
-        mf.pitchBend(track, bendingVal.left, bendingVal.right);       
-        mf.noteOff (64, track, 0);        
+        String p = "{x:104,y:203,maxp:19238}";
+        mf.addLyrics(0, track, p);
         
-        mf.noteOn(2, 2, 65, intensity);
-        mf.pitchBend(2, bendingVal.left, bendingVal.right);       
-        mf.noteOff (64, 2, 0);
-        
-        mf.noteOn(4, 3, 70, intensity);
-        mf.pitchBend(3, bendingVal.left, bendingVal.right);       
-        mf.noteOff (64, 3, 0);
+        mf.noteOn(position, track, pitchVal, intensity); // 0x90
+        mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0
+        mf.polyPress(position, track, cntBead.left, cntBead.right); // 0xA0, connect bead location.
+        mf.noteOff (position+55, track, 0); // 0x80
         
         
         
            
     }
     
+    private Tuple cnctBeads(Bead connection){
+        int cx = connection.getX();
+        int cnctBtrack = connection.track;           
+        String cxStr = Integer.toString(cx);
+        String data1, data2;
+
+        switch (cxStr.length()){                
+            case 3: // 345
+                data1 = Integer.toString(cx).substring(0,1); //3
+                data2 = Integer.toString(cx).substring(1,3); //45
+                break;
+            case 4: // 1045
+                data1 = Integer.toString(cx).substring(0,2); //10
+                data2 = Integer.toString(cx).substring(2,4); //45
+                break;
+            default:
+                data1 = "0";
+                data2 = Integer.toString(cx);
+                break;
+        }
+
+        System.out.println(data1+data2);
+        System.out.println("track : "+cnctBtrack);
+
+        //connection.page
+
+        
+        Tuple cBeads = new Tuple(cx,cnctBtrack);
+                
+                
+                
+        return cBeads;
+    }
     
     
     private int getMidiPitch(int frequency) {
