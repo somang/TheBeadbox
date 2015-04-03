@@ -10,7 +10,12 @@ import java.util.ArrayList;
 import javax.sound.midi.InvalidMidiDataException;
 
 /**
- *
+ * This class is the VIDI - MIDI mapping protocol conversion.
+ * However, it has some restrictions and limitations.
+ * It is uniquely set for the Emoti Chair, or the vibrotactile system with 8 track.
+ 
+ * It takes maximum 9 tracks.
+ * 
  * @author somang
  */
 class ProtocolHandler {
@@ -21,21 +26,28 @@ class ProtocolHandler {
     static final int MINIM = 32;
     static final int SEMIBREVE = 64;
     
-    public void saveFile(BeadPlayer beadPlayer1) throws Exception{
+    public void saveFile(BeadPlayer beadPlayer1, rightJPanel rightJPanel1) throws Exception{
         VibroMidiFile mf = new VibroMidiFile();
         
         
         // get beads from beadPlayer1.beads and create a midi file
         ArrayList <Bead> beadArray = beadPlayer1.beads;
-        for (int i=0;i<beadArray.size();i++){
-            Bead tmp = beadArray.get(i);
-            parseBeadForMidi(mf, tmp);
-            
-            //System.out.println(tmp);
-            //mf.noteOn(0, i, i);
-        }
+        //for (int i=0;i<beadArray.size();i++){
+        //    Bead tmp = beadArray.get(i);
+        //    parseBeadForMidi(mf, tmp);
+        //}
         
-        mf.writeToFile ("test1.mid");        
+        String p = "{maxpage:"+beadPlayer1.maxPage;
+        
+        for (int i=0;i<rightJPanel1.getComponentCount();i++){
+            Beadlight tmpBL = (Beadlight) rightJPanel1.getComponents()[i];
+            p = p+", BL"+(i+1)+":["+tmpBL.getX()+","+tmpBL.getY()+"]";
+        }
+        p = p+"}";
+        System.out.println(p);
+        
+        //mf.addLyrics(0, 0, p);        
+        //mf.writeToFile ("test1.mid");        
         
     }
 
@@ -70,18 +82,26 @@ class ProtocolHandler {
         
         
         Tuple cntBead = new Tuple(0,0);
+        Tuple cbpage = new Tuple(0,0);
+        
         if (b.connectedTo != null){
             Bead connection = b.connectedTo;
             cntBead = cnctBeads(connection);
+            
+            if (Integer.toString(connection.page).length() < 6){
+                cbpage = parsePage(connection.page);
+            }else{
+                System.out.println("Too big for the page parse.");
+            }
         }
         
+        System.out.println(cbpage.left+" "+cbpage.right);
         
-        String p = "{x:104,y:203,maxp:19238}";
-        mf.addLyrics(0, track, p);
         
-        mf.noteOn(position, track, pitchVal, intensity); // 0x90
-        mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0
+        mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
+        mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
         mf.polyPress(position, track, cntBead.left, cntBead.right); // 0xA0, connect bead location.
+        mf.controlChange(position, track, cbpage.right, cbpage.left); // Notice that I switched data1 and data2, cause of the order restriction
         mf.noteOff (position+55, track, 0); // 0x80
         
         
@@ -89,6 +109,18 @@ class ProtocolHandler {
            
     }
     
+    /**
+     * This is to map the position coordinates for the connected Bead.
+     * Assume,
+     * xpos: 1100 and track: 8
+     * Then we send, 
+     * 
+     * data1: 110
+     * data2: [0,1]08
+     * 
+     * @param connectionBead
+     * @return Tuple<data1, data2>
+     */
     private Tuple cnctBeads(Bead connection){
         int cx = connection.getX();
         int cnctBtrack = connection.track;           
@@ -97,29 +129,21 @@ class ProtocolHandler {
 
         switch (cxStr.length()){                
             case 3: // 345
-                data1 = Integer.toString(cx).substring(0,1); //3
-                data2 = Integer.toString(cx).substring(1,3); //45
+                data1 = Integer.toString(cx).substring(0,2); //34
+                data2 = Integer.toString(cx).substring(2,3); //5
                 break;
             case 4: // 1045
-                data1 = Integer.toString(cx).substring(0,2); //10
-                data2 = Integer.toString(cx).substring(2,4); //45
+                data1 = Integer.toString(cx).substring(0,3); //104
+                data2 = Integer.toString(cx).substring(3,4); //5
                 break;
             default:
                 data1 = "0";
                 data2 = Integer.toString(cx);
                 break;
         }
-
-        System.out.println(data1+data2);
-        System.out.println("track : "+cnctBtrack);
-
-        //connection.page
-
-        
+        data2 = data2+cnctBtrack;
+        cx = Integer.parseInt(data1);
         Tuple cBeads = new Tuple(cx,cnctBtrack);
-                
-                
-                
         return cBeads;
     }
     
@@ -168,6 +192,56 @@ class ProtocolHandler {
         // Math.log is base e, natural log, ln
         return Math.log( x ) / Math.log( 2 );
     }
+
+    /**
+     * page will be a number.
+     * it can be 0 - [126 27]
+     * This method will parse them into two data variable Tuple.
+     * So that it can fit in 
+     * 
+     * if page.length less then 3, then data1 =0, data2 = page
+     * else if page.length == 3, then data1 takes the hundreds number, rest in data2
+     * else if page.length == 4, then data1 takes the thousands, hundres, 
+     * else if page > 100 00, then data1 is 1 [00-26] data2 is [00-26]
+     * 
+     * 
+     * @param page
+     * @return <data1,data2>
+     */
+    private Tuple parsePage(int page) {
+        String data1="0";
+        String data2= Integer.toString(page);
+        
+        if (Integer.toString(page).length()>3 && Integer.toString(page).length()<6 ){
+            switch(Integer.toString(page).length()){
+                case 3: //345
+                    data1 = Integer.toString(page).substring(0,1); //3
+                    data2 = Integer.toString(page).substring(1,3); //45
+                    break;
+                case 4: //1045
+                    data1 = Integer.toString(page).substring(0,2); //10
+                    data2 = Integer.toString(page).substring(2,4); //45
+                    break;                
+                case 5: //126 26
+                    data1 = Integer.toString(page).substring(0,3); //126
+                    data2 = Integer.toString(page).substring(3,5); // 26
+                    if (Integer.parseInt(data1)>126){
+                       System.out.println("Parsing Error, Data bigger than limitation.");
+                    }
+                    if (Integer.parseInt(data2)>26){
+                       System.out.println("Parsing Error, Data bigger than limitation.");
+                    }
+                    break;
+            }
+        }
+        
+        int p1 = Integer.parseInt(data1);
+        int p2 = Integer.parseInt(data2);
+        
+        Tuple pageTotal = new Tuple(p1,p2);
+        return pageTotal;
+    }
+
     
     public class Tuple<Left, Right> { 
         public final int left; 

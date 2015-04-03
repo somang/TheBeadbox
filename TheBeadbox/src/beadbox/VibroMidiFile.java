@@ -89,7 +89,13 @@ public class VibroMidiFile {
 	return event;
     }
     
+    public void controlChange(long lTick, int track, int data1, int data2) throws InvalidMidiDataException{        
+        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.CONTROL_CHANGE, data1, data2, lTick));
+    }
 
+    public void progChange(int track, int data1, long lTick) throws InvalidMidiDataException{
+        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.PROGRAM_CHANGE, data1, 0, lTick));
+    }
 
     public void setVolume(Track track, int vol) throws InvalidMidiDataException{
         track.add(new MidiEvent(new ShortMessage(ShortMessage.CONTROL_CHANGE, 0, 7, vol),0)); //7 is the volume control.

@@ -521,7 +521,7 @@ public class VibcompUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            ph.saveFile(beadPlayer1);
+            ph.saveFile(beadPlayer1, rightJPanel1);
         } catch (Exception ex) {
             Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
         }
