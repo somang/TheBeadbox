@@ -384,14 +384,13 @@ public class VibcompUI extends javax.swing.JFrame {
         2015-03-20
         - Right click after paging does not work.
         
-        Let's make a single bead = 50 ms
-        A page takes 20 beads.
         
-        Fade in and Fade out.
+        - when playing: Fade in and Fade out.
         
         */
         point1 = evt.getPoint();        
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
+        
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {     
             if(activeBead != null){
@@ -402,9 +401,18 @@ public class VibcompUI extends javax.swing.JFrame {
                     //Remove duplicate beads
                     if(prevBead!=null && prevBead.equals(activeBead)) beadPlayer1.beads.remove(prevBead);
                     prevBead = activeBead;
-                }else{
+                }else{                    
+                    if (tmpBead.page != pageScroll.getValue()){
+                        //Create one
+                        beadPanelText.setVisible(true);
+                        activeBead.vibcompUI= this;                    
+                        beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                        //Remove duplicate beads
+                        if(prevBead!=null && prevBead.equals(activeBead)) beadPlayer1.beads.remove(prevBead);
+                        prevBead = activeBead;
+                    }
                     if(!activeBead.playable) remove(activeBead); //Remove bead panel glitch
-                    else activeBead = tmpBead;                    
+                    else activeBead = tmpBead;      
                 }
                 
                 

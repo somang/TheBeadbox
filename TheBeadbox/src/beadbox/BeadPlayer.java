@@ -161,7 +161,11 @@ public class BeadPlayer extends javax.swing.JPanel {
         hs.addAll(beads);
         beads.clear();
         beads.addAll(hs);
-
+        
+        for (Bead b:beads){
+            System.out.println(b.page + " " + b.getX() + "," + b.getY());
+        }
+        System.out.println("-----");
     }   
     
     public void deleteBead(Bead activeBead) {
