@@ -34,7 +34,7 @@
                           <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="playerOverview1" min="-2" max="-2" attributes="0"/>
-                              <Component id="playButton" min="-2" pref="863" max="-2" attributes="0"/>
+                              <Component id="playButton" min="-2" pref="844" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -185,8 +185,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="playButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&gt; Play   /   Pause | | "/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="text" type="java.lang.String" value="PLAY &gt; / PAUSE []"/>
+        <Property name="toolTipText" type="java.lang.String" value="PLAY &gt; / PAUSE []"/>
         <Property name="actionCommand" type="java.lang.String" value="&gt; Play "/>
       </Properties>
       <Events>

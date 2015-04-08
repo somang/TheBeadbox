@@ -163,8 +163,8 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
 
-        playButton.setText("> Play   /   Pause | | ");
-        playButton.setToolTipText("");
+        playButton.setText("PLAY > / PAUSE []");
+        playButton.setToolTipText("PLAY > / PAUSE []");
         playButton.setActionCommand("> Play ");
         playButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,7 +275,7 @@ public class VibcompUI extends javax.swing.JFrame {
                             .addGap(77, 77, 77)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(playerOverview1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

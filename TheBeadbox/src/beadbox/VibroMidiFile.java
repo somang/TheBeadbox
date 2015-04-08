@@ -26,11 +26,7 @@ public class VibroMidiFile {
         this.sequence = new Sequence(Sequence.PPQ, 120, 8); //120 ticks per quarter note, 8 tracks.
         
         for (int i=0;i<8;i++){
-            Track curTrack = sequence.getTracks()[i];            
-            //setTimeSignature(curTrack);
-            //setTempo(curTrack);
-            //setVolume(curTrack, 127);
-            
+            Track curTrack = sequence.getTracks()[i];      
         }
     }
     
@@ -69,17 +65,21 @@ public class VibroMidiFile {
     /**
      * Aftertouch message (0xA0, or 160)
      * 
-     * @param delta
-     * @param track
-     * @param data1
-     * @param data2 
      */
     public void polyPress(long lTick, int track, int data1, int data2) throws InvalidMidiDataException {
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.POLY_PRESSURE, data1, data2, lTick));
     }
     
-    public void noteOff(int lTick, int track, int frequency) throws InvalidMidiDataException {
+    public void controlChange(long lTick, int track, int data1, int data2) throws InvalidMidiDataException{        
+        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.CONTROL_CHANGE, data1, data2, lTick));
+    }
+
+    public void noteOff(long lTick, int track, int frequency) throws InvalidMidiDataException {
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.NOTE_OFF, frequency, 0, lTick));
+    }
+    
+    public void progChange(long lTick, int track, int data1) throws InvalidMidiDataException{
+        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.PROGRAM_CHANGE, data1, 0, lTick));
     }
     
     private static MidiEvent createNoteEvent(int nCommand, int data1, int data2, long lTick) throws InvalidMidiDataException{
@@ -89,13 +89,11 @@ public class VibroMidiFile {
 	return event;
     }
     
-    public void controlChange(long lTick, int track, int data1, int data2) throws InvalidMidiDataException{        
-        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.CONTROL_CHANGE, data1, data2, lTick));
-    }
-
-    public void progChange(int track, int data1, long lTick) throws InvalidMidiDataException{
-        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.PROGRAM_CHANGE, data1, 0, lTick));
-    }
+    
+    
+    
+    
+    
 
     public void setVolume(Track track, int vol) throws InvalidMidiDataException{
         track.add(new MidiEvent(new ShortMessage(ShortMessage.CONTROL_CHANGE, 0, 7, vol),0)); //7 is the volume control.
@@ -148,6 +146,9 @@ public class VibroMidiFile {
 
     public void writeToFile(String filename) throws FileNotFoundException, IOException {
         FileOutputStream fos = new FileOutputStream(filename);
+        
+        
+        //MidiDataOutputStream fos = new MidiDataOutputStream(filename);
         
         mfw = new MidiFileWriter();
         

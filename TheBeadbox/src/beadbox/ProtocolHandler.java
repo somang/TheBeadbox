@@ -20,22 +20,23 @@ import javax.sound.midi.InvalidMidiDataException;
  */
 class ProtocolHandler {
 
-    static final int SEMIQUAVER = 4;
-    static final int QUAVER = 8;
-    static final int CROTCHET = 16;
-    static final int MINIM = 32;
-    static final int SEMIBREVE = 64;
     
     public void saveFile(BeadPlayer beadPlayer1, rightJPanel rightJPanel1) throws Exception{
         VibroMidiFile mf = new VibroMidiFile();
         
+        /**Initialization**/
+        for (int i=0;i<8;i++){
+            mf.noteOn(0, i, 60, 60); 
+            mf.noteOff (0, i, 0); 
+        }
         
         // get beads from beadPlayer1.beads and create a midi file
         ArrayList <Bead> beadArray = beadPlayer1.beads;
-        //for (int i=0;i<beadArray.size();i++){
-        //    Bead tmp = beadArray.get(i);
-        //    parseBeadForMidi(mf, tmp);
-        //}
+        
+        for (int i=0;i<beadArray.size();i++){
+            Bead tmp = beadArray.get(i);
+            parseBeadForMidi(mf, tmp);
+        }
         
         String p = "{maxpage:"+beadPlayer1.maxPage;
         
@@ -47,7 +48,9 @@ class ProtocolHandler {
         System.out.println(p);
         
         //mf.addLyrics(0, 0, p);        
-        //mf.writeToFile ("test1.mid");        
+        mf.writeToFile ("testo.mid");        
+        
+        
         
     }
 
@@ -64,7 +67,7 @@ class ProtocolHandler {
         
         // Track
         int track = b.track-1;
-        System.out.println(track);
+        
         // Frequency convert.
         // Then find the closest Midi pitch value + the filler for the rest.
         // frequency = pitchVal + bendingVal
@@ -73,10 +76,10 @@ class ProtocolHandler {
         int pitchVal = getMidiPitch(frequency)+43; // 126-83 to avoid negative from log2
         Tuple bendingVal = getMidiBending(frequency, pitchVal);
         // Intensity
-        int intensity = b.getIntensity();     
+        int intensity = b.getIntensity();
         // Time position, Delta time (the time difference), the x position.
         // Assumed that a single page handles 20 beads = 1100 pix
-        int position = 1100*b.page + b.getX();
+        long position = (long) 1100*(b.page-1) + (long) b.getX();
         
         
         
@@ -94,16 +97,17 @@ class ProtocolHandler {
                 System.out.println("Too big for the page parse.");
             }
         }
+        //System.out.println(position);
         
-        System.out.println(cbpage.left+" "+cbpage.right);
+        //position /= 2;
+        //position = 1000;
         
         
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
         mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
         mf.polyPress(position, track, cntBead.left, cntBead.right); // 0xA0, connect bead location.
         mf.controlChange(position, track, cbpage.right, cbpage.left); // Notice that I switched data1 and data2, cause of the order restriction
-        mf.noteOff (position+55, track, 0); // 0x80
-        
+        mf.noteOff (position+(long) 55, track, pitchVal); // 0x80
         
         
            
