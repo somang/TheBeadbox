@@ -157,10 +157,15 @@ public class BeadPlayer extends javax.swing.JPanel {
         beads.clear();
         beads.addAll(hs);
         
+
 //        for (Bead b:beads){
-//            System.out.println(b.page + " " + b.getX() + "," + b.getY());
+//            System.out.println(b.page + " " + b.getX() + "," + b.track);
+//            if (b.connectedTo != null){
+//                System.out.println("Connected To: " + b.connectedTo.page + " " + b.connectedTo.getX()+","+b.connectedTo.track);
+//            }
 //        }
 //        System.out.println("-----");
+
     }   
     
     public void deleteBead(Bead activeBead) {
