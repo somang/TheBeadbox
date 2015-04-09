@@ -41,18 +41,15 @@ public class BeadPlayer extends javax.swing.JPanel {
         this.playerTickTock = new Runnable(){
             public void run(){
                 while(true){
-                    if(VibcompUI.playing){//tick%speed == 0){                            
+                    if(VibcompUI.playing){                        
                         if(barPosition < MAXBARPOS) barPosition+=50;
                         else{                            
                             barPosition = 0;
                             page++;
                             if(page>maxPage){
                                 page=1;
-                                //maxPage = page;
-                                //vibcompUI.pageScroll.setMaximum(page+1);
                             }                            
-                            vibcompUI.pageScroll.setValue(page);
-                            
+                            vibcompUI.pageScroll.setValue(page); 
                         }
                     }
                     try {
@@ -91,7 +88,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.setStroke(new BasicStroke(1));
         g2d.setColor(Color.BLACK);
         int yOfset=2;
-        vibcompUI.playerOverview1.clearAll();
+        if(beads.size()>0) vibcompUI.playerOverview1.clearAll();
         for(int i = 0; i<beads.size(); i++){
             Bead curBead = beads.get(i);
             //.show();
@@ -134,26 +131,24 @@ public class BeadPlayer extends javax.swing.JPanel {
             }
           
         }
-        vibcompUI.playerOverview1.higlightFrag(page);
+        if(beads.size()>0) vibcompUI.playerOverview1.higlightFrag(page);
         repaint ();
     }
     
 
     public void setBead(int x, int y, Bead bead){ 
         x = x-(BEADHEIGHT/2);
-        if (x<0){                   
+        if (x<0){          //keep bead within page bounds         
             x = 0;
         }else if (x>1055){
             x = 1045;
-            //page+=1;
-            //x=x-1100;
         }
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
         bead.setTrack(getTrackAt(y));
         bead.setOpaque(false);
         bead.setLocation(x, y);
         bead.playable = true;
-        bead.setPage(page); 
+        bead.setPage(page);
         beads.add(bead);
         this.add(bead);    
                     
@@ -162,10 +157,10 @@ public class BeadPlayer extends javax.swing.JPanel {
         beads.clear();
         beads.addAll(hs);
         
-        for (Bead b:beads){
-            System.out.println(b.page + " " + b.getX() + "," + b.getY());
-        }
-        System.out.println("-----");
+//        for (Bead b:beads){
+//            System.out.println(b.page + " " + b.getX() + "," + b.getY());
+//        }
+//        System.out.println("-----");
     }   
     
     public void deleteBead(Bead activeBead) {

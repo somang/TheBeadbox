@@ -12,7 +12,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
@@ -29,7 +28,6 @@ public class VibcompUI extends javax.swing.JFrame {
     protected AsioSoundHost listener;   
     protected boolean driverLoaded;
     final private JMenuItem BeadMenuDelete = new JMenuItem("Delete");
-    final private JMenuItem BeadMenuDuration = new JMenuItem("Duration");
     final private JPopupMenu menuPopup = new JPopupMenu();
 
     Bead startBead,endBead;
@@ -81,7 +79,6 @@ public class VibcompUI extends javax.swing.JFrame {
         }
         beadPlayer1.vibcompUI = this;
         menuPopup.add(BeadMenuDelete);
-        menuPopup.add(BeadMenuDuration);
     }
 
     /**
@@ -97,16 +94,17 @@ public class VibcompUI extends javax.swing.JFrame {
         beadPlayer1 = new beadbox.BeadPlayer();
         frequencySlider = new javax.swing.JSlider();
         intensitySlider = new javax.swing.JSlider();
-        playButton = new javax.swing.JButton();
         beadPanel = new javax.swing.JPanel();
         beadPanelText = new javax.swing.JLabel();
         barSlider = new javax.swing.JSlider();
         rightJPanel1 = new beadbox.rightJPanel();
         pageScroll = new javax.swing.JScrollBar();
-        addPage = new javax.swing.JButton();
         playerOverview1 = new beadbox.PlayerOverview();
+        jPanel1 = new javax.swing.JPanel();
         speedControl = new javax.swing.JSlider();
         jButton1 = new javax.swing.JButton();
+        addPage = new javax.swing.JButton();
+        playButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,7 +128,7 @@ public class VibcompUI extends javax.swing.JFrame {
         beadPlayer1.setLayout(beadPlayer1Layout);
         beadPlayer1Layout.setHorizontalGroup(
             beadPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 1145, Short.MAX_VALUE)
         );
         beadPlayer1Layout.setVerticalGroup(
             beadPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,15 +158,6 @@ public class VibcompUI extends javax.swing.JFrame {
         intensitySlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 intensitySliderStateChanged(evt);
-            }
-        });
-
-        playButton.setText("> Play   /   Pause | | ");
-        playButton.setToolTipText("");
-        playButton.setActionCommand("> Play ");
-        playButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playButtonActionPerformed(evt);
             }
         });
 
@@ -237,14 +226,9 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
 
-        addPage.setText("Add Page [+]");
-        addPage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addPageMouseClicked(evt);
-            }
-        });
-
         playerOverview1.setBackground(new java.awt.Color(100, 100, 100));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
 
         speedControl.setMinorTickSpacing(10);
         speedControl.setPaintTicks(true);
@@ -256,38 +240,79 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        addPage.setText("Add Page [+]");
+        addPage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addPageMouseClicked(evt);
+            }
+        });
+
+        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/play_pause.png"))); // NOI18N
+        playButton.setToolTipText("Play / Pause");
+        playButton.setActionCommand("> Play ");
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(addPage))
+                    .addComponent(speedControl, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(187, 187, 187)
+                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(addPage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(speedControl, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(barSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(77, 77, 77)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(playerOverview1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(speedControl, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(379, 379, 379)
-                                    .addComponent(jButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(addPage))
-                                .addComponent(jScrollPane1)
-                                .addComponent(pageScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(barSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1147, Short.MAX_VALUE)
+                                    .addComponent(pageScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(playerOverview1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(125, 125, 125)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,22 +338,15 @@ public class VibcompUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addPage)
-                            .addComponent(speedControl, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(14, 14, 14)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(intensitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(playerOverview1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(frequencySlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(intensitySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(frequencySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -398,25 +416,12 @@ public class VibcompUI extends javax.swing.JFrame {
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI= this;                    
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                    //Remove duplicate beads
-                    if(prevBead!=null && prevBead.equals(activeBead)) beadPlayer1.beads.remove(prevBead);
-                    prevBead = activeBead;
-                }else{                    
-                    if (tmpBead.page != pageScroll.getValue()){
-                        //Create one
-                        beadPanelText.setVisible(true);
-                        activeBead.vibcompUI= this;                    
-                        beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                        //Remove duplicate beads
-                        if(prevBead!=null && prevBead.equals(activeBead)) beadPlayer1.beads.remove(prevBead);
-                        prevBead = activeBead;
-                    }
+                }else{                                       
                     if(!activeBead.playable) remove(activeBead); //Remove bead panel glitch
                     else activeBead = tmpBead;      
                 }
                 
-                
-                
+
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity()*2);
                 frequencySlider.setValue(activeBead.getFrequency());                
@@ -425,6 +430,12 @@ public class VibcompUI extends javax.swing.JFrame {
             if (tmpBead != null){                
                 tmpBead.setComponentPopupMenu(menuPopup);
                 BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1,tmpBead,playerOverview1));
+                System.out.println("Bead Info: \nPage: "+tmpBead.page+"\nTrack: "+tmpBead.track+
+                        "\nLocation X: "+tmpBead.getLocation().x+"\nFrequency: "+tmpBead.getFrequency()+
+                        "\nIntensity: "+tmpBead.getIntensity()+"\n");
+                BeadMenuDelete.setToolTipText("Bead Info-  Page: "+tmpBead.page+"  Track: "+tmpBead.track+
+                        "  Location X: "+tmpBead.getLocation().x+"  Frequency: "+tmpBead.getFrequency()+
+                        "  Intensity: "+tmpBead.getIntensity());
             }
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
@@ -465,28 +476,12 @@ public class VibcompUI extends javax.swing.JFrame {
                     endBead.setFrequency(activeBead.getFrequency());
                     endBead.setConnection(activeBead);
                     endBead.vibcompUI = this;
-                    beadPlayer1.setBead(endBead_x, endBead_y, endBead);                    
-                }else{//If there already is endBead, and
-                    if (activeBead.connectedTo!=null){// if A has current connection with other bead, replace.
-                        // to move by drag. given A-B, drag from B to C make A-C
-                        //1. break connection between A-B.
-                        Bead A = activeBead.connectedTo;
-                        Bead B = activeBead;                        
-                        A.breakConnections();
-                        //2. connect A to C
-                        Bead C = new Bead();
-                        C.setSize(55,55);
-                        C.setIntensity(B.getIntensity());
-                        C.setFrequency(B.getFrequency());
-                        C.setConnection(A);
-                        C.vibcompUI = this;
-                        beadPlayer1.setBead(endBead_x, endBead_y, C);                        
-                        //3. Delete B
-                        beadPlayer1.deleteBead(B);                                                          
-                    }else{// if there is no connected bead.
-                        //connect A and B(already existed)
-                        activeBead.setConnection(endBead);
-                    }
+                    beadPlayer1.setBead(endBead_x, endBead_y, endBead); 
+                    activeBead = endBead;
+                }else{
+                    int yLoc = (beadPlayer1.getTrackAt(endBead_y)-1)*beadPlayer1.TRACKHEIGHT+5;
+                    activeBead.setTrack(activeBead.getTrack());
+                    activeBead.setLocation(endBead_x, yLoc);                    
                 }               
             }else JOptionPane.showMessageDialog(null, "There is no active Bead!");
             
@@ -506,6 +501,8 @@ public class VibcompUI extends javax.swing.JFrame {
     private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
         BeadPlayer.maxPage++;
         pageScroll.setMaximum(BeadPlayer.maxPage+1);
+        pageScroll.setValue(BeadPlayer.maxPage);
+        beadPlayer1.page = BeadPlayer.maxPage;
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
@@ -586,6 +583,7 @@ public class VibcompUI extends javax.swing.JFrame {
     private javax.swing.JSlider frequencySlider;
     private javax.swing.JSlider intensitySlider;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JScrollBar pageScroll;
     private javax.swing.JButton playButton;

@@ -44,7 +44,7 @@ class ProtocolHandler {
             p = p+", BL"+(i+1)+":["+tmpBL.getX()+","+tmpBL.getY()+"]";
         }
         p = p+"}";
-        System.out.println(p);
+        //System.out.println(p);
         
         //mf.addLyrics(0, 0, p);        
         //mf.writeToFile ("test1.mid");        
