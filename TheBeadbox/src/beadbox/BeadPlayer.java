@@ -140,8 +140,8 @@ public class BeadPlayer extends javax.swing.JPanel {
         x = x-(BEADHEIGHT/2);
         if (x<0){          //keep bead within page bounds         
             x = 0;
-        }else if (x>1055){
-            x = 1045;
+        }else if (x>945){
+            x = 945;
         }
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
         bead.setTrack(getTrackAt(y));
@@ -166,7 +166,9 @@ public class BeadPlayer extends javax.swing.JPanel {
 //        }
 //        System.out.println("-----");
 
-    }   
+    }
+    
+    
     
     public void deleteBead(Bead activeBead) {
         activeBead.breakConnections();
