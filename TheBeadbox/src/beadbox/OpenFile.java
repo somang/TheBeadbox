@@ -7,7 +7,6 @@ package beadbox;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiMessage;
@@ -63,7 +62,6 @@ public class OpenFile {
                                 int xLoc = (int) curTick%1000;
                                 bplayer.setBead(xLoc, yLoc, tmpBead);
                                 tmpBead.page = (int)(curTick/1000)+1;
-                                //bplayer.
                             }
                         } 
                         //when the key if off
