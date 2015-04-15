@@ -125,24 +125,28 @@ public class BeadPlayer extends javax.swing.JPanel {
                 
                 if (curBead.connectedTo!=null){ // if there is a connected Bead
                     int mid = (start+curBead.connectedTo.getX()+(curBead.page*getWidth()))/2;
-
+                    
                     if ((curBead.connectedTo.track != curBead.track)){// in dif track
                         /*
                         Then, fade out first bead, and fade in second bead.
                         */
-                        int startIn = curBead.getIntensity();
+                        
                         if (start < ( getBarIUPosition() + (page*getWidth())) && 
                           mid > ( getBarIUPosition() + (page*getWidth()))){
-                            curBead.playBead();
+                            float gap = (float) (-1.0*((getBarIUPosition()+page*getWidth())-mid)/(mid-start)) ;     
+                            System.out.println(gap*curBead.getIntensity());
+                            curBead.playBead((int) (gap*curBead.getIntensity()));
                         }
                         
-                        curBead = curBead.connectedTo;
+                        curBead = curBead.connectedTo; //Change what to play after mid point.
                         start = mid;
                         end = curBead.connectedTo.getX()+(curBead.connectedTo.page*getWidth());
                         
                         if (start < ( getBarIUPosition() + (page*getWidth())) && 
                           end > ( getBarIUPosition() + (page*getWidth()))){
-                            curBead.playBead();
+                            float gap = (float) (-1.0*(mid-(getBarIUPosition()+page*getWidth()))/(end-mid)) ;
+                            System.out.println(gap*curBead.getIntensity());
+                            curBead.playBead((int) (gap*curBead.getIntensity()));
                         }
                         
 
@@ -169,7 +173,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     
 
     public void setBead(int x, int y, Bead bead){ 
-        x = x-(BEADHEIGHT/2);
+        x = x-(BEADHEIGHT/2);        
         if (x<0){          //keep bead within page bounds         
             x = 0;
         }else if (x>getWidth()-55){

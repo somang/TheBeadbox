@@ -32,7 +32,9 @@ public class Bead extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
+        
         if(initial){       
+            System.out.println("initial");
             centerX = (getWidth()-maxIntensity)/2;
             centerY = (getHeight()-maxIntensity)/2;
             initial = false;
@@ -48,6 +50,8 @@ public class Bead extends javax.swing.JPanel {
         curX = (getWidth()-curIntensity)/2;
         curY = (getHeight()-curIntensity)/2;
         g2d.fillOval(curX, curY, curIntensity, curIntensity);
+        
+        
         try{   
             if(playable && VibcompUI.playing){ 
                 int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
