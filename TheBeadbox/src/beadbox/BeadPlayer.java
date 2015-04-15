@@ -67,7 +67,6 @@ public class BeadPlayer extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
-        
         TRACKHEIGHT = getHeight()/8;
         Graphics2D g2d = (Graphics2D) g;                
         super.paintComponent(g2d);
@@ -83,7 +82,6 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.setColor(Color.GRAY);
         g2d.setStroke(new BasicStroke(1));
         g2d.drawLine(getWidth()*barPosition/MAXBARPOS, 0, getWidth()*barPosition/MAXBARPOS, getHeight());
-   
         
         g2d.setStroke(new BasicStroke(1));
         g2d.setColor(Color.BLACK);
@@ -124,9 +122,43 @@ public class BeadPlayer extends javax.swing.JPanel {
             if(VibcompUI.playing){
                 int start = curBead.getX()+(curBead.page*getWidth());
                 int end = curBead.getX()+(curBead.page*getWidth())+curBead.getWidth();
-                if(curBead.connectedTo!=null) end=curBead.connectedTo.getX()+(curBead.connectedTo.page*getWidth());
-                if(start<(getBarIUPosition()+(page*getWidth())) && end>getBarIUPosition()+(page*getWidth())){
-                    curBead.playBead();
+                
+                if (curBead.connectedTo!=null){ // if there is a connected Bead
+                    int mid = (start+curBead.connectedTo.getX()+(curBead.page*getWidth()))/2;
+
+                    if ((curBead.connectedTo.track != curBead.track)){// in dif track
+                        /*
+                        Then, fade out first bead, and fade in second bead.
+                        */
+                        int startIn = curBead.getIntensity();
+                        if (start < ( getBarIUPosition() + (page*getWidth())) && 
+                          mid > ( getBarIUPosition() + (page*getWidth()))){
+                            curBead.playBead();
+                        }
+                        
+                        curBead = curBead.connectedTo;
+                        start = mid;
+                        end = curBead.connectedTo.getX()+(curBead.connectedTo.page*getWidth());
+                        
+                        if (start < ( getBarIUPosition() + (page*getWidth())) && 
+                          end > ( getBarIUPosition() + (page*getWidth()))){
+                            curBead.playBead();
+                        }
+                        
+
+                    }else{
+                        //when it's in the same track
+                        end = curBead.connectedTo.getX()+(curBead.connectedTo.page*getWidth());
+                        if (start < ( getBarIUPosition() + (page*getWidth())) && 
+                              end > ( getBarIUPosition() + (page*getWidth()))){
+                            curBead.playBead();
+                        }
+                    }
+                }else{// When there is no connected Bead, then just play a bead
+                    if (start < ( getBarIUPosition() + (page*getWidth())) && 
+                        end > ( getBarIUPosition() + (page*getWidth()))){
+                        curBead.playBead();
+                    }
                 }
             }
           
@@ -140,8 +172,8 @@ public class BeadPlayer extends javax.swing.JPanel {
         x = x-(BEADHEIGHT/2);
         if (x<0){          //keep bead within page bounds         
             x = 0;
-        }else if (x>945){
-            x = 945;
+        }else if (x>getWidth()-55){
+            x = getWidth()-55;
         }
         y = ((getTrackAt(y)-1)*TRACKHEIGHT+5);
         bead.setTrack(getTrackAt(y));
