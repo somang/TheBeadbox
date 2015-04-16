@@ -370,7 +370,9 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void intensitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_intensitySliderStateChanged
         activeBead.setMaxIntensity(intensitySlider.getMaximum()/2);
-        activeBead.setIntensity(intensitySlider.getValue()/2);
+        activeBead.setIntensity(intensitySlider.getValue());
+        //beadPanelText.setText("");
+        beadPanel.repaint();
     }//GEN-LAST:event_intensitySliderStateChanged
 
     private void frequencySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_frequencySliderStateChanged
@@ -407,26 +409,24 @@ public class VibcompUI extends javax.swing.JFrame {
         tmpBead.setSize(55,55);
         beadPanel.add(tmpBead);
         tmpBead.setLocation(15, 20);
-        beadPanel.repaint();
         activeBead = tmpBead;
+        beadPanel.repaint();
     }
     
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
         /*
         2015-03-20
         - Right click after paging does not work.
-        
-        
         - when playing: Fade in and Fade out.
         
         */
         point1 = evt.getPoint();        
-        Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y);
+        Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
         
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
-        {     
+        {   
             if(activeBead != null){
-                if(tmpBead == null){//Create one
+                if(tmpBead == null){//Create one                    
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI= this;                    
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
@@ -479,7 +479,7 @@ public class VibcompUI extends javax.swing.JFrame {
     }
     
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
-        endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y); // Check if there is a bead in the end.  
+        endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y, beadPlayer1.page); // Check if there is a bead in the end.  
          
         if (dragStatus && isActualDrag(endBead_x, endBead_y)){          
             if (activeBead != null){

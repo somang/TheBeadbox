@@ -202,9 +202,16 @@ public class BeadPlayer extends javax.swing.JPanel {
         return (y/(TRACKHEIGHT)+1);
     }
     
-    public Bead getBeadAt(int x, int y){
+    public Bead getBeadAt(int x, int y, int beadPage){
         try{
-            return (Bead)this.getComponentAt(x, y);
+            
+            Bead tmp = (Bead)this.getComponentAt(x, y);
+            if (tmp.getPage() == beadPage){
+                return tmp;
+            }else{
+                return null;
+            }
+            
         }
         catch(ClassCastException e){
             return null;

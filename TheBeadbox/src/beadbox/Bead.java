@@ -47,9 +47,9 @@ public class Bead extends javax.swing.JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillOval(centerX, centerY, maxIntensity, maxIntensity);
         g2d.setColor(safeColor.pickColor(curFrequency, track));
-        curX = (getWidth()-curIntensity)/2;
-        curY = (getHeight()-curIntensity)/2;
-        g2d.fillOval(curX, curY, curIntensity, curIntensity);
+        curX = (getWidth()-curIntensity/2)/2;
+        curY = (getHeight()-curIntensity/2)/2;
+        g2d.fillOval(curX, curY, curIntensity/2, curIntensity/2);
         
         
         try{   
@@ -147,7 +147,7 @@ public class Bead extends javax.swing.JPanel {
         safeColor = new safeColors();
         curFrequency = 1;
         track = 0;
-        curIntensity = 50;
+        curIntensity = 100;
         maxIntensity = 50;
         page = -1;
         initComponents();
