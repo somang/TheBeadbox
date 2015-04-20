@@ -134,7 +134,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                         if (start < ( getBarIUPosition() + (page*getWidth())) && 
                           mid > ( getBarIUPosition() + (page*getWidth()))){
                             float gap = (float) (-1.0*((getBarIUPosition()+page*getWidth())-mid)/(mid-start)) ;     
-                            System.out.println(gap*curBead.getIntensity());
+                            //System.out.println(gap*curBead.getIntensity());
                             curBead.playBead((int) (gap*curBead.getIntensity()));
                         }
                         
@@ -145,11 +145,9 @@ public class BeadPlayer extends javax.swing.JPanel {
                         if (start < ( getBarIUPosition() + (page*getWidth())) && 
                           end > ( getBarIUPosition() + (page*getWidth()))){
                             float gap = (float) (-1.0*(mid-(getBarIUPosition()+page*getWidth()))/(end-mid)) ;
-                            System.out.println(gap*curBead.getIntensity());
+                            //System.out.println(gap*curBead.getIntensity());
                             curBead.playBead((int) (gap*curBead.getIntensity()));
                         }
-                        
-
                     }else{
                         //when it's in the same track
                         end = curBead.connectedTo.getX()+(curBead.connectedTo.page*getWidth());
@@ -204,7 +202,6 @@ public class BeadPlayer extends javax.swing.JPanel {
     
     public Bead getBeadAt(int x, int y, int beadPage){
         try{
-            
             Bead tmp = (Bead)this.getComponentAt(x, y);
             if (tmp.getPage() == beadPage){
                 return tmp;
@@ -214,6 +211,8 @@ public class BeadPlayer extends javax.swing.JPanel {
             
         }
         catch(ClassCastException e){
+            return null;
+        }catch (NullPointerException ex){
             return null;
         }
     }

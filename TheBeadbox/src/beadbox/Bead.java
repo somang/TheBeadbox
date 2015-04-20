@@ -32,9 +32,7 @@ public class Bead extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
-        
-        if(initial){       
-            System.out.println("initial");
+        if(initial){
             centerX = (getWidth()-maxIntensity)/2;
             centerY = (getHeight()-maxIntensity)/2;
             initial = false;
@@ -50,7 +48,6 @@ public class Bead extends javax.swing.JPanel {
         curX = (getWidth()-curIntensity/2)/2;
         curY = (getHeight()-curIntensity/2)/2;
         g2d.fillOval(curX, curY, curIntensity/2, curIntensity/2);
-        
         
         try{   
             if(playable && VibcompUI.playing){ 
@@ -95,10 +92,8 @@ public class Bead extends javax.swing.JPanel {
                         InOutSwitch = true;
                     }
                 }
-
             }
-        }catch(ArrayIndexOutOfBoundsException e){}            
-        
+        }catch(ArrayIndexOutOfBoundsException e){}        
     }
     
     public void playBead(){
@@ -109,7 +104,7 @@ public class Bead extends javax.swing.JPanel {
                 try {
                     for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
                         sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*curIntensity/100;                   
-                    }                          
+                    }
                     vibcompUI.listener.output ( track-1, sampleWave );
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Bead.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,7 +129,7 @@ public class Bead extends javax.swing.JPanel {
                 try {
                     for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
                         sampleWave[k] = (float) Math.sin ( varIntensity *k*20.0 / vibcompUI.listener.getSampleRate())*varIntensity/100;                   
-                    }                          
+                    }
                     vibcompUI.listener.output ( track-1, sampleWave );
                 } catch (InterruptedException ex) {}
             catch (BufferOverflowException e) {}}}catch(NullPointerException e){}

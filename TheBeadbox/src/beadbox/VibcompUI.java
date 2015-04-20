@@ -434,10 +434,8 @@ public class VibcompUI extends javax.swing.JFrame {
                     if(!activeBead.playable) remove(activeBead); //Remove bead panel glitch
                     else activeBead = tmpBead;      
                 }
-                
-
                 //set slider positions
-                intensitySlider.setValue(activeBead.getIntensity()*2);
+                intensitySlider.setValue(activeBead.getIntensity());
                 frequencySlider.setValue(activeBead.getFrequency());                
             }else{JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");}
         }else if (evt.getButton() == MouseEvent.BUTTON3){// Right click
@@ -470,8 +468,9 @@ public class VibcompUI extends javax.swing.JFrame {
         try{
             xdif = endBeadx - activeBead.getX();
             ydif = endBeady - activeBead.getY();
-            distance = Math.sqrt(xdif*xdif-ydif*ydif); //Euclidean distance.
-            if (distance > 70){ //if distance is greater than 100
+            distance = Math.sqrt(Math.abs(xdif*xdif-ydif*ydif)); //Euclidean distance.
+            System.out.println(distance);
+            if (distance > 55){ //if distance is greater than 100
                 return true;
             }
         }catch(NullPointerException e){}
