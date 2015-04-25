@@ -3,23 +3,7 @@ The Beadbox - ToDo List
 TODO list for the project starting 2014 Sept. 28
 
 ## What's left?
-* selecting precision?
-
-* Longer notes: Draw two lines to connect two beads.
-  - If one of the bead gets deleted, the line is deleted.
-  - The other bead stays while the selected bead gets deleted at first place.
-  - 
-  
-
-* Color palette: http://www.sron.nl/~pault/ and Google up CUD palette. (Colour Universal Design) and http://draketo.de/light/english/websafe-colors-colorblind-safe
-
-* The tracks should be available for zoom in and zoom out.
-* Each bead(note) has 40ms duration.
-  - The maximized zoom will contain each note, with one in each cell.
-  - How would you time it? How do I know? UHHHH
-
- 
- 
+April 25th 2015
 
 
 
@@ -27,49 +11,15 @@ TODO list for the project starting 2014 Sept. 28
 
 
 
+# Functionalities...To do...
+- - Undo & Redo 
+- - Copy & Paste
 
-
-
-
-
-
-
-
-
-
-# Functionalities...
-
-- Play, Pause whole composition
-- Note(Bead) Entry 
-- - Undo & Redo - Copy & Paste
-
-- Layout: Move notes freely
-- Concept of Time: Timeline for playing
 - Virtual Input instrumental/device/window UI 
 (i.e. virtual Vibrochord, Computer Keyboard mapped, etc)
-- Frequency Control, Intensity/Amplitude Control
-- Separate Multi-track Output/Play
 
 - Import wav files, Export multi-track audio file
-- Save the composition
 - Load the composition file, File Format
-
-- Visualization for 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -78,11 +28,12 @@ TODO list for the project starting 2014 Sept. 28
 
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+Vibrotactile as an art genre, the Beadbox aims to support the novice artists who wants to create a vibrotactile art composition of their own. Similar to music/movie editors, but using a unique notation system, the Beadbox has its default setup for the Emoti-Chair. (http://www.ryerson.ca/psychology/emotichair.html)
 
-## Code Example
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+## Classes
+- This requires (and includes) Java Asio library (jsio)
+- Also MIDI library APIs
 
 ## Motivation or Background
 The Beadbox is a composition or notation software for Vibrotactile art.
@@ -100,12 +51,7 @@ The Vibrotactile technology has four essential components to be used.
 5. What is the usability of the vibrotactile composition tool for allowing users to control over the frequency, intensity, timing, and spatial information?
 
 ## Installation, prerequisites.
-
 Java 1.8.x
-
-## API Reference
-
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
 
 ## Tests
 
@@ -118,4 +64,24 @@ Albert Aikins-Mensah
 
 ## License
 
-A short snippet describing the license (MIT, Apache, etc.)
+The MIT License (MIT)
+
+Copyright (c) <year> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
