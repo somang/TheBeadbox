@@ -380,6 +380,7 @@ public class VibcompUI extends javax.swing.JFrame {
         //logarithmic frequenct calculation goes here
         //freq = (int) Math.log(freq)*12;
         activeBead.setFrequency(freq);
+        beadPanel.repaint();
     }//GEN-LAST:event_frequencySliderStateChanged
 
     private void barSliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barSliderMouseDragged
@@ -441,6 +442,7 @@ public class VibcompUI extends javax.swing.JFrame {
         }else if (evt.getButton() == MouseEvent.BUTTON3){// Right click
             if (tmpBead != null){                
                 tmpBead.setComponentPopupMenu(menuPopup);
+                //activeBead = tmpBead;
                 BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1,tmpBead,playerOverview1));
                 System.out.println("Bead Info: \nPage: "+tmpBead.page+"\nTrack: "+tmpBead.track+
                         "\nLocation X: "+tmpBead.getLocation().x+"\nFrequency: "+tmpBead.getFrequency()+
