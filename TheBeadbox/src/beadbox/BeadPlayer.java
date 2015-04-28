@@ -193,7 +193,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     public void deleteBead(Bead activeBead) {
         activeBead.breakConnections();
         beads.remove(activeBead);
-        this.remove(activeBead);        
+        this.remove(activeBead);
     }
     
     public int getTrackAt(int y){

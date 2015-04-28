@@ -17,13 +17,16 @@ public class PlayerOverview extends javax.swing.JPanel {
     /**
      * Creates new form PlayerOverview
      */  
-    int activePage = 1;
+    int prevPage = 1;
     Color defaultColor;
     ArrayList <PlayerOverviewFragment> frags = new ArrayList();
     PlayerOverviewFragment tempFrag;
     
 
     public void setBead(int page, int track, boolean active){
+        if (page > 15){
+            page = page%15;
+        }
         frags.get(page-1).setBeadBars(track, active);       
     }
     public void clearAll(){
@@ -33,9 +36,15 @@ public class PlayerOverview extends javax.swing.JPanel {
     }
     
     public void higlightFrag(int page){
-        frags.get(activePage-1).setBackground(defaultColor);
-        frags.get(page-1).setBackground(Color.WHITE);
-        activePage = page;
+        if (page > 15){
+            page = page%15;
+            if (page == 0){
+                page = 15;
+            }
+        }        
+        frags.get(prevPage-1).setBackground(defaultColor); // turn off
+        frags.get(page-1).setBackground(Color.WHITE); //highlight
+        prevPage = page;
     }
     
     public void createFrags(){        

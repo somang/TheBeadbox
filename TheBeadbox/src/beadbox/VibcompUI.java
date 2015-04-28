@@ -369,18 +369,22 @@ public class VibcompUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void intensitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_intensitySliderStateChanged
-        activeBead.setMaxIntensity(intensitySlider.getMaximum()/2);
-        activeBead.setIntensity(intensitySlider.getValue());
-        //beadPanelText.setText("");
-        beadPanel.repaint();
+        if (activeBead != null){
+            activeBead.setMaxIntensity(intensitySlider.getMaximum()/2);
+            activeBead.setIntensity(intensitySlider.getValue());
+            //beadPanelText.setText("");
+            beadPanel.repaint();
+        }
     }//GEN-LAST:event_intensitySliderStateChanged
 
     private void frequencySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_frequencySliderStateChanged
-        int freq = frequencySlider.getValue();
-        //logarithmic frequenct calculation goes here
-        //freq = (int) Math.log(freq)*12;
-        activeBead.setFrequency(freq);
-        beadPanel.repaint();
+        if (activeBead != null){
+            int freq = frequencySlider.getValue();
+            //logarithmic frequenct calculation goes here
+            //freq = (int) Math.log(freq)*12;
+            activeBead.setFrequency(freq);
+            beadPanel.repaint();
+        }
     }//GEN-LAST:event_frequencySliderStateChanged
 
     private void barSliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barSliderMouseDragged

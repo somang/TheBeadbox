@@ -85,7 +85,7 @@ public class PlayerOverviewFragment extends javax.swing.JPanel {
     }
     
     public void setBeadBars(int track, boolean val){
-        if (track < 8){
+        if (track < 9){
             activeBars[track-1]=val;
         }
     }
