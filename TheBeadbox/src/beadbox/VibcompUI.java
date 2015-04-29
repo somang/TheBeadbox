@@ -107,7 +107,7 @@ public class VibcompUI extends javax.swing.JFrame {
         playerOverview1 = new beadbox.PlayerOverview();
         jPanel1 = new javax.swing.JPanel();
         speedControl = new javax.swing.JSlider();
-        jButton1 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         addPage = new javax.swing.JButton();
         playButton = new javax.swing.JButton();
         openButton = new javax.swing.JButton();
@@ -246,10 +246,10 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -284,7 +284,7 @@ public class VibcompUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(saveButton)
                         .addGap(18, 18, 18)
                         .addComponent(openButton)
                         .addGap(18, 18, 18)
@@ -301,7 +301,7 @@ public class VibcompUI extends javax.swing.JFrame {
                 .addGap(7, 7, 7))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(saveButton)
                     .addComponent(addPage)
                     .addComponent(openButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -420,9 +420,7 @@ public class VibcompUI extends javax.swing.JFrame {
     
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
         /*
-        2015-03-20
-        - Right click after paging does not work.
-        - when playing: Fade in and Fade out.
+        2015-04-29
         
         */
         point1 = evt.getPoint();        
@@ -475,7 +473,7 @@ public class VibcompUI extends javax.swing.JFrame {
             xdif = endBeadx - activeBead.getX();
             ydif = endBeady - activeBead.getY();
             distance = Math.sqrt(Math.abs(xdif*xdif-ydif*ydif)); //Euclidean distance.
-            System.out.println(distance);
+            //System.out.println(distance);
             if (distance > 55){ //if distance is greater than 100
                 return true;
             }
@@ -503,8 +501,6 @@ public class VibcompUI extends javax.swing.JFrame {
                     activeBead.setLocation(endBead_x, yLoc);                    
                 }               
             }else JOptionPane.showMessageDialog(null, "There is no active Bead!");
-            
-            //System.out.println("dragged from " + startBead_x + "," + startBead_y + " to " + endBead_x + "," + endBead_y);
         }
         dragStatus = false;
     }//GEN-LAST:event_beadPlayer1MouseReleased
@@ -542,14 +538,14 @@ public class VibcompUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_speedControlStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         try {
             // TODO add your handling code here:
             ph.saveFile(beadPlayer1, rightJPanel1);
         } catch (Exception ex) {
             Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     private void openButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openButtonMouseClicked
         JFileChooser fileChooser = new JFileChooser();
@@ -619,7 +615,6 @@ public class VibcompUI extends javax.swing.JFrame {
     public beadbox.BeadPlayer beadPlayer1;
     private javax.swing.JSlider frequencySlider;
     private javax.swing.JSlider intensitySlider;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton openButton;
@@ -627,6 +622,7 @@ public class VibcompUI extends javax.swing.JFrame {
     private javax.swing.JButton playButton;
     protected beadbox.PlayerOverview playerOverview1;
     protected beadbox.rightJPanel rightJPanel1;
+    private javax.swing.JButton saveButton;
     private javax.swing.JSlider speedControl;
     // End of variables declaration//GEN-END:variables
 
