@@ -397,10 +397,12 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void pageScrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseClicked
         beadPlayer1.page = pageScroll.getValue();
+        activeBead = null;
     }//GEN-LAST:event_pageScrollMouseClicked
 
     private void pageScrollMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseDragged
         beadPlayer1.page = pageScroll.getValue();
+        activeBead = null;
     }//GEN-LAST:event_pageScrollMouseDragged
 
     private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
@@ -434,8 +436,11 @@ public class VibcompUI extends javax.swing.JFrame {
                     activeBead.vibcompUI= this;                    
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
                 }else{                                       
-                    if(!activeBead.playable) remove(activeBead); //Remove bead panel glitch
-                    else activeBead = tmpBead;      
+                    if(!activeBead.playable){ 
+                        remove(activeBead); //Remove bead panel glitch
+                    }else{ 
+                        activeBead = tmpBead; 
+                    }
                 }
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity());
@@ -483,7 +488,7 @@ public class VibcompUI extends javax.swing.JFrame {
     
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
         endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y, beadPlayer1.page); // Check if there is a bead in the end.  
-         
+        
         if (dragStatus && isActualDrag(endBead_x, endBead_y)){          
             if (activeBead != null){
                 if((endBead == null) && (activeBead.connectedTo==null)){//If there is no bead, and A is not connected, create one.
@@ -510,7 +515,9 @@ public class VibcompUI extends javax.swing.JFrame {
         point2 = evt.getPoint();
         endBead_x = point2.x;
         endBead_y = point2.y;
-        dragStatus=true;        
+        if (activeBead.connectedTo == null){
+            dragStatus=true;        
+        }
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
     private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
@@ -518,6 +525,7 @@ public class VibcompUI extends javax.swing.JFrame {
         pageScroll.setMaximum(BeadPlayer.maxPage+1);
         pageScroll.setValue(BeadPlayer.maxPage);
         beadPlayer1.page = BeadPlayer.maxPage;
+        activeBead = null;
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed

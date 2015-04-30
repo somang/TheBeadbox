@@ -101,18 +101,18 @@ public class BeadPlayer extends javax.swing.JPanel {
                         g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT, 
                                 curBead.connectedTo.getX()+(BEADHEIGHT/2), curBead.connectedTo.getY()+yOfset+BEADHEIGHT);
                     }
-                    else if(curBead.connectedTo.page < curBead.page){
-                        g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset, 
-                                0, ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2);
-                        g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT, 
-                                0, ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2+BEADHEIGHT);
-                    }
-                    else{
-                        g2d.drawLine(getWidth(), ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2, 
-                                curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset);
-                        g2d.drawLine(getWidth(), ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2+BEADHEIGHT, 
-                                curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT);
-                    }
+                    //else if(curBead.connectedTo.page < curBead.page){
+                    //    g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset, 
+                    //            0, ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2);
+                    //    g2d.drawLine(curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT, 
+                    //            0, ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2+BEADHEIGHT);
+                    //}
+                    //else{
+                    //    g2d.drawLine(getWidth(), ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2, 
+                    //            curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset);
+                    //    g2d.drawLine(getWidth(), ((curBead.connectedTo.getY()+yOfset)+(curBead.getY()+yOfset))/2+BEADHEIGHT, 
+                    //            curBead.getX()+(BEADHEIGHT/2), curBead.getY()+yOfset+BEADHEIGHT);
+                    //}
                 }
             }
             else curBead.setVisible(false);//.hide();
