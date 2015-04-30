@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
@@ -20,37 +19,36 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
-
 /**
  *
  * @author somang & albert
  */
 public class VibcompUI extends javax.swing.JFrame {
-    
-    static protected boolean playing = false;    
+
+    static protected boolean playing = false;
     protected Bead activeBead;
     protected AsioDriver driver;
-    protected AsioSoundHost listener;   
+    protected AsioSoundHost listener;
     protected boolean driverLoaded;
     final private JMenuItem BeadMenuDelete = new JMenuItem("Delete");
     final private JPopupMenu menuPopup = new JPopupMenu();
 
-    Bead startBead,endBead;
-    Bead prevBead=null;
-    int startBead_x,startBead_y,endBead_x,endBead_y;
-    boolean dragStatus=false;
+    Bead startBead, endBead;
+    Bead prevBead = null;
+    int startBead_x, startBead_y, endBead_x, endBead_y;
+    boolean dragStatus = false;
     boolean move = false;
-    Point point1,point2;
+    Point point1, point2;
     Bead beadOnClick;
     ProtocolHandler ph = new ProtocolHandler();
-    
+
     /**
      * Creates new form VibC UI
      */
     public VibcompUI() {
         initComponents();
         endBead = null;
-        activeBead = null;  
+        activeBead = null;
         beadPanel.repaint();
         //setExtendedState(this.MAXIMIZED_BOTH);        
         //Component[] incrButton = pageScroll.getComponents();
@@ -60,10 +58,10 @@ public class VibcompUI extends javax.swing.JFrame {
         /* load the driver */
         try {
             /*
-                https://github.com/mhroth/jasiohost
-            */
-            driver = AsioDriver.getDriver ( "ASIO PreSonus FireStudio" );
-            listener = new AsioSoundHost ( driver );
+             https://github.com/mhroth/jasiohost
+             */
+            driver = AsioDriver.getDriver("ASIO PreSonus FireStudio");
+            listener = new AsioSoundHost(driver);
             driver.start();
             driverLoaded = true;
             System.out.println("loaded.");
@@ -71,13 +69,11 @@ public class VibcompUI extends javax.swing.JFrame {
             //System.out.println(driver.getNumChannelsOutput());
             //System.out.println(driver.getName());
             //System.out.println(driver.getCurrentState());
-        }
-        catch ( UnsatisfiedLinkError e ){ 
+        } catch (UnsatisfiedLinkError e) {
             System.out.println("Please install the Following Driver: ASIO PreSonus FireStudio");
             JOptionPane.showMessageDialog(null, "Please install the Following Driver: ASIO PreSonus FireStudio");
             driverLoaded = false;
-        }
-        catch (com.synthbot.jasiohost.AsioException err){
+        } catch (com.synthbot.jasiohost.AsioException err) {
             System.out.println("Output Device not found: Please connect the Asio device");
             JOptionPane.showMessageDialog(null, "Output Device not found: Please connect the Asio device");
             driverLoaded = false;
@@ -369,8 +365,8 @@ public class VibcompUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void intensitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_intensitySliderStateChanged
-        if (activeBead != null){
-            activeBead.setMaxIntensity(intensitySlider.getMaximum()/2);
+        if (activeBead != null) {
+            activeBead.setMaxIntensity(intensitySlider.getMaximum() / 2);
             activeBead.setIntensity(intensitySlider.getValue());
             //beadPanelText.setText("");
             beadPanel.repaint();
@@ -378,7 +374,7 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_intensitySliderStateChanged
 
     private void frequencySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_frequencySliderStateChanged
-        if (activeBead != null){
+        if (activeBead != null) {
             int freq = frequencySlider.getValue();
             //logarithmic frequenct calculation goes here
             //freq = (int) Math.log(freq)*12;
@@ -397,117 +393,123 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void pageScrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseClicked
         beadPlayer1.page = pageScroll.getValue();
-        activeBead = null;
+        
     }//GEN-LAST:event_pageScrollMouseClicked
 
     private void pageScrollMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseDragged
         beadPlayer1.page = pageScroll.getValue();
-        activeBead = null;
+
     }//GEN-LAST:event_pageScrollMouseDragged
 
     private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
-        if(beadPanel.getComponentCount()==1){                               
+        if (beadPanel.getComponentCount() == 1) {
             refreshBeadPanel();
         }
     }//GEN-LAST:event_beadPanelTextMousePressed
 
-    private void refreshBeadPanel(){
-        Bead tmpBead = new Bead();          
-        tmpBead.setSize(55,55);
+    private void refreshBeadPanel() {
+        Bead tmpBead = new Bead();
+        tmpBead.setSize(55, 55);
         beadPanel.add(tmpBead);
         tmpBead.setLocation(15, 20);
         activeBead = tmpBead;
         beadPanel.repaint();
     }
-    
+
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
         /*
-        2015-04-29
+         2015-04-29
         
-        */
-        point1 = evt.getPoint();        
+         */
+        point1 = evt.getPoint();
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
-        
+
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
-        {   
-            if(activeBead != null){
-                if(tmpBead == null){//Create one                    
+        {
+            if (activeBead != null) {
+                if (tmpBead == null) {//Create one                    
                     beadPanelText.setVisible(true);
-                    activeBead.vibcompUI= this;                    
+                    activeBead.vibcompUI = this;
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                }else{                                       
-                    if(!activeBead.playable){ 
+                } else {
+                    if (!activeBead.playable) {
                         remove(activeBead); //Remove bead panel glitch
-                    }else{ 
-                        activeBead = tmpBead; 
+                    } else {
+                        activeBead = tmpBead;
                     }
                 }
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity());
-                frequencySlider.setValue(activeBead.getFrequency());                
-            }else{JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");}
-        }else if (evt.getButton() == MouseEvent.BUTTON3){// Right click
-            if (tmpBead != null){                
+                frequencySlider.setValue(activeBead.getFrequency());
+            } else {
+                JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");                
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
+            if (tmpBead != null) {
                 tmpBead.setComponentPopupMenu(menuPopup);
                 //activeBead = tmpBead;
-                BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1,tmpBead,playerOverview1));
-                System.out.println("Bead Info: \nPage: "+tmpBead.page+"\nTrack: "+tmpBead.track+
-                        "\nLocation X: "+tmpBead.getLocation().x+"\nFrequency: "+tmpBead.getFrequency()+
-                        "\nIntensity: "+tmpBead.getIntensity()+"\n");
-                BeadMenuDelete.setToolTipText("Bead Info-  Page: "+tmpBead.page+"  Track: "+tmpBead.track+
-                        "  Location X: "+tmpBead.getLocation().x+"  Frequency: "+tmpBead.getFrequency()+
-                        "  Intensity: "+tmpBead.getIntensity());
+                BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1, tmpBead, playerOverview1));
+                System.out.println("Bead Info: \nPage: " + tmpBead.page + "\nTrack: " + tmpBead.track
+                        + "\nLocation X: " + tmpBead.getLocation().x + "\nFrequency: " + tmpBead.getFrequency()
+                        + "\nIntensity: " + tmpBead.getIntensity() + "\n");
+                BeadMenuDelete.setToolTipText("Bead Info-  Page: " + tmpBead.page + "  Track: " + tmpBead.track
+                        + "  Location X: " + tmpBead.getLocation().x + "  Frequency: " + tmpBead.getFrequency()
+                        + "  Intensity: " + tmpBead.getIntensity());
             }
         }
+
     }//GEN-LAST:event_beadPlayer1MousePressed
 
-    
     /* 
-       While there is a startBead, where the dragging started,
-       this gets ending coordinates of the mouse dragging,
-       and calculates the eucleadian distance in between
-       so that it returns whether the drag is valid or not.
+     While there is a startBead, where the dragging started,
+     this gets ending coordinates of the mouse dragging,
+     and calculates the eucleadian distance in between
+     so that it returns whether the drag is valid or not.
     
-        tempMinimumDistance. = 100;
-    */
-    private boolean isActualDrag(int endBeadx, int endBeady){
+     tempMinimumDistance. = 100;
+     */
+    private boolean isActualDrag(int endBeadx, int endBeady) {
         int xdif = 0;
         int ydif = 0;
         double distance;
-        try{
+        try {
             xdif = endBeadx - activeBead.getX();
             ydif = endBeady - activeBead.getY();
-            distance = Math.sqrt(Math.abs(xdif*xdif-ydif*ydif)); //Euclidean distance.
+            distance = Math.sqrt(Math.abs(xdif * xdif - ydif * ydif)); //Euclidean distance.
             //System.out.println(distance);
-            if (distance > 55){ //if distance is greater than 100
+            if (distance > 55) { //if distance is greater than 100
                 return true;
             }
-        }catch(NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
         return false;
     }
-    
+
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
         endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y, beadPlayer1.page); // Check if there is a bead in the end.  
-        
-        if (dragStatus && isActualDrag(endBead_x, endBead_y)){          
-            if (activeBead != null){
-                if((endBead == null) && (activeBead.connectedTo==null)){//If there is no bead, and A is not connected, create one.
+
+        if (dragStatus && isActualDrag(endBead_x, endBead_y)) {
+            if (activeBead != null) {
+                if ((endBead == null) && (activeBead.connectedTo == null)) {//If there is no bead, and A is not connected, create one.
                     endBead = new Bead();
-                    endBead.setSize(55,55);
+                    endBead.setSize(55, 55);
                     endBead.setIntensity(activeBead.getIntensity());
                     endBead.setFrequency(activeBead.getFrequency());
                     endBead.setConnection(activeBead);
                     endBead.vibcompUI = this;
-                    beadPlayer1.setBead(endBead_x, endBead_y, endBead); 
+                    beadPlayer1.setBead(endBead_x, endBead_y, endBead);
                     activeBead = endBead;
-                }else{
-                    int yLoc = (beadPlayer1.getTrackAt(endBead_y)-1)*beadPlayer1.TRACKHEIGHT+5;
+                } else {
+                    int yLoc = (beadPlayer1.getTrackAt(endBead_y) - 1) * beadPlayer1.TRACKHEIGHT + 5;
                     activeBead.setTrack(activeBead.getTrack());
-                    activeBead.setLocation(endBead_x, yLoc);                    
-                }               
-            }else JOptionPane.showMessageDialog(null, "There is no active Bead!");
+                    activeBead.setLocation(endBead_x, yLoc);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "There is no active Bead!");
+            }
         }
         dragStatus = false;
+
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged
@@ -515,35 +517,34 @@ public class VibcompUI extends javax.swing.JFrame {
         point2 = evt.getPoint();
         endBead_x = point2.x;
         endBead_y = point2.y;
-        if (activeBead.connectedTo == null){
-            dragStatus=true;        
+        if (activeBead.connectedTo == null) {
+            dragStatus = true;
         }
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
     private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
         BeadPlayer.maxPage++;
-        pageScroll.setMaximum(BeadPlayer.maxPage+1);
+        pageScroll.setMaximum(BeadPlayer.maxPage + 1);
         pageScroll.setValue(BeadPlayer.maxPage);
         beadPlayer1.page = BeadPlayer.maxPage;
-        activeBead = null;
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        
-        if(playing){            
+
+        if (playing) {
             //playButton.setText("> PLAY");
             playing = false;
-        }else{
+        } else {
             //playButton.setText("[] STOP");
             playing = true;
-        } 
-               
+        }
+
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void speedControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedControlStateChanged
         // playing speed slider
-        beadPlayer1.SPEED = 100-speedControl.getValue();
-        
+        beadPlayer1.SPEED = 100 - speedControl.getValue();
+
     }//GEN-LAST:event_speedControlStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -573,11 +574,6 @@ public class VibcompUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openButtonMouseClicked
 
-    
-    
-    
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -608,9 +604,8 @@ public class VibcompUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VibcompUI().setVisible(true);                
-                
-                
+                new VibcompUI().setVisible(true);
+
             }
         });
     }
@@ -633,6 +628,5 @@ public class VibcompUI extends javax.swing.JFrame {
     private javax.swing.JButton saveButton;
     private javax.swing.JSlider speedControl;
     // End of variables declaration//GEN-END:variables
-
 
 }
