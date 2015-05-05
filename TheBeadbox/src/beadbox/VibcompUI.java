@@ -486,7 +486,9 @@ public class VibcompUI extends javax.swing.JFrame {
                         + "  Intensity: " + tmpBead.getIntensity());
             }
         }
-
+        for (Bead b : beadPlayer1.beads) {
+            System.out.println(b);
+        }
     }//GEN-LAST:event_beadPlayer1MousePressed
 
     /* 
@@ -517,34 +519,35 @@ public class VibcompUI extends javax.swing.JFrame {
     private void beadPlayer1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseReleased
 
         endBead = beadPlayer1.getBeadAt(endBead_x, endBead_y, beadPlayer1.page); // Check if there is a bead in the end.  
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            if (dragStatus && isActualDrag(endBead_x, endBead_y)) {
+                if (activeBead != null) {
+                    if ((endBead == null) && (activeBead.connectedTo == null)) {//If there is no bead, and A is not connected, create one.
 
-        if (dragStatus && isActualDrag(endBead_x, endBead_y)) {
-            if (activeBead != null) {
-                if ((endBead == null) && (activeBead.connectedTo == null)) {//If there is no bead, and A is not connected, create one.
+                        if (!activeBead.playable) {
+                            remove(activeBead); //Remove bead panel glitch
+                        } else {
+                            endBead = new Bead();
+                            endBead.setSize(55, 55);
+                            endBead.setIntensity(activeBead.getIntensity());
+                            endBead.setFrequency(activeBead.getFrequency());
+                            endBead.setConnection(activeBead);
+                            endBead.vibcompUI = this;
+                            beadPlayer1.setBead(endBead_x, endBead_y, endBead);
+                            activeBead = endBead;
+                        }
 
-                    if (!activeBead.playable) {
-                        remove(activeBead); //Remove bead panel glitch
                     } else {
-                        endBead = new Bead();
-                        endBead.setSize(55, 55);
-                        endBead.setIntensity(activeBead.getIntensity());
-                        endBead.setFrequency(activeBead.getFrequency());
-                        endBead.setConnection(activeBead);
-                        endBead.vibcompUI = this;
-                        beadPlayer1.setBead(endBead_x, endBead_y, endBead);
-                        activeBead = endBead;
+                        int yLoc = (beadPlayer1.getTrackAt(endBead_y) - 1) * beadPlayer1.TRACKHEIGHT + 5;
+                        activeBead.setTrack(activeBead.getTrack());
+                        activeBead.setLocation(endBead_x, yLoc);
                     }
-
                 } else {
-                    int yLoc = (beadPlayer1.getTrackAt(endBead_y) - 1) * beadPlayer1.TRACKHEIGHT + 5;
-                    activeBead.setTrack(activeBead.getTrack());
-                    activeBead.setLocation(endBead_x, yLoc);
+                    JOptionPane.showMessageDialog(null, "There is no active Bead!");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "There is no active Bead!");
             }
+            dragStatus = false;
         }
-        dragStatus = false;
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged
@@ -552,11 +555,13 @@ public class VibcompUI extends javax.swing.JFrame {
         point2 = evt.getPoint();
         endBead_x = point2.x;
         endBead_y = point2.y;
+
         if (activeBead != null) {
             if (activeBead.connectedTo == null) {
                 dragStatus = true;
             }
         }
+
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
     private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
@@ -616,7 +621,7 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_openButtonMouseClicked
-    
+
     /**
      * @param args the command line arguments
      */
