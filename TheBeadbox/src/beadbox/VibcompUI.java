@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
@@ -79,6 +80,7 @@ public class VibcompUI extends javax.swing.JFrame {
             driverLoaded = false;
         }
         beadPlayer1.vibcompUI = this;
+        beadPlayer1.pageLab = pagelabel;
         menuPopup.add(BeadMenuDelete);
     }
 
@@ -409,18 +411,27 @@ public class VibcompUI extends javax.swing.JFrame {
     private void pageScrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseClicked
         beadPlayer1.page = pageScroll.getValue();
         pagelabel.setText(Integer.toString(pageScroll.getValue()));
+        if (activeBead != null) {
+            if (activeBead.page != pageScroll.getValue()) {
+                activeBead = null;
+            }
+        }
     }//GEN-LAST:event_pageScrollMouseClicked
 
     private void pageScrollMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseDragged
         beadPlayer1.page = pageScroll.getValue();
         pagelabel.setText(Integer.toString(pageScroll.getValue()));
+        if (activeBead != null) {
+            if (activeBead.page != pageScroll.getValue()) {
+                activeBead = null;
+            }
+        }
     }//GEN-LAST:event_pageScrollMouseDragged
 
     private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
         if (beadPanel.getComponentCount() == 1) {
             refreshBeadPanel();
         }
-        System.out.println(activeBead);
     }//GEN-LAST:event_beadPanelTextMousePressed
 
     private void refreshBeadPanel() {
@@ -443,7 +454,6 @@ public class VibcompUI extends javax.swing.JFrame {
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {
             if (activeBead != null) {
-                startBead = activeBead;
                 if (tmpBead == null) {//Create one                    
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI = this;
@@ -458,8 +468,10 @@ public class VibcompUI extends javax.swing.JFrame {
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity());
                 frequencySlider.setValue(activeBead.getFrequency());
-            } else {
+            } else if (beadPlayer1.beads.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
+            } else if (activeBead == null && tmpBead != null) {
+                activeBead = tmpBead;
             }
         } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
             if (tmpBead != null) {
@@ -474,7 +486,7 @@ public class VibcompUI extends javax.swing.JFrame {
                         + "  Intensity: " + tmpBead.getIntensity());
             }
         }
-        System.out.println(activeBead);
+
     }//GEN-LAST:event_beadPlayer1MousePressed
 
     /* 
@@ -533,7 +545,6 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         }
         dragStatus = false;
-        System.out.println(activeBead);
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged
@@ -541,8 +552,10 @@ public class VibcompUI extends javax.swing.JFrame {
         point2 = evt.getPoint();
         endBead_x = point2.x;
         endBead_y = point2.y;
-        if (activeBead.connectedTo == null) {
-            dragStatus = true;
+        if (activeBead != null) {
+            if (activeBead.connectedTo == null) {
+                dragStatus = true;
+            }
         }
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
@@ -552,6 +565,11 @@ public class VibcompUI extends javax.swing.JFrame {
         pageScroll.setValue(BeadPlayer.maxPage);
         beadPlayer1.page = BeadPlayer.maxPage;
         pagelabel.setText(Integer.toString(pageScroll.getValue()));
+        if (activeBead != null) {
+            if (activeBead.page != pageScroll.getValue()) {
+                activeBead = null;
+            }
+        }
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
@@ -598,7 +616,7 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_openButtonMouseClicked
-
+    
     /**
      * @param args the command line arguments
      */
