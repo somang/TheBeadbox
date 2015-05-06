@@ -115,7 +115,6 @@ public class Bead extends javax.swing.JPanel {
                 }
             }
         }catch(NullPointerException e){
-            //System.out.println("Yo, This is from Bead.playBead() exception.");
         }
     }
     
