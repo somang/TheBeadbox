@@ -393,6 +393,7 @@ public class VibcompUI extends javax.swing.JFrame {
     private void frequencySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_frequencySliderStateChanged
         if (activeBead != null) {
             int freq = frequencySlider.getValue();
+            System.out.println(freq);
             //logarithmic frequenct calculation goes here
             //freq = (int) Math.log(freq)*12;
             activeBead.setFrequency(freq);
@@ -478,17 +479,20 @@ public class VibcompUI extends javax.swing.JFrame {
                 tmpBead.setComponentPopupMenu(menuPopup);
                 //activeBead = tmpBead;
                 BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1, tmpBead, playerOverview1));
+                playerOverview1.repaint();
+                
+                
+                
                 System.out.println("Bead Info: \nPage: " + tmpBead.page + "\nTrack: " + tmpBead.track
                         + "\nLocation X: " + tmpBead.getLocation().x + "\nFrequency: " + tmpBead.getFrequency()
                         + "\nIntensity: " + tmpBead.getIntensity() + "\n");
                 BeadMenuDelete.setToolTipText("Bead Info-  Page: " + tmpBead.page + "  Track: " + tmpBead.track
                         + "  Location X: " + tmpBead.getLocation().x + "  Frequency: " + tmpBead.getFrequency()
                         + "  Intensity: " + tmpBead.getIntensity());
+                
             }
         }
-        for (Bead b : beadPlayer1.beads) {
-            System.out.println(b);
-        }
+        
     }//GEN-LAST:event_beadPlayer1MousePressed
 
     /* 

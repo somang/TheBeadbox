@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package beadbox;
 
 import java.awt.BasicStroke;
@@ -19,22 +18,21 @@ import java.util.logging.Logger;
  * @author Somang and Albert
  */
 public class Bead extends javax.swing.JPanel {
-    
-    private int curX,curY,centerX,centerY,curIntensity, maxIntensity, curFrequency;
+
+    private int curX, curY, centerX, centerY, curIntensity, maxIntensity, curFrequency;
     protected int track, page, duration;
-    final private safeColors safeColor ;	
+    final private safeColors safeColor;
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     protected Bead connectedTo = null;
     boolean InOutSwitch = false, initial = true;
     Beadlight tmpBeadlight;
-    
-    
+
     @Override
     protected void paintComponent(Graphics g) {
-        if(initial){
-            centerX = (getWidth()-maxIntensity)/2;
-            centerY = (getHeight()-maxIntensity)/2;
+        if (initial) {
+            centerX = (getWidth() - maxIntensity) / 2;
+            centerY = (getHeight() - maxIntensity) / 2;
             initial = false;
         }
         Graphics2D g2d = (Graphics2D) g;
@@ -45,101 +43,116 @@ public class Bead extends javax.swing.JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillOval(centerX, centerY, maxIntensity, maxIntensity);
         g2d.setColor(safeColor.pickColor(curFrequency, track));
-        curX = (getWidth()-curIntensity/2)/2;
-        curY = (getHeight()-curIntensity/2)/2;
-        g2d.fillOval(curX, curY, curIntensity/2, curIntensity/2);
-        
-        try{   
-            if(playable && VibcompUI.playing){ 
+        curX = (getWidth() - curIntensity / 2) / 2;
+        curY = (getHeight() - curIntensity / 2) / 2;
+        g2d.fillOval(curX, curY, curIntensity / 2, curIntensity / 2);
+
+        try {
+            if (playable && VibcompUI.playing) {
                 int barPos = vibcompUI.beadPlayer1.getBarIUPosition();
-                int start = getX()+(page*getWidth());
-                int end = getX()+(page*getWidth())+getWidth();
-                tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track-1);
-                
-                if(connectedTo!=null){ // If there's connected Bead
-                    int mid = (start+connectedTo.getX()+(page*getWidth()))/2;
-                    
-                    if ((track!=connectedTo.track)&&(start<connectedTo.getX()+(page*getWidth()))){ // When track is not the same
+                int start = getX() + (page * getWidth());
+                int end = getX() + (page * getWidth()) + getWidth();
+                tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(track - 1);
+
+                if (connectedTo != null) { // If there's connected Bead
+                    int mid = (start + connectedTo.getX() + (page * getWidth())) / 2;
+
+                    if ((track != connectedTo.track) && (start < connectedTo.getX() + (page * getWidth()))) { // When track is not the same
                         /*
-                        blink til midpoint, then light out.
-                        */                        
-                        if( start < (barPos+(page*getWidth())) && mid > (barPos+(page*getWidth()))){                
-                            if (InOutSwitch){
+                         blink til midpoint, then light out.
+                         */
+                        if (start < (barPos + (page * getWidth())) && mid > (barPos + (page * getWidth()))) {
+                            if (InOutSwitch) {
                                 tmpBeadlight.setIntensity(40);
                                 InOutSwitch = false;
                             }
-                        }else{
-                            if (!InOutSwitch){
+                        } else {
+                            if (!InOutSwitch) {
                                 tmpBeadlight.setIntensity(0);
                                 InOutSwitch = true;
                             }
                         }
-                        tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(connectedTo.track-1);
+                        tmpBeadlight = (Beadlight) vibcompUI.rightJPanel1.getComponent(connectedTo.track - 1);
                         start = mid;
-                        end = connectedTo.getX() + (connectedTo.page*getWidth());
-                    }else if (start<connectedTo.getX()+(page*getWidth())){ // when both beads are in same track
-                        end = connectedTo.getX() + (connectedTo.page*getWidth());
+                        end = connectedTo.getX() + (connectedTo.page * getWidth());
+                    } else if (start < connectedTo.getX() + (page * getWidth())) { // when both beads are in same track
+                        end = connectedTo.getX() + (connectedTo.page * getWidth());
                     }
                 }
-                if( start < (barPos+(page*getWidth())) && end > (barPos+(page*getWidth()))){                
-                    if (InOutSwitch){
+                if (start < (barPos + (page * getWidth())) && end > (barPos + (page * getWidth()))) {
+                    if (InOutSwitch) {
                         tmpBeadlight.setIntensity(40);
                         InOutSwitch = false;
                     }
-                }else{
-                    if (!InOutSwitch){
+                } else {
+                    if (!InOutSwitch) {
                         tmpBeadlight.setIntensity(0);
                         InOutSwitch = true;
                     }
                 }
             }
-        }catch(ArrayIndexOutOfBoundsException e){}        
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
     }
-    
-    public void playBead(){
+
+    public void playBead() {
         //Play note 
-        try{
+        try {
             float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
-            if(vibcompUI.driverLoaded){           
+            if (vibcompUI.driverLoaded) {
                 try {
-                    for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
-                        sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*curIntensity/100;                   
+                    double samplingInterval = (double) (vibcompUI.listener.getSampleRate() / curFrequency);
+                    for (int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++) {
+                        //sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*curIntensity/100;                   
+                        double angle = (2.0 * Math.PI * k) / samplingInterval;
+                        sampleWave[k] = (float) Math.sin(angle) * curIntensity / 100;
                     }
-                    vibcompUI.listener.output ( track-1, sampleWave );
+                    vibcompUI.listener.output(track - 1, sampleWave);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Bead.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                catch (BufferOverflowException e) {
+                } catch (BufferOverflowException e) {
                     //if(sleepTime<5)sleepTime+=2;
                     //System.out.print("\tWarning Buffer overload..Sleep Time increased: "+sleepTime);                     
                 }
             }
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * At specific setup. i.e. for fade in and out play
+     *
+     * for(int i=0; i<rate; i++){ 
+     *      double angle = (i/rate)*Hertz*2.0*Math.PI;
+     *      buf[0]=(byte)(Math.sin(angle)*vol); sourceDL.write(buf,0,1);
+     *      sines[i]=(double)(Math.sin(angle)*vol); }
      */
-    public void playBead(int varIntensity){
-        try{
+    public void playBead(int varIntensity) {
+        try {
             float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
-            if(vibcompUI.driverLoaded){           
+            if (vibcompUI.driverLoaded) {
                 try {
-                    for ( int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++ ) {
-                        sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*varIntensity/100;                   
+                    double samplingInterval = (double) (vibcompUI.listener.getSampleRate() / curFrequency);
+                    for (int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++) {
+                        //sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*varIntensity/100;
+                        double angle = (2.0 * Math.PI * k) / samplingInterval;
+                        sampleWave[k] = (float) Math.sin(angle) * varIntensity / 100;
                     }
-                    vibcompUI.listener.output ( track-1, sampleWave );
-                } catch (InterruptedException ex) {}
-            catch (BufferOverflowException e) {}}}catch(NullPointerException e){}
+                    vibcompUI.listener.output(track - 1, sampleWave);
+                } catch (InterruptedException ex) {
+                } catch (BufferOverflowException e) {
+                }
+            }
+        } catch (NullPointerException e) {
+        }
     }
-    
+
     /**
      * Creates new form beadJPanel
      */
     public Bead() {
         safeColor = new safeColors();
-        curFrequency = 1;
+        curFrequency = 100;
         track = 0;
         curIntensity = 100;
         maxIntensity = 50;
@@ -147,65 +160,64 @@ public class Bead extends javax.swing.JPanel {
         initComponents();
     }
 
-    
     /* GETTERS */
-    public int getIntensity(){
+    public int getIntensity() {
         return curIntensity;
     }
-    
-    public int getFrequency(){
+
+    public int getFrequency() {
         return curFrequency;
     }
-    
-    public int getTrack(){
+
+    public int getTrack() {
         return track;
     }
-    
-    public int getPage(){
+
+    public int getPage() {
         return page;
     }
-    
-    public int getDuration(){
+
+    public int getDuration() {
         return duration;
     }
-    
+
     /* SETTERS */
-    public void setIntensity(int intensity){
+    public void setIntensity(int intensity) {
         curIntensity = intensity;
     }
-    
-    public void setMaxIntensity(int intensity){
+
+    public void setMaxIntensity(int intensity) {
         maxIntensity = intensity;
     }
-    
-    public void setFrequency(int freq){
+
+    public void setFrequency(int freq) {
         curFrequency = freq;
     }
-    
-    public void setTrack(int tracknumber){
+
+    public void setTrack(int tracknumber) {
         track = tracknumber;
     }
-    
-    public void setPage(int position){
+
+    public void setPage(int position) {
         page = position;
     }
-    
-    public void setDuration(int givenduration){
+
+    public void setDuration(int givenduration) {
         duration = givenduration;
     }
-    
-    public void setConnection(Bead otherBead){
+
+    public void setConnection(Bead otherBead) {
         connectedTo = otherBead;
-        otherBead.connectedTo=this;
+        otherBead.connectedTo = this;
     }
-    
-    public void breakConnections(){
-        if(connectedTo != null){
+
+    public void breakConnections() {
+        if (connectedTo != null) {
             connectedTo.connectedTo = null;
             connectedTo = null;
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

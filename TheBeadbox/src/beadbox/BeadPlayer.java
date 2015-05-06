@@ -155,7 +155,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                             curBead.playBead((int) (gap * curIn));
                         }
                         start = mid;
-                        end = curBead.connectedTo.getX() + (curBead.connectedTo.page * getWidth());                        
+                        end = curBead.connectedTo.getX() + (curBead.connectedTo.page * getWidth());
                         if (start < (getBarIUPosition() + (page * getWidth()))
                                 && end > (getBarIUPosition() + (page * getWidth()))) {
                             gap = (-1.0 * (mid - (getBarIUPosition() + page * getWidth())) / (end - mid));
@@ -208,13 +208,17 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setPage(page);
         beads.add(bead);
         this.add(bead);
-
+        refreshBeads();
     }
 
     public void deleteBead(Bead activeBead) {
         activeBead.breakConnections();
         beads.remove(activeBead);
         this.remove(activeBead);
+        refreshBeads();
+        if (beads.isEmpty()){
+            vibcompUI.playerOverview1.clearAll();
+        }
     }
 
     public int getTrackAt(int y) {
@@ -265,4 +269,12 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+    private void refreshBeads() {
+        if (beads != null) {
+            hs = new HashSet();
+            hs.addAll(beads);
+            ArrayList<Bead> beads = new ArrayList();
+            beads.addAll(hs);
+        }
+    }
 }
