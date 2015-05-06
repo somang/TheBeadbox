@@ -97,11 +97,6 @@ class ProtocolHandler {
                 System.out.println("Too big for the page parse.");
             }
         }
-        //System.out.println(position);
-        
-        //position /= 2;
-        //position = 1000;
-        
         
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
         mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
@@ -199,7 +194,7 @@ class ProtocolHandler {
 
     /**
      * page will be a number.
-     * it can be 0 - [126 27]
+     * it can be 0 - [126 26]
      * This method will parse them into two data variable Tuple.
      * So that it can fit in 
      * 
@@ -218,15 +213,15 @@ class ProtocolHandler {
         
         if (Integer.toString(page).length()>3 && Integer.toString(page).length()<6 ){
             switch(Integer.toString(page).length()){
-                case 3: //345
+                case 3: //i.e. page = 345
                     data1 = Integer.toString(page).substring(0,1); //3
                     data2 = Integer.toString(page).substring(1,3); //45
                     break;
-                case 4: //1045
+                case 4: //i.e. page = 1045
                     data1 = Integer.toString(page).substring(0,2); //10
                     data2 = Integer.toString(page).substring(2,4); //45
                     break;                
-                case 5: //126 26
+                case 5: //i.e. page = 12626
                     data1 = Integer.toString(page).substring(0,3); //126
                     data2 = Integer.toString(page).substring(3,5); // 26
                     if (Integer.parseInt(data1)>126){

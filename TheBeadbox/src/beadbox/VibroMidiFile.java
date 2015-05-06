@@ -64,12 +64,13 @@ public class VibroMidiFile {
     
     /**
      * Aftertouch message (0xA0, or 160)
-     * 
+     * This is for displaying connected Bead location. (where this bead's connected bead is at.
+     * polyPress and controlChange methods together represents the bead's connected bead's info.
+     * Track, position, and so on.
      */
     public void polyPress(long lTick, int track, int data1, int data2) throws InvalidMidiDataException {
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.POLY_PRESSURE, data1, data2, lTick));
     }
-    
     public void controlChange(long lTick, int track, int data1, int data2) throws InvalidMidiDataException{        
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.CONTROL_CHANGE, data1, data2, lTick));
     }
@@ -77,11 +78,18 @@ public class VibroMidiFile {
     public void noteOff(long lTick, int track, int frequency) throws InvalidMidiDataException {
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.NOTE_OFF, frequency, 0, lTick));
     }
+    /**************************************************************************/
     
+    /**
+     * This is just dummy method, which is not used but still implemented.
+     * @param lTick
+     * @param track
+     * @param data1
+     * @throws InvalidMidiDataException 
+     */
     public void progChange(long lTick, int track, int data1) throws InvalidMidiDataException{
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.PROGRAM_CHANGE, data1, 0, lTick));
-    }
-    
+    }    
     private static MidiEvent createNoteEvent(int nCommand, int data1, int data2, long lTick) throws InvalidMidiDataException{
 	ShortMessage message = new ShortMessage();        
         message.setMessage(nCommand, CHANNEL, data1, data2);
