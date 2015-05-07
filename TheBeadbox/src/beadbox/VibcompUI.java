@@ -414,7 +414,10 @@ public class VibcompUI extends javax.swing.JFrame {
         pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
-                activeBead = null;
+                if (activeBead.connectedTo != null){
+                    activeBead = null;
+                }
+                beadPanelText.setVisible(true);
             }
         }
     }//GEN-LAST:event_pageScrollMouseClicked
@@ -424,7 +427,10 @@ public class VibcompUI extends javax.swing.JFrame {
         pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
-                activeBead = null;
+                if (activeBead.connectedTo != null){
+                    activeBead = null;
+                }
+                beadPanelText.setVisible(true);
             }
         }
     }//GEN-LAST:event_pageScrollMouseDragged
@@ -576,7 +582,10 @@ public class VibcompUI extends javax.swing.JFrame {
         pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
-                activeBead = null;
+                if (activeBead.connectedTo != null){
+                    activeBead = null;
+                }
+                beadPanelText.setVisible(true);
             }
         }
     }//GEN-LAST:event_addPageMouseClicked
