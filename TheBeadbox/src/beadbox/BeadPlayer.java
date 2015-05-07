@@ -233,7 +233,6 @@ public class BeadPlayer extends javax.swing.JPanel {
             } else {
                 return null;
             }
-
         } catch (ClassCastException e) {
             return null;
         } catch (NullPointerException ex) {
