@@ -79,17 +79,16 @@ class ProtocolHandler {
         int intensity = b.getIntensity();
         // Time position, Delta time (the time difference), the x position.
         // Assumed that a single page handles 20 beads = 1100 pix
-        long position = (long) 1100*(b.page-1) + (long) b.getX();
+        long position = (long) (1100*(b.page-1) + b.getX());
         
-        
-        
-        
+        /*Connected Bead Information fetch.*/
+        long conPositionDelta = 0;
         Tuple cntBead = new Tuple(0,0);
         Tuple cbpage = new Tuple(0,0);
-        
         if (b.connectedTo != null){
             Bead connection = b.connectedTo;
             cntBead = cnctBeads(connection);
+            conPositionDelta = (long) Math.abs((1100*(b.connectedTo.page-1) + b.connectedTo.getX())-position); //The difference from a bead and its connected bead.
             
             if (Integer.toString(connection.page).length() < 6){
                 cbpage = parsePage(connection.page);
