@@ -24,7 +24,14 @@ class DeleteActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        bp.deleteBead(db);        
+        bp.deleteBead(db);
+        bp.refreshBeads();
+        bp.vibcompUI.playerOverview1.repaint();
+        if (!bp.vibcompUI.isBeadPanelEmpty()){
+            bp.vibcompUI.activeBead = bp.vibcompUI.prevBead;
+        }else{
+            bp.vibcompUI.activeBead = null;
+        }
     }
     
     

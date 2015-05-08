@@ -305,6 +305,6 @@ public class BeadPlayer extends javax.swing.JPanel {
             ArrayList<Bead> beads = new ArrayList();
             beads.addAll(hs);
         }
-        System.out.println(beads.isEmpty());
+        //System.out.println(beads.isEmpty());
     }
 }

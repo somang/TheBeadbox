@@ -434,18 +434,30 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_pageScrollMouseDragged
 
     private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
-        if (beadPanel.getComponentCount() == 1) {
+        if (isBeadPanelEmpty()) {
             refreshBeadPanel();
         }
     }//GEN-LAST:event_beadPanelTextMousePressed
 
-    private void refreshBeadPanel() {
+    public boolean isBeadPanelEmpty() {
+        /**
+         * 1 if empty 2 if filled
+         */
+        if (beadPanel.getComponentCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void refreshBeadPanel() {
         Bead tmpBead = new Bead();
         tmpBead.setSize(55, 55);
         beadPanel.add(tmpBead);
         tmpBead.setLocation(15, 20);
         activeBead = tmpBead;
         beadPanel.repaint();
+        prevBead = tmpBead;
     }
 
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
@@ -455,7 +467,7 @@ public class VibcompUI extends javax.swing.JFrame {
          */
         point1 = evt.getPoint();
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
-        
+
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {
             if (activeBead != null) {
@@ -463,7 +475,7 @@ public class VibcompUI extends javax.swing.JFrame {
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI = this;
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                } else {                    
+                } else {          // There already is a bead at the location          
                     if (!activeBead.playable) {
                         remove(activeBead); //Remove bead panel glitch
                     } else {
@@ -483,19 +495,16 @@ public class VibcompUI extends javax.swing.JFrame {
         } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
             if (tmpBead != null) {
                 tmpBead.setComponentPopupMenu(menuPopup);
-                activeBead = null;
                 BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1, tmpBead, playerOverview1));
-                beadPlayer1.refreshBeads();
-                playerOverview1.repaint();
 
                 /*
-                System.out.println("Bead Info: \nPage: " + tmpBead.page + "\nTrack: " + tmpBead.track
-                        + "\nLocation X: " + tmpBead.getLocation().x + "\nFrequency: " + tmpBead.getFrequency()
-                        + "\nIntensity: " + tmpBead.getIntensity() + "\n");
-                BeadMenuDelete.setToolTipText("Bead Info-  Page: " + tmpBead.page + "  Track: " + tmpBead.track
-                        + "  Location X: " + tmpBead.getLocation().x + "  Frequency: " + tmpBead.getFrequency()
-                        + "  Intensity: " + tmpBead.getIntensity());
-                */
+                 System.out.println("Bead Info: \nPage: " + tmpBead.page + "\nTrack: " + tmpBead.track
+                 + "\nLocation X: " + tmpBead.getLocation().x + "\nFrequency: " + tmpBead.getFrequency()
+                 + "\nIntensity: " + tmpBead.getIntensity() + "\n");
+                 BeadMenuDelete.setToolTipText("Bead Info-  Page: " + tmpBead.page + "  Track: " + tmpBead.track
+                 + "  Location X: " + tmpBead.getLocation().x + "  Frequency: " + tmpBead.getFrequency()
+                 + "  Intensity: " + tmpBead.getIntensity());
+                 */
             }
         }
 
