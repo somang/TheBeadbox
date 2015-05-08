@@ -53,7 +53,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                                 page = 1;
                             }
                             vibcompUI.pageScroll.setValue(page);
-                            pageLab.setText(Integer.toString(page));
+                            //pageLab.setText(String.valueOf(page)); // Whenever I update this, the rightJPanel gets refreshed....
                         }
                     }
                     try {
@@ -200,6 +200,11 @@ public class BeadPlayer extends javax.swing.JPanel {
         } else if (x > getWidth() - 55) {
             x = getWidth() - 55;
         }
+        if (y < 0) {
+            y = 0;
+        } else if (y > 540) {
+            y = 540;
+        }
         y = ((getTrackAt(y) - 1) * TRACKHEIGHT + 5);
         bead.setTrack(getTrackAt(y));
         bead.setOpaque(false);
@@ -216,7 +221,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         beads.remove(activeBead);
         this.remove(activeBead);
         refreshBeads();
-        if (beads.isEmpty()){
+        if (beads.isEmpty()) {
             vibcompUI.playerOverview1.clearAll();
         }
     }
@@ -225,19 +230,44 @@ public class BeadPlayer extends javax.swing.JPanel {
         return (y / (TRACKHEIGHT) + 1);
     }
 
+    /**
+     * Find if there is a Bead around all possible areas of the clicked coordinate.
+     * 
+     * @param x
+     * @param y
+     * @param beadPage
+     * @return 
+     */
     public Bead getBeadAt(int x, int y, int beadPage) {
-        try {
-            Bead tmp = (Bead) this.getComponentAt(x, y);
-            if (tmp.getPage() == beadPage) {
-                return tmp;
-            } else {
-                return null;
-            }
-        } catch (ClassCastException e) {
-            return null;
-        } catch (NullPointerException ex) {
-            return null;
-        }
+        Bead tmp = null;
+        try {tmp = (Bead) this.getComponentAt(x, y);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x + 27, y);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x - 27, y);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x, y - 12);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x, y + 12);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x + 27, y + 12);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x - 27, y - 12);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x - 27, y + 12);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        try {tmp = (Bead) this.getComponentAt(x + 27, y - 12);
+            if (tmp.getPage() == beadPage) {return tmp;}
+        } catch (ClassCastException | NullPointerException e) {}
+        return null;
     }
 
     public int getBarIUPosition() {
@@ -268,12 +298,13 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    private void refreshBeads() {
+    public void refreshBeads() {
         if (beads != null) {
             hs = new HashSet();
             hs.addAll(beads);
             ArrayList<Bead> beads = new ArrayList();
             beads.addAll(hs);
         }
+        System.out.println(beads.isEmpty());
     }
 }

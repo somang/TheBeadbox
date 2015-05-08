@@ -83,24 +83,19 @@ class ProtocolHandler {
         
         /*Connected Bead Information fetch.*/
         long conPositionDelta = 0;
-        Tuple cntBead = new Tuple(0,0);
+        int conTrack = 0;
+        Tuple cntBeadDeltaTime = new Tuple(0,0);
         Tuple cbpage = new Tuple(0,0);
         if (b.connectedTo != null){
             Bead connection = b.connectedTo;
-            cntBead = cnctBeads(connection);
             conPositionDelta = (long) Math.abs((1100*(b.connectedTo.page-1) + b.connectedTo.getX())-position); //The difference from a bead and its connected bead.
-            
-            if (Integer.toString(connection.page).length() < 6){
-                cbpage = parsePage(connection.page);
-            }else{
-                System.out.println("Too big for the page parse.");
-            }
+            cntBeadDeltaTime = parseCnctBeadsDelta(conPositionDelta); // parse the delta time in between
+            conTrack = connection.track;
         }
-        
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
         mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
-        mf.polyPress(position, track, cntBead.left, cntBead.right); // 0xA0, connect bead location.
-        mf.controlChange(position, track, cbpage.right, cbpage.left); // Notice that I switched data1 and data2, cause of the order restriction
+        mf.polyPress(position, track, cntBeadDeltaTime.left, cntBeadDeltaTime.right); // 0xA0, connect bead differences.
+        mf.progChange(position, track, conTrack);// Contains which track the connected bead at, 0 if there exists no connected bead.
         mf.noteOff (position+(long) 55, track, pitchVal); // 0x80
         
         
@@ -110,21 +105,23 @@ class ProtocolHandler {
     /**
      * This is to map the position coordinates for the connected Bead.
      * Assume,
-     * xpos: 1100 and track: 8
+     * xpos: 1000
+     * xpos_cnnctBead: 55
+     * Then, delta time given is 945
      * Then we send, 
      * 
-     * data1: 110
-     * data2: [0,1]08
+     * data1: 94
+     * data2: 5
      * 
      * @param connectionBead
      * @return Tuple<data1, data2>
      */
-    private Tuple cnctBeads(Bead connection){
-        int cx = connection.getX();
-        int cnctBtrack = connection.track;           
+    private Tuple parseCnctBeadsDelta(long conPositionDelta){
+        int cx = (int) conPositionDelta;
+        int cy = 0;
         String cxStr = Integer.toString(cx);
         String data1, data2;
-
+        
         switch (cxStr.length()){                
             case 3: // 345
                 data1 = Integer.toString(cx).substring(0,2); //34
@@ -139,9 +136,9 @@ class ProtocolHandler {
                 data2 = Integer.toString(cx);
                 break;
         }
-        data2 = data2+cnctBtrack;
         cx = Integer.parseInt(data1);
-        Tuple cBeads = new Tuple(cx,cnctBtrack);
+        cy = Integer.parseInt(data2);
+        Tuple cBeads = new Tuple(cx,cy);        
         return cBeads;
     }
     
@@ -190,7 +187,18 @@ class ProtocolHandler {
         // Math.log is base e, natural log, ln
         return Math.log( x ) / Math.log( 2 );
     }
-
+    
+    public class Tuple<Left, Right> { 
+        public final int left; 
+        public final int right; 
+        public Tuple(int left, int right) { 
+            this.left = left; 
+            this.right = right; 
+        } 
+    } 
+    
+    
+    
     /**
      * page will be a number.
      * it can be 0 - [126 26]
@@ -240,14 +248,4 @@ class ProtocolHandler {
         return pageTotal;
     }
 
-    
-    public class Tuple<Left, Right> { 
-        public final int left; 
-        public final int right; 
-        public Tuple(int left, int right) { 
-            this.left = left; 
-            this.right = right; 
-        } 
-    } 
-    
 }

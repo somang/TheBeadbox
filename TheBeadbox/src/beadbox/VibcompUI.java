@@ -385,7 +385,6 @@ public class VibcompUI extends javax.swing.JFrame {
         if (activeBead != null) {
             activeBead.setMaxIntensity(intensitySlider.getMaximum() / 2);
             activeBead.setIntensity(intensitySlider.getValue());
-            //beadPanelText.setText("");
             beadPanel.repaint();
         }
     }//GEN-LAST:event_intensitySliderStateChanged
@@ -393,7 +392,6 @@ public class VibcompUI extends javax.swing.JFrame {
     private void frequencySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_frequencySliderStateChanged
         if (activeBead != null) {
             int freq = frequencySlider.getValue();
-            System.out.println(freq);
             //logarithmic frequenct calculation goes here
             //freq = (int) Math.log(freq)*12;
             activeBead.setFrequency(freq);
@@ -411,7 +409,7 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void pageScrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseClicked
         beadPlayer1.page = pageScroll.getValue();
-        pagelabel.setText(Integer.toString(pageScroll.getValue()));
+        //pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
                 if (activeBead.connectedTo != null) {
@@ -424,7 +422,7 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void pageScrollMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseDragged
         beadPlayer1.page = pageScroll.getValue();
-        pagelabel.setText(Integer.toString(pageScroll.getValue()));
+        //pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
                 if (activeBead.connectedTo != null) {
@@ -457,7 +455,7 @@ public class VibcompUI extends javax.swing.JFrame {
          */
         point1 = evt.getPoint();
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
-
+        
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {
             if (activeBead != null) {
@@ -465,7 +463,7 @@ public class VibcompUI extends javax.swing.JFrame {
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI = this;
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                } else {
+                } else {                    
                     if (!activeBead.playable) {
                         remove(activeBead); //Remove bead panel glitch
                     } else {
@@ -479,21 +477,25 @@ public class VibcompUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
             } else if (activeBead == null && tmpBead != null) {
                 activeBead = tmpBead;
+            } else { //activeBead == null AND tmpBead == null
+                //do nothing.
             }
         } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
             if (tmpBead != null) {
                 tmpBead.setComponentPopupMenu(menuPopup);
-                //activeBead = tmpBead;
+                activeBead = null;
                 BeadMenuDelete.addActionListener(new DeleteActionListener(beadPlayer1, tmpBead, playerOverview1));
+                beadPlayer1.refreshBeads();
                 playerOverview1.repaint();
 
+                /*
                 System.out.println("Bead Info: \nPage: " + tmpBead.page + "\nTrack: " + tmpBead.track
                         + "\nLocation X: " + tmpBead.getLocation().x + "\nFrequency: " + tmpBead.getFrequency()
                         + "\nIntensity: " + tmpBead.getIntensity() + "\n");
                 BeadMenuDelete.setToolTipText("Bead Info-  Page: " + tmpBead.page + "  Track: " + tmpBead.track
                         + "  Location X: " + tmpBead.getLocation().x + "  Frequency: " + tmpBead.getFrequency()
                         + "  Intensity: " + tmpBead.getIntensity());
-
+                */
             }
         }
 
@@ -515,7 +517,6 @@ public class VibcompUI extends javax.swing.JFrame {
             xdif = endBeadx - activeBead.getX();
             ydif = endBeady - activeBead.getY();
             distance = Math.sqrt(Math.abs(xdif * xdif - ydif * ydif)); //Euclidean distance.
-            //System.out.println(distance);
             if (distance > 55) { //if distance is greater than 100
                 return true;
             }
@@ -576,7 +577,7 @@ public class VibcompUI extends javax.swing.JFrame {
         pageScroll.setMaximum(BeadPlayer.maxPage + 1);
         pageScroll.setValue(BeadPlayer.maxPage);
         beadPlayer1.page = BeadPlayer.maxPage;
-        pagelabel.setText(Integer.toString(pageScroll.getValue()));
+        //pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
                 if (activeBead.connectedTo != null) {

@@ -40,10 +40,10 @@ public class VibroMidiFile {
    * And will need to add the PitchBend Message info to transfer the
    * full frequency info.
    * 
-   * @param delta Time Measure unit
+   * @param lTick Time Measure unit
    * @param track Track number (0-15)
    * @param frequency Pitch number (0-126)
-   * @param velocity Intensity (0-100)
+   * @param intensity Intensity (0-100)
    */
     public void noteOn(long lTick, int track, int frequency, int intensity) throws InvalidMidiDataException {        
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.NOTE_ON, frequency, intensity, lTick));
@@ -53,7 +53,7 @@ public class VibroMidiFile {
    * Produces a pitchBend midi Message.
    * Simply to fill in extra frequency to add to previous NoteOn Message
    * 
-   * @param delta Time Measure unit
+   * @param lTick Time Measure unit
    * @param track Track number (0-15)
    * @param lsb Least Significant Byte [0-126]
    * @param msb Most Significant Byte [0-126]
@@ -67,21 +67,27 @@ public class VibroMidiFile {
      * This is for displaying connected Bead location. (where this bead's connected bead is at.
      * polyPress and controlChange methods together represents the bead's connected bead's info.
      * Track, position, and so on.
-     */
+     * 
+     * polyPress displays the delta time between two beads.
+     * If 0, then the bead has no connected Bead.
+     * Else, then the delta time gets parsed into two section data1 and data2
+     * Where, data1 has [0-100] data2 [0-100] allows total place holder for [xx xx] 
+     * Data1 carrys: Thousands, Hundreds
+     * Data2 carrys: Tens, Ones
+     * 
+     * @param lTick
+     * @param track
+     * @param data1
+     * @param data2
+     * @throws javax.sound.midi.InvalidMidiDataException
+     */    
     public void polyPress(long lTick, int track, int data1, int data2) throws InvalidMidiDataException {
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.POLY_PRESSURE, data1, data2, lTick));
     }
-    public void controlChange(long lTick, int track, int data1, int data2) throws InvalidMidiDataException{        
-        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.CONTROL_CHANGE, data1, data2, lTick));
-    }
-
-    public void noteOff(long lTick, int track, int frequency) throws InvalidMidiDataException {
-        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.NOTE_OFF, frequency, 0, lTick));
-    }
-    /**************************************************************************/
+    
     
     /**
-     * This is just dummy method, which is not used but still implemented.
+     * This is to store the track information of the connected bead. [0-126]
      * @param lTick
      * @param track
      * @param data1
@@ -89,6 +95,14 @@ public class VibroMidiFile {
      */
     public void progChange(long lTick, int track, int data1) throws InvalidMidiDataException{
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.PROGRAM_CHANGE, data1, 0, lTick));
+    }    
+    
+
+    public void noteOff(long lTick, int track, int frequency) throws InvalidMidiDataException {
+        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.NOTE_OFF, frequency, 0, lTick));
+    }    
+    public void controlChange(long lTick, int track, int data1, int data2) throws InvalidMidiDataException{        
+        sequence.getTracks()[track].add(createNoteEvent(ShortMessage.CONTROL_CHANGE, data1, data2, lTick));
     }    
     private static MidiEvent createNoteEvent(int nCommand, int data1, int data2, long lTick) throws InvalidMidiDataException{
 	ShortMessage message = new ShortMessage();        

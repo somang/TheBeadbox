@@ -25,7 +25,7 @@ public class rightJPanel extends javax.swing.JPanel {
      * Creates new form rightJPanel
      */
     public rightJPanel() {
-        initComponents();
+        initComponents();        
         loadLights();
     }
     

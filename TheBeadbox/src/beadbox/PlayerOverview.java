@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author albert & somang
  */
-public class PlayerOverview extends javax.swing.JPanel {
+public final class PlayerOverview extends javax.swing.JPanel {
 
     /**
      * Creates new form PlayerOverview
@@ -27,14 +27,15 @@ public class PlayerOverview extends javax.swing.JPanel {
         if (page > 15){
             page = page%15;
         }
-        frags.get(page-1).setBeadBars(track, active);       
+        frags.get(page-1).setBeadBars(track, active);   
+        frags.get(page-1).repaint();
     }
     public void clearAll(){
         for (int i=0; i<frags.size(); i++){
             frags.get(i).clear();
+            frags.get(i).repaint();
         }
-    }
-    
+    }    
     public void higlightFrag(int page){
         if (page > 15){
             page = page%15;
@@ -43,7 +44,7 @@ public class PlayerOverview extends javax.swing.JPanel {
             }
         }        
         frags.get(prevPage-1).setBackground(defaultColor); // turn off
-        frags.get(page-1).setBackground(Color.WHITE); //highlight
+        frags.get(page-1).setBackground(Color.WHITE); //highlight        
         prevPage = page;
     }
     

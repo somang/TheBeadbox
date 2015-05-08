@@ -83,11 +83,6 @@
   </Layout>
   <SubComponents>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -103,11 +98,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment2">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -123,11 +113,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment3">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -143,11 +128,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment4">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -163,11 +143,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment5">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -183,11 +158,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment6">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -203,11 +173,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment7">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -223,11 +188,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment8">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -243,11 +203,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment9">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -263,11 +218,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment10">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -283,11 +233,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment11">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -303,11 +248,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment12">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -323,11 +263,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment13">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -343,11 +278,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment14">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -363,11 +293,6 @@
       </Layout>
     </Container>
     <Container class="beadbox.PlayerOverviewFragment" name="playerOverviewFragment15">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6e" green="6e" red="6e" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
