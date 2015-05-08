@@ -34,7 +34,8 @@ class ProtocolHandler {
         ArrayList <Bead> beadArray = beadPlayer1.beads;
         
         for (int i=0;i<beadArray.size();i++){
-            Bead tmp = beadArray.get(i);
+            Bead tmp = beadArray.get(i);      
+            beadArray.remove(tmp.connectedTo);
             parseBeadForMidi(mf, tmp);
         }
         
@@ -88,13 +89,19 @@ class ProtocolHandler {
         Tuple cbpage = new Tuple(0,0);
         if (b.connectedTo != null){
             Bead connection = b.connectedTo;
-            conPositionDelta = (long) Math.abs((1100*(b.connectedTo.page-1) + b.connectedTo.getX())-position); //The difference from a bead and its connected bead.
+            conPositionDelta = (long) (1100*(b.connectedTo.page-1)) + (b.connectedTo.getX()) - position; //The difference from a bead and its connected bead.
             cntBeadDeltaTime = parseCnctBeadsDelta(conPositionDelta); // parse the delta time in between
             conTrack = connection.track;
         }
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
         mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
         mf.polyPress(position, track, cntBeadDeltaTime.left, cntBeadDeltaTime.right); // 0xA0, connect bead differences.
+        /*
+        mf.controlChange(position, track, 1, data1);// [data1][data2] -> frenquency 
+        mf.controlChange(position, track, 2, data2);// 
+        mf.controlChange(position, track, 3, data3);// [data3][data4] -> intensity
+        mf.controlChange(position, track, 4, data4);// 
+        */
         mf.progChange(position, track, conTrack);// Contains which track the connected bead at, 0 if there exists no connected bead.
         mf.noteOff (position+(long) 55, track, pitchVal); // 0x80
         
@@ -117,7 +124,12 @@ class ProtocolHandler {
      * @return Tuple<data1, data2>
      */
     private Tuple parseCnctBeadsDelta(long conPositionDelta){
-        int cx = (int) conPositionDelta;
+        int signholder = 2; // default the sign is positive.         
+        if (conPositionDelta<0){ // if it's negative,
+            signholder = 1;
+        }
+        
+        int cx = (int) Math.abs(conPositionDelta);
         int cy = 0;
         String cxStr = Integer.toString(cx);
         String data1, data2;
@@ -137,8 +149,18 @@ class ProtocolHandler {
                 break;
         }
         cx = Integer.parseInt(data1);
-        cy = Integer.parseInt(data2);
-        Tuple cBeads = new Tuple(cx,cy);        
+        cy = Integer.parseInt(data2+signholder);
+        Tuple cBeads = new Tuple(cx,cy);      
+        
+        System.out.println(conPositionDelta);
+        
+        System.out.println(data1);
+        System.out.println(data2);
+        System.out.println(signholder);
+        
+        System.out.println("<"+cx+","+cy+">"); // The Tuple will have, <cx, cy>        // 00 but 0
+        
+        
         return cBeads;
     }
     

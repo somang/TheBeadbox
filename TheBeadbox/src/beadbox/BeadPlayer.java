@@ -25,6 +25,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     int BEADHEIGHT = 50;
     int barPosition = 10, MAXBARPOS = 1000;
     int page = 1;
+    int index = 0;
     static int maxPage = 2;
     ArrayList<Bead> beads = new ArrayList();
     HashSet hs;
@@ -272,6 +273,25 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     public int getBarIUPosition() {
         return getWidth() * barPosition / MAXBARPOS;
+    }
+    
+    /**
+     * Find the bead assigned to the given index.
+     * 
+     * @param index
+     * @return 
+     */
+    public Bead getBeadAtIndex(int index){
+        for (int i = 0; i < beads.size(); i++) {
+            if (beads.get(i).index == index) return beads.get(i);
+        }
+        return null;
+    }
+    
+    public void refreshIndex(){
+        for (int i = 0; i < beads.size(); i++) {
+            beads.get(i).index=i;
+        }
     }
 
     /**

@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class Bead extends javax.swing.JPanel {
 
     private int curX, curY, centerX, centerY, curIntensity, maxIntensity, curFrequency;
-    protected int track, page, duration;
+    protected int track, page, duration, index;
     final private safeColors safeColor;
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
