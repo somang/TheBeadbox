@@ -295,10 +295,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Component id="playButton" min="-2" pref="90" max="-2" attributes="0"/>
-                  <EmptySpace pref="343" max="32767" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="pagelabel" min="-2" pref="16" max="-2" attributes="0"/>
+                  <EmptySpace pref="393" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -315,10 +312,6 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="speedControl" min="-2" pref="45" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="pagelabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -380,18 +373,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="openButtonMouseClicked"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Page"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="pagelabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="1"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="name" type="java.lang.String" value="" noResource="true"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

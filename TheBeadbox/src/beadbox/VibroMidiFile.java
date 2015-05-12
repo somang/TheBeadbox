@@ -153,7 +153,7 @@ public class VibroMidiFile {
         curTrack.add(ev);
     }
     
-    public void addLyrics(int i, int track, String metacontent) throws InvalidMidiDataException, UnsupportedEncodingException {
+    public void addLyrics(int track, String metacontent) throws InvalidMidiDataException, UnsupportedEncodingException {
         /**
          * addlyrics
          */

@@ -10,7 +10,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -20,14 +22,15 @@ import javax.swing.JLabel;
  * @author Albert@imdc
  */
 public class BeadPlayer extends javax.swing.JPanel {
-
-    int TRACKHEIGHT = getHeight() / 8;
+    int tracksize=8; // 8 because this is for the EmotiChair (8 channels,16speakers)
+    int TRACKHEIGHT = getHeight() / tracksize;
     int BEADHEIGHT = 50;
     int barPosition = 10, MAXBARPOS = 1000;
     int page = 1;
-    int index = 0;
+    int beadIndex = 1;
     static int maxPage = 2;
     ArrayList<Bead> beads = new ArrayList();
+    Map<Integer, Bead> map;
     HashSet hs;
 
     VibcompUI vibcompUI = null;
@@ -41,6 +44,7 @@ public class BeadPlayer extends javax.swing.JPanel {
      * Creates new form BeadPlayer
      */
     public BeadPlayer() {
+        this.map = new HashMap<Integer, Bead>();
         this.playerTickTock = new Runnable() {
             public void run() {
                 while (true) {
@@ -212,9 +216,12 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setLocation(x, y);
         bead.playable = true;
         bead.setPage(page);
+        bead.setIndex(beadIndex); // set unique index number
         beads.add(bead);
         this.add(bead);
+        //map.put(beadIndex,bead);
         refreshBeads();
+        beadIndex++;
     }
 
     public void deleteBead(Bead activeBead) {
@@ -234,11 +241,22 @@ public class BeadPlayer extends javax.swing.JPanel {
     /**
      * Find if there is a Bead around all possible areas of the clicked coordinate.
      * 
+     * 
      * @param x
      * @param y
      * @param beadPage
-     * @return 
+     * @return Bead Object.
      */
+    public Bead getBeadAt(int x, int y, int beadPage) {
+        try {
+            Bead tmp = (Bead) this.getComponentAt(x, y);
+            if (tmp.getPage() == beadPage) {
+                return tmp;
+            }            
+        } catch (ClassCastException | NullPointerException e) {}        
+        return null;
+    }
+    /*
     public Bead getBeadAt(int x, int y, int beadPage) {
         Bead tmp = null;
         try {tmp = (Bead) this.getComponentAt(x, y);
@@ -250,10 +268,10 @@ public class BeadPlayer extends javax.swing.JPanel {
         try {tmp = (Bead) this.getComponentAt(x - 27, y);
             if (tmp.getPage() == beadPage) {return tmp;}
         } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x, y - 12);
+        try {tmp = (Bead) this.getComponentAt(x, y + 12);
             if (tmp.getPage() == beadPage) {return tmp;}
         } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x, y + 12);
+        try {tmp = (Bead) this.getComponentAt(x, y - 12);
             if (tmp.getPage() == beadPage) {return tmp;}
         } catch (ClassCastException | NullPointerException e) {}
         try {tmp = (Bead) this.getComponentAt(x + 27, y + 12);
@@ -269,7 +287,7 @@ public class BeadPlayer extends javax.swing.JPanel {
             if (tmp.getPage() == beadPage) {return tmp;}
         } catch (ClassCastException | NullPointerException e) {}
         return null;
-    }
+    }*/
 
     public int getBarIUPosition() {
         return getWidth() * barPosition / MAXBARPOS;
@@ -282,15 +300,16 @@ public class BeadPlayer extends javax.swing.JPanel {
      * @return 
      */
     public Bead getBeadAtIndex(int index){
-        for (int i = 0; i < beads.size(); i++) {
-            if (beads.get(i).index == index) return beads.get(i);
-        }
-        return null;
+        return this.map.get(index);
     }
-    
+    /**
+     * Suggest use for this method is for the last change, aka before one to save the whole file.
+     */
     public void refreshIndex(){
+        this.map = new HashMap<Integer, Bead>();
         for (int i = 0; i < beads.size(); i++) {
-            beads.get(i).index=i;
+            beads.get(i).index = i;
+            this.map.put(i, beads.get(i));
         }
     }
 
@@ -322,9 +341,8 @@ public class BeadPlayer extends javax.swing.JPanel {
         if (beads != null) {
             hs = new HashSet();
             hs.addAll(beads);
-            ArrayList<Bead> beads = new ArrayList();
+            beads = new ArrayList();
             beads.addAll(hs);
         }
-        //System.out.println(beads.isEmpty());
     }
 }

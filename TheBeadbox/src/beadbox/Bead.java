@@ -27,6 +27,7 @@ public class Bead extends javax.swing.JPanel {
     protected Bead connectedTo = null;
     boolean InOutSwitch = false, initial = true;
     Beadlight tmpBeadlight;
+    
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -157,6 +158,7 @@ public class Bead extends javax.swing.JPanel {
         curIntensity = 100;
         maxIntensity = 50;
         page = -1;
+        index=0;
         initComponents();
     }
 
@@ -179,6 +181,10 @@ public class Bead extends javax.swing.JPanel {
 
     public int getDuration() {
         return duration;
+    }
+    
+    public int getIndex() {
+        return index;
     }
 
     /* SETTERS */
@@ -209,6 +215,10 @@ public class Bead extends javax.swing.JPanel {
     public void setConnection(Bead otherBead) {
         connectedTo = otherBead;
         otherBead.connectedTo = this;
+    }
+    
+    public void setIndex(int uniqueIndex) {
+        index = uniqueIndex;
     }
 
     public void breakConnections() {
