@@ -6,11 +6,9 @@
 package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
-import javax.swing.JMenuItem;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,9 +16,7 @@ import java.util.logging.Logger;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 
 /**
  *
@@ -36,10 +32,10 @@ public class VibcompUI extends javax.swing.JFrame {
 
     Bead startBead, endBead;
     Bead prevBead = null;
-    int startBead_x, startBead_y, endBead_x, endBead_y;
+    int startBead_x, startBead_y;
     boolean dragStatus = false;
     boolean move = false;
-    Point point1, point2;
+    Point point1;
     Bead beadOnClick;
     ProtocolHandler ph = new ProtocolHandler();
 
@@ -54,6 +50,7 @@ public class VibcompUI extends javax.swing.JFrame {
 
         /*PageScroll Button Actionlistener for the custom mod.*/
         pageScroll.getComponent(1).addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 beadPlayer1.page = pageScroll.getValue();
                 if (activeBead != null) {
@@ -67,6 +64,7 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         });
         pageScroll.getComponent(0).addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 beadPlayer1.page = pageScroll.getValue();
                 if (activeBead != null) {
@@ -422,7 +420,6 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void pageScrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseClicked
         beadPlayer1.page = pageScroll.getValue();
-        //pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
                 if (activeBead.connectedTo != null) {
@@ -435,7 +432,6 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void pageScrollMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseDragged
         beadPlayer1.page = pageScroll.getValue();
-        //pagelabel.setText(Integer.toString(pageScroll.getValue()));
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
                 if (activeBead.connectedTo != null) {
@@ -480,16 +476,16 @@ public class VibcompUI extends javax.swing.JFrame {
          */
         point1 = evt.getPoint();
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
-
+        
+        
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {
             if (activeBead != null) {
-                if (tmpBead == null) {//Create one                    
+                if (tmpBead == null) {//Create one    
                     beadPanelText.setVisible(true);
                     activeBead.vibcompUI = this;
                     beadPlayer1.setBead(point1.x, point1.y, activeBead);
                 } else {// There already is a bead at the location   
-                    System.out.println(isBeadPanelEmpty());
                     if (!activeBead.playable) {
                         remove(activeBead); //Remove bead panel glitch
                     } else {
@@ -504,16 +500,14 @@ public class VibcompUI extends javax.swing.JFrame {
             } else if (activeBead == null && tmpBead != null) {
                 activeBead = tmpBead;
             } else { //activeBead == null AND tmpBead == null
-                //do nothing.
+                //tmpBead=activeBead;
             }
         } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
-            if (tmpBead != null) {                
+            if (tmpBead != null) {
                 deleteBead(tmpBead);
             } else {
-
+                
             }
-            System.out.println(tmpBead);
-            System.out.println(activeBead);
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
 
@@ -545,11 +539,10 @@ public class VibcompUI extends javax.swing.JFrame {
         endBead = beadPlayer1.getBeadAt(evt.getX(), evt.getY(), beadPlayer1.page); // Check if there is a bead in the end.  
 
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            if (dragStatus && isActualDrag(endBead_x, endBead_y)) {
+            if (dragStatus && isActualDrag(evt.getX(), evt.getY())) {
                 if (activeBead != null) {
                     if (endBead == null) {
                         if (activeBead.connectedTo == null) {//If there is no bead, and A is not connected, create one.
-                            System.out.println(isBeadPanelEmpty());
                             if (!activeBead.playable) {
                                 remove(activeBead); //Remove bead panel glitch
                             } else {
@@ -559,13 +552,13 @@ public class VibcompUI extends javax.swing.JFrame {
                                 endBead.setFrequency(activeBead.getFrequency());
                                 endBead.setConnection(activeBead);
                                 endBead.vibcompUI = this;
-                                beadPlayer1.setBead(endBead_x, endBead_y, endBead);
+                                beadPlayer1.setBead(evt.getX(), evt.getY(), endBead);
                                 activeBead = endBead;
                             }
                         } else {
-                            int yLoc = (beadPlayer1.getTrackAt(endBead_y) - 1) * beadPlayer1.TRACKHEIGHT + 5;
+                            int yLoc = (beadPlayer1.getTrackAt(evt.getY()) - 1) * beadPlayer1.TRACKHEIGHT + 5;
                             activeBead.setTrack(activeBead.getTrack());
-                            activeBead.setLocation(endBead_x, yLoc);
+                            activeBead.setLocation(evt.getX(), yLoc);
                         }
                     } else {
                         /*if endbead is not null;*/
@@ -582,10 +575,6 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged
         // dynamically get where the drag ends.
-        point2 = evt.getPoint();
-        endBead_x = point2.x;
-        endBead_y = point2.y;
-
         if (activeBead != null) {
             if (activeBead.connectedTo == null) {
                 dragStatus = true;

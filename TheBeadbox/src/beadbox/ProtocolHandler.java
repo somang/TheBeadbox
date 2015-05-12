@@ -6,7 +6,6 @@
 package beadbox;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import static javafx.application.Platform.exit;
 import javax.sound.midi.InvalidMidiDataException;
 
@@ -104,7 +103,8 @@ class ProtocolHandler {
 
         /*Parse Index number of this Bead*/
         int row = 0;
-        Tuple indexVal = new Tuple(0,0);
+        Tuple indexVal;
+        indexVal = new Tuple(0,0);
         if ((b.index%9999 == 0) && (b.index!=0)){
             row+=1;
         }

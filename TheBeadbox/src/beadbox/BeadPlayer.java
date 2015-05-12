@@ -7,6 +7,7 @@ package beadbox;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     int BEADHEIGHT = 50;
     int barPosition = 10, MAXBARPOS = 1000;
     int page = 1;
-    int beadIndex = 1;
+    int beadIndex = 0;
     static int maxPage = 2;
     ArrayList<Bead> beads = new ArrayList();
     Map<Integer, Bead> map;
@@ -219,15 +220,14 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setIndex(beadIndex); // set unique index number
         beads.add(bead);
         this.add(bead);
-        //map.put(beadIndex,bead);
         refreshBeads();
         beadIndex++;
     }
 
-    public void deleteBead(Bead activeBead) {
-        activeBead.breakConnections();
-        beads.remove(activeBead);
-        this.remove(activeBead);
+    public void deleteBead(Bead delBead) {
+        delBead.breakConnections();
+        beads.remove(delBead);
+        this.remove(delBead);
         refreshBeads();
         if (beads.isEmpty()) {
             vibcompUI.playerOverview1.clearAll();
@@ -249,13 +249,28 @@ public class BeadPlayer extends javax.swing.JPanel {
      */
     public Bead getBeadAt(int x, int y, int beadPage) {
         try {
-            Bead tmp = (Bead) this.getComponentAt(x, y);
-            if (tmp.getPage() == beadPage) {
-                return tmp;
-            }            
-        } catch (ClassCastException | NullPointerException e) {}        
+            for (Component b : this.getComponents()) {
+                if (b.isShowing()) {
+                    if(containsLocation(b,x,y)){
+                        return (Bead) b;
+                    }
+                }
+            }
+        } catch (ClassCastException | NullPointerException e) {
+        }
         return null;
     }
+    
+    private boolean containsLocation(Component b,int x, int y) {
+        if ((x > b.getX()) && (x < b.getX()+55)){
+            if ((y > b.getY())&&(y < b.getY()+55)){
+                    return true;
+            }
+        }
+        return false;
+    }
+            
+    
     /*
     public Bead getBeadAt(int x, int y, int beadPage) {
         Bead tmp = null;
@@ -345,4 +360,6 @@ public class BeadPlayer extends javax.swing.JPanel {
             beads.addAll(hs);
         }
     }
+
+
 }
