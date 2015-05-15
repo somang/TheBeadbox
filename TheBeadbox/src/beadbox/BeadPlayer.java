@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -38,7 +39,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     Thread thread;
     int SPEED = 50;
     boolean inandout = true;
-    JLabel pageLab;
+    JTextPane jTP;
     Runnable playerTickTock;
 
     /**
@@ -59,7 +60,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                                 page = 1;
                             }
                             vibcompUI.pageScroll.setValue(page);
-                            //pageLab.setText(String.valueOf(page)); // Whenever I update this, the rightJPanel gets refreshed....
+                            jTP.setText("Page:"+page);
                         }
                     }
                     try {
@@ -262,47 +263,13 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
     
     private boolean containsLocation(Component b,int x, int y) {
-        if ((x > b.getX()) && (x < b.getX()+55)){
-            if ((y > b.getY())&&(y < b.getY()+55)){
+        if ((x >= b.getX()) && (x <= b.getX()+55)){
+            if ((y >= b.getY())&&(y <= b.getY()+55)){
                     return true;
             }
         }
         return false;
     }
-            
-    
-    /*
-    public Bead getBeadAt(int x, int y, int beadPage) {
-        Bead tmp = null;
-        try {tmp = (Bead) this.getComponentAt(x, y);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x + 27, y);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x - 27, y);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x, y + 12);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x, y - 12);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x + 27, y + 12);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x - 27, y - 12);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x - 27, y + 12);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        try {tmp = (Bead) this.getComponentAt(x + 27, y - 12);
-            if (tmp.getPage() == beadPage) {return tmp;}
-        } catch (ClassCastException | NullPointerException e) {}
-        return null;
-    }*/
 
     public int getBarIUPosition() {
         return getWidth() * barPosition / MAXBARPOS;

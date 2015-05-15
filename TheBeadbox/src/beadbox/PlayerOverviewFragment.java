@@ -82,6 +82,7 @@ public class PlayerOverviewFragment extends javax.swing.JPanel {
     public PlayerOverviewFragment() {
         initComponents(); 
         safeColor = new safeColors();
+        
     }
     
     public void setBeadBars(int track, boolean val){

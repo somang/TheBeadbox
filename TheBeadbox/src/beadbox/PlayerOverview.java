@@ -22,13 +22,20 @@ public final class PlayerOverview extends javax.swing.JPanel {
     ArrayList <PlayerOverviewFragment> frags = new ArrayList();
     PlayerOverviewFragment tempFrag;
     
+    public void refreshOverviewArray(){
+        // Save all the frags.
+        
+    }
 
     public void setBead(int page, int track, boolean active){
         if (page > 15){
-            page = page%15;
+            int dpPage = page%15;
+            frags.get(dpPage-1).setBeadBars(track, active);   
+            frags.get(dpPage-1).repaint();
+        }else{
+            frags.get(page-1).setBeadBars(track, active);   
+            frags.get(page-1).repaint();
         }
-        frags.get(page-1).setBeadBars(track, active);   
-        frags.get(page-1).repaint();
     }
     public void clearAll(){
         for (int i=0; i<frags.size(); i++){
@@ -42,7 +49,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
             if (page == 0){
                 page = 15;
             }
-        }        
+        }
         frags.get(prevPage-1).setBackground(defaultColor); // turn off
         frags.get(page-1).setBackground(Color.WHITE); //highlight        
         prevPage = page;
