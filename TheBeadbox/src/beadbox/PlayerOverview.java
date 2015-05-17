@@ -5,6 +5,7 @@
  */
 package beadbox;
 
+import static beadbox.BeadPlayer.maxPage;
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
     Color defaultColor;
     ArrayList <PlayerOverviewFragment> frags = new ArrayList();
     PlayerOverviewFragment tempFrag;
+    VibcompUI vui;
     
     public void refreshOverviewArray(){
         // Save all the frags.
@@ -74,12 +76,13 @@ public final class PlayerOverview extends javax.swing.JPanel {
     }
     
     /**
-     * Creates new form BeadPlayer
+     * Creates new form BeadPlayerOverview
      */
     public PlayerOverview() {
         initComponents();
         createFrags(); 
         defaultColor = frags.get(0).getBackground();
+        
     }
 
     /**
@@ -110,7 +113,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
         setBackground(new java.awt.Color(250, 250, 250));
         setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        playerOverviewFragment1.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment1MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment1Layout = new javax.swing.GroupLayout(playerOverviewFragment1);
         playerOverviewFragment1.setLayout(playerOverviewFragment1Layout);
@@ -123,7 +130,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment2.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment2MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment2Layout = new javax.swing.GroupLayout(playerOverviewFragment2);
         playerOverviewFragment2.setLayout(playerOverviewFragment2Layout);
@@ -136,7 +147,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment3.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment3MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment3Layout = new javax.swing.GroupLayout(playerOverviewFragment3);
         playerOverviewFragment3.setLayout(playerOverviewFragment3Layout);
@@ -149,7 +164,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment4.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment4MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment4Layout = new javax.swing.GroupLayout(playerOverviewFragment4);
         playerOverviewFragment4.setLayout(playerOverviewFragment4Layout);
@@ -162,7 +181,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment5.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment5MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment5Layout = new javax.swing.GroupLayout(playerOverviewFragment5);
         playerOverviewFragment5.setLayout(playerOverviewFragment5Layout);
@@ -175,7 +198,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment6.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment6MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment6Layout = new javax.swing.GroupLayout(playerOverviewFragment6);
         playerOverviewFragment6.setLayout(playerOverviewFragment6Layout);
@@ -188,7 +215,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment7.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment7MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment7Layout = new javax.swing.GroupLayout(playerOverviewFragment7);
         playerOverviewFragment7.setLayout(playerOverviewFragment7Layout);
@@ -201,7 +232,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment8.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment8MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment8Layout = new javax.swing.GroupLayout(playerOverviewFragment8);
         playerOverviewFragment8.setLayout(playerOverviewFragment8Layout);
@@ -214,7 +249,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment9.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment9MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment9Layout = new javax.swing.GroupLayout(playerOverviewFragment9);
         playerOverviewFragment9.setLayout(playerOverviewFragment9Layout);
@@ -227,7 +266,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment10.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment10MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment10Layout = new javax.swing.GroupLayout(playerOverviewFragment10);
         playerOverviewFragment10.setLayout(playerOverviewFragment10Layout);
@@ -240,7 +283,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment11.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment11MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment11Layout = new javax.swing.GroupLayout(playerOverviewFragment11);
         playerOverviewFragment11.setLayout(playerOverviewFragment11Layout);
@@ -253,7 +300,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment12.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment12MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment12Layout = new javax.swing.GroupLayout(playerOverviewFragment12);
         playerOverviewFragment12.setLayout(playerOverviewFragment12Layout);
@@ -266,7 +317,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment13.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment13MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment13Layout = new javax.swing.GroupLayout(playerOverviewFragment13);
         playerOverviewFragment13.setLayout(playerOverviewFragment13Layout);
@@ -279,7 +334,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment14.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment14MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment14Layout = new javax.swing.GroupLayout(playerOverviewFragment14);
         playerOverviewFragment14.setLayout(playerOverviewFragment14Layout);
@@ -292,7 +351,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        playerOverviewFragment15.setBackground(new java.awt.Color(110, 110, 110));
+        playerOverviewFragment15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                playerOverviewFragment15MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playerOverviewFragment15Layout = new javax.swing.GroupLayout(playerOverviewFragment15);
         playerOverviewFragment15.setLayout(playerOverviewFragment15Layout);
@@ -361,6 +424,109 @@ public final class PlayerOverview extends javax.swing.JPanel {
             .addComponent(playerOverviewFragment15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void playerOverviewFragment1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment1MousePressed
+        vui.beadPlayer1.page=1;
+        vui.pageScroll.setValue(1);
+    }//GEN-LAST:event_playerOverviewFragment1MousePressed
+
+    private void playerOverviewFragment2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment2MousePressed
+        if(maxPage > 1){
+            vui.beadPlayer1.page=2;
+            vui.pageScroll.setValue(2);
+        }
+    }//GEN-LAST:event_playerOverviewFragment2MousePressed
+
+    private void playerOverviewFragment3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment3MousePressed
+        if(maxPage > 2){
+            vui.beadPlayer1.page=3;
+            vui.pageScroll.setValue(3);
+        }
+    }//GEN-LAST:event_playerOverviewFragment3MousePressed
+
+    private void playerOverviewFragment4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment4MousePressed
+        if(maxPage > 3){
+            vui.beadPlayer1.page=4;
+            vui.pageScroll.setValue(4);
+        }
+    }//GEN-LAST:event_playerOverviewFragment4MousePressed
+
+    private void playerOverviewFragment5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment5MousePressed
+        if(maxPage > 4){
+            vui.beadPlayer1.page=5;
+            vui.pageScroll.setValue(5);
+        }
+    }//GEN-LAST:event_playerOverviewFragment5MousePressed
+
+    private void playerOverviewFragment6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment6MousePressed
+        if(maxPage > 5){
+            vui.beadPlayer1.page=6;
+            vui.pageScroll.setValue(6);
+        }
+    }//GEN-LAST:event_playerOverviewFragment6MousePressed
+
+    private void playerOverviewFragment7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment7MousePressed
+        if(maxPage > 6){
+            vui.beadPlayer1.page=7;
+            vui.pageScroll.setValue(7);
+        }
+    }//GEN-LAST:event_playerOverviewFragment7MousePressed
+
+    private void playerOverviewFragment8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment8MousePressed
+        if(maxPage > 7){
+            vui.beadPlayer1.page=8;
+            vui.pageScroll.setValue(8);
+        }
+    }//GEN-LAST:event_playerOverviewFragment8MousePressed
+
+    private void playerOverviewFragment9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment9MousePressed
+        if(maxPage > 8){
+            vui.beadPlayer1.page=9;
+            vui.pageScroll.setValue(9);
+        }
+    }//GEN-LAST:event_playerOverviewFragment9MousePressed
+
+    private void playerOverviewFragment10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment10MousePressed
+        if(maxPage > 9){
+            vui.beadPlayer1.page=10;
+            vui.pageScroll.setValue(10);
+        }
+    }//GEN-LAST:event_playerOverviewFragment10MousePressed
+
+    private void playerOverviewFragment11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment11MousePressed
+        if(maxPage > 10){
+            vui.beadPlayer1.page=11;
+            vui.pageScroll.setValue(11);
+        }
+    }//GEN-LAST:event_playerOverviewFragment11MousePressed
+
+    private void playerOverviewFragment12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment12MousePressed
+        if(maxPage > 11){
+            vui.beadPlayer1.page=12;
+            vui.pageScroll.setValue(12);
+        }
+    }//GEN-LAST:event_playerOverviewFragment12MousePressed
+
+    private void playerOverviewFragment13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment13MousePressed
+        if(maxPage > 12){
+            vui.beadPlayer1.page=13;
+            vui.pageScroll.setValue(13);
+        }
+    }//GEN-LAST:event_playerOverviewFragment13MousePressed
+
+    private void playerOverviewFragment14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment14MousePressed
+        if(maxPage > 13){
+            vui.beadPlayer1.page=14;
+            vui.pageScroll.setValue(14);
+        }
+    }//GEN-LAST:event_playerOverviewFragment14MousePressed
+
+    private void playerOverviewFragment15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment15MousePressed
+        if(maxPage > 14){
+            vui.beadPlayer1.page=15;
+            vui.pageScroll.setValue(15);
+        }
+    }//GEN-LAST:event_playerOverviewFragment15MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

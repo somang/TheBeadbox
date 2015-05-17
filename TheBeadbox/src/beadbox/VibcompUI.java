@@ -46,6 +46,7 @@ public class VibcompUI extends javax.swing.JFrame {
      */
     public VibcompUI() {
         initComponents();
+        playerOverview1.vui = this;
         endBead = null;
         activeBead = null;
         beadPanel.repaint();
