@@ -102,7 +102,7 @@ class ProtocolHandler {
         long position = (long) (1100 * (b.page - 1) + b.getX());
 
         /*Parse Index number of this Bead*/
-        int row = 0;
+        int row = 1;
         Tuple indexVal;
         indexVal = new Tuple(0,0);
         if ((b.index%9999 == 0) && (b.index!=0)){
@@ -111,7 +111,7 @@ class ProtocolHandler {
         indexVal = parseBeadIndex(b.index);
         
         /*Connected Bead Information fetch.*/
-        int cbrow = 0;
+        int cbrow = 1;
         Tuple cntBeadIndex = new Tuple(0, 0);
         if (b.connectedTo != null) {
             if ((b.index%9999 == 0) && (b.index!=0)){

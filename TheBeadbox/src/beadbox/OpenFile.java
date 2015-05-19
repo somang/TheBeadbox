@@ -35,8 +35,10 @@ public class OpenFile {
         int NOTE_ON_END = 0x9F;
         int NOTE_OFF_START = 0x80;
         int NOTE_OFF_END = 0x8F;
-        int NOTE_CONNECT = 0xA0;
-        int NOTE_TRACK = 0xC0;
+        int NOTE_POLYPRESS = 0xA0;
+        int NOTE_PROGCNG = 0xC0;
+        int NOTE_CTRLCNG = 0xB0;
+        int xLoc = 0, yLoc = 0;
         sequence = MidiSystem.getSequence(file);
         
         Bead activeBead =null, tmpBead =null;
@@ -44,54 +46,52 @@ public class OpenFile {
         bplayer.beads.clear();
         bplayer.removeAll();
         
-        int trackNumber = 0;
+        //read bead data
+            int trackNumber = 0;
             for (Track track :  sequence.getTracks()) {
                 trackNumber++;
                 System.out.println("\n\nTrack " + trackNumber + "\n----------");//": size = " + track.size());
                 System.out.println();
                 for (int i=0; i < track.size(); i++) { 
-                    MidiEvent event = track.get(i);
-                    System.out.print("@" + event.getTick() + " ");
+                    MidiEvent event = track.get(i);                   
                     curTick = event.getTick();
-                    MidiMessage message = event.getMessage();
+                    MidiMessage message = event.getMessage();                    
                     if (message instanceof ShortMessage) {
                         ShortMessage sm = (ShortMessage) message;                       
-                        //System.out.print("Channel: " + sm.getChannel() + " ");
+                        //System.out.print("Channel: " + sm.getChannel() + " ");                       
                         //When a key is on
                         if (sm.getCommand() >= NOTE_ON_START && sm.getCommand() <= NOTE_ON_END) {
-                            //compute coresponding values
                             int key = sm.getData1();
                             int velocity = sm.getData2();
                             if(curTick!=0){
-                                System.out.println("Note on ->  Frequency:" +key+ " Intensity:"+velocity);                           
-                                tmpBead = new Bead();
-                                int yLoc = (trackNumber-1)*bplayer.TRACKHEIGHT+5;
-                                int xLoc = (int) curTick%1000;
-                                tmpBead.setSize(55, 55);
-                                bplayer.setBead(xLoc, yLoc, tmpBead);
-                                tmpBead.page = (int)(curTick/1000)+1;
-                                activeBead = tmpBead;
-                                bplayer.repaint();
+                                System.out.print("@" + event.getTick() + " ");
+                                System.out.println("Note on ->   Frequency:" +key+ " Intensity:"+velocity);                           
+                                activeBead = new Bead();  
+                                activeBead.setIntensity(velocity);
+                                yLoc = (trackNumber-1)*bplayer.TRACKHEIGHT+5;
+                                xLoc = (int) curTick%1000;
                             }
                         }
-                        // when note is conected to another (poly press)
-                        else if (sm.getCommand() == NOTE_CONNECT){
-                            String data = ""+sm.getData1()+sm.getData2();
-                            int len = data.length();
-                            String sign = data.substring(len-1);
-                            data = data.substring(0,len-1);                          
-                            if (sign.equals("1")) data = "-"+data; 
-                            tmpBead = new Bead();
-                            int yLoc = (trackNumber-1)*bplayer.TRACKHEIGHT+5;
-                            int xLoc = (int) (curTick%1000) + Integer.parseInt(data);
-                            tmpBead.setSize(55, 55);
-                            tmpBead.setConnection(activeBead);
-                            bplayer.setBead(xLoc, yLoc, tmpBead);
-                            tmpBead.page = (int)(curTick/1000)+1;
-                            System.out.println("Conected to ->  Delta:" +data);
+                        // bead index info (poly press)
+                        else if (sm.getCommand() == NOTE_POLYPRESS){
+                            String data = ""+sm.getData1()+sm.getData2(); 
+                            activeBead.index = Integer.parseInt(data);                           
                         }
-                        // when 2 different tracks are connected (program change)
-                        else if (sm.getCommand() == NOTE_TRACK){
+                        // bead index multiplier (program change)
+                        else if (sm.getCommand() == NOTE_PROGCNG){
+                            String data = ""+sm.getData1();
+                            activeBead.index = activeBead.index*Integer.parseInt(data);
+                            System.out.print("@" + event.getTick() + " ");
+                            System.out.println("Note Index ->  " +activeBead.index);   
+                        }
+                        // bead connection index info (control change)
+                        else if (sm.getCommand() == NOTE_CTRLCNG){
+                            String data = ""+sm.getData1()+sm.getData2(); 
+                            if(!data.equals("00")){
+                                activeBead.connectIndex = Integer.parseInt(data);
+                                System.out.print("@" + event.getTick() + " ");
+                                System.out.println("Note Connected Index ->  " +activeBead.connectIndex);   
+                            }
                         }
                         //when the key if off
                         else if (sm.getCommand() >= NOTE_OFF_START && sm.getCommand() <= NOTE_OFF_END) {
@@ -99,15 +99,33 @@ public class OpenFile {
                             int key = sm.getData1();
                             int velocity = sm.getData2();
                             if(curTick!=0){
-                                System.out.println("Note off ->  Frequency:" +key+ " Intensity:"+velocity);
+                                System.out.print("@" + event.getTick() + " ");
+                                System.out.println("Note off ->  Bead Created\n");                               
+                                activeBead.setSize(55, 55);
+                                bplayer.setBead(xLoc, yLoc, activeBead);
+                                activeBead.page = (int)((curTick-55)/1000)+1;
+                                bplayer.repaint();
                             }
-                        } else {
+                        }                         
+                        else {
                             //System.out.println("Command:" + sm.getCommand());
                         }
                     } else {
                         //System.out.println("Other message: " + message.getClass());
                     }
                 }
-            }     
+            } 
+            
+        //set connections
+            for (int i = 0; i<bplayer.beads.size(); i++){               
+                int beadIndex = bplayer.beads.get(i).index;
+                int connectedIndex = bplayer.getBeadAtIndex(beadIndex).connectIndex;
+                if(connectedIndex != 0){
+                    bplayer.getBeadAtIndex(beadIndex).setConnection(bplayer.getBeadAtIndex(connectedIndex));
+                    System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
+                }
+                bplayer.repaint();
+            }
+            
     }
 }
