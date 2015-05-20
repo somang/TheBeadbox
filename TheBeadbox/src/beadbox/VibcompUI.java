@@ -116,6 +116,7 @@ public class VibcompUI extends javax.swing.JFrame {
             /*
              https://github.com/mhroth/jasiohost
              */
+            //System.out.println(AsioDriver.getDriverNames());
             driver = AsioDriver.getDriver("ASIO PreSonus FireStudio");
             listener = new AsioSoundHost(driver);
             driver.start();
@@ -125,6 +126,7 @@ public class VibcompUI extends javax.swing.JFrame {
             //System.out.println(driver.getNumChannelsOutput());
             //System.out.println(driver.getName());
             //System.out.println(driver.getCurrentState());
+            
         } catch (UnsatisfiedLinkError e) {
             System.out.println("Please install the Following Driver: ASIO PreSonus FireStudio");
             JOptionPane.showMessageDialog(null, "Please install the Following Driver: ASIO PreSonus FireStudio");
