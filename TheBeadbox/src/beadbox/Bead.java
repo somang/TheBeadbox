@@ -25,7 +25,7 @@ public class Bead extends javax.swing.JPanel {
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     protected Bead connectedTo = null;
-    protected int connectIndex = 0;
+    protected int connectIndex = -1;
     boolean InOutSwitch = false, initial = true;
     Beadlight tmpBeadlight;
     

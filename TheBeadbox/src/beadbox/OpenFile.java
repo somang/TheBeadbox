@@ -7,6 +7,7 @@ package beadbox;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
@@ -25,7 +26,7 @@ import javax.sound.midi.Track;
 public class OpenFile {
     static Sequence sequence;
     
-    public OpenFile(File file, BeadPlayer bplayer, rightJPanel rpanel, VibcompUI ui) throws MidiUnavailableException, InvalidMidiDataException, IOException{
+    public OpenFile(File file, VibcompUI ui) throws MidiUnavailableException, InvalidMidiDataException, IOException{
         //String	strFilename = "testo.mid";
 	//file = new File(strFilename);
         
@@ -43,10 +44,11 @@ public class OpenFile {
         int xLoc = 0, yLoc = 0;
         sequence = MidiSystem.getSequence(file);
         
+        String con = "";      
         Bead activeBead =null, tmpBead =null;
         // make sure composition is cleared first
-        bplayer.beads.clear();
-        bplayer.removeAll();
+        ui.beadPlayer1.beads.clear();
+        ui.beadPlayer1.removeAll();
         
         //read bead data
             int trackNumber = 0;
@@ -70,8 +72,8 @@ public class OpenFile {
                                 System.out.println("Note on ->   Frequency:" +key+ " Intensity:"+velocity);                           
                                 activeBead = new Bead();  
                                 activeBead.setIntensity(velocity);
-                                yLoc = (trackNumber-1)*bplayer.TRACKHEIGHT+5;
-                                xLoc = (int) curTick%1000;
+                                yLoc = (trackNumber-1)*ui.beadPlayer1.TRACKHEIGHT+5;
+                                xLoc = (int) curTick%1100;
                             }
                         }
                         // bead index info (poly press)
@@ -90,9 +92,12 @@ public class OpenFile {
                         else if (sm.getCommand() == NOTE_CTRLCNG){
                             String data = ""+sm.getData1()+sm.getData2(); 
                             if(!data.equals("00")){
-                                activeBead.connectIndex = Integer.parseInt(data);
+                                int connectIndex = Integer.parseInt(data);
+                                activeBead.connectIndex = connectIndex;
                                 System.out.print("@" + event.getTick() + " ");
-                                System.out.println("Note Connected Index ->  " +activeBead.connectIndex);   
+                                System.out.println("Note Connected Index ->  " +connectIndex);
+                                
+                                con+= connectIndex+":"+activeBead.index+"\n";
                             }
                         }
                         //when the key if off
@@ -104,9 +109,11 @@ public class OpenFile {
                                 System.out.print("@" + event.getTick() + " ");
                                 System.out.println("Note off ->  Bead Created\n");                               
                                 activeBead.setSize(55, 55);
-                                bplayer.setBead(xLoc, yLoc, activeBead);
-                                activeBead.page = (int)((curTick-55)/1000)+1;
-                                bplayer.repaint();
+                                int tmpIndex = activeBead.index;
+                                ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);
+                                activeBead.index = tmpIndex;
+                                activeBead.page = (int)((curTick-55)/1100)+1;
+                                ui.beadPlayer1.repaint();
                             }
                         }                         
                         else {
@@ -122,16 +129,16 @@ public class OpenFile {
                             System.out.println("Lyrics: "+data);
                             String[] splitArray = data.split(",");
                             int maxpage = Integer.parseInt(splitArray[0]);
-                            bplayer.maxPage = maxpage;
+                            ui.beadPlayer1.maxPage = maxpage;
                             ui.pageScroll.setMaximum(maxpage+1);
-                            rpanel.beadlight1.setLocation(Integer.parseInt(splitArray[1]), Integer.parseInt(splitArray[2]));
-                            rpanel.beadlight2.setLocation(Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[4]));
-                            rpanel.beadlight3.setLocation(Integer.parseInt(splitArray[5]), Integer.parseInt(splitArray[6]));
-                            rpanel.beadlight4.setLocation(Integer.parseInt(splitArray[7]), Integer.parseInt(splitArray[8]));
-                            rpanel.beadlight5.setLocation(Integer.parseInt(splitArray[9]), Integer.parseInt(splitArray[10]));
-                            rpanel.beadlight6.setLocation(Integer.parseInt(splitArray[11]), Integer.parseInt(splitArray[12]));
-                            rpanel.beadlight7.setLocation(Integer.parseInt(splitArray[13]), Integer.parseInt(splitArray[14]));
-                            rpanel.beadlight8.setLocation(Integer.parseInt(splitArray[15]), Integer.parseInt(splitArray[16]));
+                            ui.rightJPanel1.beadlight1.setLocation(Integer.parseInt(splitArray[1]), Integer.parseInt(splitArray[2]));
+                            ui.rightJPanel1.beadlight2.setLocation(Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[4]));
+                            ui.rightJPanel1.beadlight3.setLocation(Integer.parseInt(splitArray[5]), Integer.parseInt(splitArray[6]));
+                            ui.rightJPanel1.beadlight4.setLocation(Integer.parseInt(splitArray[7]), Integer.parseInt(splitArray[8]));
+                            ui.rightJPanel1.beadlight5.setLocation(Integer.parseInt(splitArray[9]), Integer.parseInt(splitArray[10]));
+                            ui.rightJPanel1.beadlight6.setLocation(Integer.parseInt(splitArray[11]), Integer.parseInt(splitArray[12]));
+                            ui.rightJPanel1.beadlight7.setLocation(Integer.parseInt(splitArray[13]), Integer.parseInt(splitArray[14]));
+                            ui.rightJPanel1.beadlight8.setLocation(Integer.parseInt(splitArray[15]), Integer.parseInt(splitArray[16]));
                         }
              
                     }
@@ -139,10 +146,14 @@ public class OpenFile {
             } 
             
         //set connections
-            for (int i = 0; i<bplayer.map.size(); i++){               
-                Bead a = bplayer.getBeadAtIndex(i);
-                a.setConnection(bplayer.getBeadAtIndex(a.connectIndex));
-                System.out.println("Connecting Beads "+i+": "+i+"&"+a.connectIndex);
+            for (int i = 0; i<ui.beadPlayer1.map.size(); i++){               
+                Bead a = ui.beadPlayer1.getBeadAtIndex(i);
+                int beadIndex = a.index;
+                int connectedIndex = a.connectIndex;
+                if(connectedIndex != -1){
+                    ui.beadPlayer1.getBeadAtIndex(beadIndex).setConnection(ui.beadPlayer1.getBeadAtIndex(a.connectIndex));
+                    System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
+                }
                         
                 /*int beadIndex = bplayer.map.get(i).index;
                 int connectedIndex = bplayer.getBeadAtIndex(beadIndex).connectIndex;
@@ -152,7 +163,7 @@ public class OpenFile {
                     System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
                 }
                         */
-                bplayer.repaint();
+                //ui.beadPlayer1.repaint();
             }
             
     }

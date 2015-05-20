@@ -282,10 +282,9 @@ public class BeadPlayer extends javax.swing.JPanel {
      * @return 
      */
     public Bead getBeadAtIndex(int index){
-        return this.map.get(index); //This is producing errors
-        /*for (int i = 0; i < beads.size(); i++) 
+        for (int i = 0; i < beads.size(); i++) 
             if (beads.get(i).index == index) return beads.get(i);
-        return null;*/
+        return null;
     }
     /**
      * Suggest use for this method is for the last change, aka before one to save the whole file.
