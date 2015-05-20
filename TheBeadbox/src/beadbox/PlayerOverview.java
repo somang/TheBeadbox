@@ -31,7 +31,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
 
     public void setBead(int page, int track, boolean active){
         if (page > 15){
-            int dpPage = page%15;
+            int dpPage = page%15;            
             frags.get(dpPage-1).setBeadBars(track, active);   
             frags.get(dpPage-1).repaint();
         }else{

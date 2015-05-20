@@ -7,7 +7,6 @@ package beadbox;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
@@ -71,6 +70,7 @@ public class OpenFile {
                                 System.out.print("@" + event.getTick() + " ");
                                 System.out.println("Note on ->   Frequency:" +key+ " Intensity:"+velocity);                           
                                 activeBead = new Bead();  
+                                activeBead.vibcompUI = ui;
                                 activeBead.setIntensity(velocity);
                                 yLoc = (trackNumber-1)*ui.beadPlayer1.TRACKHEIGHT+5;
                                 xLoc = (int) curTick%1100;
@@ -112,7 +112,7 @@ public class OpenFile {
                                 int tmpIndex = activeBead.index;
                                 ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);
                                 activeBead.index = tmpIndex;
-                                activeBead.page = (int)((curTick-55)/1100)+1;
+                                activeBead.page = (int)((curTick)/1100)+1;
                                 ui.beadPlayer1.repaint();
                             }
                         }                         
@@ -154,16 +154,6 @@ public class OpenFile {
                     ui.beadPlayer1.getBeadAtIndex(beadIndex).setConnection(ui.beadPlayer1.getBeadAtIndex(a.connectIndex));
                     System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
                 }
-                        
-                /*int beadIndex = bplayer.map.get(i).index;
-                int connectedIndex = bplayer.getBeadAtIndex(beadIndex).connectIndex;
-                
-                if(connectedIndex != 0){
-                    bplayer.getBeadAtIndex(beadIndex).setConnection(bplayer.getBeadAtIndex(connectedIndex));
-                    System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
-                }
-                        */
-                //ui.beadPlayer1.repaint();
             }
             
     }
