@@ -523,28 +523,33 @@ public class VibcompUI extends javax.swing.JFrame {
         point1 = evt.getPoint();
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
         
-        //System.out.println(point1);
+        System.out.println(evt.isControlDown());
         
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {   
             if (activeBead != null) {
                 if (tmpBead == null) {//Create one    
-                    beadPanelText.setVisible(true);
-                    activeBead.vibcompUI = this;
-                    
-                    Bead leftPossible = beadPlayer1.getBeadAt(point1.x-27, point1.y, beadPlayer1.page);
-                    Bead rightPossible = beadPlayer1.getBeadAt(point1.x+27, point1.y, beadPlayer1.page);
-                    
-                    if(leftPossible == null){ // If there exists no bead on the point's left
-                        if (rightPossible == null){
-                            beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                        }else{ // There is a bead on its right.
-                            beadPlayer1.setBead(rightPossible.getX()-27, point1.y, activeBead);
+                    if (evt.isControlDown()) {
+                        if (isBeadPanelEmpty()) {
+                            refreshBeadPanel();
                         }
-                    }else if (rightPossible == null){ //There is a Bead on the left of clicked position.
-                        beadPlayer1.setBead(leftPossible.getX()+80, point1.y, activeBead);
+                    } else {
+                        beadPanelText.setVisible(true);
+                        activeBead.vibcompUI = this;
+
+                        Bead leftPossible = beadPlayer1.getBeadAt(point1.x - 27, point1.y, beadPlayer1.page);
+                        Bead rightPossible = beadPlayer1.getBeadAt(point1.x + 27, point1.y, beadPlayer1.page);
+
+                        if (leftPossible == null) { // If there exists no bead on the point's left
+                            if (rightPossible == null) {
+                                beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                            } else { // There is a bead on its right.
+                                beadPlayer1.setBead(rightPossible.getX() - 27, point1.y, activeBead);
+                            }
+                        } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
+                            beadPlayer1.setBead(leftPossible.getX() + 80, point1.y, activeBead);
+                        }
                     }
-                    
                 } else {// There already is a bead at the location   
                     if (!activeBead.playable) {
                         remove(activeBead); //Remove bead panel glitch
