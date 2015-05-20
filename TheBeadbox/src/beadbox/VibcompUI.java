@@ -74,6 +74,32 @@ public class VibcompUI extends javax.swing.JFrame {
         intensitySlider.setLabelTable(labels3);
         intensitySlider.setPaintLabels(true);
         
+        Hashtable<Integer, JLabel> labels4 = new Hashtable<Integer, JLabel>();
+        labels4.put(0, new JLabel("0"));
+        labels4.put(55, new JLabel("50"));
+        labels4.put(110, new JLabel("100"));
+        labels4.put(165, new JLabel("150"));
+        labels4.put(220, new JLabel("200"));
+        labels4.put(275, new JLabel("250"));
+        labels4.put(330, new JLabel("300"));
+        labels4.put(385, new JLabel("350"));
+        labels4.put(440, new JLabel("400"));
+        labels4.put(495, new JLabel("450"));
+        labels4.put(550, new JLabel("500"));
+        labels4.put(605, new JLabel("550"));
+        labels4.put(660, new JLabel("600"));
+        labels4.put(715, new JLabel("650"));
+        labels4.put(770, new JLabel("700"));
+        labels4.put(825, new JLabel("750"));
+        labels4.put(880, new JLabel("800"));
+        labels4.put(935, new JLabel("850"));
+        labels4.put(990, new JLabel("900"));
+        labels4.put(1045, new JLabel("950"));
+        labels4.put(1100, new JLabel("1000"));
+        barSlider.setLabelTable(labels4);
+        barSlider.setPaintLabels(true);
+
+        
         /*PageScroll Button Actionlistener for the custom mod.*/
         pageScroll.getComponent(1).addMouseListener(new MouseAdapter() {
             @Override
@@ -107,10 +133,8 @@ public class VibcompUI extends javax.swing.JFrame {
         });
 
         //setExtendedState(this.MAXIMIZED_BOTH);        
-        //Component[] incrButton = pageScroll.getComponents();
-        //for (int i=0; i<incrButton.length;i++){
-        //    System.out.println(incrButton[i]);            
-        //}
+        
+        
         /* load the driver */
         try {
             /*
@@ -169,9 +193,10 @@ public class VibcompUI extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
 
         beadPlayer1.setBackground(new java.awt.Color(255, 255, 255));
-        beadPlayer1.setPreferredSize(new java.awt.Dimension(1000, 550));
+        beadPlayer1.setPreferredSize(new java.awt.Dimension(1100, 550));
         beadPlayer1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 beadPlayer1MouseDragged(evt);
@@ -190,7 +215,7 @@ public class VibcompUI extends javax.swing.JFrame {
         beadPlayer1.setLayout(beadPlayer1Layout);
         beadPlayer1Layout.setHorizontalGroup(
             beadPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1032, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
         beadPlayer1Layout.setVerticalGroup(
             beadPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,12 +278,11 @@ public class VibcompUI extends javax.swing.JFrame {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        barSlider.setMajorTickSpacing(50);
-        barSlider.setMaximum(1000);
-        barSlider.setPaintLabels(true);
+        barSlider.setMajorTickSpacing(55);
+        barSlider.setMaximum(1100);
         barSlider.setPaintTicks(true);
         barSlider.setPaintTrack(false);
-        barSlider.setValue(10);
+        barSlider.setValue(0);
         barSlider.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         barSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -388,7 +412,7 @@ public class VibcompUI extends javax.swing.JFrame {
                     .addComponent(pageScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addComponent(barSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 70, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

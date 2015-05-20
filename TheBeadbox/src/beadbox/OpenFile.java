@@ -71,7 +71,7 @@ public class OpenFile {
                                 activeBead = new Bead();  
                                 activeBead.setIntensity(velocity);
                                 yLoc = (trackNumber-1)*bplayer.TRACKHEIGHT+5;
-                                xLoc = (int) curTick%1000;
+                                xLoc = (int) curTick%1100;
                             }
                         }
                         // bead index info (poly press)
@@ -105,7 +105,7 @@ public class OpenFile {
                                 System.out.println("Note off ->  Bead Created\n");                               
                                 activeBead.setSize(55, 55);
                                 bplayer.setBead(xLoc, yLoc, activeBead);
-                                activeBead.page = (int)((curTick-55)/1000)+1;
+                                activeBead.page = (int)((curTick-55)/1100)+1;
                                 bplayer.repaint();
                             }
                         }                         
