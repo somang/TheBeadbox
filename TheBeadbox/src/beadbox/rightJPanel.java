@@ -509,14 +509,14 @@ public class rightJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private beadbox.Beadlight beadlight1;
-    private beadbox.Beadlight beadlight2;
-    private beadbox.Beadlight beadlight3;
-    private beadbox.Beadlight beadlight4;
-    private beadbox.Beadlight beadlight5;
-    private beadbox.Beadlight beadlight6;
-    private beadbox.Beadlight beadlight7;
-    private beadbox.Beadlight beadlight8;
+    protected beadbox.Beadlight beadlight1;
+    protected beadbox.Beadlight beadlight2;
+    protected beadbox.Beadlight beadlight3;
+    protected beadbox.Beadlight beadlight4;
+    protected beadbox.Beadlight beadlight5;
+    protected beadbox.Beadlight beadlight6;
+    protected beadbox.Beadlight beadlight7;
+    protected beadbox.Beadlight beadlight8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

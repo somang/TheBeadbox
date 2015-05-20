@@ -64,12 +64,12 @@ class ProtocolHandler {
         }
 
         /*Add the maximum page number, and beadlight coordinates in Lyrics Meta message. */
-        String p = "{maxpage:" + beadPlayer1.maxPage;
+        String p = "" + beadPlayer1.maxPage;
         for (int i = 0; i < rightJPanel1.getComponentCount(); i++) {
             Beadlight tmpBL = (Beadlight) rightJPanel1.getComponents()[i];
-            p = p + ", BL" + (i + 1) + ":[" + tmpBL.getX() + "," + tmpBL.getY() + "]";
+            p = p + "," + tmpBL.getX() + "," + tmpBL.getY();
         }
-        p = p + "}";
+        
         mf.addLyrics(0, p);
         mf.writeToFile("testo.mid");
     }

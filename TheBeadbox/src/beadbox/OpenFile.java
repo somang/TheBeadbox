@@ -8,6 +8,7 @@ package beadbox;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.MidiSystem;
@@ -24,7 +25,7 @@ import javax.sound.midi.Track;
 public class OpenFile {
     static Sequence sequence;
     
-    public OpenFile(File file, BeadPlayer bplayer) throws MidiUnavailableException, InvalidMidiDataException, IOException{
+    public OpenFile(File file, BeadPlayer bplayer, rightJPanel rpanel, VibcompUI ui) throws MidiUnavailableException, InvalidMidiDataException, IOException{
         //String	strFilename = "testo.mid";
 	//file = new File(strFilename);
         
@@ -38,6 +39,7 @@ public class OpenFile {
         int NOTE_POLYPRESS = 0xA0;
         int NOTE_PROGCNG = 0xC0;
         int NOTE_CTRLCNG = 0xB0;
+        int LYRIC = 5;
         int xLoc = 0, yLoc = 0;
         sequence = MidiSystem.getSequence(file);
         
@@ -110,20 +112,46 @@ public class OpenFile {
                         else {
                             //System.out.println("Command:" + sm.getCommand());
                         }
-                    } else {
+                    } 
+                    // set max page and right panel info
+                    else if(trackNumber==1 && message instanceof MetaMessage){
+                        MetaMessage mm = (MetaMessage) message;
                         //System.out.println("Other message: " + message.getClass());
+                        if (mm.getType() == LYRIC){                          
+                            String data = new String(mm.getData());
+                            System.out.println("Lyrics: "+data);
+                            String[] splitArray = data.split(",");
+                            int maxpage = Integer.parseInt(splitArray[0]);
+                            bplayer.maxPage = maxpage;
+                            ui.pageScroll.setMaximum(maxpage+1);
+                            rpanel.beadlight1.setLocation(Integer.parseInt(splitArray[1]), Integer.parseInt(splitArray[2]));
+                            rpanel.beadlight2.setLocation(Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[4]));
+                            rpanel.beadlight3.setLocation(Integer.parseInt(splitArray[5]), Integer.parseInt(splitArray[6]));
+                            rpanel.beadlight4.setLocation(Integer.parseInt(splitArray[7]), Integer.parseInt(splitArray[8]));
+                            rpanel.beadlight5.setLocation(Integer.parseInt(splitArray[9]), Integer.parseInt(splitArray[10]));
+                            rpanel.beadlight6.setLocation(Integer.parseInt(splitArray[11]), Integer.parseInt(splitArray[12]));
+                            rpanel.beadlight7.setLocation(Integer.parseInt(splitArray[13]), Integer.parseInt(splitArray[14]));
+                            rpanel.beadlight8.setLocation(Integer.parseInt(splitArray[15]), Integer.parseInt(splitArray[16]));
+                        }
+             
                     }
                 }
             } 
             
         //set connections
-            for (int i = 0; i<bplayer.beads.size(); i++){               
-                int beadIndex = bplayer.beads.get(i).index;
+            for (int i = 0; i<bplayer.map.size(); i++){               
+                Bead a = bplayer.getBeadAtIndex(i);
+                a.setConnection(bplayer.getBeadAtIndex(a.connectIndex));
+                System.out.println("Connecting Beads "+i+": "+i+"&"+a.connectIndex);
+                        
+                /*int beadIndex = bplayer.map.get(i).index;
                 int connectedIndex = bplayer.getBeadAtIndex(beadIndex).connectIndex;
+                
                 if(connectedIndex != 0){
                     bplayer.getBeadAtIndex(beadIndex).setConnection(bplayer.getBeadAtIndex(connectedIndex));
                     System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
                 }
+                        */
                 bplayer.repaint();
             }
             
