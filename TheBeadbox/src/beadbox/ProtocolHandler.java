@@ -95,8 +95,8 @@ class ProtocolHandler {
         // frequency = pitchVal + bendingVal
         // i.e. 501 = 71(493.88Hz) + 9207(7.2Hz)
         int frequency = b.getFrequency();
-        int pitchVal = getMidiPitch(frequency) + 43; // 126-83 to avoid negative from log2
-        Tuple bendingVal = parseMessageData(frequency-pitchVal); // pass in the difference to fill in with the bending value;
+        int pitchVal = getMidiPitch(frequency); // 126-83 to avoid negative from log2
+        Tuple bendingVal = parseMessageData(frequency-convertPitchToFreq(pitchVal)); // pass in the difference to fill in with the bending value;
         // Intensity
         int intensity = b.getIntensity();
         // Time position, Delta time in MIDI (the time difference), the x position.
@@ -183,6 +183,12 @@ class ProtocolHandler {
          */
         int pitchMidiVal = (int) Math.max(0f, (float)Math.log(frequency / 440.0f) / LOG2 * 12f + 69f);
         return pitchMidiVal;
+    }
+    
+    private int convertPitchToFreq(int pitchVal){
+        int pitchFreq = 0;
+        pitchFreq = (int) (440.0f * (float)Math.pow(2.0f, (pitchVal - 69f) / 12.0f));
+        return pitchFreq;                
     }
     
     public class Tuple<Left, Right> {
