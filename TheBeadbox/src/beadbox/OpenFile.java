@@ -64,7 +64,7 @@ public class OpenFile {
                         //System.out.print("Channel: " + sm.getChannel() + " ");                       
                         //When a key is on
                         if (sm.getCommand() >= NOTE_ON_START && sm.getCommand() <= NOTE_ON_END) {
-                            key = sm.getData1()-43;
+                            key = sm.getData1();//-43;
                             velocity = sm.getData2();
                             if(curTick!=0){
                                 System.out.print("@" + event.getTick() + " ");
@@ -79,8 +79,9 @@ public class OpenFile {
                         // bead frequency info (pitch bend)
                         else if (sm.getCommand() == PITCH_BEND){
                             String data = ""+sm.getData1()+sm.getData2(); 
+                            System.out.println(data);
                             int bendVal = Integer.parseInt(data);
-                            key = convertPitchToFreq(key);//+bendVal;
+                            key = convertPitchToFreq(key)+bendVal;
                             activeBead.setFrequency(key);
                             System.out.println("\tFrequency ->  " +key);
                         }
