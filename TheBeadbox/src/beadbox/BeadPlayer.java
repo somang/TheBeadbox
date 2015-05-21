@@ -151,6 +151,10 @@ public class BeadPlayer extends javax.swing.JPanel {
                     int conIn = curBead.connectedTo.getIntensity();
                     int dif = Math.abs(curIn - conIn);
 
+                    int curfreq = curBead.getFrequency();
+                    int confreq = curBead.connectedTo.getFrequency();
+                    int diffreq = Math.abs(curfreq - confreq);
+                    
                     if ((curBead.connectedTo.track != curBead.track)) {//two beads in dif track
                         /*
                          Then, fade out first bead, and fade in second bead.
@@ -158,30 +162,43 @@ public class BeadPlayer extends javax.swing.JPanel {
                         if (start < (getBarIUPosition() + (page * getWidth()))
                                 && mid > (getBarIUPosition() + (page * getWidth()))) {
                             gap = (-1.0 * ((getBarIUPosition() + page * getWidth()) - mid) / (mid - start));
-                            curBead.playBead((int) (gap * curIn));
+                            
+                            curBead.playBead((int) (gap * curIn), curfreq); //, (int) (gap*curfreq));
                         }
                         start = mid;
                         end = curBead.connectedTo.getX() + (curBead.connectedTo.page * getWidth());
                         if (start < (getBarIUPosition() + (page * getWidth()))
                                 && end > (getBarIUPosition() + (page * getWidth()))) {
                             gap = (-1.0 * (mid - (getBarIUPosition() + page * getWidth())) / (end - mid));
-                            curBead.connectedTo.playBead((int) (gap * conIn));
+                            curBead.connectedTo.playBead((int) (gap * conIn), confreq);//, (int) (gap*confreq));
                         }
+                        
+                        
                     } else {
                         //when it's in the same track
                         end = curBead.connectedTo.getX() + (curBead.connectedTo.page * getWidth());
                         if (start < (getBarIUPosition() + (page * getWidth()))
                                 && end > (getBarIUPosition() + (page * getWidth()))) {
                             gap = (1.0 * (end - (getBarIUPosition() + page * getWidth())) / (end - start));
+                            
                             if (curIn > conIn) {
                                 dif = (int) (dif * gap + conIn);
                             } else if (curIn < conIn) {
                                 dif = (int) (dif * (1 - gap) + curIn);
                             } else { // When both intensities are the same.
-                                gap = 1.0;
                                 dif = curIn;
                             }
-                            curBead.playBead(dif);
+                            
+                            if (curfreq > confreq) {
+                                diffreq = (int) (diffreq * gap + confreq);
+                            } else if (curfreq < confreq) {
+                                diffreq = (int) (diffreq * (1 - gap) + curfreq);
+                            } else { // When both intensities are the same.
+                                diffreq = curfreq;
+                            }
+                            
+                            System.out.println(dif+","+diffreq);
+                            curBead.playBead(dif,diffreq);
                         }
                     }
                 } else {// When there is no connected Bead, then just play a bead

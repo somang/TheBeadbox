@@ -98,6 +98,7 @@ public class Bead extends javax.swing.JPanel {
     }
 
     public void playBead() {
+        double playIntensity = curIntensity;//20 * Math.log10(curIntensity);
         //Play note 
         try {
             float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
@@ -107,7 +108,7 @@ public class Bead extends javax.swing.JPanel {
                     for (int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++) {
                         //sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*curIntensity/100;                   
                         double angle = (2.0 * Math.PI * k) / samplingInterval;
-                        sampleWave[k] = (float) Math.sin(angle) * curIntensity / 100;
+                        sampleWave[k] = (float) ((float) Math.sin(angle) * playIntensity / 100.0);
                     }
                     vibcompUI.listener.output(track - 1, sampleWave);
                 } catch (InterruptedException ex) {
@@ -128,19 +129,26 @@ public class Bead extends javax.swing.JPanel {
      *      double angle = (i/rate)*Hertz*2.0*Math.PI;
      *      buf[0]=(byte)(Math.sin(angle)*vol); sourceDL.write(buf,0,1);
      *      sines[i]=(double)(Math.sin(angle)*vol); }
+     * @param varIntensity
+     * @param varFrequency
      */
-    public void playBead(int varIntensity) {
+    public void playBead(int varIntensity, int varFrequency) {
+        double playIntensity = varIntensity;
+        //playIntensity = 20*Math.log10(60-varIntensity);
+        
         try {
             float[] sampleWave = new float[vibcompUI.listener.getBufferSize()];
             if (vibcompUI.driverLoaded) {
                 try {
-                    double samplingInterval = (double) (vibcompUI.listener.getSampleRate() / curFrequency);
+                    double samplingInterval = (double) (vibcompUI.listener.getSampleRate() / varFrequency);                    
                     for (int k = 0; k < vibcompUI.driver.getBufferPreferredSize(); k++) {
                         //sampleWave[k] = (float) Math.sin ( curFrequency *k*20.0 / vibcompUI.listener.getSampleRate())*varIntensity/100;
                         double angle = (2.0 * Math.PI * k) / samplingInterval;
-                        sampleWave[k] = (float) Math.sin(angle) * varIntensity / 100;
+                        sampleWave[k] = (float) ((float) Math.sin(angle) * playIntensity);
                     }
                     vibcompUI.listener.output(track - 1, sampleWave);
+                    //System.out.println(playIntensity+","+varFrequency);
+                    
                 } catch (InterruptedException ex) {
                 } catch (BufferOverflowException e) {
                 }

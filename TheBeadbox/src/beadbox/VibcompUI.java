@@ -554,8 +554,6 @@ public class VibcompUI extends javax.swing.JFrame {
         point1 = evt.getPoint();
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
         
-        System.out.println(evt.isControlDown());
-        
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {   
             if (activeBead != null) {
