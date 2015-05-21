@@ -9,6 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,8 +21,9 @@ public class PlayerOverviewFragment extends javax.swing.JPanel {
      * Creates new form PlayerOverviewFragment
      */
     int TRACKHEIGHT = getHeight()/8;
-    int BEADHEIGHT = 50, page = 1;
+    int BEADHEIGHT = 50, page = 1, curChapter=0;
     boolean[] activeBars= new boolean[8];
+    boolean[][] savedBars = new boolean[150][]; 
     private safeColors safeColor ;
     
     @Override
@@ -100,7 +102,13 @@ public class PlayerOverviewFragment extends javax.swing.JPanel {
     public void cleartrack(int track){
         activeBars[track] = false;        
     }
-
+    
+    public void loadFrag(int chapter){
+        savedBars[curChapter]=activeBars;
+        activeBars = savedBars[chapter];
+        if(activeBars == null) activeBars = new boolean[8];
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

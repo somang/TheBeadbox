@@ -26,8 +26,6 @@ public class OpenFile {
     static Sequence sequence;
     
     public OpenFile(File file, VibcompUI ui) throws MidiUnavailableException, InvalidMidiDataException, IOException{
-        //String	strFilename = "testo.mid";
-	//file = new File(strFilename);
         
         Synthesizer synth = MidiSystem.getSynthesizer();
         synth.open();
@@ -39,12 +37,14 @@ public class OpenFile {
         int NOTE_POLYPRESS = 0xA0;
         int NOTE_PROGCNG = 0xC0;
         int NOTE_CTRLCNG = 0xB0;
+        int PITCH_BEND = 0xE0;
         int LYRIC = 5;
         int xLoc = 0, yLoc = 0;
         sequence = MidiSystem.getSequence(file);
         
         String con = "";      
         Bead activeBead =null, tmpBead =null;
+        int key=0, velocity;
         // make sure composition is cleared first
         ui.beadPlayer1.beads.clear();
         ui.beadPlayer1.removeAll();
@@ -64,17 +64,25 @@ public class OpenFile {
                         //System.out.print("Channel: " + sm.getChannel() + " ");                       
                         //When a key is on
                         if (sm.getCommand() >= NOTE_ON_START && sm.getCommand() <= NOTE_ON_END) {
-                            int key = sm.getData1();
-                            int velocity = sm.getData2();
+                            key = sm.getData1()-43;
+                            velocity = sm.getData2();
                             if(curTick!=0){
                                 System.out.print("@" + event.getTick() + " ");
-                                System.out.println("Note on ->   Frequency:" +key+ " Intensity:"+velocity);                           
+                                System.out.println("Note on ->   Key:" +key+ " Intensity:"+velocity);                           
                                 activeBead = new Bead();  
                                 activeBead.vibcompUI = ui;
                                 activeBead.setIntensity(velocity);
                                 yLoc = (trackNumber-1)*ui.beadPlayer1.TRACKHEIGHT+5;
                                 xLoc = (int) curTick%1100;
                             }
+                        }
+                        // bead frequency info (pitch bend)
+                        else if (sm.getCommand() == PITCH_BEND){
+                            String data = ""+sm.getData1()+sm.getData2(); 
+                            int bendVal = Integer.parseInt(data);
+                            key = convertPitchToFreq(key);//+bendVal;
+                            activeBead.setFrequency(key);
+                            System.out.println("\tFrequency ->  " +key);
                         }
                         // bead index info (poly press)
                         else if (sm.getCommand() == NOTE_POLYPRESS){
@@ -85,8 +93,7 @@ public class OpenFile {
                         else if (sm.getCommand() == NOTE_PROGCNG){
                             String data = ""+sm.getData1();
                             activeBead.index = activeBead.index*Integer.parseInt(data);
-                            System.out.print("@" + event.getTick() + " ");
-                            System.out.println("Note Index ->  " +activeBead.index);   
+                            System.out.println("\tNote Index ->  " +activeBead.index);   
                         }
                         // bead connection index info (control change)
                         else if (sm.getCommand() == NOTE_CTRLCNG){
@@ -94,17 +101,13 @@ public class OpenFile {
                             if(!data.equals("00")){
                                 int connectIndex = Integer.parseInt(data);
                                 activeBead.connectIndex = connectIndex;
-                                System.out.print("@" + event.getTick() + " ");
-                                System.out.println("Note Connected Index ->  " +connectIndex);
+                                System.out.println("\tNote Connected Index ->  " +connectIndex);
                                 
                                 con+= connectIndex+":"+activeBead.index+"\n";
                             }
                         }
                         //when the key if off
                         else if (sm.getCommand() >= NOTE_OFF_START && sm.getCommand() <= NOTE_OFF_END) {
-                            //compute coresponding values
-                            int key = sm.getData1();
-                            int velocity = sm.getData2();
                             if(curTick!=0){
                                 System.out.print("@" + event.getTick() + " ");
                                 System.out.println("Note off ->  Bead Created\n");                               
@@ -156,5 +159,12 @@ public class OpenFile {
                 }
             }
             
+    }
+    
+    
+    private int convertPitchToFreq(int pitchVal){
+        int pitchFreq = 0;
+        pitchFreq = (int) (440.0f * (float)Math.pow(2.0f, (pitchVal - 69f) / 12.0f));
+        return pitchFreq;                
     }
 }

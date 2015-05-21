@@ -20,6 +20,8 @@ import javax.sound.midi.InvalidMidiDataException;
  */
 class ProtocolHandler {
 
+    public final static float LOG2 = 0.6931472f;
+    
     public void saveFile(BeadPlayer beadPlayer1, rightJPanel rightJPanel1) throws Exception {
         /**
          * Initialization*
@@ -94,7 +96,7 @@ class ProtocolHandler {
         // i.e. 501 = 71(493.88Hz) + 9207(7.2Hz)
         int frequency = b.getFrequency();
         int pitchVal = getMidiPitch(frequency) + 43; // 126-83 to avoid negative from log2
-        Tuple bendingVal = getMidiBending(frequency, pitchVal);
+        Tuple bendingVal = parseMessageData(frequency-pitchVal); // pass in the difference to fill in with the bending value;
         // Intensity
         int intensity = b.getIntensity();
         // Time position, Delta time in MIDI (the time difference), the x position.
@@ -108,7 +110,7 @@ class ProtocolHandler {
         if ((b.index%9999 == 0) && (b.index!=0)){
             row+=1;
         }
-        indexVal = parseBeadIndex(b.index);
+        indexVal = parseMessageData(b.index);
         
         /*Connected Bead Information fetch.*/
         int cbrow = 1;
@@ -117,7 +119,7 @@ class ProtocolHandler {
             if ((b.index%9999 == 0) && (b.index!=0)){
                 cbrow+=1;
             }
-            cntBeadIndex = parseBeadIndex(b.connectedTo.index);
+            cntBeadIndex = parseMessageData(b.connectedTo.index);
         }
 
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
@@ -130,7 +132,7 @@ class ProtocolHandler {
     }
 
     /**
-     * This is to map the index value for the connected Bead into two data
+     * This is to map the value for the connected Bead into two data
      * tuple. Given a number NNNN with condition of maximum four digit integers,
      *
      * if NNNN.length < 3; then data1 = 0 and data2 = NN/N
@@ -141,11 +143,11 @@ class ProtocolHandler {
      * data1 takes 1000s and 1000s,
      * data2 takes 10s and 1s.
      *
-     * @param connectionBead
+     * @param 
      * @return Tuple<data1, data2>
      */
-    private Tuple parseBeadIndex(long conIndex) {
-        int cx = (int) Math.abs(conIndex);
+    private Tuple parseMessageData(int number) {
+        int cx = (int) Math.abs(number);
         int cy = 0;
         String cxStr = Integer.toString(cx);
         String data1, data2;
@@ -165,8 +167,8 @@ class ProtocolHandler {
         }
         cx = Integer.parseInt(data1);
         cy = Integer.parseInt(data2);
-        Tuple cBeads = new Tuple(cx, cy);
-        return cBeads;
+        Tuple dataTuple = new Tuple(cx, cy);
+        return dataTuple;
     }
 
     private int getMidiPitch(int frequency) {
@@ -179,40 +181,10 @@ class ProtocolHandler {
          Multiplying it by 12 gives the number of semitones above that frequency. 
          Adding 69 gives the number of semitones above the C five octaves below middle C.
          */
-
-        int pitchMidiVal = 0;
-        double f = (double) frequency / 440.0;
-        pitchMidiVal = (int) Math.round(69 + 12 * log2(f));
-
+        int pitchMidiVal = (int) Math.max(0f, (float)Math.log(frequency / 440.0f) / LOG2 * 12f + 69f);
         return pitchMidiVal;
     }
-
-    private Tuple getMidiBending(int frequency, int pitch) {
-        // Bending Value 
-        /* The two bytes of the pitch bend message form a 14 bit number, 
-         0 to 16383. The value 8192 (sent, LSB first, as 0x00 0x40), is centered, or "no pitch bend." 
-         The value 0 (0x00 0x00) means, "bend as low as possible," and, similarly, 
-         16383 (0x7F 0x7F) is to "bend as high as possible."  
-         i.e. 1100000  0000000
-         // msb      lsb
-         */
-        double pitchFreq = 440.0 * Math.pow(2, (pitch - 69) / 12.0);
-        int bendingValue = (int) Math.round(8192 + 4096 * 12 * log2((double) frequency / pitchFreq));
-
-        String binaryBending = Integer.toBinaryString(bendingValue); //0x0000 to 0x3FFF
-        int lsb = Integer.parseInt(binaryBending.substring(0, 7), 2);
-        int msb = Integer.parseInt(binaryBending.substring(7, 14), 2);
-
-        Tuple p = new Tuple(lsb, msb);
-
-        return p; // because message format data1 = lsb, data2 = msb.
-    }
-
-    private static double log2(double x) {
-        // Math.log is base e, natural log, ln
-        return Math.log(x) / Math.log(2);
-    }
-
+    
     public class Tuple<Left, Right> {
 
         public final int left;
@@ -271,4 +243,35 @@ class ProtocolHandler {
      Tuple pageTotal = new Tuple(p1,p2);
      return pageTotal;
      }*/
+    
+        /*
+    private Tuple getMidiBending(int frequency, int pitch) {
+        // Bending Value 
+         The two bytes of the pitch bend message form a 14 bit number, 
+         0 to 16383. The value 8192 (sent, LSB first, as 0x00 0x40), is centered, or "no pitch bend." 
+         The value 0 (0x00 0x00) means, "bend as low as possible," and, similarly, 
+         16383 (0x7F 0x7F) is to "bend as high as possible."  
+         i.e. 1100000  0000000
+         // msb      lsb
+         
+        double pitchFreq = 440.0 * Math.pow(2, (pitch - 69) / 12.0);
+        int bendingValue = (int) Math.round(8192 + 4096 * 12 * log2((double) frequency / pitchFreq));
+
+        String binaryBending = Integer.toBinaryString(bendingValue); //0x0000 to 0x3FFF
+        int lsb = Integer.parseInt(binaryBending.substring(0, 7), 2);
+        int msb = Integer.parseInt(binaryBending.substring(7, 14), 2);
+
+        Tuple p = new Tuple(lsb, msb);
+
+        return p; // because message format data1 = lsb, data2 = msb.
+    }
+    
+    
+    private static double log2(double x) {
+        // Math.log is base e, natural log, ln
+        return Math.log(x) / Math.log(2);
+    }
+
+    */
+
 }
