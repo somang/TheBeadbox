@@ -663,20 +663,34 @@ public class VibcompUI extends javax.swing.JFrame {
                                 activeBead = endBead;
                             }
                         } else {//Moving a connected Bead.
-                            int yLoc = (beadPlayer1.getTrackAt(evt.getY()) - 1) * beadPlayer1.TRACKHEIGHT + 5;
-                            activeBead.setTrack(beadPlayer1.getTrackAt(evt.getY()));
-                            
-                            Bead leftPossible = beadPlayer1.getBeadAt(evt.getX() - 27, evt.getY(), beadPlayer1.page);
-                            Bead rightPossible = beadPlayer1.getBeadAt(evt.getX() + 27, evt.getY(), beadPlayer1.page);                            
+                            int x = evt.getX();
+                            int y = evt.getY();
+
+                            if (x < 0) {          //keep bead within page bounds         
+                                x = 0;
+                            } else if (x > 1072) {
+                                x = 1072;
+                            }
+                            if (y < 0) {
+                                y = 0;
+                            } else if (y > 540) {
+                                y = 540;
+                            }
+                            int yLoc = (beadPlayer1.getTrackAt(y) - 1) * beadPlayer1.TRACKHEIGHT + 5;
+                            activeBead.setTrack(beadPlayer1.getTrackAt(y));
+
+                            Bead leftPossible = beadPlayer1.getBeadAt(x - 27, y, beadPlayer1.page);
+                            Bead rightPossible = beadPlayer1.getBeadAt(x + 27, y, beadPlayer1.page);
                             if (leftPossible == null) { // If there exists no bead on the point's left
                                 if (rightPossible == null) {
-                                    activeBead.setLocation(evt.getX()-27, yLoc);
+                                    activeBead.setLocation(x - 27, yLoc);
                                 } else { // There is a bead on its right.
-                                    activeBead.setLocation(rightPossible.getX()-55, yLoc);
+                                    activeBead.setLocation(rightPossible.getX() - 55, yLoc);
                                 }
                             } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
-                                activeBead.setLocation(leftPossible.getX()+55, yLoc);
+                                activeBead.setLocation(leftPossible.getX() + 55, yLoc);
                             }
+
                         }
                     } else {
                         /*if endbead is not null;*/
