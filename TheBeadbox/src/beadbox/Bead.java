@@ -147,7 +147,7 @@ public class Bead extends javax.swing.JPanel {
                         sampleWave[k] = (float) ((float) Math.sin(angle) * playIntensity/100);
                     }
                     vibcompUI.listener.output(track - 1, sampleWave);
-                    vibcompUI.listener.setVolume(varIntensity);
+                    //vibcompUI.listener.setVolume(varIntensity);
                     //System.out.println(playIntensity+","+varFrequency);
                     
                 } catch (InterruptedException ex) {
