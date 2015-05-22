@@ -197,7 +197,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                                 diffreq = curfreq;
                             }
                             
-                            System.out.println(dif+","+diffreq);
+                            //System.out.println(dif+","+diffreq);
                             curBead.playBead(dif,diffreq);
                         }
                     }

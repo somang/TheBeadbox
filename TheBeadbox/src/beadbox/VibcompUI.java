@@ -666,8 +666,8 @@ public class VibcompUI extends javax.swing.JFrame {
                             int x = evt.getX();
                             int y = evt.getY();
 
-                            if (x < 0) {          //keep bead within page bounds         
-                                x = 0;
+                            if (x < 27) {          //keep bead within page bounds         
+                                x = 27;
                             } else if (x > 1072) {
                                 x = 1072;
                             }
