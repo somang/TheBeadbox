@@ -96,6 +96,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.setStroke(new BasicStroke(1));
         g2d.setColor(Color.BLACK);
         int yOfset = 2;
+        
         if (beads.size() > 0) {
             vibcompUI.playerOverview1.clearAll();
         }
@@ -129,7 +130,7 @@ public class BeadPlayer extends javax.swing.JPanel {
             } else {
                 curBead.setVisible(false);//.hide();
             }
-            vibcompUI.playerOverview1.setBead(curBead.page, curBead.track, true);
+            vibcompUI.playerOverview1.setBead(curBead.page, curBead.track, true);                       
             /**
              * Below is to play the actual audio output.
              *

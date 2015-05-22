@@ -30,13 +30,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
     }
 
     public void setBead(int page, int track, boolean active){
-        if (page > 15){
-            int dpPage = page%15;            
-            frags.get(dpPage-1).setBeadBars(track, active);   
-            frags.get(dpPage-1).repaint();
-        }else{
-            frags.get(page-1).setBeadBars(track, active);   
-            frags.get(page-1).repaint();
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        if ((page-1)/15 == chapter){
+            int dpPage = (page-1)%15;            
+            frags.get(dpPage).setBeadBars(track, active);   
+            frags.get(dpPage).repaint();
         }
     }
     public void clearAll(){
@@ -426,121 +424,123 @@ public final class PlayerOverview extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playerOverviewFragment1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment1MousePressed
-        vui.beadPlayer1.page=1;
-        vui.pageScroll.setValue(1);
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+1;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
         vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment1MousePressed
 
     private void playerOverviewFragment2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment2MousePressed
-        if(maxPage > 1){
-            vui.beadPlayer1.page=2;
-            vui.pageScroll.setValue(2);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+2;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment2MousePressed
 
     private void playerOverviewFragment3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment3MousePressed
-        if(maxPage > 2){
-            vui.beadPlayer1.page=3;
-            vui.pageScroll.setValue(3);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+3;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment3MousePressed
 
     private void playerOverviewFragment4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment4MousePressed
-        if(maxPage > 3){
-            vui.beadPlayer1.page=4;
-            vui.pageScroll.setValue(4);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+4;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment4MousePressed
 
     private void playerOverviewFragment5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment5MousePressed
-        if(maxPage > 4){
-            vui.beadPlayer1.page=5;
-            vui.pageScroll.setValue(5);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+5;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment5MousePressed
 
     private void playerOverviewFragment6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment6MousePressed
-        if(maxPage > 5){
-            vui.beadPlayer1.page=6;
-            vui.pageScroll.setValue(6);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+6;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment6MousePressed
 
     private void playerOverviewFragment7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment7MousePressed
-        if(maxPage > 6){
-            vui.beadPlayer1.page=7;
-            vui.pageScroll.setValue(7);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+7;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment7MousePressed
 
     private void playerOverviewFragment8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment8MousePressed
-        if(maxPage > 7){
-            vui.beadPlayer1.page=8;
-            vui.pageScroll.setValue(8);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+8;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment8MousePressed
 
     private void playerOverviewFragment9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment9MousePressed
-        if(maxPage > 8){
-            vui.beadPlayer1.page=9;
-            vui.pageScroll.setValue(9);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+9;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment9MousePressed
 
     private void playerOverviewFragment10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment10MousePressed
-        if(maxPage > 9){
-            vui.beadPlayer1.page=10;
-            vui.pageScroll.setValue(10);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+10;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment10MousePressed
 
     private void playerOverviewFragment11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment11MousePressed
-        if(maxPage > 10){
-            vui.beadPlayer1.page=11;
-            vui.pageScroll.setValue(11);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+11;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment11MousePressed
 
     private void playerOverviewFragment12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment12MousePressed
-        if(maxPage > 11){
-            vui.beadPlayer1.page=12;
-            vui.pageScroll.setValue(12);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+12;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment12MousePressed
 
     private void playerOverviewFragment13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment13MousePressed
-        if(maxPage > 12){
-            vui.beadPlayer1.page=13;
-            vui.pageScroll.setValue(13);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+13;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment13MousePressed
 
     private void playerOverviewFragment14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment14MousePressed
-        if(maxPage > 13){
-            vui.beadPlayer1.page=14;
-            vui.pageScroll.setValue(14);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+14;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment14MousePressed
 
     private void playerOverviewFragment15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment15MousePressed
-        if(maxPage > 14){
-            vui.beadPlayer1.page=15;
-            vui.pageScroll.setValue(15);
-            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
-        }
+        int chapter = (vui.beadPlayer1.page-1)/15;
+        int index = (chapter*15)+15;
+        vui.beadPlayer1.page=index;
+        vui.pageScroll.setValue(index);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment15MousePressed
 
 

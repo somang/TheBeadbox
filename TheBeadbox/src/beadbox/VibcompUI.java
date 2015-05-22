@@ -311,11 +311,6 @@ public class VibcompUI extends javax.swing.JFrame {
                 pageScrollMouseClicked(evt);
             }
         });
-        pageScroll.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
-            public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
-                pageScrollAdjustmentValueChanged(evt);
-            }
-        });
 
         playerOverview1.setBackground(new java.awt.Color(100, 100, 100));
 
@@ -772,12 +767,6 @@ public class VibcompUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_openButtonMouseClicked
-
-    private void pageScrollAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_pageScrollAdjustmentValueChanged
-        for (int i=0; i<playerOverview1.frags.size(); i++){
-            playerOverview1.frags.get(i).loadFrag(beadPlayer1.page/15);
-        }
-    }//GEN-LAST:event_pageScrollAdjustmentValueChanged
 
     /**
      * @param args the command line arguments
