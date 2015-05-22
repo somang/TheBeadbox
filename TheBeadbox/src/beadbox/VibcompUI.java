@@ -470,8 +470,6 @@ public class VibcompUI extends javax.swing.JFrame {
     private void frequencySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_frequencySliderStateChanged
         if (activeBead != null) {
             int freq = frequencySlider.getValue();
-            //logarithmic frequenct calculation goes here
-            //freq = (int) Math.log(freq)*12;
             activeBead.setFrequency(freq);
             beadPanel.repaint();
         }
@@ -561,6 +559,7 @@ public class VibcompUI extends javax.swing.JFrame {
                     if (evt.isControlDown()) {
                         if (isBeadPanelEmpty()) {
                             refreshBeadPanel();
+                            
                         }
                     } else {
                         beadPanelText.setVisible(true);
@@ -690,24 +689,10 @@ public class VibcompUI extends javax.swing.JFrame {
                 }
             }
             dragStatus = false;
-            
-            //System.out.println("------------------");
-            //for (Bead b:beadPlayer1.beads){
-            //    System.out.println(b);
-            //}
         }
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
     private void beadPlayer1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MouseDragged
-        /*        
-        if (activeBead != null) {
-            if (activeBead.connectedTo == null) {
-                dragStatus = true;
-            }else{
-                dragStatus = true;
-            }
-        }
-        */
         dragStatus = true;
     }//GEN-LAST:event_beadPlayer1MouseDragged
 
@@ -732,7 +717,6 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-
         if (playing) {
             //playButton.setText("> PLAY");
             playing = false;
@@ -746,7 +730,6 @@ public class VibcompUI extends javax.swing.JFrame {
     private void speedControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedControlStateChanged
         // playing speed slider
         beadPlayer1.SPEED = 100 - speedControl.getValue();
-
     }//GEN-LAST:event_speedControlStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed

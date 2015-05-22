@@ -428,12 +428,14 @@ public final class PlayerOverview extends javax.swing.JPanel {
     private void playerOverviewFragment1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment1MousePressed
         vui.beadPlayer1.page=1;
         vui.pageScroll.setValue(1);
+        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
     }//GEN-LAST:event_playerOverviewFragment1MousePressed
 
     private void playerOverviewFragment2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment2MousePressed
         if(maxPage > 1){
             vui.beadPlayer1.page=2;
             vui.pageScroll.setValue(2);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment2MousePressed
 
@@ -441,6 +443,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 2){
             vui.beadPlayer1.page=3;
             vui.pageScroll.setValue(3);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment3MousePressed
 
@@ -448,6 +451,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 3){
             vui.beadPlayer1.page=4;
             vui.pageScroll.setValue(4);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment4MousePressed
 
@@ -455,6 +459,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 4){
             vui.beadPlayer1.page=5;
             vui.pageScroll.setValue(5);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment5MousePressed
 
@@ -462,6 +467,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 5){
             vui.beadPlayer1.page=6;
             vui.pageScroll.setValue(6);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment6MousePressed
 
@@ -469,6 +475,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 6){
             vui.beadPlayer1.page=7;
             vui.pageScroll.setValue(7);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment7MousePressed
 
@@ -476,6 +483,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 7){
             vui.beadPlayer1.page=8;
             vui.pageScroll.setValue(8);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment8MousePressed
 
@@ -483,6 +491,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 8){
             vui.beadPlayer1.page=9;
             vui.pageScroll.setValue(9);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment9MousePressed
 
@@ -490,6 +499,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 9){
             vui.beadPlayer1.page=10;
             vui.pageScroll.setValue(10);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment10MousePressed
 
@@ -497,6 +507,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 10){
             vui.beadPlayer1.page=11;
             vui.pageScroll.setValue(11);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment11MousePressed
 
@@ -504,6 +515,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 11){
             vui.beadPlayer1.page=12;
             vui.pageScroll.setValue(12);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment12MousePressed
 
@@ -511,6 +523,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 12){
             vui.beadPlayer1.page=13;
             vui.pageScroll.setValue(13);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment13MousePressed
 
@@ -518,6 +531,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 13){
             vui.beadPlayer1.page=14;
             vui.pageScroll.setValue(14);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment14MousePressed
 
@@ -525,6 +539,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         if(maxPage > 14){
             vui.beadPlayer1.page=15;
             vui.pageScroll.setValue(15);
+            vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
         }
     }//GEN-LAST:event_playerOverviewFragment15MousePressed
 

@@ -59,7 +59,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                                 page = 1;
                             }
                             vibcompUI.pageScroll.setValue(page);
-                            jTP.setText("Page:"+page);
+                            jTP.setText("Page: "+page);
                         }
                     }
                     try {
