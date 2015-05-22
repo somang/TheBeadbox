@@ -147,7 +147,7 @@ public class VibcompUI extends javax.swing.JFrame {
             driverLoaded = true;
             System.out.println("loaded.");
             //System.out.println(driver.getNumChannelsInput());
-            //System.out.println(driver.getNumChannelsOutput());
+            System.out.println(driver.getNumChannelsOutput());
             //System.out.println(driver.getName());
             //System.out.println(driver.getCurrentState());
             
