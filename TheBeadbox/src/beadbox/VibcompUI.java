@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,122 +47,14 @@ public class VibcompUI extends javax.swing.JFrame {
      */
     public VibcompUI() {
         initComponents();
-        playerOverview1.vui = this;
-        endBead = null;
-        activeBead = null;
-        beadPanel.repaint();
-        /*Put labels on speed control slider*/
-        Hashtable<Integer, JLabel> labels1 = new Hashtable<Integer, JLabel>();
-        labels1.put(0, new JLabel("x0.5"));
-        labels1.put(50, new JLabel("0"));
-        labels1.put(100, new JLabel("x2"));
-        speedControl.setLabelTable(labels1);
-        speedControl.setPaintLabels(true);
-
-        /*Put labels on speed control slider*/
-        Hashtable<Integer, JLabel> labels2 = new Hashtable<Integer, JLabel>();
-        labels2.put(100, new JLabel("100"));
-        labels2.put(500, new JLabel("500"));
-        labels2.put(1000, new JLabel("1000"));
-        frequencySlider.setLabelTable(labels2);
-        frequencySlider.setPaintLabels(true);
-        
-        /*Put labels on speed control slider*/
-        Hashtable<Integer, JLabel> labels3 = new Hashtable<Integer, JLabel>();
-        labels3.put(0, new JLabel("0"));
-        labels3.put(50, new JLabel("50"));
-        labels3.put(100, new JLabel("100"));
-        intensitySlider.setLabelTable(labels3);
-        intensitySlider.setPaintLabels(true);
-        
-        Hashtable<Integer, JLabel> labels4 = new Hashtable<Integer, JLabel>();
-        labels4.put(0, new JLabel("0"));
-        labels4.put(55, new JLabel("50"));
-        labels4.put(110, new JLabel("100"));
-        labels4.put(165, new JLabel("150"));
-        labels4.put(220, new JLabel("200"));
-        labels4.put(275, new JLabel("250"));
-        labels4.put(330, new JLabel("300"));
-        labels4.put(385, new JLabel("350"));
-        labels4.put(440, new JLabel("400"));
-        labels4.put(495, new JLabel("450"));
-        labels4.put(550, new JLabel("500"));
-        labels4.put(605, new JLabel("550"));
-        labels4.put(660, new JLabel("600"));
-        labels4.put(715, new JLabel("650"));
-        labels4.put(770, new JLabel("700"));
-        labels4.put(825, new JLabel("750"));
-        labels4.put(880, new JLabel("800"));
-        labels4.put(935, new JLabel("850"));
-        labels4.put(990, new JLabel("900"));
-        labels4.put(1045, new JLabel("950"));
-        labels4.put(1100, new JLabel("1000"));
-        barSlider.setLabelTable(labels4);
-        barSlider.setPaintLabels(true);
-
-        
-        /*PageScroll Button Actionlistener for the custom mod.*/
-        pageScroll.getComponent(1).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                beadPlayer1.page = pageScroll.getValue();
-                jTextPane1.setText("Page: "+beadPlayer1.page);
-                if (activeBead != null) {
-                    if (activeBead.page != pageScroll.getValue()) {
-                        if (activeBead.connectedTo != null) {
-                            activeBead = null;
-                        }
-                        beadPanelText.setVisible(true);
-                    }
-                }
-            }
-        });
-        pageScroll.getComponent(0).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                beadPlayer1.page = pageScroll.getValue();
-                jTextPane1.setText("Page: "+beadPlayer1.page);
-                if (activeBead != null) {
-                    if (activeBead.page != pageScroll.getValue()) {
-                        if (activeBead.connectedTo != null) {
-                            activeBead = null;
-                        }
-                        beadPanelText.setVisible(true);
-                    }
-                }
-            }
-        });
-
-        //setExtendedState(this.MAXIMIZED_BOTH);        
-        
-        
-        /* load the driver */
         try {
-            /*
-             https://github.com/mhroth/jasiohost
-             */
-            //System.out.println(AsioDriver.getDriverNames());
-            driver = AsioDriver.getDriver("ASIO PreSonus FireStudio");
-            listener = new AsioSoundHost(driver);
-            driver.start();
-            driverLoaded = true;
-            System.out.println("loaded.");
-            //System.out.println(driver.getNumChannelsInput());
-            System.out.println(driver.getNumChannelsOutput());
-            //System.out.println(driver.getName());
-            //System.out.println(driver.getCurrentState());
-            
-        } catch (UnsatisfiedLinkError e) {
-            System.out.println("Please install the Following Driver: ASIO PreSonus FireStudio");
-            JOptionPane.showMessageDialog(null, "Please install the Following Driver: ASIO PreSonus FireStudio");
-            driverLoaded = false;
-        } catch (com.synthbot.jasiohost.AsioException err) {
-            System.out.println("Output Device not found: Please connect the Asio device");
-            JOptionPane.showMessageDialog(null, "Output Device not found: Please connect the Asio device");
-            driverLoaded = false;
+            initiateEssentials();
+        } catch (InvalidMidiDataException ex) {
+            Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        beadPlayer1.vibcompUI = this;
-        beadPlayer1.jTP = jTextPane1;
+        loadAsioDriver();
+        
+        
     }
 
     /**
@@ -707,10 +600,12 @@ public class VibcompUI extends javax.swing.JFrame {
 
     private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
         BeadPlayer.maxPage++;
+        
         pageScroll.setMaximum(BeadPlayer.maxPage + 1);
         pageScroll.setValue(BeadPlayer.maxPage);
         beadPlayer1.page = BeadPlayer.maxPage;
         jTextPane1.setText("Page: "+beadPlayer1.page);
+        beadPlayer1.pageMap.put(beadPlayer1.page, new ArrayList());
         
         if (activeBead != null) {
             if (activeBead.page != pageScroll.getValue()) {
@@ -833,6 +728,125 @@ public class VibcompUI extends javax.swing.JFrame {
             activeBead = prevBead;
         } else {
             activeBead = null;
+        }
+    }
+
+    private void initiateEssentials() throws InvalidMidiDataException {
+        playerOverview1.vui = this;
+        endBead = null;
+        activeBead = null;
+        beadPanel.repaint();
+        /*Put labels on speed control slider*/
+        Hashtable<Integer, JLabel> labels1 = new Hashtable<Integer, JLabel>();
+        labels1.put(0, new JLabel("x0.5"));
+        labels1.put(50, new JLabel("0"));
+        labels1.put(100, new JLabel("x2"));
+        speedControl.setLabelTable(labels1);
+        speedControl.setPaintLabels(true);
+
+        /*Put labels on speed control slider*/
+        Hashtable<Integer, JLabel> labels2 = new Hashtable<Integer, JLabel>();
+        labels2.put(100, new JLabel("100"));
+        labels2.put(500, new JLabel("500"));
+        labels2.put(1000, new JLabel("1000"));
+        frequencySlider.setLabelTable(labels2);
+        frequencySlider.setPaintLabels(true);
+        
+        /*Put labels on speed control slider*/
+        Hashtable<Integer, JLabel> labels3 = new Hashtable<Integer, JLabel>();
+        labels3.put(0, new JLabel("0"));
+        labels3.put(50, new JLabel("50"));
+        labels3.put(100, new JLabel("100"));
+        intensitySlider.setLabelTable(labels3);
+        intensitySlider.setPaintLabels(true);
+        
+        Hashtable<Integer, JLabel> labels4 = new Hashtable<Integer, JLabel>();
+        labels4.put(0, new JLabel("0"));
+        labels4.put(55, new JLabel("50"));
+        labels4.put(110, new JLabel("100"));
+        labels4.put(165, new JLabel("150"));
+        labels4.put(220, new JLabel("200"));
+        labels4.put(275, new JLabel("250"));
+        labels4.put(330, new JLabel("300"));
+        labels4.put(385, new JLabel("350"));
+        labels4.put(440, new JLabel("400"));
+        labels4.put(495, new JLabel("450"));
+        labels4.put(550, new JLabel("500"));
+        labels4.put(605, new JLabel("550"));
+        labels4.put(660, new JLabel("600"));
+        labels4.put(715, new JLabel("650"));
+        labels4.put(770, new JLabel("700"));
+        labels4.put(825, new JLabel("750"));
+        labels4.put(880, new JLabel("800"));
+        labels4.put(935, new JLabel("850"));
+        labels4.put(990, new JLabel("900"));
+        labels4.put(1045, new JLabel("950"));
+        labels4.put(1100, new JLabel("1000"));
+        barSlider.setLabelTable(labels4);
+        barSlider.setPaintLabels(true);
+
+        
+        /*PageScroll Button Actionlistener for the custom mod.*/
+        pageScroll.getComponent(1).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                beadPlayer1.page = pageScroll.getValue();
+                jTextPane1.setText("Page: "+beadPlayer1.page);
+                if (activeBead != null) {
+                    if (activeBead.page != pageScroll.getValue()) {
+                        if (activeBead.connectedTo != null) {
+                            activeBead = null;
+                        }
+                        beadPanelText.setVisible(true);
+                    }
+                }
+            }
+        });
+        pageScroll.getComponent(0).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                beadPlayer1.page = pageScroll.getValue();
+                jTextPane1.setText("Page: "+beadPlayer1.page);
+                if (activeBead != null) {
+                    if (activeBead.page != pageScroll.getValue()) {
+                        if (activeBead.connectedTo != null) {
+                            activeBead = null;
+                        }
+                        beadPanelText.setVisible(true);
+                    }
+                }
+            }
+        });        
+        beadPlayer1.vibcompUI = this;
+        beadPlayer1.jTP = jTextPane1;
+    }
+
+    private void loadAsioDriver() {
+        
+        /* load the driver */
+        try {
+            /*
+             https://github.com/mhroth/jasiohost
+             */
+            //System.out.println(AsioDriver.getDriverNames());
+            driver = AsioDriver.getDriver("ASIO PreSonus FireStudio");
+            listener = new AsioSoundHost(driver);
+            driver.start();
+            driverLoaded = true;
+            System.out.println("loaded.");
+            //System.out.println(driver.getNumChannelsInput());
+            System.out.println(driver.getNumChannelsOutput());
+            //System.out.println(driver.getName());
+            //System.out.println(driver.getCurrentState());
+            
+        } catch (UnsatisfiedLinkError e) {
+            System.out.println("Please install the Following Driver: ASIO PreSonus FireStudio");
+            JOptionPane.showMessageDialog(null, "Please install the Following Driver: ASIO PreSonus FireStudio");
+            driverLoaded = false;
+        } catch (com.synthbot.jasiohost.AsioException err) {
+            System.out.println("Output Device not found: Please connect the Asio device");
+            JOptionPane.showMessageDialog(null, "Output Device not found: Please connect the Asio device");
+            driverLoaded = false;
         }
     }
 

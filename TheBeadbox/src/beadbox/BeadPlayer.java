@@ -32,6 +32,8 @@ public class BeadPlayer extends javax.swing.JPanel {
     static int maxPage = 2;
     ArrayList<Bead> beads = new ArrayList();
     Map<Integer, Bead> map;
+    Map<Integer, ArrayList<Bead>> pageMap;
+    
     HashSet hs;
 
     VibcompUI vibcompUI = null;
@@ -45,6 +47,10 @@ public class BeadPlayer extends javax.swing.JPanel {
      * Creates new form BeadPlayer
      */
     public BeadPlayer() {
+        this.pageMap = new HashMap<Integer, ArrayList<Bead>>();
+        pageMap.put(1, new ArrayList());
+        pageMap.put(2, new ArrayList());
+        
         this.map = new HashMap<Integer, Bead>();
         this.playerTickTock = new Runnable() {
             public void run() {
@@ -239,6 +245,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         beads.add(bead);
         this.add(bead);
         map.put(beadIndex,bead);
+        pageMap.get(page).add(bead);
         refreshBeads();
         beadIndex++;
     }
@@ -246,6 +253,9 @@ public class BeadPlayer extends javax.swing.JPanel {
     public void deleteBead(Bead delBead) {
         delBead.breakConnections();
         beads.remove(delBead);
+        map.remove(delBead.index);
+        pageMap.get(delBead.page).remove(delBead);
+        
         this.remove(delBead);
         refreshBeads();
         if (beads.isEmpty()) {

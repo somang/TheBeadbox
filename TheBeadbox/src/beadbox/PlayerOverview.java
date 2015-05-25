@@ -7,7 +7,12 @@ package beadbox;
 
 import static beadbox.BeadPlayer.maxPage;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.midi.InvalidMidiDataException;
 
 /**
  *
@@ -424,11 +429,24 @@ public final class PlayerOverview extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playerOverviewFragment1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment1MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+1;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 1;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment1MousePressed
 
     private void playerOverviewFragment2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment2MousePressed
@@ -561,4 +579,30 @@ public final class PlayerOverview extends javax.swing.JPanel {
     private beadbox.PlayerOverviewFragment playerOverviewFragment8;
     private beadbox.PlayerOverviewFragment playerOverviewFragment9;
     // End of variables declaration//GEN-END:variables
+
+    private void copyPage(int pageIndex) {
+        try {
+            /*Copy this page*/
+            VibroMidiFile tempmf = new VibroMidiFile();
+            // Initiate the tracks
+            for (int i = 0; i < vui.beadPlayer1.tracksize; i++) { // 0-7
+                tempmf.noteOn(0, i, 60, 60);
+                tempmf.noteOff(0, i, 0);
+            }
+            
+            ArrayList<Bead> beadsOnThisPage = vui.beadPlayer1.pageMap.get(pageIndex);
+            
+            for (int i = 0; i < beadsOnThisPage.size(); i++) {
+                Bead tmpbead = beadsOnThisPage.get(i);
+                tempmf = beadInfoParser.parseBead(tempmf, tmpbead);
+            }
+            tempmf.writeToFile("tmp.mid");
+            
+        } catch (InvalidMidiDataException ex) {
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
