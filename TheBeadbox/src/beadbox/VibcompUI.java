@@ -652,7 +652,7 @@ public class VibcompUI extends javax.swing.JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
             try {
-                new OpenFile(selectedFile, this);
+                new OpenFile(selectedFile, this, false);
             } catch (MidiUnavailableException ex) {
                 Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvalidMidiDataException ex) {

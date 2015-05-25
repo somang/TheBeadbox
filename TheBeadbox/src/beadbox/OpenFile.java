@@ -25,7 +25,7 @@ import javax.sound.midi.Track;
 public class OpenFile {
     static Sequence sequence;
     
-    public OpenFile(File file, VibcompUI ui) throws MidiUnavailableException, InvalidMidiDataException, IOException{
+    public OpenFile(File file, VibcompUI ui, boolean paste) throws MidiUnavailableException, InvalidMidiDataException, IOException{
         
         Synthesizer synth = MidiSystem.getSynthesizer();
         synth.open();
@@ -41,13 +41,15 @@ public class OpenFile {
         int LYRIC = 5;
         int xLoc = 0, yLoc = 0;
         sequence = MidiSystem.getSequence(file);
-        
-        String con = "";      
-        Bead activeBead =null, tmpBead =null;
+            
+        Bead activeBead =null;
         int key=0, velocity;
-        // make sure composition is cleared first
-        ui.beadPlayer1.beads.clear();
-        ui.beadPlayer1.removeAll();
+        
+        if(!paste){
+            // make sure composition is cleared first
+            ui.beadPlayer1.beads.clear();
+            ui.beadPlayer1.removeAll();
+        }
         
         //read bead data
             int trackNumber = 0;
@@ -74,6 +76,7 @@ public class OpenFile {
                                 activeBead.setIntensity(velocity);
                                 yLoc = (trackNumber-1)*ui.beadPlayer1.TRACKHEIGHT+5;
                                 xLoc = (int) curTick%1100;
+                                if(paste) xLoc = (int) curTick%1100;
                             }
                         }
                         // bead frequency info (pitch bend)
@@ -102,8 +105,6 @@ public class OpenFile {
                                 int connectIndex = Integer.parseInt(data);
                                 activeBead.connectIndex = connectIndex;
                                 System.out.println("\tNote Connected Index ->  " +connectIndex);
-                                
-                                con+= connectIndex+":"+activeBead.index+"\n";
                             }
                         }
                         //when the key if off
@@ -116,6 +117,7 @@ public class OpenFile {
                                 ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);
                                 activeBead.index = tmpIndex;
                                 activeBead.page = (int)((curTick)/1100)+1;
+                                if(paste) activeBead.page = ui.beadPlayer1.page;
                                 ui.beadPlayer1.repaint();
                             }
                         }                         
