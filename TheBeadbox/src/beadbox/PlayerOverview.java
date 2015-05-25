@@ -450,115 +450,297 @@ public final class PlayerOverview extends javax.swing.JPanel {
     }//GEN-LAST:event_playerOverviewFragment1MousePressed
 
     private void playerOverviewFragment2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment2MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+2;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 2;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment2MousePressed
 
     private void playerOverviewFragment3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment3MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+3;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 3;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment3MousePressed
 
     private void playerOverviewFragment4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment4MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+4;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 4;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment4MousePressed
 
     private void playerOverviewFragment5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment5MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+5;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 5;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment5MousePressed
 
     private void playerOverviewFragment6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment6MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+6;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 6;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment6MousePressed
 
     private void playerOverviewFragment7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment7MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+7;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 7;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment7MousePressed
 
     private void playerOverviewFragment8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment8MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+8;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 8;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment8MousePressed
 
     private void playerOverviewFragment9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment9MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+9;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 9;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment9MousePressed
 
     private void playerOverviewFragment10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment10MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+10;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 10;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment10MousePressed
 
     private void playerOverviewFragment11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment11MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+11;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 11;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment11MousePressed
 
     private void playerOverviewFragment12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment12MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+12;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 12;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment12MousePressed
 
     private void playerOverviewFragment13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment13MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+13;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 13;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment13MousePressed
 
     private void playerOverviewFragment14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment14MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+14;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 14;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment14MousePressed
 
     private void playerOverviewFragment15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment15MousePressed
-        int chapter = (vui.beadPlayer1.page-1)/15;
-        int index = (chapter*15)+15;
-        vui.beadPlayer1.page=index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: "+vui.pageScroll.getValue());
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int chapter = (vui.beadPlayer1.page - 1) / 15;
+            int index = (chapter * 15) + 15;
+            System.out.println(index);
+            
+            if (evt.isControlDown()) {
+                System.out.println("copied");
+                copyPage(index);
+            } else {
+                /*Navigate*/
+                vui.beadPlayer1.page = index;
+                vui.pageScroll.setValue(index);
+                vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+            }
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            /*Right click to paste.*/
+            
+        }
     }//GEN-LAST:event_playerOverviewFragment15MousePressed
 
 
@@ -591,12 +773,13 @@ public final class PlayerOverview extends javax.swing.JPanel {
             }
             
             ArrayList<Bead> beadsOnThisPage = vui.beadPlayer1.pageMap.get(pageIndex);
-            
-            for (int i = 0; i < beadsOnThisPage.size(); i++) {
-                Bead tmpbead = beadsOnThisPage.get(i);
-                tempmf = beadInfoParser.parseBead(tempmf, tmpbead);
+            if (beadsOnThisPage != null) {
+                for (int i = 0; i < beadsOnThisPage.size(); i++) {
+                    Bead tmpbead = beadsOnThisPage.get(i);
+                    tempmf = beadInfoParser.parseBead(tempmf, tmpbead, true);
+                }
+                tempmf.writeToFile("tmp.mid");
             }
-            tempmf.writeToFile("tmp.mid");
             
         } catch (InvalidMidiDataException ex) {
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);

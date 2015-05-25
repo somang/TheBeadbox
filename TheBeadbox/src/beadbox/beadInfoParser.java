@@ -15,7 +15,7 @@ import javax.sound.midi.InvalidMidiDataException;
  */
 public class beadInfoParser {
     
-    public static VibroMidiFile parseBead(VibroMidiFile mf, Bead b) throws InvalidMidiDataException, UnsupportedEncodingException {
+    public static VibroMidiFile parseBead(VibroMidiFile mf, Bead b, boolean copy) throws InvalidMidiDataException, UnsupportedEncodingException {
         /* This method takes a bead, and parse it
          So that it converts the data that could fit into Midi Protocol
             
@@ -60,15 +60,25 @@ public class beadInfoParser {
             }
             cntBeadIndex = parseMessageData(b.connectedTo.index);
         }
+        if (copy){
+            position = (long) (b.getX());
+            mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
+            mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
+            mf.polyPress(position, track, indexVal.left, indexVal.right); // Bead Index
+            mf.progChange(position, track, row);
+            mf.controlChange(position, track, cntBeadIndex.left, cntBeadIndex.right);// Connected Bead Index
+            mf.progChange(position, track, cbrow);
+            mf.noteOff(position + (long) 55, track, pitchVal); // 0x80
 
-        mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
-        mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
-        mf.polyPress(position, track, indexVal.left, indexVal.right); // Bead Index
-        mf.progChange(position, track, row);
-        mf.controlChange(position, track, cntBeadIndex.left, cntBeadIndex.right);// Connected Bead Index
-        mf.progChange(position, track, cbrow);
-        mf.noteOff(position + (long) 55, track, pitchVal); // 0x80
-        
+        }else {
+            mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
+            mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
+            mf.polyPress(position, track, indexVal.left, indexVal.right); // Bead Index
+            mf.progChange(position, track, row);
+            mf.controlChange(position, track, cntBeadIndex.left, cntBeadIndex.right);// Connected Bead Index
+            mf.progChange(position, track, cbrow);
+            mf.noteOff(position + (long) 55, track, pitchVal); // 0x80
+        }
         return mf;
     }
 
