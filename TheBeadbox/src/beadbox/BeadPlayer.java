@@ -26,7 +26,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     int tracksize=8; // 8 because this is for the EmotiChair (8 channels,16speakers)
     int TRACKHEIGHT = getHeight() / tracksize;
     int BEADHEIGHT = 50;
-    int barPosition = 10, MAXBARPOS = 1000;
+    int barPosition = 10, MAXBARPOS = 1100;
     int page = 1;
     int beadIndex = 0;
     static int maxPage = 2;
@@ -86,6 +86,13 @@ public class BeadPlayer extends javax.swing.JPanel {
         TRACKHEIGHT = getHeight() / 8;
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g2d);
+        //create vertical grid lines
+        g2d.setColor(new Color(240,240,240));
+        g2d.setStroke(new BasicStroke(1));
+        for (int i=0; i<20; i++){
+            g2d.drawLine(i*55, 0, i*55, getHeight());
+        }
+        //create horizontal staff lines
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(4));
         g2d.drawLine(0, TRACKHEIGHT, getWidth(), TRACKHEIGHT);
@@ -95,8 +102,9 @@ public class BeadPlayer extends javax.swing.JPanel {
         g2d.drawLine(0, TRACKHEIGHT * 5, getWidth(), TRACKHEIGHT * 5);
         g2d.drawLine(0, TRACKHEIGHT * 6, getWidth(), TRACKHEIGHT * 6);
         g2d.drawLine(0, TRACKHEIGHT * 7, getWidth(), TRACKHEIGHT * 7);
-        g2d.setColor(Color.GRAY);
-        g2d.setStroke(new BasicStroke(1));
+        //create vertical moving bar
+        g2d.setColor(Color.RED);
+        g2d.setStroke(new BasicStroke(2));
         g2d.drawLine(getWidth() * barPosition / MAXBARPOS, 0, getWidth() * barPosition / MAXBARPOS, getHeight());
 
         g2d.setStroke(new BasicStroke(1));

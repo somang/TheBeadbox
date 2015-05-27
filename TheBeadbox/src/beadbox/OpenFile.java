@@ -40,6 +40,7 @@ public class OpenFile {
         int PITCH_BEND = 0xE0;
         int LYRIC = 5;
         int xLoc = 0, yLoc = 0;
+        int BEADHEIGHT = 55;
         sequence = MidiSystem.getSequence(file);
             
         Bead activeBead =null;
@@ -75,7 +76,7 @@ public class OpenFile {
                                 activeBead.vibcompUI = ui;
                                 activeBead.setIntensity(velocity);
                                 yLoc = (trackNumber-1)*ui.beadPlayer1.TRACKHEIGHT+5;
-                                xLoc = (int) curTick%1100;
+                                xLoc = (int) curTick%1100+(BEADHEIGHT/2);
                                 if(paste) xLoc = (int) curTick%1100;
                             }
                         }
@@ -112,7 +113,7 @@ public class OpenFile {
                             if(curTick!=0){
                                 System.out.print("@" + event.getTick() + " ");
                                 System.out.println("Note off ->  Bead Created\n");                               
-                                activeBead.setSize(55, 55);
+                                activeBead.setSize(BEADHEIGHT, BEADHEIGHT);
                                 int tmpIndex = activeBead.index;
                                 ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);
                                 activeBead.index = tmpIndex;

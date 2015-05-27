@@ -194,14 +194,9 @@ public class VibcompUI extends javax.swing.JFrame {
         pageScroll.setMinimum(1);
         pageScroll.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
         pageScroll.setVisibleAmount(1);
-        pageScroll.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                pageScrollMouseDragged(evt);
-            }
-        });
-        pageScroll.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageScrollMouseClicked(evt);
+        pageScroll.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
+            public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
+                pageScrollAdjustmentValueChanged(evt);
             }
         });
 
@@ -244,9 +239,9 @@ public class VibcompUI extends javax.swing.JFrame {
         });
 
         openButton.setText("Open");
-        openButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                openButtonMouseClicked(evt);
+        openButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openButtonActionPerformed(evt);
             }
         });
 
@@ -370,32 +365,6 @@ public class VibcompUI extends javax.swing.JFrame {
     private void barSliderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barSliderMouseClicked
         beadPlayer1.barPosition = barSlider.getValue();
     }//GEN-LAST:event_barSliderMouseClicked
-
-    private void pageScrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseClicked
-        beadPlayer1.page = pageScroll.getValue();
-        jTextPane1.setText("Page: "+beadPlayer1.page);
-        if (activeBead != null) {
-            if (activeBead.page != pageScroll.getValue()) {
-                if (activeBead.connectedTo != null) {
-                    activeBead = null;
-                }
-                beadPanelText.setVisible(true);
-            }
-        }
-    }//GEN-LAST:event_pageScrollMouseClicked
-
-    private void pageScrollMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pageScrollMouseDragged
-        beadPlayer1.page = pageScroll.getValue();
-        jTextPane1.setText("Page: "+beadPlayer1.page);
-        if (activeBead != null) {
-            if (activeBead.page != pageScroll.getValue()) {
-                if (activeBead.connectedTo != null) {
-                    activeBead = null;
-                }
-                beadPanelText.setVisible(true);
-            }
-        }
-    }//GEN-LAST:event_pageScrollMouseDragged
 
     private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
         if (isBeadPanelEmpty()) {
@@ -637,22 +606,30 @@ public class VibcompUI extends javax.swing.JFrame {
     }//GEN-LAST:event_speedControlStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        try {
-            // TODO add your handling code here:
-            ph.saveFile(beadPlayer1, rightJPanel1);
-        } catch (Exception ex) {
-            Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if(!selectedFile.getName().endsWith(".vidi")) 
+                selectedFile = new File(selectedFile.toString()+".vidi");
+            try {
+                // TODO add your handling code here:
+                ph.saveFile(beadPlayer1, rightJPanel1,selectedFile.getAbsolutePath());
+                System.out.println("Saved file: " + selectedFile.getAbsolutePath());
+            } catch (Exception ex) {
+                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void openButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openButtonMouseClicked
+    private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            File selectedFile = fileChooser.getSelectedFile();         
             try {
                 new OpenFile(selectedFile, this, false);
+                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
             } catch (MidiUnavailableException ex) {
                 Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvalidMidiDataException ex) {
@@ -661,7 +638,20 @@ public class VibcompUI extends javax.swing.JFrame {
                 Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_openButtonMouseClicked
+    }//GEN-LAST:event_openButtonActionPerformed
+
+    private void pageScrollAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_pageScrollAdjustmentValueChanged
+        beadPlayer1.page = pageScroll.getValue();
+        jTextPane1.setText("Page: "+beadPlayer1.page);
+        if (activeBead != null) {
+            if (activeBead.page != pageScroll.getValue()) {
+                if (activeBead.connectedTo != null) {
+                    activeBead = null;
+                }
+                beadPanelText.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_pageScrollAdjustmentValueChanged
 
     /**
      * @param args the command line arguments

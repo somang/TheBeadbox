@@ -22,7 +22,7 @@ class ProtocolHandler {
 
     public final static float LOG2 = 0.6931472f;
     
-    public void saveFile(BeadPlayer beadPlayer1, rightJPanel rightJPanel1) throws Exception {
+    public void saveFile(BeadPlayer beadPlayer1, rightJPanel rightJPanel1, String fName) throws Exception {
         /**
          * Initialization*
          */
@@ -73,7 +73,7 @@ class ProtocolHandler {
         }
         
         mf.addLyrics(0, p);
-        mf.writeToFile("testo.mid");
+        mf.writeToFile(fName);
     }
 
     
