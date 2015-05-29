@@ -48,7 +48,7 @@ public class OpenFile {
         Bead activeBead =null;
         int key=0, velocity;
         Map<Integer, Integer> connectionPairs = new HashMap<Integer, Integer>();
-        
+        boolean conBead = false;
         if(!paste){
             // make sure composition is cleared first
             ui.beadPlayer1.beads.clear();
@@ -98,20 +98,30 @@ public class OpenFile {
                         }
                         // bead index multiplier (program change)
                         else if (sm.getCommand() == NOTE_PROGCNG){
-                            String data = ""+sm.getData1();
-                            activeBead.index = activeBead.index*Integer.parseInt(data);
-                            System.out.println("\tNote Index ->  " +activeBead.index);   
+                            if (conBead){
+                                String data = "" + sm.getData1();
+                                activeBead.connectIndex = activeBead.connectIndex * Integer.parseInt(data);
+                                System.out.println("\tCon Index ->  " + activeBead.connectIndex);
+                                conBead = false;
+                            }else {
+                                String data = "" + sm.getData1();
+                                activeBead.index = activeBead.index * Integer.parseInt(data);
+                                System.out.println("\tNote Index ->  " + activeBead.index);
+                            }
                         }
                         // bead connection index info (control change)
                         else if (sm.getCommand() == NOTE_CTRLCNG){
-                            String data = ""+sm.getData1()+sm.getData2(); 
-                            if(!data.equals("00")){
-                                int connectIndex = Integer.parseInt(data);
-                                activeBead.connectIndex = connectIndex;
-                                System.out.println("\tNote Connected Index ->  " +connectIndex);
+                            if (!conBead) {
+                                String data = "" + sm.getData1() + sm.getData2();
+                                if (!data.equals("00")) {
+                                    int connectIndex = Integer.parseInt(data);
+                                    activeBead.connectIndex = connectIndex;
+                                    //System.out.println("\tNote Connected Index ->  " + connectIndex);
+                                }
+                                conBead = true;
                             }
                         }
-                        //when the key if off
+                        //when the bead is off
                         else if (sm.getCommand() >= NOTE_OFF_START && sm.getCommand() <= NOTE_OFF_END) {
                             if(curTick!=0){
                                 System.out.print("@" + event.getTick() + " ");
@@ -121,7 +131,7 @@ public class OpenFile {
                                 ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);
                                 activeBead.index = tmpIndex;
                                 activeBead.page = (int)((curTick)/1100)+1;
-                                if(paste) activeBead.page = ui.beadPlayer1.page;
+                                if(paste) {activeBead.page = ui.beadPlayer1.page;}
                                 ui.beadPlayer1.repaint();
                             }
                         }                         
@@ -152,7 +162,7 @@ public class OpenFile {
              
                     }
                 }
-            } 
+            }
             
         //set connections
             for (int i = 0; i<ui.beadPlayer1.map.size(); i++){               
@@ -162,9 +172,9 @@ public class OpenFile {
                 //System.out.println(a.connectedTo);
                 
                 
-                if(connectedIndex != -1){
-                    ui.beadPlayer1.getBeadAtIndex(beadIndex).setConnection(ui.beadPlayer1.getBeadAtIndex(connectedIndex));
-                    System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
+                if((connectedIndex != -1)&&(a.connectedTo==null)){
+                    a.setConnection(ui.beadPlayer1.getBeadAtIndex(connectedIndex));
+                    System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex+" and "+a.connectedTo);
                 }
             }
             
