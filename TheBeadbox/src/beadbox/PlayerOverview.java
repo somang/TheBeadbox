@@ -13,6 +13,9 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.midi.InvalidMidiDataException;
@@ -719,6 +722,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
             }
             
             ArrayList<Bead> beadsOnThisPage = vui.beadPlayer1.pageMap.get(pageIndex);
+            beadsOnThisPage = refreshCopyIndex(beadsOnThisPage);
+            
             if (beadsOnThisPage != null) {
                 for (int i = 0; i < beadsOnThisPage.size(); i++) {
                     Bead tmpbead = beadsOnThisPage.get(i);
@@ -743,14 +748,44 @@ public final class PlayerOverview extends javax.swing.JPanel {
         }
         File file = new File ("tmp.mid");
         try {
-            new OpenFile(file, vui,true);
-        } catch (MidiUnavailableException ex) {
+            new OpenFile(file, vui, true);
+        }catch (IOException ex) {
+            System.out.println(ex);
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (MidiUnavailableException ex) {
+            System.out.println(ex);
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidMidiDataException ex) {
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+            System.out.println(ex);
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * Re index the beads, so that each beads index starts from 0 to size of the beads in this page.
+     * @param beadsOnThisPage 
+     */
+    private ArrayList<Bead> refreshCopyIndex(ArrayList<Bead> beadsOnThisPage) {
+        Map<Integer, Integer> tmpmap = new HashMap<Integer, Integer>();
+        
+        if (beadsOnThisPage != null) {
+            HashSet hs = new HashSet();
+            hs.addAll(beadsOnThisPage);
+            beadsOnThisPage = new ArrayList();
+            beadsOnThisPage.addAll(hs);
+        }
+        
+        for (int i=0;i<beadsOnThisPage.size();i++){
+            tmpmap.put(i,beadsOnThisPage.get(i).connectIndex);
+        }
+        for (int i=0;i<beadsOnThisPage.size();i++){
+            beadsOnThisPage.get(i).index = i;
+            if (beadsOnThisPage.get(i).connectIndex != -1){
+                beadsOnThisPage.get(i).connectIndex = tmpmap.get(i);
+            }
+        }
+        return beadsOnThisPage;
     }
     
     class OverviewPopUp extends JPopupMenu {
@@ -764,7 +799,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     copyPage(index);
-                    System.out.println("copied");                   
+                    System.out.println("copied page"+index);                   
                 }
             });
             paste.addActionListener(new java.awt.event.ActionListener() {

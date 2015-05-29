@@ -7,6 +7,8 @@ package beadbox;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
@@ -45,6 +47,7 @@ public class OpenFile {
             
         Bead activeBead =null;
         int key=0, velocity;
+        Map<Integer, Integer> connectionPairs = new HashMap<Integer, Integer>();
         
         if(!paste){
             // make sure composition is cleared first
@@ -156,8 +159,11 @@ public class OpenFile {
                 Bead a = ui.beadPlayer1.getBeadAtIndex(i);
                 int beadIndex = a.index;
                 int connectedIndex = a.connectIndex;
+                //System.out.println(a.connectedTo);
+                
+                
                 if(connectedIndex != -1){
-                    ui.beadPlayer1.getBeadAtIndex(beadIndex).setConnection(ui.beadPlayer1.getBeadAtIndex(a.connectIndex));
+                    ui.beadPlayer1.getBeadAtIndex(beadIndex).setConnection(ui.beadPlayer1.getBeadAtIndex(connectedIndex));
                     System.out.println("Connecting Beads "+i+": "+beadIndex+"&"+connectedIndex);
                 }
             }
