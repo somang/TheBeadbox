@@ -138,19 +138,20 @@ public class VibroMidiFile {
         curTrack.add(ev);
     }
     
-    public void setTempo(Track curTrack) throws InvalidMidiDataException{
+    public void setTempo(int curTrack, int tempo) throws InvalidMidiDataException{
         /**
          * The Default Tempo bpm is 120
          */
+        
         MetaMessage mm = new MetaMessage();
             byte[] b = new byte[]{
-                (byte)0x07, 
+                (byte)tempo, 
                 (byte)0xA1, 
                 (byte)0x20
             };            
         mm.setMessage(81, b, 3);
         MidiEvent ev = new MidiEvent(mm,0);
-        curTrack.add(ev);
+        sequence.getTracks()[curTrack].add(ev);
     }
     
     public void addLyrics(int track, String metacontent) throws InvalidMidiDataException, UnsupportedEncodingException {
