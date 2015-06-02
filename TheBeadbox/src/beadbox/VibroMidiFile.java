@@ -88,6 +88,7 @@ public class VibroMidiFile {
     
     /**
      * This is to store the track information of the connected bead. [0-126]
+     * 0xC0
      * @param lTick
      * @param track
      * @param data1
@@ -101,6 +102,7 @@ public class VibroMidiFile {
     public void noteOff(long lTick, int track, int frequency) throws InvalidMidiDataException {
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.NOTE_OFF, frequency, 0, lTick));
     }    
+    /*0xB0*/
     public void controlChange(long lTick, int track, int data1, int data2) throws InvalidMidiDataException{        
         sequence.getTracks()[track].add(createNoteEvent(ShortMessage.CONTROL_CHANGE, data1, data2, lTick));
     }    
@@ -142,6 +144,7 @@ public class VibroMidiFile {
         /**
          * The Default Tempo bpm is 120
          */
+        
         
         MetaMessage mm = new MetaMessage();
             byte[] b = new byte[]{

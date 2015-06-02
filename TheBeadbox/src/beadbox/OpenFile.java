@@ -7,6 +7,8 @@ package beadbox;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sound.midi.InvalidMidiDataException;
@@ -41,6 +43,7 @@ public class OpenFile {
         int NOTE_PROGCNG = 0xC0;
         int NOTE_CTRLCNG = 0xB0;
         int PITCH_BEND = 0xE0;
+        int TEMPO = 47;
         int LYRIC = 5;
         int xLoc = 0, yLoc = 0;
         int BEADHEIGHT = 55;
@@ -160,12 +163,15 @@ public class OpenFile {
                         ui.rightJPanel1.beadlight7.setLocation(Integer.parseInt(splitArray[13]), Integer.parseInt(splitArray[14]));
                         ui.rightJPanel1.beadlight8.setLocation(Integer.parseInt(splitArray[15]), Integer.parseInt(splitArray[16]));
                     }
-
-                }else if (trackNumber == 1 && message instanceof MetaMessage){
-                    MetaMessage mm = (MetaMessage) message;
-                    
-                    System.out.println("Other message: " + message.getClass());
-                    
+                    else if (mm.getType() == TEMPO){
+                        System.out.println(mm.getData().length);
+                        
+                        for (int p=0; p<mm.getData().length;p++){
+                            System.out.println(mm.getData()[p]);
+                        }
+                        
+                        
+                    }
                 }
             }
         }
