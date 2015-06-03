@@ -715,7 +715,7 @@ public class VibcompUI extends javax.swing.JFrame {
     protected beadbox.PlayerOverview playerOverview1;
     protected beadbox.rightJPanel rightJPanel1;
     private javax.swing.JButton saveButton;
-    private javax.swing.JSlider speedControl;
+    protected javax.swing.JSlider speedControl;
     // End of variables declaration//GEN-END:variables
 
     private void deleteBead(Bead tmpBead) {

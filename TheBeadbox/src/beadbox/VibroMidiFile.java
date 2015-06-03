@@ -147,12 +147,13 @@ public class VibroMidiFile {
         
         
         MetaMessage mm = new MetaMessage();
+            
             byte[] b = new byte[]{
                 (byte)tempo, 
                 (byte)0xA1, 
                 (byte)0x20
             };            
-        mm.setMessage(81, b, 3);
+        mm.setMessage(51, b, 3);
         MidiEvent ev = new MidiEvent(mm,0);
         sequence.getTracks()[curTrack].add(ev);
     }

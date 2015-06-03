@@ -71,7 +71,7 @@ class ProtocolHandler {
             Beadlight tmpBL = (Beadlight) rightJPanel1.getComponents()[i];
             p = p + "," + tmpBL.getX() + "," + tmpBL.getY();
         }
-        //mf.setTempo(0, beadPlayer1.SPEED);
+        mf.setTempo(0, beadPlayer1.SPEED);
         mf.addLyrics(0, p);
         mf.writeToFile(fName);
     }
