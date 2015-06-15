@@ -150,10 +150,8 @@ public class VibroMidiFile {
             
             byte[] b = new byte[]{
                 (byte)tempo, 
-                (byte)0xA1, 
-                (byte)0x20
             };            
-        mm.setMessage(51, b, 3);
+        mm.setMessage(51, b, 1);
         MidiEvent ev = new MidiEvent(mm,0);
         sequence.getTracks()[curTrack].add(ev);
     }
