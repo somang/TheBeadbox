@@ -7,6 +7,8 @@ package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -25,7 +27,7 @@ import javax.swing.JOptionPane;
  *
  * @author somang & albert
  */
-public class VibcompUI extends javax.swing.JFrame {
+public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     static protected boolean playing = false;
     protected Bead activeBead;
@@ -47,6 +49,10 @@ public class VibcompUI extends javax.swing.JFrame {
      */
     public VibcompUI() {
         initComponents();
+        setFocusable(true);
+        addKeyListener(this);
+        
+        
         try {
             initiateEssentials();
         } catch (InvalidMidiDataException ex) {
@@ -846,6 +852,22 @@ public class VibcompUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Output Device not found: Please connect the Asio device");
             driverLoaded = false;
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        System.out.println("key typed");
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        System.out.println("key pressed");
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        System.out.println("key released");
     }
 
 }
