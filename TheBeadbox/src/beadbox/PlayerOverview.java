@@ -761,6 +761,19 @@ public final class PlayerOverview extends javax.swing.JPanel {
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+     private void clearPage(int pageIndex){ 
+        int timeout = 5;
+        while(vui.beadPlayer1.pageMap.get(pageIndex).size()>0){
+            for (int i = 0; i < vui.beadPlayer1.beads.size(); i++) {
+                if(vui.beadPlayer1.beads.get(i).page == pageIndex){
+                    vui.beadPlayer1.deleteBead(vui.beadPlayer1.beads.get(i));
+                }
+            }
+            if (timeout==0) break;
+            timeout--;
+        }
+     }
 
     /**
      * Re index the beads, so that each beads index starts from 0 to size of the beads in this page.
@@ -789,12 +802,14 @@ public final class PlayerOverview extends javax.swing.JPanel {
     }
     
     class OverviewPopUp extends JPopupMenu {
-        JMenuItem copy, paste;
+        JMenuItem copy, paste, clear;
         public OverviewPopUp(int index){
             copy = new JMenuItem("Copy");
             paste = new JMenuItem("Paste");
+            clear = new JMenuItem("Clear");
             add(copy); 
             add(paste);
+            add(clear); 
             copy.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -807,6 +822,13 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent e) {
                     pastePage();
                     System.out.println("pasted");                   
+                }
+            });
+            clear.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    clearPage(index);
+                    System.out.println("page cleared");                   
                 }
             });
         }
