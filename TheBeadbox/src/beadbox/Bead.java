@@ -48,6 +48,11 @@ public class Bead extends javax.swing.JPanel {
         curX = (getWidth() - curIntensity / 2) / 2;
         curY = (getHeight() - curIntensity / 2) / 2;
         g2d.fillOval(curX, curY, curIntensity / 2, curIntensity / 2);
+        if(VibcompUI.activeBead==this || VibcompUI.multiSelect.contains(this)) {
+            g2d.setStroke(new BasicStroke(2));
+            g2d.setColor(Color.RED);
+            g2d.drawOval(centerX, centerY, maxIntensity, maxIntensity);
+        }
 
         try {
             if (playable && VibcompUI.playing) {

@@ -30,10 +30,11 @@ import javax.swing.JOptionPane;
 public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     static protected boolean playing = false;
-    protected Bead activeBead;
+    static protected Bead activeBead;
     protected AsioDriver driver;
     protected AsioSoundHost listener;
     protected boolean driverLoaded;
+    static protected ArrayList<Bead> multiSelect = new ArrayList();
 
     Bead startBead, endBead;
     Bead prevBead = null;
@@ -92,7 +93,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1500, 1000));
+        setPreferredSize(new java.awt.Dimension(1400, 900));
+        setResizable(false);
 
         beadPlayer1.setBackground(new java.awt.Color(255, 255, 255));
         beadPlayer1.setPreferredSize(new java.awt.Dimension(1100, 550));
@@ -451,6 +453,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity());
                 frequencySlider.setValue(activeBead.getFrequency());
+                
+                //multi select
+                if(evt.isShiftDown()){
+                    if(multiSelect.contains(activeBead)) multiSelect.remove(activeBead);
+                    else multiSelect.add(activeBead);
+                }
             } else if (beadPlayer1.beads.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
             } else if (activeBead == null && tmpBead != null) {
