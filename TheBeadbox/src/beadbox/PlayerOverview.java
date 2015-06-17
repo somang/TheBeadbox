@@ -779,7 +779,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
      * Re index the beads, so that each beads index starts from 0 to size of the beads in this page.
      * @param beadsOnThisPage 
      */
-    private ArrayList<Bead> refreshCopyIndex(ArrayList<Bead> beadsOnThisPage) {
+    protected ArrayList<Bead> refreshCopyIndex(ArrayList<Bead> beadsOnThisPage) {
         Map<Integer, Integer> tmpmap = new HashMap<Integer, Integer>();
         
         if (beadsOnThisPage != null) {

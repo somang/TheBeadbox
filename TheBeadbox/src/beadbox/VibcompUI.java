@@ -7,6 +7,7 @@ package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -21,7 +22,9 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -472,6 +475,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 if(evt.isShiftDown()){
                     if(multiSelect.contains(activeBead)) multiSelect.remove(activeBead);
                     else multiSelect.add(activeBead);
+                } else {
+                    multiSelect.clear();
                 }
             } else if (beadPlayer1.beads.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please click 'New Bead' to create a Bead, then Click on then click on the canvas");
@@ -481,11 +486,11 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 //tmpBead=activeBead;
             }
         } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
-            if (tmpBead != null) {
-                deleteBead(tmpBead);
-            } else {
-                
-            }
+//            if (tmpBead != null) {
+//                deleteBead(tmpBead);
+//            }
+            OverviewPopUp menu = new OverviewPopUp();
+            menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
 
@@ -582,12 +587,13 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                         /* do nothing*/
                         
                         
-                    }
+                    }     
                 } else {
                     JOptionPane.showMessageDialog(null, "There is no active Bead!");
                 }
             }
             dragStatus = false;
+            multiSelect.add(activeBead);
         }
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
@@ -890,6 +896,97 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     @Override
     public void keyReleased(KeyEvent ke) {
         System.out.println("key released");
+    }
+    
+    public void copy(){
+        try {
+            /*Copy this page*/
+            VibroMidiFile tempmf = new VibroMidiFile();
+            // Initiate the tracks
+            for (int i = 0; i < beadPlayer1.tracksize; i++) { // 0-7
+                tempmf.noteOn(0, i, 60, 60);
+                tempmf.noteOff(0, i, 0);
+            }
+            
+            ArrayList<Bead> beadsOnThisPage = multiSelect;
+            beadsOnThisPage = playerOverview1.refreshCopyIndex(beadsOnThisPage);
+            
+            if (beadsOnThisPage != null) {
+                for (int i = 0; i < beadsOnThisPage.size(); i++) {
+                    Bead tmpbead = beadsOnThisPage.get(i);
+                    tempmf = beadInfoParser.parseBead(tempmf, tmpbead, true);
+                }
+                tempmf.writeToFile("tmp.mid");
+            }
+            
+        } catch (InvalidMidiDataException ex) {
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void paste(){
+        File file = new File ("tmp.mid");
+        try {
+            new OpenFile(file, this, true);
+        }catch (IOException ex) {
+            System.out.println(ex);
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (MidiUnavailableException ex) {
+            System.out.println(ex);
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidMidiDataException ex) {
+            System.out.println(ex);
+            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        multiSelect.clear();
+    }
+    
+    public void delete(){
+        for (Bead bead : multiSelect){
+            beadPlayer1.deleteBead(bead);
+        }
+    }
+    
+    class OverviewPopUp extends JPopupMenu {
+        JMenuItem copy, paste, delete, cut;
+        public OverviewPopUp(){
+            cut = new JMenuItem("Cut");
+            copy = new JMenuItem("Copy");
+            paste = new JMenuItem("Paste");
+            delete = new JMenuItem("Delete");
+            add(cut); 
+            add(copy); 
+            add(paste);
+            add(delete); 
+            cut.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    copy(); 
+                    delete();
+                }
+            });
+            copy.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    copy(); 
+                }
+            });
+            paste.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    paste();                 
+                }
+            });
+            delete.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    delete();
+                }
+            });
+        }
     }
 
 }
