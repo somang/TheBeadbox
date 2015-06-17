@@ -424,7 +424,21 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                     if (evt.isControlDown()) {
                         if (isBeadPanelEmpty()) {
                             refreshBeadPanel();
-                            
+                            beadPanelText.setVisible(true);
+                            activeBead.vibcompUI = this;
+
+                            Bead leftPossible = beadPlayer1.getBeadAt(point1.x - 27, point1.y, beadPlayer1.page);
+                            Bead rightPossible = beadPlayer1.getBeadAt(point1.x + 27, point1.y, beadPlayer1.page);
+
+                            if (leftPossible == null) { // If there exists no bead on the point's left
+                                if (rightPossible == null) {
+                                    beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                                } else { // There is a bead on its right.
+                                    beadPlayer1.setBead(rightPossible.getX() - 27, point1.y, activeBead);
+                                }
+                            } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
+                                beadPlayer1.setBead(leftPossible.getX() + 80, point1.y, activeBead);
+                            }
                         }
                     } else {
                         beadPanelText.setVisible(true);
