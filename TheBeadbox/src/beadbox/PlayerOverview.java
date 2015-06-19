@@ -64,8 +64,12 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 page = 15;
             }
         }
-        frags.get(prevPage-1).setBackground(defaultColor); // turn off
-        frags.get(page-1).setBackground(Color.WHITE); //highlight        
+        if(prevPage-1<(maxPage%15)){
+            frags.get(prevPage-1).setBackground(Color.GRAY); //Page is active
+        }else {
+            frags.get(prevPage-1).setBackground(defaultColor); //Page is off
+        } 
+        frags.get(page-1).setBackground(Color.WHITE); //highlight current page       
         prevPage = page;
     }
     
@@ -439,256 +443,286 @@ public final class PlayerOverview extends javax.swing.JPanel {
 
     private void playerOverviewFragment1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment1MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
-        int index = (chapter * 15) + 1;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        int index = (chapter * 15) + 1;      
+        if(maxPage >= index){        
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment1MousePressed
 
     private void playerOverviewFragment2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment2MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 2;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment2MousePressed
 
     private void playerOverviewFragment3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment3MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 3;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment3MousePressed
 
     private void playerOverviewFragment4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment4MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 4;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment4MousePressed
 
     private void playerOverviewFragment5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment5MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 5;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment5MousePressed
 
     private void playerOverviewFragment6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment6MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 6;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment6MousePressed
 
     private void playerOverviewFragment7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment7MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 7;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment7MousePressed
 
     private void playerOverviewFragment8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment8MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 8;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment8MousePressed
 
     private void playerOverviewFragment9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment9MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 9;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment9MousePressed
 
     private void playerOverviewFragment10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment10MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 10;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment10MousePressed
 
     private void playerOverviewFragment11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment11MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 11;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment11MousePressed
 
     private void playerOverviewFragment12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment12MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 12;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment12MousePressed
 
     private void playerOverviewFragment13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment13MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 13;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment13MousePressed
 
     private void playerOverviewFragment14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment14MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 14;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment14MousePressed
 
     private void playerOverviewFragment15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerOverviewFragment15MousePressed
         int chapter = (vui.beadPlayer1.page - 1) / 15;
         int index = (chapter * 15) + 15;
-        /*Navigate*/
-        vui.beadPlayer1.page = index;
-        vui.pageScroll.setValue(index);
-        vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
-        
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            //left click
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            //Right click
-            OverviewPopUp menu = new OverviewPopUp(index);
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if(maxPage >= index){
+            /*Navigate*/
+            vui.beadPlayer1.page = index;
+            vui.pageScroll.setValue(index);
+            vui.beadPlayer1.jTP.setText("Page: " + vui.pageScroll.getValue());
+
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                //left click
+            } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_playerOverviewFragment15MousePressed
 
