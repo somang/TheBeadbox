@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 /**
@@ -64,11 +65,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 page = 15;
             }
         }
-        if(prevPage-1<(maxPage%15)){
-            frags.get(prevPage-1).setBackground(Color.GRAY); //Page is active
-        }else {
-            frags.get(prevPage-1).setBackground(defaultColor); //Page is off
-        } 
+        frags.get(prevPage-1).setBackground(defaultColor); //Page is off
         frags.get(page-1).setBackground(Color.WHITE); //highlight current page       
         prevPage = page;
     }
@@ -457,6 +454,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment1MousePressed
 
@@ -476,6 +475,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment2MousePressed
 
@@ -495,6 +496,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment3MousePressed
 
@@ -514,6 +517,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment4MousePressed
 
@@ -533,6 +538,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment5MousePressed
 
@@ -552,6 +559,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment6MousePressed
 
@@ -571,6 +580,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment7MousePressed
 
@@ -590,6 +601,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment8MousePressed
 
@@ -609,6 +622,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment9MousePressed
 
@@ -647,6 +662,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment11MousePressed
 
@@ -666,6 +683,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment12MousePressed
 
@@ -685,6 +704,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment13MousePressed
 
@@ -704,6 +725,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment14MousePressed
 
@@ -723,6 +746,8 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment15MousePressed
 
