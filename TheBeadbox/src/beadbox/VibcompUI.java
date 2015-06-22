@@ -615,14 +615,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         jTextPane1.setText("Page: "+beadPlayer1.page);
         beadPlayer1.pageMap.put(beadPlayer1.page, new ArrayList());
         
-        if (activeBead != null) {
-            if (activeBead.page != pageScroll.getValue()) {
-                if (activeBead.connectedTo != null) {
-                    activeBead = null;
-                }
-                beadPanelText.setVisible(true);
-            }
-        }
         playerOverview1.refreshOverviewArray();
         
         
@@ -681,15 +673,10 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     private void pageScrollAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_pageScrollAdjustmentValueChanged
         beadPlayer1.page = pageScroll.getValue();
-        jTextPane1.setText("Page: "+beadPlayer1.page);
-        if (activeBead != null) {
-            if (activeBead.page != pageScroll.getValue()) {
-                if (activeBead.connectedTo != null) {
-                    activeBead = null;
-                }
-                beadPanelText.setVisible(true);
-            }
-        }
+        jTextPane1.setText("Page: "+beadPlayer1.page);      
+       
+        multiSelect.clear();
+        activeBead = null;
     }//GEN-LAST:event_pageScrollAdjustmentValueChanged
 
     /**
