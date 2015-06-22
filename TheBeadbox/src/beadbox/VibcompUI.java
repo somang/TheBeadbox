@@ -427,43 +427,39 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {   
+            if (evt.isControlDown()) {
+                if (isBeadPanelEmpty()) {
+                    refreshBeadPanel();
+                    beadPanelText.setVisible(true);
+                    activeBead.vibcompUI = this;
+
+                    Bead leftPossible = beadPlayer1.getBeadAt(point1.x - 27, point1.y, beadPlayer1.page);
+                    Bead rightPossible = beadPlayer1.getBeadAt(point1.x + 27, point1.y, beadPlayer1.page);
+                    if (leftPossible == null) { // If there exists no bead on the point's left
+                        if (rightPossible == null) {
+                            beadPlayer1.setBead(point1.x+80, point1.y, activeBead);
+                        } else { // There is a bead on its right.
+                            beadPlayer1.setBead(rightPossible.getX() - 27, point1.y, activeBead);
+                        }
+                    } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
+                        beadPlayer1.setBead(leftPossible.getX() + 80, point1.y, activeBead);
+                    }
+                }
+            }
             if (activeBead != null) {
-                if (tmpBead == null) {//Create one    
-                    if (evt.isControlDown()) {
-                        if (isBeadPanelEmpty()) {
-                            refreshBeadPanel();
-                            beadPanelText.setVisible(true);
-                            activeBead.vibcompUI = this;
-
-                            Bead leftPossible = beadPlayer1.getBeadAt(point1.x - 27, point1.y, beadPlayer1.page);
-                            Bead rightPossible = beadPlayer1.getBeadAt(point1.x + 27, point1.y, beadPlayer1.page);
-
-                            if (leftPossible == null) { // If there exists no bead on the point's left
-                                if (rightPossible == null) {
-                                    beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                                } else { // There is a bead on its right.
-                                    beadPlayer1.setBead(rightPossible.getX() - 27, point1.y, activeBead);
-                                }
-                            } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
-                                beadPlayer1.setBead(leftPossible.getX() + 80, point1.y, activeBead);
-                            }
+                if (tmpBead == null) {//Create one 
+                    beadPanelText.setVisible(true);
+                    activeBead.vibcompUI = this;
+                    Bead leftPossible = beadPlayer1.getBeadAt(point1.x - 27, point1.y, beadPlayer1.page);
+                    Bead rightPossible = beadPlayer1.getBeadAt(point1.x + 27, point1.y, beadPlayer1.page);
+                    if (leftPossible == null) { // If there exists no bead on the point's left
+                        if (rightPossible == null) {
+                            beadPlayer1.setBead(point1.x, point1.y, activeBead);
+                        } else { // There is a bead on its right.
+                            beadPlayer1.setBead(rightPossible.getX() - 27, point1.y, activeBead);
                         }
-                    } else {
-                        beadPanelText.setVisible(true);
-                        activeBead.vibcompUI = this;
-
-                        Bead leftPossible = beadPlayer1.getBeadAt(point1.x - 27, point1.y, beadPlayer1.page);
-                        Bead rightPossible = beadPlayer1.getBeadAt(point1.x + 27, point1.y, beadPlayer1.page);
-
-                        if (leftPossible == null) { // If there exists no bead on the point's left
-                            if (rightPossible == null) {
-                                beadPlayer1.setBead(point1.x, point1.y, activeBead);
-                            } else { // There is a bead on its right.
-                                beadPlayer1.setBead(rightPossible.getX() - 27, point1.y, activeBead);
-                            }
-                        } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
-                            beadPlayer1.setBead(leftPossible.getX() + 80, point1.y, activeBead);
-                        }
+                    } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
+                        beadPlayer1.setBead(leftPossible.getX() + 80, point1.y, activeBead);
                     }
                 } else {// There already is a bead at the location   
                     if (!activeBead.playable) {
@@ -673,10 +669,15 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     private void pageScrollAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_pageScrollAdjustmentValueChanged
         beadPlayer1.page = pageScroll.getValue();
-        jTextPane1.setText("Page: "+beadPlayer1.page);      
-       
+        jTextPane1.setText("Page: "+beadPlayer1.page);   
         multiSelect.clear();
-        activeBead = null;
+        
+        if (activeBead != null) {
+            activeBead = null;
+            beadPanelText.setVisible(true);
+        }
+        
+        
     }//GEN-LAST:event_pageScrollAdjustmentValueChanged
 
     /**
@@ -697,8 +698,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
              Windows Classic
              */
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                System.out.println(info.getName());
-                if("Windows".equals(info.getName())){
+                //System.out.println(info.getName());
+                if("Nimbus".equals(info.getName())){
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -876,18 +877,18 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        System.out.println("key typed");
+        //System.out.println("key typed");
         
     }
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        System.out.println("key pressed");
+        //System.out.println("key pressed");
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        System.out.println("key released");
+        //System.out.println("key released");
     }
     
     public void copy(){
