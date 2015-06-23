@@ -24,7 +24,7 @@ class ProtocolHandler {
     
     public void saveFile(BeadPlayer beadPlayer1, rightJPanel rightJPanel1, String fName) throws Exception {
         /**
-         * Initialization*
+         * Initialization
          */
         VibroMidiFile mf = new VibroMidiFile();
         // Initiate the tracks

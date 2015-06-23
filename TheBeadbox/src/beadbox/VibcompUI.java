@@ -7,7 +7,6 @@ package beadbox;
 
 import com.synthbot.jasiohost.AsioDriver;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -22,9 +21,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 
 /**
  *
@@ -487,10 +484,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 //tmpBead=activeBead;
             }
         } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
-//            if (tmpBead != null) {
-//                deleteBead(tmpBead);
-//            }
-            OverviewPopUp menu = new OverviewPopUp();
+            if(tmpBead!=null){
+                if(multiSelect.size()==1)multiSelect.clear();
+                multiSelect.add(tmpBead);
+                activeBead = tmpBead;
+            }
+            OverviewPopUp menu = new OverviewPopUp(this);
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
@@ -673,8 +672,9 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         multiSelect.clear();
         
         if (activeBead != null) {
+            beadPanel.remove(activeBead);
+            beadPanel.repaint();
             activeBead = null;
-            beadPanelText.setVisible(true);
         }
         
         
@@ -943,43 +943,4 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         }
     }
     
-    class OverviewPopUp extends JPopupMenu {
-        JMenuItem copy, paste, delete, cut;
-        public OverviewPopUp(){
-            cut = new JMenuItem("Cut");
-            copy = new JMenuItem("Copy");
-            paste = new JMenuItem("Paste");
-            delete = new JMenuItem("Delete");
-            add(cut); 
-            add(copy); 
-            add(paste);
-            add(delete); 
-            cut.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    copy(); 
-                    delete();
-                }
-            });
-            copy.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    copy(); 
-                }
-            });
-            paste.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    paste();                 
-                }
-            });
-            delete.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    delete();
-                }
-            });
-        }
-    }
-
 }
