@@ -26,30 +26,18 @@ public class OverviewPopUp extends JPopupMenu {
             add(copy); 
             add(paste);
             add(delete); 
-            cut.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            cut.addActionListener((ActionEvent e) -> {
+                vu.copy();
+                vu.delete();
+            });
+            copy.addActionListener((ActionEvent e) ->{
                     vu.copy(); 
+            });
+            paste.addActionListener((ActionEvent e) -> {
+                    vu.paste();   
+            });
+            delete.addActionListener((ActionEvent e) -> {
                     vu.delete();
-                }
-            });
-            copy.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    vu.copy(); 
-                }
-            });
-            paste.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    vu.paste();                 
-                }
-            });
-            delete.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    vu.delete();
-                }
             });
         }
     }

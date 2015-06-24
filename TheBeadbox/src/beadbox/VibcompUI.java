@@ -389,11 +389,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         /**
          * 1 if empty 2 if filled
          */
-        if (beadPanel.getComponentCount() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return beadPanel.getComponentCount() == 1;
     }
 
     public void refreshBeadPanel() {
@@ -614,12 +610,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        if (playing) {
-            playing = false;
-        } else {
-            playing = true;
-        }
-
+        //change playing state to opposite
+        playing = !playing;
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void speedControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedControlStateChanged
@@ -712,11 +704,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VibcompUI().setVisible(true);
-
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new VibcompUI().setVisible(true);
         });
     }
 
@@ -758,7 +747,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         activeBead = null;
         beadPanel.repaint();
         /*Put labels on speed control slider*/
-        Hashtable<Integer, JLabel> labels1 = new Hashtable<Integer, JLabel>();
+        Hashtable<Integer, JLabel> labels1 = new Hashtable<>();
         labels1.put(0, new JLabel("x0.5"));
         labels1.put(50, new JLabel("0"));
         labels1.put(100, new JLabel("x2"));
@@ -766,7 +755,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         speedControl.setPaintLabels(true);
 
         /*Put labels on speed control slider*/
-        Hashtable<Integer, JLabel> labels2 = new Hashtable<Integer, JLabel>();
+        Hashtable<Integer, JLabel> labels2 = new Hashtable<>();
         labels2.put(100, new JLabel("100"));
         labels2.put(500, new JLabel("500"));
         labels2.put(1000, new JLabel("1000"));
@@ -774,14 +763,14 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         frequencySlider.setPaintLabels(true);
         
         /*Put labels on speed control slider*/
-        Hashtable<Integer, JLabel> labels3 = new Hashtable<Integer, JLabel>();
+        Hashtable<Integer, JLabel> labels3 = new Hashtable<>();
         labels3.put(0, new JLabel("0"));
         labels3.put(50, new JLabel("50"));
         labels3.put(100, new JLabel("100"));
         intensitySlider.setLabelTable(labels3);
         intensitySlider.setPaintLabels(true);
         
-        Hashtable<Integer, JLabel> labels4 = new Hashtable<Integer, JLabel>();
+        Hashtable<Integer, JLabel> labels4 = new Hashtable<>();
         labels4.put(0, new JLabel("0"));
         labels4.put(55, new JLabel("50"));
         labels4.put(110, new JLabel("100"));

@@ -22,7 +22,7 @@ public class PlayerOverviewFragment extends javax.swing.JPanel {
     int TRACKHEIGHT = getHeight()/8;
     int BEADHEIGHT = 50, page = 1, curChapter=0;
     boolean[] activeBars= new boolean[8];
-    private safeColors safeColor ;
+    private final safeColors safeColor ;
     
     @Override
     protected void paintComponent(Graphics g) {

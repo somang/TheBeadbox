@@ -47,38 +47,36 @@ public class BeadPlayer extends javax.swing.JPanel {
      * Creates new form BeadPlayer
      */
     public BeadPlayer() {
-        this.pageMap = new HashMap<Integer, ArrayList<Bead>>();
+        this.pageMap = new HashMap<>();
         pageMap.put(1, new ArrayList());
         pageMap.put(2, new ArrayList());
         
-        this.map = new HashMap<Integer, Bead>();
-        this.playerTickTock = new Runnable() {
-            public void run() {
-                while (true) {
-                    if (VibcompUI.playing) {
-                        if (barPosition < MAXBARPOS) {
-                            barPosition += 50;
-                        } else {
-                            barPosition = 0;
-                            page++;
-                            if (page > maxPage) {
-                                page = 1;
-                            }
-                            vibcompUI.pageScroll.setValue(page);
-                            jTP.setText("Page: "+page);
+        this.map = new HashMap<>();
+        this.playerTickTock = () -> {
+            while (true) {
+                if (VibcompUI.playing) {
+                    if (barPosition < MAXBARPOS) {
+                        barPosition += 50;
+                    } else {
+                        barPosition = 0;
+                        page++;
+                        if (page > maxPage) {
+                            page = 1;
                         }
+                        vibcompUI.pageScroll.setValue(page);
+                        jTP.setText("Page: "+page);
                     }
-                    try {
-                        thread.sleep(SPEED);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                }
+                try {
+                    thread.sleep(SPEED);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         };
         initComponents();
-        Thread thread = new Thread(playerTickTock);
-        thread.start();
+        Thread td = new Thread(playerTickTock);
+        td.start();
     }
 
     @Override
@@ -114,8 +112,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         if (beads.size() > 0) {
             vibcompUI.playerOverview1.clearAll();
         }
-        for (int i = 0; i < beads.size(); i++) {
-            Bead curBead = beads.get(i);
+        for (Bead curBead : beads) {
             //.show();
             //Draw beads here 
             if (curBead.getPage() == page) {
@@ -160,8 +157,8 @@ public class BeadPlayer extends javax.swing.JPanel {
                     
                     if ((curBead.connectedTo.track != curBead.track)) {//two beads in dif track
                         /*
-                         Then, fade out first bead, and fade in second bead.
-                         */
+                        Then, fade out first bead, and fade in second bead.
+                        */
                         if (start < (getBarIUPosition() + (page * getWidth()))
                                 && mid > (getBarIUPosition() + (page * getWidth()))) {
                             gap = (-1.0 * ((getBarIUPosition() + page * getWidth()) - mid) / (mid - start));
@@ -210,7 +207,6 @@ public class BeadPlayer extends javax.swing.JPanel {
                     }
                 }
             }
-
         }
         if (beads.size() > 0) {
             vibcompUI.playerOverview1.higlightFrag(page);
@@ -305,9 +301,9 @@ public class BeadPlayer extends javax.swing.JPanel {
      * @return 
      */
     public Bead getBeadAtIndex(int index) {
-        for (int i = 0; i < beads.size(); i++) {
-            if (beads.get(i).index == index) {
-                return beads.get(i);
+        for (Bead bead : beads) {
+            if (bead.index == index) {
+                return bead;
             }
         }
         return null;
@@ -316,7 +312,7 @@ public class BeadPlayer extends javax.swing.JPanel {
      * Suggest use for this method is for the last change, aka before one to save the whole file.
      */
     public void refreshIndex(){
-        this.map = new HashMap<Integer, Bead>();
+        this.map = new HashMap<>();
         for (int i = 0; i < beads.size(); i++) {
             beads.get(i).index = i;
             this.map.put(i, beads.get(i));

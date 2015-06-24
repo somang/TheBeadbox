@@ -5,9 +5,7 @@
  */
 package beadbox;
 
-import java.io.UnsupportedEncodingException;
 import static javafx.application.Platform.exit;
-import javax.sound.midi.InvalidMidiDataException;
 
 /**
  * This class is the VIDI - MIDI mapping protocol conversion. However, it has

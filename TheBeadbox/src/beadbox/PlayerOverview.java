@@ -8,7 +8,6 @@ package beadbox;
 import static beadbox.BeadPlayer.maxPage;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
@@ -53,9 +52,9 @@ public final class PlayerOverview extends javax.swing.JPanel {
         }
     }
     public void clearAll(){
-        for (int i=0; i<frags.size(); i++){
-            frags.get(i).clear();
-            frags.get(i).repaint();
+        for (PlayerOverviewFragment frag : frags) {
+            frag.clear();
+            frag.repaint();
         }
     }    
     public void higlightFrag(int page){
@@ -784,16 +783,13 @@ public final class PlayerOverview extends javax.swing.JPanel {
             beadsOnThisPage = refreshCopyIndex(beadsOnThisPage);
             
             if (beadsOnThisPage != null) {
-                for (int i = 0; i < beadsOnThisPage.size(); i++) {
-                    Bead tmpbead = beadsOnThisPage.get(i);
+                for (Bead tmpbead : beadsOnThisPage) {
                     tempmf = beadInfoParser.parseBead(tempmf, tmpbead, true);
                 }
                 tempmf.writeToFile("tmp.mid");
             }
             
-        } catch (InvalidMidiDataException ex) {
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InvalidMidiDataException | IOException ex) {
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -808,14 +804,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
         File file = new File ("tmp.mid");
         try {
             new OpenFile(file, vui, true);
-        }catch (IOException ex) {
-            System.out.println(ex);
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        catch (MidiUnavailableException ex) {
-            System.out.println(ex);
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidMidiDataException ex) {
+        }catch (IOException | MidiUnavailableException | InvalidMidiDataException ex) {
             System.out.println(ex);
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -824,9 +813,9 @@ public final class PlayerOverview extends javax.swing.JPanel {
      private void clearPage(int pageIndex){ 
         int timeout = 5;
         while(vui.beadPlayer1.pageMap.get(pageIndex).size()>0){
-            for (int i = 0; i < vui.beadPlayer1.beads.size(); i++) {
-                if(vui.beadPlayer1.beads.get(i).page == pageIndex){
-                    vui.beadPlayer1.deleteBead(vui.beadPlayer1.beads.get(i));
+            for (Bead bead : vui.beadPlayer1.beads) {
+                if (bead.page == pageIndex) {
+                    vui.beadPlayer1.deleteBead(bead);
                 }
             }
             if (timeout==0) break;
@@ -837,9 +826,10 @@ public final class PlayerOverview extends javax.swing.JPanel {
     /**
      * Re index the beads, so that each beads index starts from 0 to size of the beads in this page.
      * @param beadsOnThisPage 
+     * @return  new indexed set
      */
     protected ArrayList<Bead> refreshCopyIndex(ArrayList<Bead> beadsOnThisPage) {
-        Map<Integer, Integer> tmpmap = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> tmpmap = new HashMap<>();
         
         if (beadsOnThisPage != null) {
             HashSet hs = new HashSet();
@@ -869,26 +859,17 @@ public final class PlayerOverview extends javax.swing.JPanel {
             add(copy); 
             add(paste);
             add(clear); 
-            copy.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    copyPage(index);
-                    System.out.println("copied page"+index);                   
-                }
+            copy.addActionListener((ActionEvent e) -> {
+                copyPage(index);
+                System.out.println("copied page"+index);
             });
-            paste.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    pastePage();
-                    System.out.println("pasted");                   
-                }
+            paste.addActionListener((ActionEvent e) -> {
+                pastePage();
+                System.out.println("pasted");
             });
-            clear.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    clearPage(index);
-                    System.out.println("page cleared");                   
-                }
+            clear.addActionListener((ActionEvent e) -> {
+                clearPage(index);
+                System.out.println("page cleared");
             });
         }
     }
