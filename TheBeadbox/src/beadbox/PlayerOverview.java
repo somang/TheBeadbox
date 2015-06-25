@@ -811,16 +811,9 @@ public final class PlayerOverview extends javax.swing.JPanel {
     }
     
      private void clearPage(int pageIndex){ 
-        int timeout = 5;
-        while(vui.beadPlayer1.pageMap.get(pageIndex).size()>0){
-            for (Bead bead : vui.beadPlayer1.beads) {
-                if (bead.page == pageIndex) {
-                    vui.beadPlayer1.deleteBead(bead);
-                }
-            }
-            if (timeout==0) break;
-            timeout--;
-        }
+        vui.beadPlayer1.pageMap.get(pageIndex).stream().forEach((bead) -> {
+            vui.beadPlayer1.deleteBead(bead);
+        });
      }
 
     /**
