@@ -794,11 +794,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
         }
     }
     
-    private void pastePage(){
-        for (int i = 0; i < vui.beadPlayer1.beads.size(); i++) {
-            vui.beadPlayer1.beads.get(i).index=-1;
-            if(vui.beadPlayer1.beads.get(i).page == vui.beadPlayer1.page){
-                vui.beadPlayer1.deleteBead(vui.beadPlayer1.beads.get(i));
+    private void pastePage(int pageIndex){
+        for (Bead bead : vui.beadPlayer1.beads) {
+            bead.index = -1;
+            if (bead.page == pageIndex) {
+                vui.beadPlayer1.deleteBead(bead);
             }
         }
         File file = new File ("tmp.mid");
@@ -810,10 +810,10 @@ public final class PlayerOverview extends javax.swing.JPanel {
         }
     }
     
-     private void clearPage(int pageIndex){ 
-        vui.beadPlayer1.pageMap.get(pageIndex).stream().forEach((bead) -> {
-            vui.beadPlayer1.deleteBead(bead);
-        });
+     private void clearPage(int pageIndex){
+         ArrayList<Bead> beadAry= new ArrayList<>(); 
+         for(Bead bd : vui.beadPlayer1.pageMap.get(pageIndex)) beadAry.add(bd);
+         for(Bead bead : beadAry) vui.beadPlayer1.deleteBead(bead);
      }
 
     /**
@@ -857,7 +857,7 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 System.out.println("copied page"+index);
             });
             paste.addActionListener((ActionEvent e) -> {
-                pastePage();
+                pastePage(index);
                 System.out.println("pasted");
             });
             clear.addActionListener((ActionEvent e) -> {

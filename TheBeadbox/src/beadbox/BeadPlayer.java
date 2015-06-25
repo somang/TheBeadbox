@@ -208,7 +208,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                 }
             }
         }
-        if (beads.size() > 0) {
+        if (!beads.isEmpty()) {
             vibcompUI.playerOverview1.higlightFrag(page);
         }
         repaint();
