@@ -477,7 +477,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             } else if (activeBead == null && tmpBead != null) {
                 activeBead = tmpBead;
             }
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {// Right click
+        }
+        if (evt.getButton() == MouseEvent.BUTTON3 || evt.getClickCount()==2) {// Right click or double click
             if(tmpBead!=null){
                 if(multiSelect.size()==1)multiSelect.clear();
                 multiSelect.add(tmpBead);

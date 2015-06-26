@@ -453,6 +453,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
@@ -471,6 +476,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 //left click
             } else if (evt.getButton() == MouseEvent.BUTTON3) {
                 //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            if(evt.getClickCount()==2){
+                //double click
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
@@ -495,6 +505,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
@@ -513,6 +528,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 //left click
             } else if (evt.getButton() == MouseEvent.BUTTON3) {
                 //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            if(evt.getClickCount()==2){
+                //double click
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
@@ -537,6 +557,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
@@ -555,6 +580,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 //left click
             } else if (evt.getButton() == MouseEvent.BUTTON3) {
                 //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            if(evt.getClickCount()==2){
+                //double click
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
@@ -579,6 +609,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
@@ -597,6 +632,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 //left click
             } else if (evt.getButton() == MouseEvent.BUTTON3) {
                 //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            if(evt.getClickCount()==2){
+                //double click
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
@@ -621,6 +661,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
@@ -642,6 +687,13 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
     }//GEN-LAST:event_playerOverviewFragment10MousePressed
 
@@ -682,6 +734,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
@@ -700,6 +757,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 //left click
             } else if (evt.getButton() == MouseEvent.BUTTON3) {
                 //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            if(evt.getClickCount()==2){
+                //double click
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
@@ -724,6 +786,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
+            if(evt.getClickCount()==2){
+                //double click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Page "+index+" has not been created yet, to access this page please add more pages");
         }
@@ -742,6 +809,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 //left click
             } else if (evt.getButton() == MouseEvent.BUTTON3) {
                 //Right click
+                OverviewPopUp menu = new OverviewPopUp(index);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            if(evt.getClickCount()==2){
+                //double click
                 OverviewPopUp menu = new OverviewPopUp(index);
                 menu.show(evt.getComponent(), evt.getX(), evt.getY());
             }
