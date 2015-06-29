@@ -903,6 +903,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         } catch (IOException ex) {
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         }
+        multiSelect.clear();
     }
     
     public void paste(){
@@ -927,6 +928,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         for (Bead bead : multiSelect){
             beadPlayer1.deleteBead(bead);
         }
+        multiSelect.clear();
     }
     
 }

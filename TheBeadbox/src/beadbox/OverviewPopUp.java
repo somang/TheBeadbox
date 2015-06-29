@@ -13,7 +13,7 @@ import javax.swing.JPopupMenu;
 
 /**
  *
- * @author imdc
+ * @author imdc Albert
  */
 public class OverviewPopUp extends JPopupMenu {
         JMenuItem copy, paste, delete, cut;
