@@ -94,7 +94,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1400, 900));
-        setResizable(false);
 
         beadPlayer1.setBackground(new java.awt.Color(255, 255, 255));
         beadPlayer1.setPreferredSize(new java.awt.Dimension(1100, 550));
@@ -202,6 +201,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         pageScroll.setMinimum(1);
         pageScroll.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
         pageScroll.setVisibleAmount(1);
+        pageScroll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pageScroll.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
             public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
                 pageScrollAdjustmentValueChanged(evt);
