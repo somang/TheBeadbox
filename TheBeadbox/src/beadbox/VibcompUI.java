@@ -132,6 +132,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         frequencySlider.setPaintTicks(true);
         frequencySlider.setToolTipText("");
         frequencySlider.setBorder(javax.swing.BorderFactory.createTitledBorder("Frequency"));
+        frequencySlider.setFocusable(false);
         frequencySlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 frequencySliderStateChanged(evt);
@@ -142,6 +143,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         intensitySlider.setOrientation(javax.swing.JSlider.VERTICAL);
         intensitySlider.setPaintTicks(true);
         intensitySlider.setBorder(javax.swing.BorderFactory.createTitledBorder("Intensity"));
+        intensitySlider.setFocusable(false);
         intensitySlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 intensitySliderStateChanged(evt);
@@ -184,6 +186,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         barSlider.setPaintTrack(false);
         barSlider.setValue(0);
         barSlider.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        barSlider.setFocusable(false);
         barSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 barSliderMouseDragged(evt);
@@ -217,6 +220,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         speedControl.setPaintTicks(true);
         speedControl.setToolTipText("Speed Control");
         speedControl.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed Control"));
+        speedControl.setFocusable(false);
         speedControl.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 speedControlStateChanged(evt);
@@ -226,6 +230,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         saveButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/save_icon.png"))); // NOI18N
         saveButton.setText("Save");
+        saveButton.setFocusable(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -235,6 +240,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         addPage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         addPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/add_icon.png"))); // NOI18N
         addPage.setText("Add Page");
+        addPage.setFocusable(false);
         addPage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addPageMouseClicked(evt);
@@ -244,6 +250,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/play_pause.png"))); // NOI18N
         playButton.setToolTipText("Play / Pause");
         playButton.setActionCommand("> Play ");
+        playButton.setFocusable(false);
         playButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playButtonActionPerformed(evt);
@@ -253,6 +260,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         openButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/open_icon.png"))); // NOI18N
         openButton.setText("Open");
+        openButton.setFocusable(false);
         openButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openButtonActionPerformed(evt);
@@ -294,6 +302,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         openButton.getAccessibleContext().setAccessibleName("openFile");
 
         jTextPane1.setText("Page: 1");
+        jTextPane1.setEnabled(false);
         jScrollPane2.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -607,7 +616,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         
         playerOverview1.refreshOverviewArray();
         
-        
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
@@ -869,7 +877,19 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        //System.out.println("key pressed");
+        System.out.println("key pressed:"+ke.getKeyCode());
+        if(ke.isControlDown()){
+            if(ke.getKeyCode()==67){        //Ctrl+c = copy
+                copy();
+            } 
+            else if (ke.getKeyCode()==88){  //Ctrl+x = cut
+                copy();
+                delete();
+            }
+            else if (ke.getKeyCode()==86){  //Ctrl+v = paste
+                paste();
+            } 
+        }
     }
 
     @Override
@@ -903,7 +923,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         } catch (IOException ex) {
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         }
-        multiSelect.clear();
+        //multiSelect.clear();
     }
     
     public void paste(){
@@ -925,9 +945,9 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     }
     
     public void delete(){
-        for (Bead bead : multiSelect){
-            beadPlayer1.deleteBead(bead);
-        }
+        ArrayList<Bead> beadAry= new ArrayList<>(); 
+        for (Bead bead : multiSelect)beadAry.add(bead);
+        for(Bead bead : beadAry) beadPlayer1.deleteBead(bead);
         multiSelect.clear();
     }
     

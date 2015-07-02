@@ -18,14 +18,15 @@ import javax.swing.JPopupMenu;
 public class OverviewPopUp extends JPopupMenu {
         JMenuItem copy, paste, delete, cut;
         public OverviewPopUp(VibcompUI vu){
-            cut = new JMenuItem("Cut");
+            delete = new JMenuItem("Delete");
+            cut = new JMenuItem("Cut");            
             copy = new JMenuItem("Copy");
             paste = new JMenuItem("Paste");
-            delete = new JMenuItem("Delete");
+
+            add(delete);
             add(cut); 
             add(copy); 
-            add(paste);
-            add(delete); 
+            add(paste);            
             cut.addActionListener((ActionEvent e) -> {
                 vu.copy();
                 vu.delete();

@@ -145,6 +145,7 @@
             <TitledBorder title="Frequency"/>
           </Border>
         </Property>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="frequencySliderStateChanged"/>
@@ -160,6 +161,7 @@
             <TitledBorder title="Intensity"/>
           </Border>
         </Property>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="intensitySliderStateChanged"/>
@@ -227,6 +229,7 @@
             <EtchetBorder/>
           </Border>
         </Property>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="barSliderMouseDragged"/>
@@ -334,6 +337,7 @@
                 <TitledBorder title="Speed Control"/>
               </Border>
             </Property>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="speedControlStateChanged"/>
@@ -351,6 +355,7 @@
               <Image iconType="3" name="/beadbox/save_icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Save"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
@@ -365,6 +370,7 @@
               <Image iconType="3" name="/beadbox/add_icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Add Page"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addPageMouseClicked"/>
@@ -377,6 +383,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Play / Pause"/>
             <Property name="actionCommand" type="java.lang.String" value="&gt; Play "/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playButtonActionPerformed"/>
@@ -391,6 +398,7 @@
               <Image iconType="3" name="/beadbox/open_icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Open"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="openFile"/>
@@ -411,6 +419,7 @@
         <Component class="javax.swing.JTextPane" name="jTextPane1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Page: 1"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

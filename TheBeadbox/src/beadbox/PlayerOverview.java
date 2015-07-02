@@ -921,9 +921,9 @@ public final class PlayerOverview extends javax.swing.JPanel {
             copy = new JMenuItem("Copy");
             paste = new JMenuItem("Paste");
             clear = new JMenuItem("Clear");
+            add(clear);
             add(copy); 
-            add(paste);
-            add(clear); 
+            add(paste);             
             copy.addActionListener((ActionEvent e) -> {
                 copyPage(index);
                 System.out.println("copied page"+index);
