@@ -41,6 +41,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     int startBead_x, startBead_y;
     boolean dragStatus = false;
     boolean move = false;
+    boolean shiftOn = false;
     Point point1;
     Bead beadOnClick;
     ProtocolHandler ph = new ProtocolHandler();
@@ -91,9 +92,10 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         openButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        shiftKey = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1400, 900));
+        setPreferredSize(new java.awt.Dimension(1450, 910));
 
         beadPlayer1.setBackground(new java.awt.Color(255, 255, 255));
         beadPlayer1.setPreferredSize(new java.awt.Dimension(1100, 550));
@@ -267,6 +269,17 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             }
         });
 
+        jTextPane1.setText("Page: 1");
+        jTextPane1.setEnabled(false);
+        jScrollPane2.setViewportView(jTextPane1);
+
+        shiftKey.setText("Shift Key");
+        shiftKey.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                shiftKeyStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -281,29 +294,33 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                         .addGap(18, 18, 18)
                         .addComponent(addPage))
                     .addComponent(speedControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(84, 84, 84)
-                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addGap(111, 111, 111)
+                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(shiftKey)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(saveButton)
+                        .addComponent(addPage)
+                        .addComponent(openButton))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(speedControl, javax.swing.GroupLayout.PREFERRED_SIZE, 53, Short.MAX_VALUE))
+                .addComponent(playButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
-                    .addComponent(addPage)
-                    .addComponent(openButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(speedControl, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
+                .addComponent(shiftKey)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         openButton.getAccessibleContext().setAccessibleName("openFile");
-
-        jTextPane1.setText("Page: 1");
-        jTextPane1.setEnabled(false);
-        jScrollPane2.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -313,16 +330,13 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
+                        .addGap(100, 100, 100)
                         .addComponent(playerOverview1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pageScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addComponent(barSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(barSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,13 +362,11 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(intensitySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(playerOverview1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(intensitySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(frequencySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -475,7 +487,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 frequencySlider.setValue(activeBead.getFrequency());
                 
                 //multi select
-                if(evt.isShiftDown()){
+                if(evt.isShiftDown() || shiftOn){
                     if(multiSelect.contains(activeBead)) multiSelect.remove(activeBead);
                     else multiSelect.add(activeBead);
                 } else {
@@ -629,38 +641,11 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     }//GEN-LAST:event_speedControlStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showSaveDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            if(!selectedFile.getName().endsWith(".vidi")) 
-                selectedFile = new File(selectedFile.toString()+".vidi");
-            try {
-                // TODO add your handling code here:
-                ph.saveFile(beadPlayer1, rightJPanel1,selectedFile.getAbsolutePath());
-                System.out.println("Saved file: " + selectedFile.getAbsolutePath());
-            } catch (Exception ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        save();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();         
-            try {
-                new OpenFile(selectedFile, this, false);
-                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-            } catch (MidiUnavailableException ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvalidMidiDataException ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        open();
     }//GEN-LAST:event_openButtonActionPerformed
 
     private void pageScrollAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_pageScrollAdjustmentValueChanged
@@ -676,6 +661,10 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         
         
     }//GEN-LAST:event_pageScrollAdjustmentValueChanged
+
+    private void shiftKeyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_shiftKeyStateChanged
+        shiftOn = shiftKey.isSelected();
+    }//GEN-LAST:event_shiftKeyStateChanged
 
     /**
      * @param args the command line arguments
@@ -736,6 +725,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     protected beadbox.PlayerOverview playerOverview1;
     protected beadbox.rightJPanel rightJPanel1;
     private javax.swing.JButton saveButton;
+    private javax.swing.JToggleButton shiftKey;
     protected javax.swing.JSlider speedControl;
     // End of variables declaration//GEN-END:variables
 
@@ -877,7 +867,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        System.out.println("key pressed:"+ke.getKeyCode());
+        //System.out.println("key pressed:"+ke.getKeyCode());
         if(ke.isControlDown()){
             if(ke.getKeyCode()==67){        //Ctrl+c = copy
                 copy();
@@ -888,6 +878,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             }
             else if (ke.getKeyCode()==86){  //Ctrl+v = paste
                 paste();
+            } 
+            else if (ke.getKeyCode()==79){  //Ctrl+o = open
+                open();
+            } 
+            else if (ke.getKeyCode()==83){  //Ctrl+s = save
+                save();
             } 
         }
     }
@@ -949,6 +945,41 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         for (Bead bead : multiSelect)beadAry.add(bead);
         for(Bead bead : beadAry) beadPlayer1.deleteBead(bead);
         multiSelect.clear();
+    }
+    
+    public void open(){
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();         
+            try {
+                new OpenFile(selectedFile, this, false);
+                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            } catch (MidiUnavailableException ex) {
+                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvalidMidiDataException ex) {
+                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void save(){
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if(!selectedFile.getName().endsWith(".vidi")) 
+                selectedFile = new File(selectedFile.toString()+".vidi");
+            try {
+                // TODO add your handling code here:
+                ph.saveFile(beadPlayer1, rightJPanel1,selectedFile.getAbsolutePath());
+                System.out.println("Saved file: " + selectedFile.getAbsolutePath());
+            } catch (Exception ex) {
+                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }
