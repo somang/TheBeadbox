@@ -11,15 +11,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiUnavailableException;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -45,6 +42,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     Point point1;
     Bead beadOnClick;
     ProtocolHandler ph = new ProtocolHandler();
+    BeadPlayerPopUp menu;
 
     /**
      * Creates new form VibC UI
@@ -53,6 +51,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         initComponents();
         setFocusable(true);
         addKeyListener(this);
+        menu = new BeadPlayerPopUp(this);
         
         
         try {
@@ -232,6 +231,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         saveButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/save_icon.png"))); // NOI18N
         saveButton.setText("Save");
+        saveButton.setToolTipText("(ctrl+s)");
         saveButton.setFocusable(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +262,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         openButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/open_icon.png"))); // NOI18N
         openButton.setText("Open");
+        openButton.setToolTipText("(ctrl+o)");
         openButton.setFocusable(false);
         openButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -441,7 +442,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
         {   
-            if (evt.isControlDown()) {
+            if (evt.isAltDown()) {
                 if (isBeadPanelEmpty()) {
                     refreshBeadPanel();
                     beadPanelText.setVisible(true);
@@ -505,7 +506,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 multiSelect.add(tmpBead);
                 activeBead = tmpBead;
             }
-            OverviewPopUp menu = new OverviewPopUp(this);
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
@@ -641,11 +641,11 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     }//GEN-LAST:event_speedControlStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        save();
+        menu.save();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
-        open();
+        menu.open();
     }//GEN-LAST:event_openButtonActionPerformed
 
     private void pageScrollAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_pageScrollAdjustmentValueChanged
@@ -870,20 +870,20 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         //System.out.println("key pressed:"+ke.getKeyCode());
         if(ke.isControlDown()){
             if(ke.getKeyCode()==67){        //Ctrl+c = copy
-                copy();
+                menu.copy();
             } 
             else if (ke.getKeyCode()==88){  //Ctrl+x = cut
-                copy();
-                delete();
+                menu.copy();
+                menu.delete();
             }
             else if (ke.getKeyCode()==86){  //Ctrl+v = paste
-                paste();
+                menu.paste();
             } 
             else if (ke.getKeyCode()==79){  //Ctrl+o = open
-                open();
+                menu.open();
             } 
             else if (ke.getKeyCode()==83){  //Ctrl+s = save
-                save();
+                menu.save();
             } 
         }
     }
@@ -891,95 +891,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     @Override
     public void keyReleased(KeyEvent ke) {
         //System.out.println("key released");
-    }
-    
-    public void copy(){
-        try {
-            /*Copy this page*/
-            VibroMidiFile tempmf = new VibroMidiFile();
-            // Initiate the tracks
-            for (int i = 0; i < beadPlayer1.tracksize; i++) { // 0-7
-                tempmf.noteOn(0, i, 60, 60);
-                tempmf.noteOff(0, i, 0);
-            }
-            
-            ArrayList<Bead> beadsOnThisPage = multiSelect;
-            beadsOnThisPage = playerOverview1.refreshCopyIndex(beadsOnThisPage);
-            
-            if (beadsOnThisPage != null) {
-                for (int i = 0; i < beadsOnThisPage.size(); i++) {
-                    Bead tmpbead = beadsOnThisPage.get(i);
-                    tempmf = beadInfoParser.parseBead(tempmf, tmpbead, true);
-                }
-                tempmf.writeToFile("tmp.mid");
-            }
-            
-        } catch (InvalidMidiDataException ex) {
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //multiSelect.clear();
-    }
-    
-    public void paste(){
-        File file = new File ("tmp.mid");
-        try {
-            new OpenFile(file, this, true);
-        }catch (IOException ex) {
-            System.out.println(ex);
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        catch (MidiUnavailableException ex) {
-            System.out.println(ex);
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidMidiDataException ex) {
-            System.out.println(ex);
-            Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        multiSelect.clear();
-    }
-    
-    public void delete(){
-        ArrayList<Bead> beadAry= new ArrayList<>(); 
-        for (Bead bead : multiSelect)beadAry.add(bead);
-        for(Bead bead : beadAry) beadPlayer1.deleteBead(bead);
-        multiSelect.clear();
-    }
-    
-    public void open(){
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();         
-            try {
-                new OpenFile(selectedFile, this, false);
-                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-            } catch (MidiUnavailableException ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvalidMidiDataException ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    
-    public void save(){
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showSaveDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            if(!selectedFile.getName().endsWith(".vidi")) 
-                selectedFile = new File(selectedFile.toString()+".vidi");
-            try {
-                // TODO add your handling code here:
-                ph.saveFile(beadPlayer1, rightJPanel1,selectedFile.getAbsolutePath());
-                System.out.println("Saved file: " + selectedFile.getAbsolutePath());
-            } catch (Exception ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
     
 }

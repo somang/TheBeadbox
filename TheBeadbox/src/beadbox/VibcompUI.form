@@ -358,6 +358,7 @@
               <Image iconType="3" name="/beadbox/save_icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Save"/>
+            <Property name="toolTipText" type="java.lang.String" value="(ctrl+s)"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -401,6 +402,7 @@
               <Image iconType="3" name="/beadbox/open_icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Open"/>
+            <Property name="toolTipText" type="java.lang.String" value="(ctrl+o)"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
