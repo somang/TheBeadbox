@@ -886,6 +886,23 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 menu.save();
             } 
         }
+        
+        if(ke.getKeyCode()==38){    //Up key
+            for(Bead bead : multiSelect){
+                if(bead.getTrack()>1){
+                    bead.setTrack(bead.getTrack()-1);
+                    bead.setLocation(bead.getX(),bead.getY()-beadPlayer1.TRACKHEIGHT);
+                }
+            }
+        }        
+        else if(ke.getKeyCode()==40){    //Down key
+            for(Bead bead : multiSelect){
+                if(bead.getTrack()<8){
+                    bead.setTrack(bead.getTrack()+1);
+                    bead.setLocation(bead.getX(),bead.getY()+beadPlayer1.TRACKHEIGHT);
+                }
+            }
+        }     
     }
 
     @Override

@@ -141,4 +141,4 @@ public class BeadPlayerPopUp extends JPopupMenu {
             }
         }
     }
-    }
+}
