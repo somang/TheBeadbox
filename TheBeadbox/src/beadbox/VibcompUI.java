@@ -519,8 +519,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
      tempMinimumDistance. = 100;
      */
     private boolean isActualDrag(int endBeadx, int endBeady) {
-        int xdif = 0;
-        int ydif = 0;
+        int xdif;
+        int ydif;
         double distance;
         try {
             xdif = endBeadx - activeBead.getX();
@@ -891,7 +891,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             for(Bead bead : multiSelect){
                 if(bead.getTrack()>1){
                     bead.setTrack(bead.getTrack()-1);
-                    bead.setLocation(bead.getX(),bead.getY()-beadPlayer1.TRACKHEIGHT);
+                    bead.setLocation(bead.getX(),bead.getY()
+                            -beadPlayer1.TRACKHEIGHT);
                 }
             }
         }        
@@ -899,10 +900,23 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             for(Bead bead : multiSelect){
                 if(bead.getTrack()<8){
                     bead.setTrack(bead.getTrack()+1);
-                    bead.setLocation(bead.getX(),bead.getY()+beadPlayer1.TRACKHEIGHT);
+                    bead.setLocation(bead.getX(),bead.getY()
+                            +beadPlayer1.TRACKHEIGHT);
                 }
             }
-        }     
+        } 
+        else if(ke.getKeyCode()==37){    //Left key
+            for(Bead bead : multiSelect){
+                 if(bead.getX()>55)bead.setLocation(bead.getX()
+                         -beadPlayer1.BEADHEIGHT,bead.getY());
+            }
+        }
+        else if(ke.getKeyCode()==39){    //Right key
+            for(Bead bead : multiSelect){
+                if(bead.getX()<1000) bead.setLocation(bead.getX()
+                        +beadPlayer1.BEADHEIGHT,bead.getY());
+            }
+        }
     }
 
     @Override
