@@ -507,6 +507,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 activeBead = tmpBead;
             }
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            menu.setBorderPainted(true);
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
 
@@ -916,6 +917,9 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 if(bead.getX()<1000) bead.setLocation(bead.getX()
                         +beadPlayer1.BEADHEIGHT,bead.getY());
             }
+        }
+        else if(ke.getKeyCode()==127 || ke.getKeyCode()==8){  //delete/backspace key
+            menu.delete();
         }
     }
 

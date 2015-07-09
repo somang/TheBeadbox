@@ -29,7 +29,7 @@ public class BeadPlayerPopUp extends JPopupMenu {
         VibcompUI vu;
         public BeadPlayerPopUp(VibcompUI vui){
             vu = vui;
-            delete = new JMenuItem("Delete");
+            delete = new JMenuItem("Delete"); delete.setToolTipText("(backspace)");
             cut = new JMenuItem("Cut"); cut.setToolTipText("(ctrl+x)");
             copy = new JMenuItem("Copy"); copy.setToolTipText("(ctrl+c)");
             paste = new JMenuItem("Paste"); paste.setToolTipText("(ctrl+v)");
