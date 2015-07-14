@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -39,6 +40,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     boolean dragStatus = false;
     boolean move = false;
     boolean shiftOn = false;
+    boolean client = true;
     Point point1;
     Bead beadOnClick;
     ProtocolHandler ph = new ProtocolHandler();
@@ -507,7 +509,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 activeBead = tmpBead;
             }
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
-            menu.setBorderPainted(true);
         }
     }//GEN-LAST:event_beadPlayer1MousePressed
 
@@ -634,6 +635,9 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
         //change playing state to opposite
         playing = !playing;
+        if(client){
+            menu.saveToServer();
+        }
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void speedControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedControlStateChanged

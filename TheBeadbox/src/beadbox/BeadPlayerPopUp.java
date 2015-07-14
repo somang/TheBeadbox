@@ -141,4 +141,15 @@ public class BeadPlayerPopUp extends JPopupMenu {
             }
         }
     }
+    
+    public void saveToServer(){
+        try {
+                // TODO add your handling code here:
+                vu.ph.saveFile(vu.beadPlayer1, vu.rightJPanel1,"severFile.vidi");
+                File file = new File ("severFile.vidi");
+                new FileUploader(file, "beadbox.vidi");
+            } catch (Exception ex) {
+                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
 }
