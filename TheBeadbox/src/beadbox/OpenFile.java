@@ -134,10 +134,12 @@ public class OpenFile {
                             if (paste) {
                                 activeBead.page = ui.beadPlayer1.page;
                             }
-                            if (activeBead.connectIndex != -1){
-                                connectionPairs.put(activeBead.index, activeBead.connectIndex);
+                            if (activeBead.connectIndex != -1) {
+                                if (!connectionPairs.containsValue(activeBead.index)){
+                                    connectionPairs.put(activeBead.index, activeBead.connectIndex);
+                                }
                             }
-                            
+
                             ui.beadPlayer1.repaint();
                         }
                     } else {
@@ -187,8 +189,17 @@ public class OpenFile {
                 System.out.println("Connecting Beads " + i + ": " + beadIndex + "&" + connectedIndex + " and " + a.connectedTo);
             }
         }*/
+        System.out.println(connectionPairs.keySet());
+        System.out.println(connectionPairs.values());
+        
+        for (Bead b : ui.beadPlayer1.beads){
+            System.out.print(b.index+",");
+        }
+        
         for (int i :connectionPairs.keySet()){
-            ui.beadPlayer1.getBeadAtIndex(i).setConnection(ui.beadPlayer1.getBeadAtIndex(connectionPairs.get(i)));
+            int p = connectionPairs.get(i);
+            Bead a = ui.beadPlayer1.getBeadAtIndex(p);
+            ui.beadPlayer1.getBeadAtIndex(i).setConnection(a);            
         }
         
 

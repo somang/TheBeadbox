@@ -42,15 +42,18 @@ public class beadInfoParser {
         // Assumed that a single page handles 20 beads = 1100 pix
         long position = (long) (1100 * (b.page - 1) + b.getX());
 
-        /*Parse Index number of this Bead*/
+        /**
+         * 
+         * 
+         * Parse Index number of this Bead
+         */
         int row = 1;
         Tuple indexVal;
         indexVal = new Tuple(0,0);
         if ((b.index%9999 == 0) && (b.index!=0)){
             row+=1;
         }
-        indexVal = parseMessageData(b.index);
-        
+        indexVal = parseMessageData(b.index);        
         /*Connected Bead Information fetch.*/
         int cbrow = 1;
         Tuple cntBeadIndex = new Tuple(0, 0);
@@ -59,7 +62,15 @@ public class beadInfoParser {
                 cbrow+=1;
             }
             cntBeadIndex = parseMessageData(b.connectedTo.index);
-        }
+        }        
+        /**
+         * 
+         * 
+         * 
+         * 
+         */
+        
+        
         if (copy){
             position = (long) (b.getX());
             mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
