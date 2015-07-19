@@ -42,19 +42,38 @@ public class beadInfoParser {
         // Assumed that a single page handles 20 beads = 1100 pix
         long position = (long) (1100 * (b.page - 1) + b.getX());
 
-        /**
+        /************
+         * July 19th, 2015
+         * This is by coordinate.
+         * given connectedBead C, the protocol aims to send its x coordinate AND track.
+         * 
+         */     
+        Tuple conBeadXCoord = new Tuple(0, 0);
+        Tuple conBeadTrack = new Tuple(0, 0);
+        if (b.connectedTo != null){
+            long conp = (long) (1100 * (b.connectedTo.page - 1) + b.connectedTo.getX());        
+            conBeadXCoord = parseMessageData((int) conp);
+            conBeadTrack = parseMessageData(b.connectedTo.track);
+        }        
+        mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
+        mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
+        mf.polyPress(position, track, conBeadXCoord.left, conBeadXCoord.right); // Connected Bead's X position
+        mf.controlChange(position, track, conBeadTrack.left, conBeadTrack.right); // Connected Bead's Y position
+        mf.noteOff(position + (long) 55, track, pitchVal); // 0x80
+        
+        /********************************************************************************************************************************
          * 
          * 
          * Parse Index number of this Bead
          */
-        int row = 1;
-        Tuple indexVal;
-        indexVal = new Tuple(0,0);
+        /*
+        int row = 1;        
         if ((b.index%9999 == 0) && (b.index!=0)){
             row+=1;
         }
-        indexVal = parseMessageData(b.index);        
-        /*Connected Bead Information fetch.*/
+        Tuple indexVal = parseMessageData(b.index);  
+        
+        /*Connected Bead Information fetch.
         int cbrow = 1;
         Tuple cntBeadIndex = new Tuple(0, 0);
         if (b.connectedTo != null) {
@@ -62,14 +81,7 @@ public class beadInfoParser {
                 cbrow+=1;
             }
             cntBeadIndex = parseMessageData(b.connectedTo.index);
-        }        
-        /**
-         * 
-         * 
-         * 
-         * 
-         */
-        
+        }
         
         if (copy){
             position = (long) (b.getX());
@@ -90,6 +102,9 @@ public class beadInfoParser {
             mf.progChange(position, track, cbrow);
             mf.noteOff(position + (long) 55, track, pitchVal); // 0x80
         }
+        *****************************************************************************************************************************/
+                
+                
         return mf;
     }
 

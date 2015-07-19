@@ -173,7 +173,7 @@ public class Bead extends javax.swing.JPanel {
         curIntensity = 100;
         maxIntensity = 50;
         page = -1;
-        index=0;
+        index = 0;
         initComponents();
     }
 

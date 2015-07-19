@@ -112,9 +112,9 @@ public class OpenFile {
                             System.out.println("\tNote Index ->  " + activeBead.index);
                         }
                     } // bead connection index info (control change)
-                    else if (sm.getCommand() == NOTE_CTRLCNG) {
-                        if (!conBead) {
-                            String data = "" + sm.getData1() + sm.getData2();
+                    else if (sm.getCommand() == NOTE_CTRLCNG) {                        
+                        if (!conBead) {                            
+                            String data = "" + sm.getData1() + sm.getData2();     
                             if (!data.equals("00")) {
                                 int connectIndex = Integer.parseInt(data);
                                 activeBead.connectIndex = connectIndex;
@@ -135,9 +135,9 @@ public class OpenFile {
                                 activeBead.page = ui.beadPlayer1.page;
                             }
                             if (activeBead.connectIndex != -1) {
-                                if (!connectionPairs.containsValue(activeBead.index)){
+                                //if (!connectionPairs.containsValue(activeBead.index)){
                                     connectionPairs.put(activeBead.index, activeBead.connectIndex);
-                                }
+                                //}
                             }
 
                             ui.beadPlayer1.repaint();

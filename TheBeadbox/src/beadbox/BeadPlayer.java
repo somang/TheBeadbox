@@ -215,6 +215,9 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
 
     public void setBead(int x, int y, Bead bead) {
+        
+        beadIndex++;
+        
         x = x - (BEADHEIGHT / 2);
         if (x < 0) {          //keep bead within page bounds         
             x = 0;
@@ -238,7 +241,6 @@ public class BeadPlayer extends javax.swing.JPanel {
         map.put(beadIndex,bead);
         pageMap.get(page).add(bead);
         refreshBeads();
-        beadIndex++;
     }
 
     public void deleteBead(Bead delBead) {
@@ -313,7 +315,7 @@ public class BeadPlayer extends javax.swing.JPanel {
      */
     public void refreshIndex(){
         this.map = new HashMap<>();
-        for (int i = 0; i < beads.size(); i++) {
+        for (int i = 1; i < beads.size(); i++) {
             beads.get(i).index = i;
             this.map.put(i, beads.get(i));
         }

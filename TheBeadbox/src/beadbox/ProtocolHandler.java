@@ -54,7 +54,7 @@ class ProtocolHandler {
          * upto 0-127 [128 cols]
          */
         if (beadPlayer1.map.size() < 1269873) {//maximum capacity
-            for (int i = 0; i < beadPlayer1.map.size(); i++) {
+            for (int i = 1; i < beadPlayer1.map.size(); i++) {
                 Bead tmp = beadPlayer1.map.get(i);
                 mf = beadInfoParser.parseBead(mf, tmp, false);
             }
