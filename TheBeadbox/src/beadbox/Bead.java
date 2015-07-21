@@ -20,12 +20,12 @@ import java.util.logging.Logger;
 public class Bead extends javax.swing.JPanel {
 
     private int curX, curY, centerX, centerY, curIntensity, maxIntensity, curFrequency;
-    protected int track, page, duration, index;
+    protected int track, page, duration;
     final private safeColors safeColor;
     protected boolean playable = false;
     public VibcompUI vibcompUI = null;
     protected Bead connectedTo = null;
-    protected int connectIndex = -1;
+    protected int connectPosX = -1, connectPosY = -1;;
     boolean InOutSwitch = false, initial = true;
     Beadlight tmpBeadlight;
     
@@ -173,7 +173,6 @@ public class Bead extends javax.swing.JPanel {
         curIntensity = 100;
         maxIntensity = 50;
         page = -1;
-        index = 0;
         initComponents();
     }
 
@@ -196,10 +195,6 @@ public class Bead extends javax.swing.JPanel {
 
     public int getDuration() {
         return duration;
-    }
-    
-    public int getIndex() {
-        return index;
     }
 
     /* SETTERS */
@@ -230,10 +225,6 @@ public class Bead extends javax.swing.JPanel {
     public void setConnection(Bead otherBead) {
         connectedTo = otherBead;
         otherBead.connectedTo = this;
-    }
-    
-    public void setIndex(int uniqueIndex) {
-        index = uniqueIndex;
     }
 
     public void breakConnections() {

@@ -43,7 +43,6 @@ class ProtocolHandler {
          * 6. connected Bead Index
          *
          */
-        beadPlayer1.refreshIndex();
 
         /**
          * for Matrix M:
@@ -53,9 +52,9 @@ class ProtocolHandler {
          * where col.size can be upto 0-9998 [9999 beads] and row.size can be
          * upto 0-127 [128 cols]
          */
-        if (beadPlayer1.map.size() < 1269873) {//maximum capacity
-            for (int i = 1; i < beadPlayer1.map.size(); i++) {
-                Bead tmp = beadPlayer1.map.get(i);
+        if (beadPlayer1.beads.size() < 1269873) {//maximum capacity
+            for (int i = 0; i < beadPlayer1.beads.size(); i++) {
+                Bead tmp = beadPlayer1.beads.get(i);
                 mf = beadInfoParser.parseBead(mf, tmp, false);
             }
         } else {

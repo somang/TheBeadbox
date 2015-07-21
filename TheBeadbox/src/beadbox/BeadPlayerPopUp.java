@@ -64,7 +64,6 @@ public class BeadPlayerPopUp extends JPopupMenu {
             }
             
             ArrayList<Bead> beadsOnThisPage = multiSelect;
-            beadsOnThisPage = vu.playerOverview1.refreshCopyIndex(beadsOnThisPage);
             
             if (beadsOnThisPage != null) {
                 for (int i = 0; i < beadsOnThisPage.size(); i++) {

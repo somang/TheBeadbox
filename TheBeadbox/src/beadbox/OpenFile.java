@@ -7,10 +7,6 @@ package beadbox;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.util.HashMap;
-import java.util.Map;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
@@ -40,7 +36,6 @@ public class OpenFile {
         int NOTE_OFF_START = 0x80;
         int NOTE_OFF_END = 0x8F;
         int NOTE_POLYPRESS = 0xA0;
-        int NOTE_PROGCNG = 0xC0;
         int NOTE_CTRLCNG = 0xB0;
         int PITCH_BEND = 0xE0;
         int TEMPO = 51;
@@ -51,8 +46,8 @@ public class OpenFile {
 
         Bead activeBead = null;
         int key = 0, velocity;
-        Map<Integer, Integer> connectionPairs = new HashMap<Integer, Integer>();
-        boolean conBead = false;
+        
+        //boolean conBead = false;
         if (!paste) {
             // make sure composition is cleared first
             ui.beadPlayer1.beads.clear();
@@ -72,7 +67,7 @@ public class OpenFile {
                 if (message instanceof ShortMessage) {
                     ShortMessage sm = (ShortMessage) message;
                         //System.out.print("Channel: " + sm.getChannel() + " ");                       
-                    //When a key is on
+                //When a key is on
                     if (sm.getCommand() >= NOTE_ON_START && sm.getCommand() <= NOTE_ON_END) {
                         key = sm.getData1();
                         velocity = sm.getData2();
@@ -88,64 +83,47 @@ public class OpenFile {
                                 xLoc = (int) curTick % 1100 + (25);
                             }
                         }
-                    } // bead frequency info (pitch bend)
+                    } 
+                // bead frequency info (pitch bend)
                     else if (sm.getCommand() == PITCH_BEND) {
                         String data = "" + sm.getData1() + sm.getData2();
                         int bendVal = Integer.parseInt(data);
                         key = convertPitchToFreq(key) + bendVal;
                         activeBead.setFrequency(key);
                         System.out.println("\tFrequency ->  " + key);
-                    } // bead index info (poly press)
+                    } 
+                // bead index info (poly press)
                     else if (sm.getCommand() == NOTE_POLYPRESS) {
                         String data = "" + sm.getData1() + sm.getData2();
-                        activeBead.index = Integer.parseInt(data);
-                    } // bead index multiplier (program change)
-                    else if (sm.getCommand() == NOTE_PROGCNG) {
-                        if (conBead) {
-                            String data = "" + sm.getData1();
-                            activeBead.connectIndex = activeBead.connectIndex * Integer.parseInt(data);
-                            System.out.println("\tCon Index ->  " + activeBead.connectIndex);
-                            conBead = false;
-                        } else {
-                            String data = "" + sm.getData1();
-                            activeBead.index = activeBead.index * Integer.parseInt(data);
-                            System.out.println("\tNote Index ->  " + activeBead.index);
-                        }
-                    } // bead connection index info (control change)
+                        System.out.println("\nPoly press data###:"+data);
+                        activeBead.connectPosX = Integer.parseInt(data);
+                    } 
+                // bead connection index info (control change)
                     else if (sm.getCommand() == NOTE_CTRLCNG) {                        
-                        if (!conBead) {                            
-                            String data = "" + sm.getData1() + sm.getData2();     
-                            if (!data.equals("00")) {
-                                int connectIndex = Integer.parseInt(data);
-                                activeBead.connectIndex = connectIndex;
-                            }
-                            conBead = true;
+                        String data = "" + sm.getData1() + sm.getData2();
+                        System.out.println("\nControl change data###:"+data);
+                        if (!data.equals("00")) {
+                            activeBead.connectPosY = Integer.parseInt(data);
                         }
-                    } //when the bead is off
+                    } 
+                //when the bead is off
                     else if (sm.getCommand() >= NOTE_OFF_START && sm.getCommand() <= NOTE_OFF_END) {
                         if (curTick != 0) {
                             System.out.print("@" + event.getTick() + " ");
                             System.out.println("Note off ->  Bead Created\n");
                             activeBead.setSize(BEADHEIGHT, BEADHEIGHT);
-                            int tmpIndex = activeBead.index;
                             ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);
-                            activeBead.index = tmpIndex;
                             activeBead.page = (int) ((curTick) / 1100) + 1;
                             if (paste) {
                                 activeBead.page = ui.beadPlayer1.page;
                             }
-                            if (activeBead.connectIndex != -1) {
-                                //if (!connectionPairs.containsValue(activeBead.index)){
-                                    connectionPairs.put(activeBead.index, activeBead.connectIndex);
-                                //}
-                            }
-
                             ui.beadPlayer1.repaint();
                         }
                     } else {
                         //System.out.println("Command:" + sm.getCommand());
                     }
-                } // set max page and right panel info
+                } 
+            // set max page and right panel info
                 else if (trackNumber == 1 && message instanceof MetaMessage) {
                     MetaMessage mm = (MetaMessage) message;
                     //System.out.println("Other message: " + message.getClass());
@@ -175,34 +153,17 @@ public class OpenFile {
             }
         }
 
-        //set connections
-        /*
-        for (int i = 0; i < ui.beadPlayer1.map.size(); i++) {
-            Bead a = ui.beadPlayer1.getBeadAtIndex(i);
-            int beadIndex = a.index;
-            int connectedIndex = a.connectIndex;
-                //System.out.println(a.connectedTo);
-
-            if ((connectedIndex != -1) && (a.connectedTo == null)) {
-                System.out.println(a.connectedTo);
-                a.setConnection(ui.beadPlayer1.getBeadAtIndex(connectedIndex));
-                System.out.println("Connecting Beads " + i + ": " + beadIndex + "&" + connectedIndex + " and " + a.connectedTo);
-            }
-        }*/
-        System.out.println(connectionPairs.keySet());
-        System.out.println(connectionPairs.values());
         
         for (Bead b : ui.beadPlayer1.beads){
-            System.out.print(b.index+",");
+            if(b.connectPosY!=-1 && b.connectedTo==null){
+                int xPos = b.connectPosX%1100;
+                int yPos = b.connectPosY*ui.beadPlayer1.TRACKHEIGHT;
+                int page = (b.connectPosX/1100)+1;
+                b.connectedTo = ui.beadPlayer1.getBeadAt(xPos+40,yPos+40,page);
+            }
         }
         
-        for (int i :connectionPairs.keySet()){
-            int p = connectionPairs.get(i);
-            Bead a = ui.beadPlayer1.getBeadAtIndex(p);
-            ui.beadPlayer1.getBeadAtIndex(i).setConnection(a);            
-        }
         
-
     }
 
     private int convertPitchToFreq(int pitchVal) {

@@ -12,9 +12,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.midi.InvalidMidiDataException;
@@ -851,8 +848,11 @@ public final class PlayerOverview extends javax.swing.JPanel {
                 tempmf.noteOff(0, i, 0);
             }
             
-            ArrayList<Bead> beadsOnThisPage = vui.beadPlayer1.pageMap.get(pageIndex);
-            beadsOnThisPage = refreshCopyIndex(beadsOnThisPage);
+            ArrayList<Bead> beadsOnThisPage= new ArrayList<>(); 
+            for(Bead bd : vui.beadPlayer1.beads) {
+                if(bd.page == pageIndex)
+                beadsOnThisPage.add(bd);
+            }
             
             if (beadsOnThisPage != null) {
                 for (Bead tmpbead : beadsOnThisPage) {
@@ -868,7 +868,6 @@ public final class PlayerOverview extends javax.swing.JPanel {
     
     private void pastePage(int pageIndex){
         for (Bead bead : vui.beadPlayer1.beads) {
-            bead.index = -1;
             if (bead.page == pageIndex) {
                 vui.beadPlayer1.deleteBead(bead);
             }
@@ -884,36 +883,13 @@ public final class PlayerOverview extends javax.swing.JPanel {
     
      private void clearPage(int pageIndex){
          ArrayList<Bead> beadAry= new ArrayList<>(); 
-         for(Bead bd : vui.beadPlayer1.pageMap.get(pageIndex)) beadAry.add(bd);
+         for(Bead bd : vui.beadPlayer1.beads) {
+             if(bd.page == pageIndex)
+             beadAry.add(bd);
+         }
          for(Bead bead : beadAry) vui.beadPlayer1.deleteBead(bead);
      }
 
-    /**
-     * Re index the beads, so that each beads index starts from 0 to size of the beads in this page.
-     * @param beadsOnThisPage 
-     * @return  new indexed set
-     */
-    protected ArrayList<Bead> refreshCopyIndex(ArrayList<Bead> beadsOnThisPage) {
-        Map<Integer, Integer> tmpmap = new HashMap<>();
-        
-        if (beadsOnThisPage != null) {
-            HashSet hs = new HashSet();
-            hs.addAll(beadsOnThisPage);
-            beadsOnThisPage = new ArrayList();
-            beadsOnThisPage.addAll(hs);
-        }
-        
-        for (int i=0;i<beadsOnThisPage.size();i++){
-            tmpmap.put(i,beadsOnThisPage.get(i).connectIndex);
-        }
-        for (int i=0;i<beadsOnThisPage.size();i++){
-            beadsOnThisPage.get(i).index = i;
-            if (beadsOnThisPage.get(i).connectIndex != -1){
-                beadsOnThisPage.get(i).connectIndex = tmpmap.get(i);
-            }
-        }
-        return beadsOnThisPage;
-    }
     
     class OverviewPopUp extends JPopupMenu {
         JMenuItem copy, paste, clear;

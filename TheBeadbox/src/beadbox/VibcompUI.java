@@ -11,7 +11,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -626,7 +625,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         pageScroll.setValue(BeadPlayer.maxPage);
         beadPlayer1.page = BeadPlayer.maxPage;
         jTextPane1.setText("Page: "+beadPlayer1.page);
-        beadPlayer1.pageMap.put(beadPlayer1.page, new ArrayList());
+        //beadPlayer1.pageMap.put(beadPlayer1.page, new ArrayList());
         
         playerOverview1.refreshOverviewArray();
         

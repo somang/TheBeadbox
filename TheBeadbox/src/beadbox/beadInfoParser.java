@@ -53,7 +53,7 @@ public class beadInfoParser {
         if (b.connectedTo != null){
             long conp = (long) (1100 * (b.connectedTo.page - 1) + b.connectedTo.getX());        
             conBeadXCoord = parseMessageData((int) conp);
-            conBeadTrack = parseMessageData(b.connectedTo.track);
+            conBeadTrack = parseMessageData(b.connectedTo.track-1);
         }        
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
         mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.

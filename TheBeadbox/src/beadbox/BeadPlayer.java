@@ -11,9 +11,7 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextPane;
@@ -31,8 +29,6 @@ public class BeadPlayer extends javax.swing.JPanel {
     int beadIndex = 0;
     static int maxPage = 2;
     ArrayList<Bead> beads = new ArrayList();
-    Map<Integer, Bead> map;
-    Map<Integer, ArrayList<Bead>> pageMap;
     
     HashSet hs;
 
@@ -47,11 +43,7 @@ public class BeadPlayer extends javax.swing.JPanel {
      * Creates new form BeadPlayer
      */
     public BeadPlayer() {
-        this.pageMap = new HashMap<>();
-        pageMap.put(1, new ArrayList());
-        pageMap.put(2, new ArrayList());
         
-        this.map = new HashMap<>();
         this.playerTickTock = () -> {
             while (true) {
                 if (VibcompUI.playing) {
@@ -235,19 +227,14 @@ public class BeadPlayer extends javax.swing.JPanel {
         bead.setLocation(x, y);
         bead.playable = true;
         bead.setPage(page);
-        bead.setIndex(beadIndex); // set unique index number
         beads.add(bead);
         this.add(bead);
-        map.put(beadIndex,bead);
-        pageMap.get(page).add(bead);
         refreshBeads();
     }
 
     public void deleteBead(Bead delBead) {
         delBead.breakConnections();
         beads.remove(delBead);
-        map.remove(delBead.index);
-        pageMap.get(delBead.page).remove(delBead);
         
         this.remove(delBead);
         refreshBeads();
@@ -297,29 +284,8 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
     
     /**
-     * Find the bead assigned to the given index.
-     * 
-     * @param index
-     * @return 
-     */
-    public Bead getBeadAtIndex(int index) {
-        for (Bead bead : beads) {
-            if (bead.index == index) {
-                return bead;
-            }
-        }
-        return null;
-    }
-    /**
      * Suggest use for this method is for the last change, aka before one to save the whole file.
      */
-    public void refreshIndex(){
-        this.map = new HashMap<>();
-        for (int i = 1; i < beads.size(); i++) {
-            beads.get(i).index = i;
-            this.map.put(i, beads.get(i));
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
