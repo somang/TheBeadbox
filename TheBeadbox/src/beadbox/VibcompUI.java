@@ -39,7 +39,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     boolean dragStatus = false;
     boolean move = false;
     boolean shiftOn = false;
-    boolean client = true;
+    static boolean client = false, server = true;
     Point point1;
     Bead beadOnClick;
     ProtocolHandler ph = new ProtocolHandler();
@@ -636,6 +636,11 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         playing = !playing;
         if(client){
             menu.saveToServer();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_playButtonActionPerformed
 
@@ -930,5 +935,5 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     public void keyReleased(KeyEvent ke) {
         //System.out.println("key released");
     }
-    
+       
 }

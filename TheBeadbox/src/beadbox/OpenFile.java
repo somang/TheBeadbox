@@ -95,13 +95,13 @@ public class OpenFile {
                 // bead index info (poly press)
                     else if (sm.getCommand() == NOTE_POLYPRESS) {
                         String data = "" + sm.getData1() + sm.getData2();
-                        System.out.println("\nPoly press data###:"+data);
+                        System.out.print("\tConnectedTo Xpos:"+data);
                         activeBead.connectPosX = Integer.parseInt(data);
                     } 
                 // bead connection index info (control change)
                     else if (sm.getCommand() == NOTE_CTRLCNG) {                        
                         String data = "" + sm.getData1() + sm.getData2();
-                        System.out.println("\nControl change data###:"+data);
+                        System.out.println(" \tYpos:"+data);
                         if (!data.equals("00")) {
                             activeBead.connectPosY = Integer.parseInt(data);
                         }
@@ -153,7 +153,7 @@ public class OpenFile {
             }
         }
 
-        
+        // Set connections
         for (Bead b : ui.beadPlayer1.beads){
             if(b.connectPosY!=-1 && b.connectedTo==null){
                 int xPos = b.connectPosX%1100;

@@ -5,6 +5,7 @@ import static beadbox.VibcompUI.multiSelect;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -141,14 +142,22 @@ public class BeadPlayerPopUp extends JPopupMenu {
         }
     }
     
-    public void saveToServer(){
+    public void saveToServer(){      
         try {
-                // TODO add your handling code here:
-                vu.ph.saveFile(vu.beadPlayer1, vu.rightJPanel1,"severFile.vidi");
-                File file = new File ("severFile.vidi");
-                new FileUploader(file, "beadbox.vidi");
-            } catch (Exception ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            //save and send current Beadbox file
+            vu.ph.saveFile(vu.beadPlayer1, vu.rightJPanel1,"severFile.vidi");
+            File file = new File ("severFile.vidi");
+            new FileUploader(file, "beadbox.vidi");
+            
+            //save and send extra info
+            PrintWriter writer = new PrintWriter("serverFileInfo.txt", "UTF-8");
+            writer.println("playing: "+vu.playing);
+            writer.println("page: "+vu.beadPlayer1.page);
+            writer.close();
+            File file2 = new File ("serverFileInfo.txt");
+            new FileUploader(file2, "beadboxInfo.txt");
+        } catch (Exception ex) {
+            Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

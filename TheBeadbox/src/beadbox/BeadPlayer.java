@@ -10,10 +10,19 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiUnavailableException;
 import javax.swing.JTextPane;
 
 /**
@@ -26,7 +35,6 @@ public class BeadPlayer extends javax.swing.JPanel {
     int BEADHEIGHT = 50;
     int barPosition = 10, MAXBARPOS = 1100;
     int page = 1;
-    int beadIndex = 0;
     static int maxPage = 2;
     ArrayList<Bead> beads = new ArrayList();
     
@@ -69,6 +77,9 @@ public class BeadPlayer extends javax.swing.JPanel {
         initComponents();
         Thread td = new Thread(playerTickTock);
         td.start();
+        
+        
+        if(VibcompUI.server) ServerCheck.start();
     }
 
     @Override
@@ -207,9 +218,6 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
 
     public void setBead(int x, int y, Bead bead) {
-        
-        beadIndex++;
-        
         x = x - (BEADHEIGHT / 2);
         if (x < 0) {          //keep bead within page bounds         
             x = 0;
@@ -320,5 +328,50 @@ public class BeadPlayer extends javax.swing.JPanel {
         }
     }
     
-    
+    Thread ServerCheck = new Thread(){
+        public void run(){
+            boolean currState = false;
+            while(true){
+                try {
+                    URL url = new URL("http://saduda.com/imdc/uploads/beadboxInfo.txt");
+                    Scanner s = new Scanner(url.openStream());
+                    s.next();
+                    boolean nextState = s.nextBoolean();
+                    if(nextState!=currState){ 
+                        vibcompUI.playing = nextState;
+                        currState = nextState;
+                        
+                        String url2 = "http://saduda.com/imdc/uploads/beadbox.vidi";
+                        downloadUsingStream(url2, "clientFile.vidi");
+                        new OpenFile(new File("clientFile.vidi"),vibcompUI,false);
+                        s.next();
+                        page = s.nextInt();
+                    }
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MidiUnavailableException ex) {
+                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvalidMidiDataException ex) {
+                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                       
+        }  
+        
+        private void downloadUsingStream(String urlStr, String file) throws IOException{
+            URL url = new URL(urlStr);
+            BufferedInputStream bis = new BufferedInputStream(url.openStream());
+            FileOutputStream fis = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int count=0;
+            while((count = bis.read(buffer,0,1024)) != -1)
+            {
+                fis.write(buffer, 0, count);
+            }
+            fis.close();
+            bis.close();
+        }
+    };
 }
