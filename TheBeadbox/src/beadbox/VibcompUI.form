@@ -4,7 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1450, 910]"/>
+      <Dimension value="[1450, 930]"/>
     </Property>
   </Properties>
   <AccessibilityProperties>
@@ -295,7 +295,7 @@
                       <Component id="speedControl" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                  <Component id="playButton" min="-2" pref="96" max="-2" attributes="0"/>
+                  <Component id="playButton" min="-2" pref="122" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="shiftKey" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -312,9 +312,9 @@
                       <Component id="openButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="speedControl" pref="53" max="32767" attributes="0"/>
+                  <Component id="speedControl" max="32767" attributes="0"/>
               </Group>
-              <Component id="playButton" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="playButton" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -352,7 +352,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/beadbox/save_icon.png"/>
+              <Image iconType="3" name="/beadbox/icons/save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Save"/>
             <Property name="toolTipText" type="java.lang.String" value="(ctrl+s)"/>
@@ -368,7 +368,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/beadbox/add_icon.png"/>
+              <Image iconType="3" name="/beadbox/icons/add.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Add Page"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -380,7 +380,7 @@
         <Component class="javax.swing.JButton" name="playButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/beadbox/play_pause.png"/>
+              <Image iconType="3" name="/beadbox/icons/play.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Play / Pause"/>
             <Property name="actionCommand" type="java.lang.String" value="&gt; Play "/>
@@ -396,7 +396,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/beadbox/open_icon.png"/>
+              <Image iconType="3" name="/beadbox/icons/open.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Open"/>
             <Property name="toolTipText" type="java.lang.String" value="(ctrl+o)"/>

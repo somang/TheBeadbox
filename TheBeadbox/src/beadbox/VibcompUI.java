@@ -95,7 +95,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         shiftKey = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1450, 910));
+        setPreferredSize(new java.awt.Dimension(1450, 930));
 
         beadPlayer1.setBackground(new java.awt.Color(255, 255, 255));
         beadPlayer1.setPreferredSize(new java.awt.Dimension(1100, 550));
@@ -230,7 +230,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         });
 
         saveButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/save_icon.png"))); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/save.png"))); // NOI18N
         saveButton.setText("Save");
         saveButton.setToolTipText("(ctrl+s)");
         saveButton.setFocusable(false);
@@ -241,7 +241,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         });
 
         addPage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        addPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/add_icon.png"))); // NOI18N
+        addPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/add.png"))); // NOI18N
         addPage.setText("Add Page");
         addPage.setFocusable(false);
         addPage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -250,7 +250,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             }
         });
 
-        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/play_pause.png"))); // NOI18N
+        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/play.png"))); // NOI18N
         playButton.setToolTipText("Play / Pause");
         playButton.setActionCommand("> Play ");
         playButton.setFocusable(false);
@@ -261,7 +261,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         });
 
         openButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/open_icon.png"))); // NOI18N
+        openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/open.png"))); // NOI18N
         openButton.setText("Open");
         openButton.setToolTipText("(ctrl+o)");
         openButton.setFocusable(false);
@@ -297,7 +297,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                         .addComponent(addPage))
                     .addComponent(speedControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(111, 111, 111)
-                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(shiftKey)
                 .addGap(18, 18, 18)
@@ -305,20 +305,18 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(saveButton)
-                        .addComponent(addPage)
-                        .addComponent(openButton))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(speedControl, javax.swing.GroupLayout.PREFERRED_SIZE, 53, Short.MAX_VALUE))
-                .addComponent(playButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(shiftKey)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveButton)
+                    .addComponent(addPage)
+                    .addComponent(openButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(speedControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(playButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(shiftKey))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
