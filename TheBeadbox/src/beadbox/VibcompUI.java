@@ -158,7 +158,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         beadPanelText.setBackground(new java.awt.Color(255, 255, 255));
         beadPanelText.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         beadPanelText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        beadPanelText.setText("NEW BEAD");
+        beadPanelText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/bb_add_bead_icons_July_29_2015-05.png"))); // NOI18N
+        beadPanelText.setToolTipText("");
         beadPanelText.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         beadPanelText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -171,15 +172,16 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         beadPanelLayout.setHorizontalGroup(
             beadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(beadPanelLayout.createSequentialGroup()
-                .addComponent(beadPanelText, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(beadPanelText, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         beadPanelLayout.setVerticalGroup(
             beadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(beadPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(beadPanelText, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addComponent(beadPanelText, javax.swing.GroupLayout.PREFERRED_SIZE, 121, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         barSlider.setMajorTickSpacing(55);
@@ -275,7 +277,15 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         jTextPane1.setEnabled(false);
         jScrollPane2.setViewportView(jTextPane1);
 
-        shiftKey.setText("Shift Key");
+        shiftKey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/multi_select.png"))); // NOI18N
+        shiftKey.setText("Multi Select");
+        shiftKey.setToolTipText("");
+        shiftKey.setFocusable(false);
+        shiftKey.setIconTextGap(8);
+        shiftKey.setMaximumSize(new java.awt.Dimension(129, 39));
+        shiftKey.setMinimumSize(new java.awt.Dimension(129, 39));
+        shiftKey.setName(""); // NOI18N
+        shiftKey.setOpaque(true);
         shiftKey.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 shiftKeyStateChanged(evt);
@@ -299,7 +309,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 .addGap(111, 111, 111)
                 .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(shiftKey)
+                .addComponent(shiftKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -316,7 +326,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(shiftKey))
+                    .addComponent(shiftKey, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -336,7 +346,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                     .addComponent(jScrollPane1)
                     .addComponent(barSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(beadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,7 +354,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                         .addComponent(intensitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(frequencySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(rightJPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                    .addComponent(rightJPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
