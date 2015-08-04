@@ -50,14 +50,21 @@ public class beadInfoParser {
          */     
         Tuple conBeadXCoord = new Tuple(0, 0);
         Tuple conBeadTrack = new Tuple(0, 0);
+        int negativeSign = 0;
         if (b.connectedTo != null){
-            long conp = (long) (1100 * (b.connectedTo.page - 1) + b.connectedTo.getX());        
-            conBeadXCoord = parseMessageData((int) conp);
+            long conbeadposition = (long) (1100 * (b.connectedTo.page - 1) + b.connectedTo.getX());        
+            long distance_btwn = conbeadposition - position;
+            if (distance_btwn < 0){ // when B->A 
+                negativeSign = 1;
+            }
+            conBeadXCoord = parseMessageData((int) distance_btwn);
+            System.out.println(conBeadXCoord.left + "," + conBeadXCoord.right);
             conBeadTrack = parseMessageData(b.connectedTo.track-1);
         }        
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
         mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
         mf.polyPress(position, track, conBeadXCoord.left, conBeadXCoord.right); // Connected Bead's X position
+        mf.progChange(position, track, negativeSign);
         mf.controlChange(position, track, conBeadTrack.left, conBeadTrack.right); // Connected Bead's Y position
         mf.noteOff(position + (long) 55, track, pitchVal); // 0x80
         
