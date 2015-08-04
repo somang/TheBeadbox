@@ -132,7 +132,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         frequencySlider.setMinorTickSpacing(50);
         frequencySlider.setOrientation(javax.swing.JSlider.VERTICAL);
         frequencySlider.setPaintTicks(true);
-        frequencySlider.setToolTipText("");
         frequencySlider.setBorder(javax.swing.BorderFactory.createTitledBorder("Frequency"));
         frequencySlider.setFocusable(false);
         frequencySlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -144,6 +143,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         intensitySlider.setMinorTickSpacing(10);
         intensitySlider.setOrientation(javax.swing.JSlider.VERTICAL);
         intensitySlider.setPaintTicks(true);
+        intensitySlider.setToolTipText("");
         intensitySlider.setBorder(javax.swing.BorderFactory.createTitledBorder("Intensity"));
         intensitySlider.setFocusable(false);
         intensitySlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -159,7 +159,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         beadPanelText.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         beadPanelText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         beadPanelText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/bb_add_bead_icons_July_29_2015-05.png"))); // NOI18N
-        beadPanelText.setToolTipText("");
         beadPanelText.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         beadPanelText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -279,7 +278,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
         shiftKey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/beadbox/icons/multi_select.png"))); // NOI18N
         shiftKey.setText("Multi Select");
-        shiftKey.setToolTipText("");
         shiftKey.setFocusable(false);
         shiftKey.setIconTextGap(8);
         shiftKey.setMaximumSize(new java.awt.Dimension(129, 39));
@@ -410,24 +408,16 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         beadPlayer1.barPosition = barSlider.getValue();
     }//GEN-LAST:event_barSliderMouseClicked
 
-    private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
-        if (isBeadPanelEmpty()) {
-            refreshBeadPanel();
-        }
-    }//GEN-LAST:event_beadPanelTextMousePressed
-
     public boolean isBeadPanelEmpty() {
-        /**
-         * 1 if empty 2 if filled
-         */
-        return beadPanel.getComponentCount() == 1;
+        return beadPanelText.getComponentCount() == 0;
     }
 
     public void refreshBeadPanel() {
         Bead tmpBead = new Bead();
         tmpBead.setSize(55, 55);
-        beadPanel.add(tmpBead);
-        tmpBead.setLocation(15, 20);
+        beadPanelText.add(tmpBead);
+        tmpBead.setLocation(20, 15); 
+        tmpBead.setOpaque(false);
         activeBead = tmpBead;
         beadPanel.repaint();
         prevBead = tmpBead;
@@ -682,6 +672,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     private void shiftKeyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_shiftKeyStateChanged
         shiftOn = shiftKey.isSelected();
     }//GEN-LAST:event_shiftKeyStateChanged
+
+    private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
+        if(isBeadPanelEmpty()){
+            refreshBeadPanel();
+        }
+    }//GEN-LAST:event_beadPanelTextMousePressed
 
     /**
      * @param args the command line arguments

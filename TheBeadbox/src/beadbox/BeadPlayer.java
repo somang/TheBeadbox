@@ -231,7 +231,6 @@ public class BeadPlayer extends javax.swing.JPanel {
         }
         y = ((getTrackAt(y) - 1) * TRACKHEIGHT + 5);
         bead.setTrack(getTrackAt(y));
-        bead.setOpaque(false);
         bead.setLocation(x, y);
         bead.playable = true;
         bead.setPage(page);
