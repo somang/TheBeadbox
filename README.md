@@ -1,4 +1,4 @@
-The Beadbox ![alt text](https://github.com/somang/TheBeadbox/blob/master/TheBeadbox/resources/logo.png "Beadboxlogo") : Vibrotactile Composition Softare / Notation System
+The Beadbox : Vibrotactile Composition Softare / Notation System
 
 ==============================
 ## What's new?
