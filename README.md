@@ -5,14 +5,8 @@
 
 ![alt text](https://github.com/somang/TheBeadbox/blob/master/TheBeadbox/resources/Screenshot.jpg "Screenshot")
 
-## Synopsis
+## What is this?
 Vibrotactile as an art genre, the Beadbox aims to support the artists who wants to create a vibrotactile art composition of their own. Similar to music/movie editors, it uses timeline user interface but using a unique notation system. The Beadbox has its default setup for the Emoti-Chair but further it will support other output devices. (http://www.ryerson.ca/psychology/emotichair.html)
-
-## Classes
-All classes are commented by developers including:
-- File I/O : Vidi file structure protocol uses MIDI message base but has unique way to interpret
-- Java GUI classes : Forms, Components, Swing!
-- ASIO outputs : Audio outputs to each channel, speakers
 
 ## Libraries
 - This requires (and includes) Java Asio library (jasiohost) and ASIO driver.
@@ -21,7 +15,13 @@ All classes are commented by developers including:
 ## Installation, prerequisites.
 Java 1.8.x
 
-## Motivation or Background
+## Classes
+All classes are commented by developers including:
+- File I/O : Vidi file structure protocol uses MIDI message base but has unique way to interpret
+- Java GUI classes : Forms, Components, Swing!
+- ASIO outputs : Audio outputs to each channel, speakers
+
+### Motivation or Background
 A Vibrotactile system needs four essential components to be used.
 * Frequency Control
 * Intensity (Amplitude) Level Control
@@ -48,8 +48,7 @@ The data collected were analyzed to answer the research questions:
 5. What is the usability of the vibrotactile composition tool for allowing users to control over the frequency, intensity, timing, and spatial information?
 
 
-
-# Future works (To do)
+### Future works (To do)
 - Undo & Redo 
 - Virtual Input instrumental/device/window UI (i.e. virtual Vibrochord, Computer Keyboard mapped, etc)
 - Import wav files, Export multi-track audio file
@@ -57,7 +56,8 @@ The data collected were analyzed to answer the research questions:
 ## Contributors
 - [x] Somang Nam :v:
 - [x] Albert Aikins-Mensah :v:
-- [ ] http://imdc.ca/
+- [x] Carly Holtzman did the icon design :v:
+- [ ] Inclusive Media Design Centre, http://imdc.ca/
 - [ ] Project started since Sept. 28th 2014
 
 
