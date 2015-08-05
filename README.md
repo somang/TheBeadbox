@@ -1,7 +1,10 @@
-The Beadbox : Vibrotactile Composition Softare / Notation System
+The Beadbox ![alt text](https://github.com/somang/TheBeadbox/blob/master/TheBeadbox/resources/logo.png "Beadboxlogo") : Vibrotactile Composition Softare / Notation System
+
 ==============================
 ## What's new?
 Aug 07-10 ParaPanAm Event: Accessible Innovation Showcase 2015
+
+![alt text](https://github.com/somang/TheBeadbox/blob/master/TheBeadbox/resources/Screenshot.jpg "Screenshot")
 
 ## Synopsis
 Vibrotactile as an art genre, the Beadbox aims to support the artists who wants to create a vibrotactile art composition of their own. Similar to music/movie editors, it uses timeline user interface but using a unique notation system. The Beadbox has its default setup for the Emoti-Chair but further it will support other output devices. (http://www.ryerson.ca/psychology/emotichair.html)
