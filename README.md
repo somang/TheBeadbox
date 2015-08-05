@@ -4,7 +4,6 @@
 :boom: The Beadbox will be showcased at ParaPanAm Event: Accessible Innovation Showcase 2015, Aug 07-10
 
 ![alt text](https://github.com/somang/TheBeadbox/blob/master/TheBeadbox/resources/Screenshot.jpg "Screenshot")
-**[Screenshot of the Beadbox]**
 
 ## What is the Beadbox?
 Vibrotactile as an art genre, the Beadbox aims to support the artists who wants to create a vibrotactile art composition of their own. Similar to music/movie editors, it uses timeline user interface but using a unique notation system. The Beadbox has its default setup for the Emoti-Chair but further it will support other output devices. (http://www.ryerson.ca/psychology/emotichair.html)
@@ -33,7 +32,7 @@ The Beadbox provides intuitive notation system, intuitive user interface, and al
 
 ### Research
 There were 30 participants for the user study to evaluate the Beadbox.
-Study procedure includes prequestionnaire, breif demo, and a 30 minute composition session.
+Study procedure includes prequestionnaire, breif demo, and a short composition session.
 Also recorded the users behaviour and audio, post questionnaire.
 
 The data collected were analyzed to answer the research questions:
@@ -60,8 +59,6 @@ The data collected were analyzed to answer the research questions:
 - [x] Thanks to Carly Holtzman (https://ca.linkedin.com/in/carlyholtzman) :v: for the icon and logo design!
 - [ ] Inclusive Media Design Centre, http://imdc.ca/
 - [ ] Project started since Sept. 28th 2014
-
-
 
 ## License
 
