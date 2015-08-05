@@ -1,19 +1,20 @@
 # The Beadbox : Vibrotactile Composition Softare / Notation System
 
-## :sparkles: What's new? :sparkles:
-:boom: Aug 07-10 ParaPanAm Event: Accessible Innovation Showcase 2015
+## :sparkles: Updates :sparkles:
+:boom: The Beadbox will be showcased at ParaPanAm Event: Accessible Innovation Showcase 2015, Aug 07-10
 
 ![alt text](https://github.com/somang/TheBeadbox/blob/master/TheBeadbox/resources/Screenshot.jpg "Screenshot")
+**[Screenshot of the Beadbox]**
 
-## What is this?
+## What is the Beadbox?
 Vibrotactile as an art genre, the Beadbox aims to support the artists who wants to create a vibrotactile art composition of their own. Similar to music/movie editors, it uses timeline user interface but using a unique notation system. The Beadbox has its default setup for the Emoti-Chair but further it will support other output devices. (http://www.ryerson.ca/psychology/emotichair.html)
 
-## Libraries
-- This requires (and includes) Java Asio library (jasiohost) and ASIO driver.
-- ASIO4ALL is suggested.
+## Libraries Used
+- This requires (and includes) Java Asio library (_jasiohost_) and any ASIO driver.
+- _ASIO4ALL_ is suggested.
 
 ## Installation, prerequisites.
-Java 1.8.x
+- Java 1.8.x is not a prerequisite but it was used to develop.
 
 ## Classes
 All classes are commented by developers including:
@@ -54,9 +55,9 @@ The data collected were analyzed to answer the research questions:
 - Import wav files, Export multi-track audio file
 
 ## Contributors
-- [x] Somang Nam :v:
-- [x] Albert Aikins-Mensah :v:
-- [x] Carly Holtzman did the icon design :v:
+- [x] Somang Nam (https://github.com/somang) :v:
+- [x] Albert Aikins-Mensah (https://github.com/aaikinsm) :v:
+- [x] Thanks to Carly Holtzman (https://ca.linkedin.com/in/carlyholtzman) :v: for the icon and logo design!
 - [ ] Inclusive Media Design Centre, http://imdc.ca/
 - [ ] Project started since Sept. 28th 2014
 
