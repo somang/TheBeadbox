@@ -55,10 +55,10 @@ The data collected were analyzed to answer the research questions:
 - Import wav files, Export multi-track audio file
 
 ## Contributors
-[v] Somang Nam :v:
-[v] Albert Aikins-Mensah :v:
-[v] http://imdc.ca/
-Project started since Sept. 28th 2014
+- [x] Somang Nam :v:
+- [x] Albert Aikins-Mensah :v:
+= [ ] http://imdc.ca/
+= [ ] Project started since Sept. 28th 2014
 
 
 
