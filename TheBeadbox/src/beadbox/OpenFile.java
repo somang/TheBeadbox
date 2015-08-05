@@ -47,7 +47,7 @@ public class OpenFile {
 
         Bead activeBead = null;
         int key = 0, velocity;
-        int actualValue;
+        int actualValue = 0;
         int negSign = 1;
 
         //boolean conBead = false;
@@ -97,24 +97,26 @@ public class OpenFile {
                     else if (sm.getCommand() == NOTE_POLYPRESS) {
                         String data = "" + sm.getData1() + sm.getData2();
                         System.out.println("\tConnectedTo Gap: " + data);
-                        actualValue = Integer.parseInt(data)*negSign;
-                        int realConBXPos = actualValue + xLoc;
+                        actualValue = Integer.parseInt(data);                        
+                    } // connected bead distance delta sign (program change)
+                    else if (sm.getCommand() == NOTE_PROGCNG) {
+                        String data = "" + sm.getData1();
+                        if (Integer.parseInt(data) == 1){
+                            negSign = -1;
+                        }else{
+                            negSign = 1;
+                        }
+                        int realConBXPos = (actualValue*negSign) + xLoc;
                         System.out.println("\tConnectedTo Xpos: " + realConBXPos);
                         activeBead.connectPosX = realConBXPos;
-                    } // bead connection index info (control change)
+                    }
+                    // bead connection index info (control change)
                     else if (sm.getCommand() == NOTE_CTRLCNG) {
                         String data = "" + sm.getData1() + sm.getData2();
                         System.out.println(" \tYpos:" + data);
                         if (!data.equals("00")) {
                             activeBead.connectPosY = Integer.parseInt(data);
                         }
-                    } // connected bead distance delta sign (program change)
-                    else if (sm.getCommand() == NOTE_PROGCNG) {
-                        String data = "" + sm.getData1();
-                        if (Integer.parseInt(data) == 1){
-                            negSign = -1;
-                        }// else it's positive -> negSign = 1
-                        
                     } //when the bead is off
                     else if (sm.getCommand() >= NOTE_OFF_START && sm.getCommand() <= NOTE_OFF_END) {
                         if (curTick != 0) {
@@ -163,10 +165,12 @@ public class OpenFile {
         // Set connections
         for (Bead b : ui.beadPlayer1.beads) {
             if (b.connectPosY != -1 && b.connectedTo == null) {
+                System.out.println("bead connection");
                 int xPos = b.connectPosX % 1100;
                 int yPos = b.connectPosY * ui.beadPlayer1.TRACKHEIGHT;
                 int page = (b.connectPosX / 1100) + 1;
-                b.connectedTo = ui.beadPlayer1.getBeadAt(xPos + 40, yPos + 40, page);
+                b.connectedTo = ui.beadPlayer1.getBeadAt(xPos, yPos+40, page);
+                
             }
         }
 
