@@ -57,8 +57,8 @@ The data collected were analyzed to answer the research questions:
 ## Contributors
 - [x] Somang Nam :v:
 - [x] Albert Aikins-Mensah :v:
-= [ ] http://imdc.ca/
-= [ ] Project started since Sept. 28th 2014
+- [ ] http://imdc.ca/
+- [ ] Project started since Sept. 28th 2014
 
 
 
