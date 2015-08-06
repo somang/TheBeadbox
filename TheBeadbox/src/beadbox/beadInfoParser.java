@@ -58,7 +58,6 @@ public class beadInfoParser {
                 negativeSign = 1;
             }
             conBeadXCoord = parseMessageData((int) distance_btwn);
-            System.out.println(conBeadXCoord.left + "," + conBeadXCoord.right);
             conBeadTrack = parseMessageData(b.connectedTo.track-1);
         }        
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity

@@ -44,13 +44,13 @@ public class BeadPlayerPopUp extends JPopupMenu {
                 delete();
             });
             copy.addActionListener((ActionEvent e) ->{
-                    copy(); 
+                copy(); 
             });
             paste.addActionListener((ActionEvent e) -> {
-                    paste();   
+                paste();   
             });
             delete.addActionListener((ActionEvent e) -> {
-                    delete();
+                delete();
             });
         }
         
@@ -98,6 +98,7 @@ public class BeadPlayerPopUp extends JPopupMenu {
             Logger.getLogger(PlayerOverview.class.getName()).log(Level.SEVERE, null, ex);
         }
         multiSelect.clear();
+        vu.shiftOn = false;
     }
     
     public void delete(){
@@ -142,7 +143,7 @@ public class BeadPlayerPopUp extends JPopupMenu {
         }
     }
     
-    public void saveToServer(){      
+    public void saveToServer(long startTime){      
         try {
             //save and send current Beadbox file
             vu.ph.saveFile(vu.beadPlayer1, vu.rightJPanel1,"severFile.vidi");
@@ -153,6 +154,7 @@ public class BeadPlayerPopUp extends JPopupMenu {
             PrintWriter writer = new PrintWriter("serverFileInfo.txt", "UTF-8");
             writer.println("playing: "+vu.playing);
             writer.println("page: "+vu.beadPlayer1.page);
+            writer.println("startTime: "+startTime);
             writer.close();
             File file2 = new File ("serverFileInfo.txt");
             new FileUploader(file2, "beadboxInfo.txt");

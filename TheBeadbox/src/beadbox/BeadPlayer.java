@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -42,7 +43,7 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     VibcompUI vibcompUI = null;
     Thread thread;
-    int SPEED = 50;
+    int SPEED = 41;
     boolean inandout = true;
     JTextPane jTP;
     Runnable playerTickTock;
@@ -53,8 +54,10 @@ public class BeadPlayer extends javax.swing.JPanel {
     public BeadPlayer() {
         
         this.playerTickTock = () -> {
+            long curTime = Calendar.getInstance().getTimeInMillis();
             while (true) {
-                if (VibcompUI.playing) {
+                System.out.print("");
+                if (VibcompUI.playing && Calendar.getInstance().getTimeInMillis()>=curTime+SPEED) {
                     if (barPosition < MAXBARPOS) {
                         barPosition += 50;
                     } else {
@@ -66,11 +69,7 @@ public class BeadPlayer extends javax.swing.JPanel {
                         vibcompUI.pageScroll.setValue(page);
                         jTP.setText("Page: "+page);
                     }
-                }
-                try {
-                    thread.sleep(SPEED);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    curTime = Calendar.getInstance().getTimeInMillis();
                 }
             }
         };
@@ -338,14 +337,22 @@ public class BeadPlayer extends javax.swing.JPanel {
                     s.next();
                     boolean nextState = s.nextBoolean();
                     if(nextState!=currState){ 
-                        vibcompUI.playing = nextState;
+                        //vibcompUI.playing = nextState;
                         currState = nextState;
                         
                         String url2 = "http://saduda.com/imdc/uploads/beadbox.vidi";
                         downloadUsingStream(url2, "clientFile.vidi");
                         new OpenFile(new File("clientFile.vidi"),vibcompUI,false);
-                        s.next();
-                        page = s.nextInt();
+                        s.next(); page = s.nextInt();
+                        vibcompUI.beadPlayer1.barPosition=0;
+                        s.next(); long startTime = s.nextLong();
+                        while(true){
+                            if (Calendar.getInstance().getTimeInMillis()>=startTime 
+                                    || currState==false){
+                                vibcompUI.playing = nextState;
+                                break;
+                            }
+                        }
                     }
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(BeadPlayer.class.getName()).log(Level.SEVERE, null, ex);
