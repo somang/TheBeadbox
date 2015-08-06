@@ -79,7 +79,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         td.start();
         
         
-        if(VibcompUI.server) ServerCheck.start();
+        //if(VibcompUI.server) ServerCheck.start();
     }
 
     @Override

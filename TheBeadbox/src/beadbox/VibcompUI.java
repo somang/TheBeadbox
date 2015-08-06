@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author somang & albert
  */
-public class VibcompUI extends javax.swing.JFrame implements KeyListener{
+public class VibcompUI extends javax.swing.JFrame implements KeyListener {
 
     static protected boolean playing = false;
     static protected Bead activeBead;
@@ -53,16 +53,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         setFocusable(true);
         addKeyListener(this);
         menu = new BeadPlayerPopUp(this);
-        
-        
         try {
             initiateEssentials();
         } catch (InvalidMidiDataException ex) {
             Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         loadAsioDriver();
-        
-        
     }
 
     /**
@@ -424,7 +420,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         Bead tmpBead = new Bead();
         tmpBead.setSize(55, 55);
         beadPanelText.add(tmpBead);
-        tmpBead.setLocation(20, 15); 
+        tmpBead.setLocation(20, 15);
         tmpBead.setOpaque(false);
         activeBead = tmpBead;
         beadPanel.repaint();
@@ -432,23 +428,10 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     }
 
     private void beadPlayer1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPlayer1MousePressed
-        /**
-         * 2015-05-13
-         * 
-         * Update note.
-         * If a bead is already Connected to something, then
-         * the user can "Drag" to move around the note.
-         * 
-         * One can overlap if s/he clicked on "offset margin"
-         * 
-         * 
-         * 
-         */
         point1 = evt.getPoint();
         Bead tmpBead = beadPlayer1.getBeadAt(point1.x, point1.y, beadPlayer1.page);
-        
         if (evt.getButton() == MouseEvent.BUTTON1) // Left click
-        {   
+        {
             if (evt.isAltDown()) {
                 if (isBeadPanelEmpty()) {
                     refreshBeadPanel();
@@ -459,7 +442,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                     Bead rightPossible = beadPlayer1.getBeadAt(point1.x + 27, point1.y, beadPlayer1.page);
                     if (leftPossible == null) { // If there exists no bead on the point's left
                         if (rightPossible == null) {
-                            beadPlayer1.setBead(point1.x+80, point1.y, activeBead);
+                            beadPlayer1.setBead(point1.x + 80, point1.y, activeBead);
                         } else { // There is a bead on its right.
                             beadPlayer1.setBead(rightPossible.getX() - 27, point1.y, activeBead);
                         }
@@ -493,11 +476,15 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 //set slider positions
                 intensitySlider.setValue(activeBead.getIntensity());
                 frequencySlider.setValue(activeBead.getFrequency());
-                
+
                 //multi select
-                if(evt.isShiftDown() || shiftOn){
-                    if(multiSelect.contains(activeBead)) multiSelect.remove(activeBead);
-                    else multiSelect.add(activeBead);
+                if (evt.isShiftDown() || shiftOn) {
+                    if (multiSelect.contains(activeBead)) {
+                        multiSelect.remove(activeBead);
+                    }
+                    //else{
+                    //multiSelect.add(activeBead);
+                    //}
                 } else {
                     multiSelect.clear();
                 }
@@ -507,9 +494,11 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                 activeBead = tmpBead;
             }
         }
-        if (evt.getButton() == MouseEvent.BUTTON3 || evt.getClickCount()==2) {// Right click or double click
-            if(tmpBead!=null){
-                if(multiSelect.size()==1)multiSelect.clear();
+        if (evt.getButton() == MouseEvent.BUTTON3 || evt.getClickCount() == 2) {// Right click or double click
+            if (tmpBead != null) {
+                if (multiSelect.size() == 1) {
+                    multiSelect.clear();
+                }
                 multiSelect.add(tmpBead);
                 activeBead = tmpBead;
             }
@@ -536,7 +525,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             //System.out.println(distance);
             if (distance > 10) { //if distance is greater than 100
                 return true;
-            }else if (activeBead.connectedTo!=null){//If the bead is already paired.
+            } else if (activeBead.connectedTo != null) {//If the bead is already paired.
                 return true;
             }
         } catch (NullPointerException e) {
@@ -561,14 +550,14 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                                 endBead.setFrequency(activeBead.getFrequency());
                                 endBead.setConnection(activeBead);
                                 endBead.vibcompUI = this;
-                                
+
                                 Bead leftPossible = beadPlayer1.getBeadAt(evt.getX() - 27, evt.getY(), beadPlayer1.page);
                                 Bead rightPossible = beadPlayer1.getBeadAt(evt.getX() + 27, evt.getY(), beadPlayer1.page);
                                 if (leftPossible == null) { // If there exists no bead on the point's left
                                     if (rightPossible == null) {
                                         beadPlayer1.setBead(evt.getX(), evt.getY(), endBead);
                                     } else { // There is a bead on its right.
-                                        beadPlayer1.setBead(rightPossible.getX()-27, evt.getY(), endBead);
+                                        beadPlayer1.setBead(rightPossible.getX() - 27, evt.getY(), endBead);
                                     }
                                 } else if (rightPossible == null) { //There is a Bead on the left of clicked position.
                                     beadPlayer1.setBead(leftPossible.getX() + 80, evt.getY(), endBead);
@@ -608,15 +597,16 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                     } else {
                         /*if endbead is not null;*/
                         /* do nothing*/
-                        
-                        
-                    }     
+
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "There is no active Bead!");
                 }
             }
             dragStatus = false;
-            multiSelect.add(activeBead);
+            if (!evt.isShiftDown() || !shiftOn) {
+                multiSelect.add(activeBead);
+            }
         }
     }//GEN-LAST:event_beadPlayer1MouseReleased
 
@@ -626,21 +616,21 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     private void addPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPageMouseClicked
         BeadPlayer.maxPage++;
-        
+
         pageScroll.setMaximum(BeadPlayer.maxPage + 1);
         pageScroll.setValue(BeadPlayer.maxPage);
         beadPlayer1.page = BeadPlayer.maxPage;
-        jTextPane1.setText("Page: "+beadPlayer1.page);
+        jTextPane1.setText("Page: " + beadPlayer1.page);
         //beadPlayer1.pageMap.put(beadPlayer1.page, new ArrayList());
-        
+
         playerOverview1.refreshOverviewArray();
-        
+
     }//GEN-LAST:event_addPageMouseClicked
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
         //change playing state to opposite
         playing = !playing;
-        if(client){
+        if (client) {
             menu.saveToServer();
             try {
                 Thread.sleep(500);
@@ -665,16 +655,16 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     private void pageScrollAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_pageScrollAdjustmentValueChanged
         beadPlayer1.page = pageScroll.getValue();
-        jTextPane1.setText("Page: "+beadPlayer1.page);   
+        jTextPane1.setText("Page: " + beadPlayer1.page);
         multiSelect.clear();
-        
+
         if (activeBead != null) {
             beadPanel.remove(activeBead);
             beadPanel.repaint();
             activeBead = null;
         }
-        
-        
+
+
     }//GEN-LAST:event_pageScrollAdjustmentValueChanged
 
     private void shiftKeyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_shiftKeyStateChanged
@@ -682,7 +672,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     }//GEN-LAST:event_shiftKeyStateChanged
 
     private void beadPanelTextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beadPanelTextMousePressed
-        if(isBeadPanelEmpty()){
+        if (isBeadPanelEmpty()) {
             refreshBeadPanel();
         }
     }//GEN-LAST:event_beadPanelTextMousePressed
@@ -706,12 +696,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
              */
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 //System.out.println(info.getName());
-                if("Nimbus".equals(info.getName())){
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        }catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(VibcompUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(VibcompUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -782,7 +772,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         labels2.put(1000, new JLabel("1000"));
         frequencySlider.setLabelTable(labels2);
         frequencySlider.setPaintLabels(true);
-        
+
         /*Put labels on speed control slider*/
         Hashtable<Integer, JLabel> labels3 = new Hashtable<>();
         labels3.put(0, new JLabel("0"));
@@ -790,7 +780,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         labels3.put(100, new JLabel("100"));
         intensitySlider.setLabelTable(labels3);
         intensitySlider.setPaintLabels(true);
-        
+
         Hashtable<Integer, JLabel> labels4 = new Hashtable<>();
         labels4.put(0, new JLabel("0"));
         labels4.put(55, new JLabel("50"));
@@ -816,13 +806,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         barSlider.setLabelTable(labels4);
         barSlider.setPaintLabels(true);
 
-        
         /*PageScroll Button Actionlistener for the custom mod.*/
         pageScroll.getComponent(1).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 beadPlayer1.page = pageScroll.getValue();
-                jTextPane1.setText("Page: "+beadPlayer1.page);
+                jTextPane1.setText("Page: " + beadPlayer1.page);
                 if (activeBead != null) {
                     if (activeBead.page != pageScroll.getValue()) {
                         if (activeBead.connectedTo != null) {
@@ -837,7 +826,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             @Override
             public void mouseClicked(MouseEvent e) {
                 beadPlayer1.page = pageScroll.getValue();
-                jTextPane1.setText("Page: "+beadPlayer1.page);
+                jTextPane1.setText("Page: " + beadPlayer1.page);
                 if (activeBead != null) {
                     if (activeBead.page != pageScroll.getValue()) {
                         if (activeBead.connectedTo != null) {
@@ -847,13 +836,13 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
                     }
                 }
             }
-        });        
+        });
         beadPlayer1.vibcompUI = this;
         beadPlayer1.jTP = jTextPane1;
     }
 
     private void loadAsioDriver() {
-        
+
         /* load the driver */
         try {
             /*
@@ -869,7 +858,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
             System.out.println(driver.getNumChannelsOutput());
             //System.out.println(driver.getName());
             //System.out.println(driver.getCurrentState());
-            
+
         } catch (UnsatisfiedLinkError e) {
             System.out.println("Please install the Following Driver: ASIO PreSonus FireStudio");
             JOptionPane.showMessageDialog(null, "Please install the Following Driver: ASIO PreSonus FireStudio");
@@ -884,62 +873,73 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     @Override
     public void keyTyped(KeyEvent ke) {
         //System.out.println("key typed");
-        
+
     }
 
     @Override
     public void keyPressed(KeyEvent ke) {
         //System.out.println("key pressed:"+ke.getKeyCode());
-        if(ke.isControlDown()){
-            if(ke.getKeyCode()==67){        //Ctrl+c = copy
+        if (ke.isControlDown()) {
+            if (ke.getKeyCode() == 67) {        //Ctrl+c = copy
                 menu.copy();
-            } 
-            else if (ke.getKeyCode()==88){  //Ctrl+x = cut
+            } else if (ke.getKeyCode() == 88) {  //Ctrl+x = cut
                 menu.copy();
                 menu.delete();
-            }
-            else if (ke.getKeyCode()==86){  //Ctrl+v = paste
+            } else if (ke.getKeyCode() == 86) {  //Ctrl+v = paste
                 menu.paste();
-            } 
-            else if (ke.getKeyCode()==79){  //Ctrl+o = open
+            } else if (ke.getKeyCode() == 79) {  //Ctrl+o = open
                 menu.open();
-            } 
-            else if (ke.getKeyCode()==83){  //Ctrl+s = save
+            } else if (ke.getKeyCode() == 83) {  //Ctrl+s = save
                 menu.save();
-            } 
+            }
         }
-        
-        if(ke.getKeyCode()==38){    //Up key
-            for(Bead bead : multiSelect){
-                if(bead.getTrack()>1){
-                    bead.setTrack(bead.getTrack()-1);
-                    bead.setLocation(bead.getX(),bead.getY()
-                            -beadPlayer1.TRACKHEIGHT);
+
+        if (ke.getKeyCode() == 38) {    //Up key
+            System.out.println(multiSelect.size());
+            for (Bead bead : multiSelect) {
+                if (bead.getTrack() > 1) {
+                    bead.setTrack(bead.getTrack() - 1);
+                    bead.setLocation(bead.getX(), bead.getY()
+                            - beadPlayer1.TRACKHEIGHT);
                 }
             }
-        }        
-        else if(ke.getKeyCode()==40){    //Down key
-            for(Bead bead : multiSelect){
-                if(bead.getTrack()<8){
-                    bead.setTrack(bead.getTrack()+1);
-                    bead.setLocation(bead.getX(),bead.getY()
-                            +beadPlayer1.TRACKHEIGHT);
+        } else if (ke.getKeyCode() == 40) {    //Down key
+            for (Bead bead : multiSelect) {
+                if (bead.getTrack() < 8) {
+                    bead.setTrack(bead.getTrack() + 1);
+                    bead.setLocation(bead.getX(), bead.getY()
+                            + beadPlayer1.TRACKHEIGHT);
                 }
             }
-        } 
-        else if(ke.getKeyCode()==37){    //Left key
-            for(Bead bead : multiSelect){
-                 if(bead.getX()>55)bead.setLocation(bead.getX()
-                         -beadPlayer1.BEADHEIGHT,bead.getY());
+        } else if (ke.getKeyCode() == 37) {    //Left key
+            for (Bead bead : multiSelect) {
+                if (bead.getX() > 0) {
+                    Bead tmp = beadPlayer1.getBeadAt(bead.getX() - 27, bead.getY(), beadPlayer1.page);
+                    if (tmp != null) {
+                        bead.setLocation(tmp.getX() + 55, bead.getY());
+                    } else {
+                        int val = bead.getX() - beadPlayer1.BEADHEIGHT;
+                        if (val < 23) {
+                            val = 0;
+                        }
+                        bead.setLocation(val, bead.getY());
+                    }
+                }
             }
-        }
-        else if(ke.getKeyCode()==39){    //Right key
-            for(Bead bead : multiSelect){
-                if(bead.getX()<1000) bead.setLocation(bead.getX()
-                        +beadPlayer1.BEADHEIGHT,bead.getY());
+        } else if (ke.getKeyCode() == 39) {    //Right key
+            for (Bead bead : multiSelect) {
+                if (bead.getX() < 1022) {
+                    Bead tmp = beadPlayer1.getBeadAt(bead.getX() + 27, bead.getY(), beadPlayer1.page);
+                    if (tmp != null) {
+                        bead.setLocation(tmp.getX() - 55, bead.getY());
+                    } else {
+                        int val = bead.getX() + beadPlayer1.BEADHEIGHT;
+                        if (val > 1023) {val = 1026;}
+                        bead.setLocation(val, bead.getY());
+                    }
+                }
             }
-        }
-        else if(ke.getKeyCode()==127 || ke.getKeyCode()==8){  //delete/backspace key
+        } else if (ke.getKeyCode() == 127 || ke.getKeyCode() == 8) {  //delete/backspace key
             menu.delete();
         }
     }
@@ -948,5 +948,5 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
     public void keyReleased(KeyEvent ke) {
         //System.out.println("key released");
     }
-       
+
 }
