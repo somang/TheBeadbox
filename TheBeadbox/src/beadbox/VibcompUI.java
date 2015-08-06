@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
 
     Bead startBead, endBead;
     Bead prevBead = null;
-    int startBead_x, startBead_y;
+    int startBead_x, startBead_y, networkDelay = 1000;
     boolean dragStatus = false;
     boolean move = false;
     boolean shiftOn = false;
@@ -53,6 +54,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         setFocusable(true);
         addKeyListener(this);
         menu = new BeadPlayerPopUp(this);
+        this.setTitle("The BeadBox");
         
         
         try {
@@ -60,7 +62,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         } catch (InvalidMidiDataException ex) {
             Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        loadAsioDriver();
+        if(!client) loadAsioDriver();
         
         
     }
@@ -223,6 +225,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         speedControl.setPaintLabels(true);
         speedControl.setPaintTicks(true);
         speedControl.setToolTipText("Speed Control");
+        speedControl.setValue(59);
         speedControl.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed Control"));
         speedControl.setFocusable(false);
         speedControl.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -641,12 +644,14 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         //change playing state to opposite
         playing = !playing;
         if(client){
-            menu.saveToServer();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
+            int pg = beadPlayer1.page;
+            long startTime = Calendar.getInstance().getTimeInMillis()+networkDelay;
+            menu.saveToServer(startTime);
+            while(Calendar.getInstance().getTimeInMillis()<startTime){
+                //if start time not reached do nothing
             }
+            beadPlayer1.barPosition = 0;
+            beadPlayer1.page = pg;
         }
     }//GEN-LAST:event_playButtonActionPerformed
 
@@ -669,8 +674,8 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         multiSelect.clear();
         
         if (activeBead != null) {
-            beadPanel.remove(activeBead);
-            beadPanel.repaint();
+            beadPanelText.remove(activeBead);
+            beadPanelText.repaint();
             activeBead = null;
         }
         
@@ -941,6 +946,15 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener{
         }
         else if(ke.getKeyCode()==127 || ke.getKeyCode()==8){  //delete/backspace key
             menu.delete();
+        }
+        
+        if(ke.getKeyCode()==78){ 
+            networkDelay-=10;
+            this.setTitle("The BeadBox :\t"+networkDelay);
+        }
+        else if (ke.getKeyCode()==77){ 
+            networkDelay+=10;
+            this.setTitle("The BeadBox :\t"+networkDelay);
         }
     }
 
