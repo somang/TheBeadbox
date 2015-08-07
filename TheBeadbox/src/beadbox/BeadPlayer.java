@@ -36,6 +36,7 @@ public class BeadPlayer extends javax.swing.JPanel {
     int BEADHEIGHT = 50;
     int barPosition = 10, MAXBARPOS = 1100;
     int page = 1;
+    boolean resetBar = false;
     static int maxPage = 2;
     ArrayList<Bead> beads = new ArrayList();
     
@@ -43,7 +44,7 @@ public class BeadPlayer extends javax.swing.JPanel {
 
     VibcompUI vibcompUI = null;
     Thread thread;
-    int SPEED = 41;
+    int SPEED = 100;
     boolean inandout = true;
     JTextPane jTP;
     Runnable playerTickTock;
@@ -54,22 +55,27 @@ public class BeadPlayer extends javax.swing.JPanel {
     public BeadPlayer() {
         
         this.playerTickTock = () -> {
-            long curTime = Calendar.getInstance().getTimeInMillis();
+            long prev = 0, next = 0;
             while (true) {
                 System.out.print("");
-                if (VibcompUI.playing && Calendar.getInstance().getTimeInMillis()>=curTime+SPEED) {
-                    if (barPosition < MAXBARPOS) {
-                        barPosition += 50;
-                    } else {
-                        barPosition = 0;
+                if(resetBar){
+                    if(Calendar.getInstance().getTimeInMillis()%1000<10){                       
+                        resetBar = false;
+                    }                   
+                }
+                else if (VibcompUI.playing) {
+                    long tmpTime = Calendar.getInstance().getTimeInMillis()*SPEED/100;
+                    barPosition =  (int)(tmpTime%1000*1.1);
+                    if (prev!=next) {
                         page++;
                         if (page > maxPage) {
                             page = 1;
                         }
                         vibcompUI.pageScroll.setValue(page);
                         jTP.setText("Page: "+page);
-                    }
-                    curTime = Calendar.getInstance().getTimeInMillis();
+                        prev=next;
+                    }                  
+                    next = tmpTime/1000;                   
                 }
             }
         };
@@ -78,7 +84,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         td.start();
         
         
-        //if(VibcompUI.server) ServerCheck.start();
+        if(VibcompUI.server) ServerCheck.start();
     }
 
     @Override
@@ -343,13 +349,13 @@ public class BeadPlayer extends javax.swing.JPanel {
                         String url2 = "http://saduda.com/imdc/uploads/beadbox.vidi";
                         downloadUsingStream(url2, "clientFile.vidi");
                         new OpenFile(new File("clientFile.vidi"),vibcompUI,false);
-                        s.next(); page = s.nextInt();
-                        vibcompUI.beadPlayer1.barPosition=0;
+                        s.next(); page = s.nextInt();  page=1;                     
                         s.next(); long startTime = s.nextLong();
                         while(true){
                             if (Calendar.getInstance().getTimeInMillis()>=startTime 
                                     || currState==false){
-                                vibcompUI.playing = nextState;
+                                if(nextState) vibcompUI.beadPlayer1.resetBar = true;
+                                vibcompUI.playing = nextState;                                
                                 break;
                             }
                         }

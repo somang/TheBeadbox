@@ -36,7 +36,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
 
     Bead startBead, endBead;
     Bead prevBead = null;
-    int startBead_x, startBead_y, networkDelay = 1000;
+    int startBead_x, startBead_y, networkDelay = 1500;
     boolean dragStatus = false;
     boolean move = false;
     boolean shiftOn = false;
@@ -60,7 +60,6 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
         } catch (InvalidMidiDataException ex) {
             Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        loadAsioDriver();
         if(!client) loadAsioDriver();
     }
 
@@ -218,11 +217,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
 
+        speedControl.setMaximum(200);
         speedControl.setMinorTickSpacing(10);
         speedControl.setPaintLabels(true);
         speedControl.setPaintTicks(true);
         speedControl.setToolTipText("Speed Control");
-        speedControl.setValue(59);
+        speedControl.setValue(100);
         speedControl.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed Control"));
         speedControl.setFocusable(false);
         speedControl.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -633,22 +633,26 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
         //change playing state to opposite
+        
         playing = !playing;
+        beadPlayer1.resetBar = true;
         if(client){
-            int pg = beadPlayer1.page;
-            long startTime = Calendar.getInstance().getTimeInMillis()+networkDelay;
+            
+            //int pg = beadPlayer1.page;           
+            long startTime = (int)(Calendar.getInstance().getTimeInMillis()+networkDelay/1000)*1000;
             menu.saveToServer(startTime);
             while(Calendar.getInstance().getTimeInMillis()<startTime){
                 //if start time not reached do nothing
             }
-            beadPlayer1.barPosition = 0;
-            beadPlayer1.page = pg;
+            beadPlayer1.page = 1;          
+                       
         }
+        
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void speedControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedControlStateChanged
         // playing speed slider
-        beadPlayer1.SPEED = 100 - speedControl.getValue();
+        beadPlayer1.SPEED = speedControl.getValue();
     }//GEN-LAST:event_speedControlStateChanged
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -765,9 +769,9 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
         beadPanel.repaint();
         /*Put labels on speed control slider*/
         Hashtable<Integer, JLabel> labels1 = new Hashtable<>();
-        labels1.put(0, new JLabel("x0.5"));
-        labels1.put(50, new JLabel("0"));
-        labels1.put(100, new JLabel("x2"));
+        labels1.put(0, new JLabel("0"));
+        labels1.put(100, new JLabel("x1"));
+        labels1.put(200, new JLabel("x2"));
         speedControl.setLabelTable(labels1);
         speedControl.setPaintLabels(true);
 
