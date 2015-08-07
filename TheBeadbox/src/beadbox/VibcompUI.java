@@ -61,7 +61,7 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
             Logger.getLogger(VibcompUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         loadAsioDriver();
-        if(!client) loadAsioDriver();
+        //if(!client) loadAsioDriver();
     }
 
     /**
@@ -901,20 +901,33 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
         }
 
         if (ke.getKeyCode() == 38) {    //Up key
-            System.out.println(multiSelect.size());
             for (Bead bead : multiSelect) {
                 if (bead.getTrack() > 1) {
-                    bead.setTrack(bead.getTrack() - 1);
-                    bead.setLocation(bead.getX(), bead.getY()
-                            - beadPlayer1.TRACKHEIGHT);
+                    Bead righttmp = beadPlayer1.getBeadAt(bead.getX()+27,bead.getY()-28,beadPlayer1.page);
+                    Bead lefttmp = beadPlayer1.getBeadAt(bead.getX()-27,bead.getY()-28,beadPlayer1.page);
+                    if (righttmp != null){
+                        //System.out.println("right");
+                    }else if (lefttmp != null){
+                        //System.out.println("left");
+                    }else{
+                        bead.setTrack(bead.getTrack() - 1);
+                        bead.setLocation(bead.getX(), bead.getY() - beadPlayer1.TRACKHEIGHT);
+                    }
                 }
             }
         } else if (ke.getKeyCode() == 40) {    //Down key
             for (Bead bead : multiSelect) {
                 if (bead.getTrack() < 8) {
-                    bead.setTrack(bead.getTrack() + 1);
-                    bead.setLocation(bead.getX(), bead.getY()
-                            + beadPlayer1.TRACKHEIGHT);
+                    Bead righttmp = beadPlayer1.getBeadAt(bead.getX()+27,bead.getY()+80,beadPlayer1.page);
+                    Bead lefttmp = beadPlayer1.getBeadAt(bead.getX()-27,bead.getY()+80,beadPlayer1.page);
+                    if (righttmp != null){
+                        //System.out.println("right");
+                    }else if (lefttmp != null){
+                        //System.out.println("left");
+                    }else{
+                        bead.setTrack(bead.getTrack() + 1);
+                        bead.setLocation(bead.getX(), bead.getY() + beadPlayer1.TRACKHEIGHT);
+                    }
                 }
             }
         } else if (ke.getKeyCode() == 37) {    //Left key
@@ -935,12 +948,12 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
         } else if (ke.getKeyCode() == 39) {    //Right key
             for (Bead bead : multiSelect) {
                 if (bead.getX() < 1022) {
-                    Bead tmp = beadPlayer1.getBeadAt(bead.getX() + 27, bead.getY(), beadPlayer1.page);
+                    Bead tmp = beadPlayer1.getBeadAt(bead.getX() + 80, bead.getY(), beadPlayer1.page);
                     if (tmp != null) {
                         bead.setLocation(tmp.getX() - 55, bead.getY());
-                    } else {
+                    } else {                        
                         int val = bead.getX() + beadPlayer1.BEADHEIGHT;
-                        if (val > 1023) {val = 1026;}
+                        if (val > 1020) {val = 1045;}
                         bead.setLocation(val, bead.getY());
                     }
                 }
