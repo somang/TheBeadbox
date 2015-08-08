@@ -84,7 +84,7 @@ public class BeadPlayer extends javax.swing.JPanel {
         td.start();
         
         
-        if(VibcompUI.server) ServerCheck.start();
+        //if(VibcompUI.server) ServerCheck.start();
     }
 
     @Override
@@ -284,8 +284,8 @@ public class BeadPlayer extends javax.swing.JPanel {
     }
     
     private boolean containsLocation(Component b,int x, int y) {
-        if ((x >= b.getX()) && (x <= b.getX()+55)){
-            if ((y >= b.getY())&&(y <= b.getY()+55)){
+        if ((x >= b.getX()) && (x <= b.getX()+BEADHEIGHT)){
+            if ((y >= b.getY())&&(y <= b.getY()+BEADHEIGHT)){
                     return true;
             }
         }

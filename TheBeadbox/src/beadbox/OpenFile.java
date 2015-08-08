@@ -97,18 +97,22 @@ public class OpenFile {
                     else if (sm.getCommand() == NOTE_POLYPRESS) {
                         String data = "" + sm.getData1() + sm.getData2();
                         System.out.println("\tConnectedTo Gap: " + data);
-                        actualValue = Integer.parseInt(data);                        
+                        actualValue = Integer.parseInt(data);     
                     } // connected bead distance delta sign (program change)
                     else if (sm.getCommand() == NOTE_PROGCNG) {
-                        String data = "" + sm.getData1();
-                        if (Integer.parseInt(data) == 1){
-                            negSign = -1;
+                        if (actualValue > 0) {
+                            String data = "" + sm.getData1();
+                            if (Integer.parseInt(data) == 1) {
+                                negSign = -1;
+                            } else {
+                                negSign = 1;
+                            }
+                            int realConBXPos = (actualValue * negSign) + xLoc;
+                            System.out.println("\tConnectedTo Xpos: " + realConBXPos);
+                            activeBead.connectPosX = realConBXPos;
                         }else{
-                            negSign = 1;
+                            System.out.println("\tno connection");
                         }
-                        int realConBXPos = (actualValue*negSign) + xLoc;
-                        System.out.println("\tConnectedTo Xpos: " + realConBXPos);
-                        activeBead.connectPosX = realConBXPos;
                     }
                     // bead connection index info (control change)
                     else if (sm.getCommand() == NOTE_CTRLCNG) {
@@ -123,8 +127,8 @@ public class OpenFile {
                             System.out.print("@" + event.getTick() + " ");
                             System.out.println("Note off ->  Bead Created\n");
                             activeBead.setSize(BEADHEIGHT, BEADHEIGHT);
-                            ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);
-                            activeBead.page = (int) ((curTick) / 1100) + 1;
+                            ui.beadPlayer1.setBead(xLoc, yLoc, activeBead);                            
+                            activeBead.page = (int) ((curTick) / 1101) + 1;
                             if (paste) {
                                 activeBead.page = ui.beadPlayer1.page;
                             }
@@ -163,14 +167,12 @@ public class OpenFile {
         }
 
         // Set connections
-        for (Bead b : ui.beadPlayer1.beads) {
-            if (b.connectPosY != -1 && b.connectedTo == null) {
-                System.out.println("bead connection");
+        for (Bead b : ui.beadPlayer1.beads) {            
+            if (b.connectPosY != -1 && b.connectedTo == null) {                
                 int xPos = b.connectPosX % 1100;
                 int yPos = b.connectPosY * ui.beadPlayer1.TRACKHEIGHT;
-                int page = (b.connectPosX / 1100) + 1;
-                b.connectedTo = ui.beadPlayer1.getBeadAt(xPos, yPos+40, page);
-                
+                int page = (b.connectPosX / 1101) + 1;
+                b.connectedTo = ui.beadPlayer1.getBeadAt(xPos, yPos-ui.beadPlayer1.TRACKHEIGHT/2, page);
             }
         }
 

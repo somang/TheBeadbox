@@ -58,8 +58,8 @@ public class beadInfoParser {
                 negativeSign = 1;
             }
             conBeadXCoord = parseMessageData((int) distance_btwn);
-            conBeadTrack = parseMessageData(b.connectedTo.track-1);
-        }        
+            conBeadTrack = parseMessageData(b.connectedTo.track);
+        }
         mf.noteOn(position, track, pitchVal, intensity); // 0x90, frequency track intensity
         mf.pitchBend(position, track, bendingVal.left, bendingVal.right); //0xE0 filler for the rest of frequency given from bead.
         mf.polyPress(position, track, conBeadXCoord.left, conBeadXCoord.right); // Connected Bead's X position
