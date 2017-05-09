@@ -852,13 +852,13 @@ public class VibcompUI extends javax.swing.JFrame implements KeyListener {
     }
 
     private void loadAsioDriver() {
-
+        System.out.println(AsioDriver.getDriverNames());
         /* load the driver */
         try {
             /*
              https://github.com/mhroth/jasiohost
              */
-            //System.out.println(AsioDriver.getDriverNames());
+            System.out.println(AsioDriver.getDriverNames());
             driver = AsioDriver.getDriver("ASIO PreSonus FireStudio");
             listener = new AsioSoundHost(driver);
             driver.start();
